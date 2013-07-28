@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: anonymous | Merge Conflicts]]></title>
+  <link href="http://gboone.github.io/blog/categories/anonymous/atom.xml" rel="self"/>
+  <link href="http://gboone.github.io/"/>
+  <updated>2013-07-28T15:39:28-04:00</updated>
+  <id>http://gboone.github.io/</id>
+  <author>
+    <name><![CDATA[Greg Boone]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Hacking as Protest?]]></title>
+    <link href="http://gboone.github.io/blog/2011/08/16/hacking-as-protest/"/>
+    <updated>2011-08-16T00:00:00-04:00</updated>
+    <id>http://gboone.github.io/blog/2011/08/16/hacking-as-protest</id>
+    <content type="html"><![CDATA[<p>I posted this question to my Google+ contacts earlier this morning, but decided it was worth blogging about too.</p>
+
+<p>The recent protests against SanFrancisco&rsquo;s BART system is raising all kinds of eyebrows over a government authority&rsquo;s silencing of mobile networks in the interest of  public safety. The bushiest of those eyebrows: didn&rsquo;t Mubarak do exactly the same thing when he was trying to silence pro-democratic riots in Egypt, and isn&rsquo;t that guy in a cage on trial right now, and doesn&rsquo;t this remind anyone of a certain book titled with the year Reagan was reelected? While comparing BART&rsquo;s suppression of cell networks underground to Mubarak&rsquo;s silencing of all Internet and telephonic communication in the entire country of Egypt is a stretch, it does follow that if citizens are content to allow a small government agency to shut off our communication systems in the name of possible threats to public safety, it would be hard for those citizens to complain about a bigger agency doing the same thing. It sets a dangerous precedent.</p>
+
+<p>The people of SanFrancisco had the right to protest BART&rsquo;s action, and <a title="Anonymous Protest Turns Tumultuous" href="http://bits.blogs.nytimes.com/2011/08/15/anonymous-protest-ends-quietely/?nl=todaysheadlines&emc=tha26">protest they did</a>. The hacker group Anonymous even got in on the action, showing up, as they did in DC recently, wearing Guy Fawkes masks and joined in the fun of shutting down the metro stations around downtown SFO.</p>
+
+<p>The eyebrow I raised after reading the <em>Times&rsquo;s</em> report (linked above) about the protests, was Anonymous&rsquo;s hacking of myBART.org, a &ldquo;web site for BART riders,&rdquo; wherein they &ldquo;leaked the names, phone numbers and passwords of many of the site’s users.&rdquo; What&rsquo;s puzzling to me about this, is why a friend of the cause would intentionally do harm to its own people.</p>
+
+<p>Yes what BART did was wrong. Yes anonymous have the right to protest; I&rsquo;m even inclined to say they have the right to hack the myBART website as a means of protest. But how effective a protest is it to release data of innocent civilians? It seems the worst kinds of protests are the ones where the leaders intentionally put the supporters at greater risk. For example, if my bank came under fire and someone hacked the bank and released my account numbers, address, user name and password, it would be hard to think, &ldquo;those dudes are on my side.&rdquo;</p>
+
+<p>Then again, maybe compromised data is the new risk of protesting; the 21st equivalent of getting arrested for sitting at a lunch counter. That would be like MLK arresting the people for the police, or directing the fire hoses. Most people knew it was a possibility going into the protests, but in the civil rights movement, when people were arrested it reinforced the movement&rsquo;s legitimacy.</p>
+
+<p>A while ago <a title="Weak Ties Build Movements" href="http://harmsboone.org/weak-ties-build-movements">I railed against Malcolm Gladwell&rsquo;s</a> argument that social movements require &ldquo;huge sacrifices&rdquo; in order to be successful, and that the lack of sacrifices in online social movements is proof that &ldquo;the revolution will not be tweeted.&rdquo; Is this the &ldquo;huge sacrifice&rdquo; people will be required to make, that if you protest you risk having any data connected to the institution you are protesting against compromised? Weigh in, share your thoughts in the comments.</p>
+]]></content>
+  </entry>
+  
+</feed>

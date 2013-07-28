@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: STS | Merge Conflicts]]></title>
+  <link href="http://gboone.github.io/blog/categories/sts/atom.xml" rel="self"/>
+  <link href="http://gboone.github.io/"/>
+  <updated>2013-07-28T15:39:28-04:00</updated>
+  <id>http://gboone.github.io/</id>
+  <author>
+    <name><![CDATA[Greg Boone]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Tussle over Technology: Controversy & the Patent Act]]></title>
+    <link href="http://gboone.github.io/blog/2012/12/30/tussle-over-technology-controversy-the-patent-act/"/>
+    <updated>2012-12-30T00:00:00-05:00</updated>
+    <id>http://gboone.github.io/blog/2012/12/30/tussle-over-technology-controversy-the-patent-act</id>
+    <content type="html"><![CDATA[<h2>Abstract</h2>
+
+
+
+
+<blockquote>
+  <p>The United States Constitution instructed the First Congress of the United States to enact laws ``securing for limited Times to Authors and Inventors the exclusive Right to their respective Writings and Discoveries.'' This instruction, commonly referred to as the Intellectual Property Clause, demanded a set of laws based on the broad idea that inventors are best incentivized and remunerated for their works through a system of guaranteed exclusive rights. What exactly the scope of those rights were, who had authority to hand them out, and under what conditions they would be given, were all left to Congress to sort out; it was among the earliest controversies over science and technology in the United States of America. <!--more--></p>
+</blockquote>
+
+
+
+
+<h1>Introduction</h1>
+
+
+
+
+<p>In the United States of America, the working definition of a patent is best encapsulated not in US Code, but from the United Nations’ World Intellectual Property Organization (WIPO). One of a handful of specialized UN agencies, WIPO’s mission is “to promote… a balanced and effective international intellectual property (IP) system.” Today, U.S. IP law is as much shaped by WIPO treaties and other international agreements as by the U.S. Congress. On its face a patent is nothing more than a legal document but the legal power endowed upon it is mighty. A patent grants to an inventor the power to exclude and determine who is allowed to ‘practice,’ or “make, use, or build,” an invention, in exchange the inventor must disclose in some detail how the technology could be made, used, and built (WIPO). A journey through time will show America’s first patent law respond to a specific set of concerns and gave society a way of answering the question: what is technology?</p>
+
+
+
+
+<p>sThe United States Constitution empowered the United States Congress “to promote the Progress of Science and useful Arts, by securing for limited Times to Authors and Inventors the exclusive Right to their respective Writings and Discoveries” (US Constitution, Art. 1, §8, Cl. 8.). The exact scope of those rights, who administered them under what conditions and for how long were all left to Congress to sort out; it was among the earliest controversies over science and technology in the United States of America. The resulting law, the Patent Act of 1790, created a paradigm for how the United States understood the ideas of invention, technology, and science.</p>
+
+
+
+
+<p>Intellectual Property Rights are not the only means of incentivizing creative work, but it had been the custom for many centuries before the Constitution was written. In his “Theories of Intellectual Property,” William Fisher argued for four broad ways of thinking about IP: utilitarian, natural rights, humanist, and desirable society perspectives. Thomas Jefferson reluctantly accepted IP rights as a <em>desirable society utilitarian’s</em> solution to the problem of incentivizing invention. To Jefferson’s (and, he would argue America’s) chagrin “the exclusive right to invention” is given “for the benefit of society,” at the risk of “embarrassment” from its unintended consequences (Jefferson 1813). As Edward Walterscheid tells in his 1997 article “Charting a Novel Course: The Creation of the Patent Act of 1790” there was robust debate in the late 18th Century. Input came from President Washington, Jefferson, inventors, and many others regarding what Congress should do.</p>
+
+
+
+
+<p>The Patent Act of 1790 was a response to a specific set of problems unique to the early United States. It established a policy paradigm the legislation thereafter served to articulate in the same way that “normal science” did for Kuhn’s scientific paradigms (Kuhn 1970). Peter Hall called this “normal policymaking”, in which the established paradigm sets goals around which future policy will operate.</p>
+
+
+
+
+<p>This paper is less concerned with the virtue of the law, about which a great deal has been written by legal scholars that will inform this work. Rather, it will examine the debate and proposals that interpreted the only precedent the US Congress had in its first three years—the Constitution—around the question of what constituted technology in the young republic. It holds that the Patent Act of 1790 was paradigmatic in the sense that Hall extrapolated “policy paradigms” from Kuhn’s scientific and technological paradigms (Hall1993, Kuhn 1970). The law settled a set of specific questions and problems and served as the answer to all disputes until such a time when the relevant parties no longer found the law adequate.</p>
+
+
+
+
+<h1>Intellectual Property Policy Paradigms</h1>
+
+
+
+
+<p>Peter Hall saw policymaking as essentially a process of social learning that “involves three central variables: the overarching goals that guide policy in a particular field, the techniques or policy instruments used to attain those goals, and the precise settings of these instruments.” Using British economic policy from 1970-89 as his object of inquiry, he illustrated a paradigm shift. He argued to think about three orders of policy change, the first and second of which he called “normal policymaking” [@Hall1993]. The third was “marked by the radical changes in the overarching terms of policy discourse” that sometimes led to paradigm shifts.</p>
+
+
+
+
+<p>First and second order changes do not necessarily lead to third order changes. In Kuhn’s terms, normal policymaking has the effect of “further articulation and specification under new or more stringent conditions” (Kuhn 1970). First order change is characterized by “incrementalism, satisficing, and routinized decision making” (Hall 1993). Hall noted first order changes were made every year during the time period he studied. Second order changes happen less frequently; they “alter the instruments… without radically altering the hierarchy of goals behind [the] policy.” In British economic policies, these were changes to the controls on lending and monetary policy routinely made each year (Hall 1993).</p>
+
+
+
+
+<p>A third order change is much more profound, and far rarer. In British economic policy it was a radical shift from the “Keynesian mode of policymaking to one based on monetarist economic theory” (Hall 1993). Third order changes are informed by “policy experimentation and policy failure” and can lead to “movement from one paradigm to another.” The United States Constitution’s Intellectual Property Clause prompted the First Congress to establish a paradigm for granting IP rights.</p>
+
+
+
+
+<h1>Pre-paradigmatic Environment: The Colonies Confederation, and the Constitution</h1>
+
+
+
+
+<p>Edward Walterscheid (1997), showed that IP rights derived from English law abounded in the American Colonies (Walterscheid 1997). Frank D. Prager, writing earlier than Walterscheid, showed that those laws were in turn inspired by even earlier Venetian laws protecting inventions and creative works (Prager 1944). A brief discussion of this custom is necessary to understand the controversy that shaped the first Patent Act.</p>
+
+
+
+
+<p>By the time the American Colonies were legislating, intellectual property rights were generations old (Prager 1944). The Continental Congress, the legislative body under the Articles of Confederation, did not issue any patents or enact any laws establishing a patent <em>system</em> but “there was nonetheless a patent <em>custom</em> extant in both the infant United States and in Great Britain….” That custom, not operating through any formal mechanisms was, by 1787, “timeworn” and failing to address the technological needs of the American and English societies (Walterscheid 1997, emphasis added). The only explicit mention of inventions in law came from South Carolina’s copyright statute which extended the same rights to inventors of “useful machines” as authors had over their writings. It did not, however, create any kind of formal system by which those rights would be conferred. “Consequently, the granting of each patent… required a special act of the legislature” (Walterscheid 1997, Prager1944). This South Carolinian custom would be demonstrated by inventors in petitions to Congress.</p>
+
+
+
+
+<p>What little policy made during the Colonial and Articles of Confederation eras was first and second order policy change. The aging custom of common law IP rights had yet to be replaced. The Constitution prompted a third order change to codify a uniform patent <em>system</em> across all the states in the union. After the constitution was adopted, inventors sought from Congress, a paradigm shift.</p>
+
+
+
+
+<h1>Building a Paradigm: Controversy in Congress</h1>
+
+
+
+
+<p>The First Congress’s goal was simple: grant IP rights. The Constitution said nothing about what those rights should look like or whether they should be create some kind of system or grant them individually as in colonial South Carolina. Walterscheid noted that the First Congress started receiving petitions from inventors waiting for legislation “almost immediately.” The petitioners wanted Congress to individually assign a unique right for each invention. Congress, overwhelmed with all the other obligations it had per the Constitution. The authors and inventors wanted answers from Congress about what they had in mind for a law: how generic it would be, whether one law would cover both inventors and authors, what would happen to them upon death, and how the assignment process would work. Congress did what it would probably do today on a question it had never before considered, “it appointed a committee” (Walterscheid 1997, 458).</p>
+
+
+
+
+<p>Less than a month after Congress convened inventors David Rumsey and John Churchman’s petitions were heard in the House posing just these questions. The committee interviewed Churchman about how his navigational instruments worked and responded directly to him saying that he should be given some kind of exclusive right for a “term of years”, but stopped short of actually giving him one or any indication of how many years it had in mind. The committee’s report generated added controversy within Congress when it recommended giving Churchman “further encouragement to his ingenuity,” upon proof of his invention’s success. Another issue to consider: whether the power given to Congress was to <em>reward</em> or simply <em>encourage</em> inventors (Walterscheid1997, 456-459).</p>
+
+
+
+
+<p>More petitions came from inventor Alexander Lewis claiming to have discovered a novel way of “impelling boats… through the water, against any current or stream,” and asking Congress to pass a law securing a twenty-one year exclusive right to “construct boats upon his model.” Inventor Arthur Greer, asked for the same term length, but specifically used the word patent, for his navigational discoveries, and a third, Englehart Cruse asked for an eight year term over his “improved steam engine.” All of these (and presumably more) were ordered to lie on the table [@Walterscheid1997, 459]. Finally, a petition from John Fitch asked for an exclusive right, not just to build, construct or use the invention, but to enjoin others, like Rumsey, from improving upon his steam boat invention. Fitch also claimed to have exclusive rights over his inventions in several states (Walterscheid 1997, 460-462).</p>
+
+
+
+
+<p>To the extent these petitioners imagined a uniform system for applications, it was in wondering whether Congress might impose one. Each hoped congress would issue a special right over their unique inventions (Walterscheid 1997, Prager 1954). The issues raised nevertheless became central questions for a future patent system: what was a technology (or a Useful Art), and how long was sufficient enough time to protect it to promote their discovery? They were the issues the English system and common law traditions failed to address and were crucial for the First Congress in crafting legislation.</p>
+
+
+
+
+<p>If Prager’s 1954 account is any indication, the public debate surrounding any patent legislation was a battle between Fitch and Rumsey over a perennial question of patent policy: what shall be done with simultaneous discovery? Rumsey wanted a public examination system like that in France, while Fitch wanted a jury mechanism to determine which invention came first similar to Webster’s proposal. On another level Fitch and his supporters also argued that any American system should be predicated on public declarations and disclosures of their inventions, rather than a more secretive but expedient system of closed examination favored by Rumsey. In the end both parties won some part of the argument in the final Patent Act (Prager 1954).</p>
+
+
+
+
+<p>Walterscheid told the story more completely. While Rumsey and Fitch traded barbs, Congress attempted to make law. The first bill introduced built a system aimed at addressing the petitions and solving the many problems the English system faced. Patentability of improvements, for example, was a question for English courts, rather than Parliament, because England’s aging system had no mechanism to deal with them directly; Congress, however, had no system so it could take on that question (Walterscheid 1997).</p>
+
+
+
+
+<p>The bill introduced on June 23, 1789 was ultimately ordered to lie on the table because Congress could not pass it and had other, more pressing things to consider by the session’s end (Walterscheid 1997).</p>
+
+
+
+
+<p>By the opening of its second session, Congress was fully inundated with petitions asking for individual rights for inventions ranging from mills and sundry engines to lightning rods and wheeled boats. Added urgency came from President Washington who, in his 1790 address to a joint session, implored Congress to act on the Intellectual Property Clause and recommended that whatever legislation passed, it include some mechanism for importing useful inventions from abroad. The Senate, responded saying it would pass legislation when it deemed appropriate and the House appointed a committee “look into” his recommendations.<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> Congress wanted the granting of exclusive rights to be handled in a system, rather than an arbitrary case-by-case basis (Walterscheid 1997, 492-498).</p>
+
+
+
+
+<h1>A new Technological Order</h1>
+
+
+
+
+<p>Finally, in 1790, a patent bill was introduced that eventually passed and settled all the controversy described <em>supra</em>. The Act was paradigmatic in that it established a system within which instruments of public policy could be created and predictably used to issue IP rights for technologies.</p>
+
+
+
+
+<h2>What did Congress Say?</h2>
+
+
+
+
+<p>Congress laid out some specifics based on the controversies identified by petitions sent between 1787 and 1790, though mostly these revolved around the formal operation of the system. Congress declared, for example, that inventions worthy of an exclusive right needed to be “sufficiently useful and important,” and would only be granted for a period of fourteen (14) years. Applications would be examined by a patent board within the State Department consisting of the Secretaries of State and War and the Attorney General. Inventors were required to provide a “specification in writing and a drawing, and a model if possible” (Federico 1936, 237). Many were rejected if they lacked a working model. Filing for a patent would cost about five dollars.<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></p>
+
+
+
+
+<p>One concern of many petitioners regarded whether State patents would be honored as Federal patents. That answer was simply, no. All inventions would have to apply to the Patent Board—consisting of the Secretary of State (Thomas Jefferson), the Attorney General (Edmund Randolph), and the Secretary of War (Henry Knox)—and obtain an original patent. All those who petitioned Congress from 1787 through 1790 would have to file a patent like all other inventors. Rather than attempt to enumerate for the Board a list of criteria, Congress gave broad authority to these three to determine what constituted a “useful and important” invention “not before known or used” (Federico1936, Citing the Patent Act of 1790, p. 238).</p>
+
+
+
+
+<p>Federico wrote that Jefferson was likely the most influential board member because of his many useful and important inventions, some of which earned him awards in France, none of which were patented.<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup> These three individuals would “meet from time to time and discussed the applications” pending before the Board. Jefferson elucidated the “rules and regulations ” by which these applications would be evaluated through various letters to citizens looking for guidance on licensing or patenting some invention. As legal scholar P.J. Federico wrote about the Act, “a personal letter form Jefferson probably represents an action on an application” (Federico 1936, 239-243).<sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup></p>
+
+
+
+
+<p>Patentability quickly became shaped by what was technology. Jefferson was clear in his letter to Isaac McPherson that new uses for old technologies did not merit a patent, an improvement upon it, however, did (Jefferson 1813). In that same letter, Jefferson identified three rules the Board used that arose largely out of his desirable society view of intellectual property. Exclusive rights, monopolies as he called them, were granted not to protect a natural right, rather they are given for the benefit of society. Putting an old technology to new use did not bring enough benefit to merit a monopoly over that use. Neither did changing the material from which a machine was made: “Making a plowshare of cast rather than of wrought iron” was not sufficiently inventive because it was still a plowshare. His final rule said that “a change of form” was not an invention. A horseshoe was a horseshoe regardless of whether it was “high-quartered” or low (Jefferson1813, Federico 1936). These three rules were not, however, a complete or exhaustive list of the criteria used to judge applications. Federico notes that Jefferson had strong beliefs that “small devices, obvious improvements or…frivolous devices,” should not receive the protections of a patent (Federico 1936, 241). This system was not perfect, but did manage to give both Fitch and Rumsey patents for their respective steamboat inventions.</p>
+
+
+
+
+<p>A report from the clerk’s office showed that of the 114 applications the Board received, only 49 patents were granted during the Act’s first three years [@Federico1936, 246]. As for the 14 steamboat or engine petitions, a Congressional hearing was held and ultimately determined that each invention was uniquely novel and could therefore be patented. Federico described the patent regime established as “conservative” with a keen attention to the scope of the rights being granted (Federico 1936). Jefferson wanted to hold ‘invention’ to a high standard. He worried that too many patents for too inconsequential of discoveries would be embarrassing to the young republic.</p>
+
+
+
+
+<h1>Conclusion: A return to normal science</h1>
+
+
+
+
+<p>Science and Technology Studies (STS) scholars have a history of analyzing the politics of techno-scientific events. Steven Epstein analyzed the politics of inclusion in clinical trials as well as the political transfer from lay person to expert in the controversies of the AIDS epidemic (Epstein 2009, Epstein 1995). More removed from politics, Bruno Latour’s Actor Network Theory is a suitable methodology for studying how a complicated system functions and produces knowledge (Latour 1988). Both Epstein and Latour’s methods could be useful frameworks for examining a lawmaking process; especially one with many nuanced actors like patent regime’s. Sheila Jasanoff wrote more specifically about the formal political process and the roles of STS in advising policymakers (Jasanoff 2011). Her perspective on the tension between highly technological societies and democracy are useful when thinking about passing a normative judgement on a set of policies, particularly if the rules a democracy sets up governing what is or is not technology are the object of study.</p>
+
+
+
+
+<p>This essay, however, sought to understand how the United State’s first patent system came about and the controversies that informed it. To that end, Hall’s notions of policy paradigms were more useful because of its focus on policy being oriented toward goals based on a specific view of how a part of the world works. In Hall’s account of policy paradigms, the new economic order established was one that was “based on a fundamentally different conception of how the economy itself worked.” The shift in British Economics was a radical departure from Keynesian theory and fiscal tools to neoclassical economics and monetary policy tools [@Hall1993]. In the account here, the Americans saw a dramatic shift away from a <em>custom</em> to a <em>codified system</em> for intellectual property rights. The decay of the former and its failure to address new questions of patentability combined with a Constitutional call provoked a third order policy change that set a paradigm changing the fundamental goals of the State regarding the promotion of the “Useful Arts”.</p>
+
+
+
+
+<p>Just as a Kuhnian scientific paradigm ushers in a new wave of “normal science,” (Kuhn 1970), so a policy paradigm brings forth a period of “normal policymaking.” Hall says that after a paradigm shift, first and second order policies are adopted to do the work of “[adjusting] policy without challenging the overall terms” set by the paradigm (Hall1993, 279). Evidence of this in the 1790 Patent Act can be seen immediately following its passage when Congress created the patent clerk (Federico1936). This is a clear first order change where “policy at time-1” (the creation of the clerk) is “deliberately” and directly influenced by “the outcomes of policy at time-0” (the need for one created by the Act). They happen frequently and largely respond to unforeseen consequences of past policy and “new developments” (Hall 1993, 281). The issuing of patents had the collective result of incrementally defining what was and was not useful, obvious, or otherwise patentable. Supreme Court decisions following the Patent Act also shaped this answer as well as the limits of Congressional power for granting patents.</p>
+
+
+
+
+<p>Second order changes are rarer than first but not as profound as third order, paradigm shifting, actions. According to Hall they are instrumental adjustments that change the mechanisms underlying the current paradigm, but not its “hierarchy of goals” (Hall 1993). Walterscheid notes that few were happy with the Patent Act of 1790: not Jefferson, nor the other officials, nor inventors (more than half of whom were rejected by the Patent Board). Congress acted quickly to amend it to essentially remove the examination process inventors and officials alike thought stymied the system. Despite the fact that the system had changed from “one of registration rather than examination,” (Walterscheid 1999) this second Act is only a second order change because it preserved the central goal of the 1790 Act which moved the United States from “a patent custom to a patent system in the United States” (Walterscheid 1997) The standards for obtaining a patent still included non-obviousness and usefulness standards, it was still a formal application and fee based system universally applied, and it remained predicated on the idea that the in exchange for a monopoly over their production and use, useful inventions and discoveries would be disclosed to the public (Walterscheid 1997).</p>
+
+
+
+
+<p>Today, the United States is at a juncture in Intellectual Property policy where new innovations and global governance organizations are pushing the limits of our current patenting paradigm. These new phenomena putting pressure on US Code Title 35 it may not be prepared to sustain. Understanding how IP area paradigms were created and overhauled in the past can be useful to inform these contemporary discussions. The controversy leading to the 1790 Patent Act is one such informative instance. Further examination of Patent Legislation over time will show how for long normal policy making continued after 1790 and at what point it began to fail as new inventions (like methods and software) and patenting mechanisms (like patent pools and thickets) that Congress could not anticipate in its first Act.</p>
+
+
+
+
+<h1>References</h1>
+
+
+
+
+<ol>
+<li>Epstein, Steven (1995). “The Construction of Lay Expertise: AIDS Activism and the Forging of Credibility in the Reform of Clinical Trials.” In: <em>Science, Technology &amp; Human Values</em> 20, pp. 408–437.</li>
+<li>Epstein, Steven (2009). <em>Inclusion: Politics of Difference in Medical Research</em> (Chicago Studies in Practices of Meaning). 1st Paperback. University of Chicago Press.</li>
+<li>Federico, PJ (1936). “Operation of the Patent Act of 1790.” In: <em>J. Pat. Off. Soc’y</em> 18, p. 237. url: http://heinonlinebackup.com/hol-cgi-bin/get_pdf.cgi? handle=hein.journals/jpatos18\&amp;section=43.</li>
+<li>Hall, PA (1993). “Policy Paradigms, Social Learning, and the State: The Case of Economic Policymaking in Britain.” In: <em>Comparative Politics</em>. url: http://www. jstor.org/stable/10.2307/422246.</li>
+<li>Jasanoff, Sheila (Dec. 2011). “Constitutional moments in governing science and technology.” In: <em>Science and Engineering Ethics</em> 4, pp. 621–38. issn: 1471-5546. doi: 10.1007/s11948-011-9302-2. url: http://www.ncbi.nlm.nih.gov/pubmed/ 21879357.</li>
+<li>Jefferson, Thomas (1813). Letter to Isaac McPherson. </li>
+<li>Kuhn, Thomas (1970). <em>The Structure of Scientific Revolutions.</em> 50th Anniv. University of Chicago Press. isbn: 978-0226458083.</li>
+<li>Latour, Bruno (1988). <em>Science in Action: How to Follow Scientists and Engineers Through Society.</em> Harvard University Press. isbn: 978-0674792913.</li>
+<li>Prager, FD (1944). “A History of Intellectual Property from 1545 to 1787.” In: <em>J. Pat. Off. Soc’y</em> 26, p. 711. url: http://heinonlinebackup.com/hol-cgi- bin/get_pdf.cgi?handle=hein.journals/jpatos26\&amp;section=144.</li>
+<li>— (1954). “Proposals for the Patent Act of 1790.” In: <em>J. Pat. Off. Soc’y</em> 36. url: http://heinonlinebackup.com/hol-cgi-bin/get_pdf.cgi?handle=hein. journals/jpatos36\&amp;section=28. </li>
+<li>The Constitution of the United States (1787).</li>
+<li>Walterscheid, EC (1999). “Use and Abuse of History: The Supreme Court’s Interpretation of Thomas Jefferson’s Influence on the Patent Law, The.” In: <em>Idea: The Journal of Law and Technology</em> 39, pp. 195–236. url: http://heinonlinebackup. com/hol-cgi-bin/get_pdf.cgi?handle=hein.journals/idea39\&amp;section= 14.</li>
+<li>Walterscheid, Edward C. (1997). “Charting a Novel Course: The Creation of the Patent Act of 1790.” In: <em>AIPLA QJ.</em> url: http://heinonlinebackup.com/hol- cgi-bin/get_pdf.cgi?handle=hein.journals/aiplaqj25\&amp;section=20.</li>
+<li>WIPO. “WIPO Intellectual Property Handbook.” pp. 17–160.</li>
+</ol>
+
+
+
+
+<div class="footnotes">
+<hr />
+<ol>
+
+<li id="fn:1">
+<p>Francis Bailey came closest to securing a so-called “Special Act” from Congress for his invention of marking paper such that it could not be counterfeited. The Senate’s interest in creating a single system ultimately prevailed over Bailey’s bill.&#160;<a href="#fnref:1" rev="footnote">&#8617;</a></p>
+</li>
+
+<li id="fn:2">
+<p>“Fifty cents plus ten cents per hundred words of specification, two dollars for making out the patent, one dollar for affixing the Great Seal and twenty cents for endorsement and all other services” (Federico 1936, 237).&#160;<a href="#fnref:2" rev="footnote">&#8617;</a></p>
+</li>
+
+<li id="fn:3">
+<p>A colorful list of these inventions can be found at Federico (1936, 239).&#160;<a href="#fnref:3" rev="footnote">&#8617;</a></p>
+</li>
+
+<li id="fn:4">
+<p>The Letter to Isaac McPherson, Jefferson 1813, is one such letter.&#160;<a href="#fnref:4" rev="footnote">&#8617;</a></p>
+</li>
+
+</ol>
+</div>
+
+]]></content>
+  </entry>
+  
+</feed>
