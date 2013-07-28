@@ -4,7 +4,7 @@
   <title><![CDATA[Merge Conflicts]]></title>
   <link href="http://gboone.github.io/atom.xml" rel="self"/>
   <link href="http://gboone.github.io/"/>
-  <updated>2013-07-28T10:05:12-04:00</updated>
+  <updated>2013-07-28T14:04:32-04:00</updated>
   <id>http://gboone.github.io/</id>
   <author>
     <name><![CDATA[Greg Boone]]></name>
@@ -14,11 +14,31 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Title]]></title>
+    <title type="html"><![CDATA[What I learned about git this week]]></title>
     <link href="http://gboone.github.io/blog/2013/07/28/title/"/>
     <updated>2013-07-28T09:50:00-04:00</updated>
     <id>http://gboone.github.io/blog/2013/07/28/title</id>
-    <content type="html"><![CDATA[
+    <content type="html"><![CDATA[<p>I love hidden features in software. Whether it&rsquo;s finding a <a href="http://www.vogue.co.uk/">konami code in unexpected places</a> or that I can add or remove all the dots and underscores to my gmail address I want and I&rsquo;ll still get the emails, something about them are great. That was what made Zach Holman&rsquo;s presentation &lsquo;More Git &amp; GitHub Secrets&rsquo; such an enjoyable read this week.</p>
+
+<p>Git can be at once incredibly powerful and overwhelming. It has one of the longest manual pages I&rsquo;ve ever seen, and sub-commands have an equally long manuals. Picking up the basics, it&rsquo;s easier to rely on a book, the book: <a href="http://git-scm.com/book">ProGit</a>, which can take you from installation to power user, but there are all kinds of hidden features built into git you can only find by using git <em>all the time</em>.</p>
+
+<p>I get the impression that people at GitHub spend a lot of time digging into git and it&rsquo;s probably why GitHub is so good at what it does. And, like git, it&rsquo;s full of hidden features. For example, in <a href="http://zachholman.com">@holman&rsquo;s</a> recent talk, he talked about fetching pull requests into a specific branch, a conveinent short cut to the typical:</p>
+
+<pre><code>git checkout -b pr
+git pull &lt;git URI&gt; &lt;branch&gt;
+&lt;fix any mrege conflicts&gt;
+git checkout &lt;branch&gt;
+git merge pr
+</code></pre>
+
+<p>You can fetch a pull request into a branch with:</p>
+
+<pre><code>git fetch origin pull/&lt;##&gt;/head:pr
+</code></pre>
+
+<p>Woah, way handy, git, GitHub! Another highlight, <code>git merge --abort</code>. You know that one time you accepted a pull request into the wrong branch and had a billion merge conflicts? This one little command will abort the merge and reset your tree without any rebasing or having to push <code>git commit -m 'fixing erroneous merge to the wrong branch'</code> to your remote.</p>
+
+<p>There are lots of other great tips in this and Holman&rsquo;s previous talks. <a href="http://zachholman.com/talk/more-git-and-github-secrets/">Check them out at his website, zachholman.com.</a></p>
 ]]></content>
   </entry>
   

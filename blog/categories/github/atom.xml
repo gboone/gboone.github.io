@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: git | Merge Conflicts]]></title>
-  <link href="http://gboone.github.io/blog/categories/git/atom.xml" rel="self"/>
+  <title><![CDATA[Category: GitHub | Merge Conflicts]]></title>
+  <link href="http://gboone.github.io/blog/categories/github/atom.xml" rel="self"/>
   <link href="http://gboone.github.io/"/>
   <updated>2013-07-28T14:04:32-04:00</updated>
   <id>http://gboone.github.io/</id>
