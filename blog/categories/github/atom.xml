@@ -4,7 +4,7 @@
   <title><![CDATA[Category: GitHub | Merge Conflicts]]></title>
   <link href="http://gboone.github.io/blog/categories/github/atom.xml" rel="self"/>
   <link href="http://gboone.github.io/"/>
-  <updated>2013-07-28T15:39:28-04:00</updated>
+  <updated>2013-07-28T17:32:31-04:00</updated>
   <id>http://gboone.github.io/</id>
   <author>
     <name><![CDATA[Greg Boone]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[What I learned about git this week]]></title>
-    <link href="http://gboone.github.io/blog/2013/07/28/title/"/>
+    <link href="http://gboone.github.io/blog/2013/07/28/what-i-learned-about-git-this-week/"/>
     <updated>2013-07-28T09:50:00-04:00</updated>
-    <id>http://gboone.github.io/blog/2013/07/28/title</id>
+    <id>http://gboone.github.io/blog/2013/07/28/what-i-learned-about-git-this-week</id>
     <content type="html"><![CDATA[<p>I love hidden features in software. Whether it&rsquo;s finding a <a href="http://www.vogue.co.uk/">konami code in unexpected places</a> or that I can add or remove all the dots and underscores to my gmail address I want and I&rsquo;ll still get the emails, something about them are great. That was what made Zach Holman&rsquo;s presentation &lsquo;More Git &amp; GitHub Secrets&rsquo; such an enjoyable read this week.</p>
 
 <p>Git can be at once incredibly powerful and overwhelming. It has one of the longest manual pages I&rsquo;ve ever seen, and sub-commands have an equally long manuals. Picking up the basics, it&rsquo;s easier to rely on a book, the book: <a href="http://git-scm.com/book">ProGit</a>, which can take you from installation to power user, but there are all kinds of hidden features built into git you can only find by using git <em>all the time</em>.</p>
