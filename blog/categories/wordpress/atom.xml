@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: WordPress | Merge Conflicts]]></title>
+  <link href="http://gboone.github.io/blog/categories/wordpress/atom.xml" rel="self"/>
+  <link href="http://gboone.github.io/"/>
+  <updated>2013-07-28T10:05:12-04:00</updated>
+  <id>http://gboone.github.io/</id>
+  <author>
+    <name><![CDATA[Greg Boone]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Title]]></title>
+    <link href="http://gboone.github.io/blog/2013/07/28/title/"/>
+    <updated>2013-07-28T09:50:00-04:00</updated>
+    <id>http://gboone.github.io/blog/2013/07/28/title</id>
+    <content type="html"><![CDATA[
+]]></content>
+  </entry>
+  
+</feed>
