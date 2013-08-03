@@ -1,84 +1,113 @@
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<!DOCTYPE HTML>
+<html>
 <head>
-  <meta charset="utf-8">
-  <title>Merge Conflicts</title>
-  <meta name="author" content="Greg Boone">
+	<meta charset="utf-8">
+	<title>Merge Conflicts</title>
+    <meta name="author" content="Greg Boone">
+    
+	<meta name="description" content="Published on: Aug 3rd, 2013 Tags: Octopress, WordPress About a week ago I successfully migrated some of my posts from harmsboone.org to this blog, I &hellip;">
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-  
-  <meta name="description" content="About a week ago I successfully migrated some of my posts from harmsboone.org to this blog, I also wrote a post about some things I learned about git &hellip;">
-  
+	<link href="/atom.xml" rel="alternate" title="Merge Conflicts" type="application/atom+xml">
+	<link rel="canonical" href="">
+	<link href="/favicon.ico" rel="shortcut icon">
+    <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
 
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href='http://fonts.googleapis.com/css?family=Slackey' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Fjalla+One' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Amethysta' rel='stylesheet' type='text/css'>
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
 
-  
-  <link rel="canonical" href="http://gboone.github.io">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <link href="/atom.xml" rel="alternate" title="Merge Conflicts" type="application/atom+xml">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="/javascripts/jquery-tapir.js"></script>
 
-  
+    <!-- remove or comment it to disable ajaxification -->   
+    <script src="/javascripts/ajaxify.js"></script>
+   
+    
+    
 
 </head>
 
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">Merge Conflicts</a></h1>
+
+<body>
+    <div id="wrapper">
+    <header id="header" class="inner"><!-- for more effects see _animate.scss -->
+<h1 class="animated bounceInDown">
+    <div id="headerbg">
+        Greg Boone
+    </div>
+</h1>
+<br>
+
+<ul id="social-links" style="text-align:center">
   
-    <h2>Lessons in Web Development</h2>
+  <!-- GitHub -->
+  <li>
+  <a href="https://github.com/gboone" class="github" title="Github"></a>
+  </li>
   
-</hgroup>
+  
+  <!-- Google Plus -->
+  <li>
+  <a href="http://plus.google.com/boone.greg?rel=author" class="google" title="Google+"></a>
+  </li>
+  
+  
+  
+  <!-- Twitter -->
+  <li>
+  <a href="http://www.twitter.com/gboone42" class="twitter" title="Twitter"></a>
+  </li>
+  
+  
+  
+  
+  
+</ul>
+
+
+<!-- use full url including 'index.html' for navigation bar if you are using ajax -->
+<ul id="nav">
+	<li id="ajax"><a href="/index.html">Home</a></li>
+	<li id="ajax"><a href="/blog/archives/index.html">Archives</a></li>
+    <li><a href="/atom.xml">RSS</a></li>
+    
+    <li>
+    <div id="dark">
+        <form method="get" action="/search.html" id="search">
+            <input name="query" type="text" placeholder="Search..." x-webkit-speech />
+        </form>
+    </div>
+    </li>
+        
+</ul>
+
+
+
 
 </header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:gboone.github.io" />
-    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archives</a></li>
-  <li><a href="/about/">About</a></li>
-</ul>
 
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/08/03/a-week-into-octopress/">A Week Into Octopress</a></h1>
-    
-    
-      <p class="meta">
+<div id="toload">
+<!-- begin toload --> 
+    <div id="content" class="inner">
         
 
 
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2013/08/03/a-week-into-octopress/">
+		
+			A Week Into Octopress</a>
+	</h2>
+    <div class="entry-content">
+    <div class="meta">
+      <div class="date">Published on: 
+
+
 
 
 
@@ -88,38 +117,40 @@
   
 
 
-<time datetime="2013-08-03T11:39:00-04:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time>
-        
-      </p>
-    
-  </header>
+<time datetime="2013-08-03T11:39:00-04:00" pubdate data-updated="true">Aug 3<span>rd</span>, 2013</time></div>
+      <div class="tags">Tags: 
 
 
-  <div class="entry-content"><p>About a week ago I successfully migrated some of my posts from <a href="http://harmsboone.org">harmsboone.org</a> to this blog, I also wrote a post about <a href="http://greg.harmsboone.org/blog/2013/07/28/what-i-learned-about-git-this-week/">some things I learned about git that week</a>. WordPress is great. I wouldn&rsquo;t recommend it (and I almost always do) if it weren&rsquo;t. For someone who wants to spin up a blog and maybe some day more in a pinch, WordPress is the go-to platform. In fact, the rest of harmsboone.org still runs it. Earlier this year, though, Danielle and I started talking about ditching the one-blog-for-both solution. When we were both living and teaching abroad sharing one blog made sense but now with the both of us starting different careers, we have different things to say.</p>
+	<a class='category' href='/blog/categories/octopress/'>Octopress</a>, <a class='category' href='/blog/categories/wordpress/'>WordPress</a>
+
+
+</div>
+    </div>
+		<p>About a week ago I successfully migrated some of my posts from <a href="http://harmsboone.org">harmsboone.org</a> to this blog, I also wrote a post about <a href="http://greg.harmsboone.org/blog/2013/07/28/what-i-learned-about-git-this-week/">some things I learned about git that week</a>. WordPress is great. I wouldn&rsquo;t recommend it (and I almost always do) if it weren&rsquo;t. For someone who wants to spin up a blog and maybe some day more in a pinch, WordPress is the go-to platform. In fact, the rest of harmsboone.org still runs it. Earlier this year, though, Danielle and I started talking about ditching the one-blog-for-both solution. When we were both living and teaching abroad sharing one blog made sense but now with the both of us starting different careers, we have different things to say.</p>
 
 <p>We decided to keep HarmsBoone.org as an archive of the last four years and also create new blogs for the both of us. Since I was starting from scratch anyway, might as well strike out with something new.</p>
 
+
+		
+		<a href="/blog/2013/08/03/a-week-into-octopress/" class="more-link">Read on &rarr;</a>
+	</div>
+
+<div class="meta">
+	
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/08/03/a-week-into-octopress/">Read on &rarr;</a>
-    </footer>
-  
+</article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/07/28/what-i-learned-about-git-this-week/">What I Learned About Git This Week</a></h1>
-    
-    
-      <p class="meta">
-        
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2013/07/28/what-i-learned-about-git-this-week/">
+		
+			What I Learned About Git This Week</a>
+	</h2>
+    <div class="entry-content">
+    <div class="meta">
+      <div class="date">Published on: 
 
 
 
@@ -131,14 +162,16 @@
   
 
 
-<time datetime="2013-07-28T09:50:00-04:00" pubdate data-updated="true">Jul 28<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
+<time datetime="2013-07-28T09:50:00-04:00" pubdate data-updated="true">Jul 28<span>th</span>, 2013</time></div>
+      <div class="tags">Tags: 
 
 
-  <div class="entry-content"><p>I love hidden features in software. Whether it&rsquo;s finding a <a href="http://www.vogue.co.uk/">konami code in unexpected places</a> or that I can add or remove all the dots and underscores to my gmail address I want and I&rsquo;ll still get the emails, something about them are great. That was what made Zach Holman&rsquo;s presentation &lsquo;More Git &amp; GitHub Secrets&rsquo; such an enjoyable read this week.</p>
+	<a class='category' href='/blog/categories/github/'>GitHub</a>, <a class='category' href='/blog/categories/git/'>git</a>
+
+
+</div>
+    </div>
+		<p>I love hidden features in software. Whether it&rsquo;s finding a <a href="http://www.vogue.co.uk/">konami code in unexpected places</a> or that I can add or remove all the dots and underscores to my gmail address I want and I&rsquo;ll still get the emails, something about them are great. That was what made Zach Holman&rsquo;s presentation &lsquo;More Git &amp; GitHub Secrets&rsquo; such an enjoyable read this week.</p>
 
 <p>Git can be at once incredibly powerful and overwhelming. It has one of the longest manual pages I&rsquo;ve ever seen, and sub-commands have an equally long manuals. Picking up the basics, it&rsquo;s easier to rely on a book, the book: <a href="http://git-scm.com/book">ProGit</a>, which can take you from installation to power user, but there are all kinds of hidden features built into git you can only find by using git <em>all the time</em>.</p>
 
@@ -159,23 +192,27 @@ git merge pr
 <p>Woah, way handy, git, GitHub! Another highlight, <code>git merge --abort</code>. You know that one time you accepted a pull request into the wrong branch and had a billion merge conflicts? This one little command will abort the merge and reset your tree without any rebasing or having to push <code>git commit -m 'fixing erroneous merge to the wrong branch'</code> to your remote.</p>
 
 <p>There are lots of other great tips in this and Holman&rsquo;s previous talks. <a href="http://zachholman.com/talk/more-git-and-github-secrets/">Check them out at his website, zachholman.com.</a></p>
+
+		
+		
+	</div>
+
+<div class="meta">
+	
 </div>
-  
-  
+</article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/12/30/tussle-over-technology-controversy-the-patent-act/">Tussle Over Technology: Controversy & the Patent Act</a></h1>
-    
-    
-      <p class="meta">
-        
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2012/12/30/tussle-over-technology-controversy-the-patent-act/">
+		
+			Tussle Over Technology: Controversy & the Patent Act</a>
+	</h2>
+    <div class="entry-content">
+    <div class="meta">
+      <div class="date">Published on: 
 
 
 
@@ -187,56 +224,60 @@ git merge pr
   
 
 
-<time datetime="2012-12-30T00:00:00-05:00" pubdate data-updated="true">Dec 30<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
+<time datetime="2012-12-30T00:00:00-05:00" pubdate data-updated="true">Dec 30<span>th</span>, 2012</time></div>
+      <div class="tags">Tags: 
 
 
-  <div class="entry-content"><h2>Abstract</h2>
+	<a class='category' href='/blog/categories/sts/'>STS</a>, <a class='category' href='/blog/categories/controversy/'>controversy</a>, <a class='category' href='/blog/categories/history/'>history</a>, <a class='category' href='/blog/categories/patents/'>patents</a>, <a class='category' href='/blog/categories/policy-paradigms/'>policy paradigms</a>, <a class='category' href='/blog/categories/politics/'>politics</a>, <a class='category' href='/blog/categories/scholarship/'>scholarship</a>, <a class='category' href='/blog/categories/science-and-technology-studies/'>science and technology studies</a>, <a class='category' href='/blog/categories/us-congress/'>us congress</a>
+
+
+</div>
+    </div>
+		<h2>Abstract</h2>
 
 <blockquote>
-  <p>The United States Constitution instructed the First Congress of the United States to enact laws &#8220;securing for limited Times to Authors and Inventors the exclusive Right to their respective Writings and Discoveries.&#8221; This instruction, commonly referred to as the Intellectual Property Clause, demanded a set of laws based on the broad idea that inventors are best incentivized and remunerated for their works through a system of guaranteed exclusive rights. What exactly the scope of those rights were, who had authority to hand them out, and under what conditions they would be given, were all left to Congress to sort out; it was among the earliest controversies over science and technology in the United States of America. </div>
+  <p>The United States Constitution instructed the First Congress of the United States to enact laws &#8220;securing for limited Times to Authors and Inventors the exclusive Right to their respective Writings and Discoveries.&#8221; This instruction, commonly referred to as the Intellectual Property Clause, demanded a set of laws based on the broad idea that inventors are best incentivized and remunerated for their works through a system of guaranteed exclusive rights. What exactly the scope of those rights were, who had authority to hand them out, and under what conditions they would be given, were all left to Congress to sort out; it was among the earliest controversies over science and technology in the United States of America. 
+		
+		<a href="/blog/2012/12/30/tussle-over-technology-controversy-the-patent-act/" class="more-link">Read on &rarr;</a>
+	</div>
+
+<div class="meta">
+	
+</div>
+</article>
+
+
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2012/08/15/20-years-of-gustavus-a-birds-eye-view/">
+		
+			20 Years of Gustavus: A Bird&#8217;s Eye View</a>
+	</h2>
+    <div class="entry-content">
+    <div class="meta">
+      <div class="date">Published on: 
+
+
+
+
+
+
+
+
   
-  
-    <footer>
-      <a rel="full-article" href="/blog/2012/12/30/tussle-over-technology-controversy-the-patent-act/">Read on &rarr;</a>
-    </footer>
-  
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/08/15/20-years-of-gustavus-a-birds-eye-view/">20 Years of Gustavus: A Bird&#8217;s Eye View</a></h1>
-    
-    
-      <p class="meta">
-        
+<time datetime="2012-08-15T00:00:00-04:00" pubdate data-updated="true">Aug 15<span>th</span>, 2012</time></div>
+      <div class="tags">Tags: 
 
 
+	<a class='category' href='/blog/categories/aerial-photography/'>aerial photography</a>, <a class='category' href='/blog/categories/cartography/'>cartography</a>, <a class='category' href='/blog/categories/college-costs/'>college costs</a>, <a class='category' href='/blog/categories/gustavus/'>gustavus</a>, <a class='category' href='/blog/categories/gustavus-adolphus-college/'>gustavus adolphus college</a>, <a class='category' href='/blog/categories/human-geography/'>human geography</a>
 
 
-
-
-
-
-  
-
-
-<time datetime="2012-08-15T00:00:00-04:00" pubdate data-updated="true">Aug 15<span>th</span>, 2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content">Inspired by the <a href="http://googleearthtimemachine.blogspot.fr/">Google Earth Time Machine blog</a> highlighted by Kottke.org a few days ago, I decided to see how far back the imagery over my college campus reached. I figured it being in rural area, there was probably a lot of agricultural aerial photography going on, but I was wrong, the imagery only went back as far as 1992. Perhaps if I paid for some extra features it would stretch back further, but who knows. Those familiar with Gustavus Adolphus College will recall the infamous 1998 Tornado, the ten-year anniversary of which was commemorated while I was a student. The big thing I remember hearing about the campus was tree loss. The big takeaway watching the recruitment video from the 90s they were still using when I was a freshman was &#8216;where did all those giant trees on the quad go? What I did not think about, and what never really got talked about, was how many more trees there are now, and this was immediately evident comparing the 92 aerial imagery with the photographs taken 20 years later.
+</div>
+    </div>
+		Inspired by the <a href="http://googleearthtimemachine.blogspot.fr/">Google Earth Time Machine blog</a> highlighted by Kottke.org a few days ago, I decided to see how far back the imagery over my college campus reached. I figured it being in rural area, there was probably a lot of agricultural aerial photography going on, but I was wrong, the imagery only went back as far as 1992. Perhaps if I paid for some extra features it would stretch back further, but who knows. Those familiar with Gustavus Adolphus College will recall the infamous 1998 Tornado, the ten-year anniversary of which was commemorated while I was a student. The big thing I remember hearing about the campus was tree loss. The big takeaway watching the recruitment video from the 90s they were still using when I was a freshman was &#8216;where did all those giant trees on the quad go? What I did not think about, and what never really got talked about, was how many more trees there are now, and this was immediately evident comparing the 92 aerial imagery with the photographs taken 20 years later.
 <a href="http://www.harmsboone.org/wp-content/uploads/2012/08/GAC121.jpg"><img class="alignleft size-medium wp-image-1596" title="Gustavus 2012" src="http://www.harmsboone.org/wp-content/uploads/2012/08/GAC121-512x318.jpg" alt="" width="512" height="318" /></a>
 
 One thing that was especially interesting was where there were more trees in 2012, where the trees were smaller, and where they were actually larger. The Linnaeus Arboretum sort of hugs the Westernmost part of the campus. In 2012 the Arb, as we affectionately knew it, is densely populated with trees on the North side, strikingly so compared to the same image in 1992. The South side is a bit more dense, but, being that it&#8217;s a bit more prairie on that end of the Arb, it&#8217;s not as noticeable. What&#8217;s strange here is that all the trees actually look a lot bigger, 20 years bigger, in fact. Did the Arb somehow survive the tornado, or was it replanted with really big trees? On the South-Southeast side of the campus, headed down the hill from (the old) Old Main the tree cover is definitely sparser in &#8216;92, but the trees much larger. There are also more paved paths headed up the hill from Rundstrom Hall, something I would have welcomed when I lived there.
@@ -250,23 +291,27 @@ The last thing I noted was how little the campus expanded its academic buildings
 I&#8217;m far from the first to note that <a href="http://www.nytimes.com/2012/05/15/business/colleges-begin-to-confront-higher-costs-and-students-debt.html?pagewanted=all">college</a> <a href="http://www.npr.org/2011/05/16/136214779/college-student-debt-grows-is-it-worth-it">costs</a> <a href="http://money.cnn.com/2011/10/26/pf/college/college_tuition_cost/index.htm">are</a> <a href="http://www.forbes.com/sites/peterjreilly/2012/03/19/why-college-prices-keep-rising/">on</a> <a href="http://www.npr.org/templates/story/story.php?storyId=130895432">the</a> <a href="http://www.theatlantic.com/business/archive/2012/06/how-in-the-world-did-college-costs-rise-15-in-only-2-years/258463/">rise</a>, and I&#8217;m far from the first to wonder why colleges <a href="http://www.pbs.org/wnet/need-to-know/pitchroom/are-college-sports-worth-the-cost/7827/">seem to spend more on fancy athletic and housing facilities than the academic program</a> (and whether that even matters), and <a href="http://www.newyorker.com/talk/comment/2012/05/28/120528taco_talk_lemann">what drives</a> <a href="http://blogs.edweek.org/edweek/college_bound/2012/04/some_perspective_on_the_high_cost_of_college.html">spending by college administrators</a>. Nevertheless, it is hard to argue that, at least from a bird&#8217;s eye view, my college seems to have its priorities in two key areas: athletics, and student facilities.
 
 <em>Edited for grammar and spelling, 8/15 at 7:37pm.</em>
+
+		
+		
+	</div>
+
+<div class="meta">
+	
 </div>
-  
-  
+</article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/12/13/the-soft-power-of-online-diplomacy/">The Soft Power of Online Diplomacy</a></h1>
-    
-    
-      <p class="meta">
-        
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2011/12/13/the-soft-power-of-online-diplomacy/">
+		
+			The Soft Power of Online Diplomacy</a>
+	</h2>
+    <div class="entry-content">
+    <div class="meta">
+      <div class="date">Published on: 
 
 
 
@@ -278,37 +323,39 @@ I&#8217;m far from the first to note that <a href="http://www.nytimes.com/2012/0
   
 
 
-<time datetime="2011-12-13T00:00:00-05:00" pubdate data-updated="true">Dec 13<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
+<time datetime="2011-12-13T00:00:00-05:00" pubdate data-updated="true">Dec 13<span>th</span>, 2011</time></div>
+      <div class="tags">Tags: 
 
 
-  <div class="entry-content"><p><strong>Abstract</strong></p>
+	<a class='category' href='/blog/categories/korea/'>Korea</a>, <a class='category' href='/blog/categories/north-korea/'>North Korea</a>, <a class='category' href='/blog/categories/south-korea/'>South Korea</a>, <a class='category' href='/blog/categories/culture/'>culture</a>, <a class='category' href='/blog/categories/diplomacy/'>diplomacy</a>, <a class='category' href='/blog/categories/hallyu/'>hallyu</a>, <a class='category' href='/blog/categories/hansik/'>hansik</a>, <a class='category' href='/blog/categories/korean-wave/'>korean wave</a>, <a class='category' href='/blog/categories/online-diplomacy/'>online diplomacy</a>, <a class='category' href='/blog/categories/public-diplomacy/'>public diplomacy</a>, <a class='category' href='/blog/categories/scholarship/'>scholarship</a>
+
+
+</div>
+    </div>
+		<p><strong>Abstract</strong></p>
 
 <p>The age of the state is not over. Though some have written about the power of web 2.0 to topple regimes and destroy state sovereignty, the picture is a little more complicated. The Republic of Korea in the last two decades has taken on a major cultural export campaign. Led by television dramas and pop music, the “Korean Wave,” as it’s called, has strengthened the ROK’s position as a regional power. More recently, the Republic of Korea started a comprehensive online public diplomacy campaign targeted specifically outside Korea’s ordinary sphere of influence with the goal of developing soft power abroad. Through an examination of tourism statistics, public opinion polls, and Google search trends, this paper ask the question: what if any soft power was generated by these online efforts? The results, though not immediately obvious, provide an early model for a state successfully taking on the new challenges posed by information and communication technologies to generate soft power online. <a href="#pdf">Download this article as a PDF.</a> This paper was prepared as part of a course taught by Shanthi Kalathil at Georgetown University.
+
+		
+		<a href="/blog/2011/12/13/the-soft-power-of-online-diplomacy/" class="more-link">Read on &rarr;</a>
+	</div>
+
+<div class="meta">
+	
 </div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2011/12/13/the-soft-power-of-online-diplomacy/">Read on &rarr;</a>
-    </footer>
-  
+</article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/08/16/hacking-as-protest/">Hacking as Protest?</a></h1>
-    
-    
-      <p class="meta">
-        
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2011/08/16/hacking-as-protest/">
+		
+			Hacking as Protest?</a>
+	</h2>
+    <div class="entry-content">
+    <div class="meta">
+      <div class="date">Published on: 
 
 
 
@@ -320,14 +367,16 @@ I&#8217;m far from the first to note that <a href="http://www.nytimes.com/2012/0
   
 
 
-<time datetime="2011-08-16T00:00:00-04:00" pubdate data-updated="true">Aug 16<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
+<time datetime="2011-08-16T00:00:00-04:00" pubdate data-updated="true">Aug 16<span>th</span>, 2011</time></div>
+      <div class="tags">Tags: 
 
 
-  <div class="entry-content"><p>I posted this question to my Google+ contacts earlier this morning, but decided it was worth blogging about too.</p>
+	<a class='category' href='/blog/categories/bart/'>BART</a>, <a class='category' href='/blog/categories/commentary/'>Commentary</a>, <a class='category' href='/blog/categories/first-amendment/'>First Amendment</a>, <a class='category' href='/blog/categories/anonymous/'>anonymous</a>, <a class='category' href='/blog/categories/electronic-freedom/'>electronic freedom</a>, <a class='category' href='/blog/categories/hacking/'>hacking</a>, <a class='category' href='/blog/categories/protest/'>protest</a>
+
+
+</div>
+    </div>
+		<p>I posted this question to my Google+ contacts earlier this morning, but decided it was worth blogging about too.</p>
 
 <p>The recent protests against SanFrancisco&#8217;s BART system is raising all kinds of eyebrows over a government authority&#8217;s silencing of mobile networks in the interest of  public safety. The bushiest of those eyebrows: didn&#8217;t Mubarak do exactly the same thing when he was trying to silence pro-democratic riots in Egypt, and isn&#8217;t that guy in a cage on trial right now, and doesn&#8217;t this remind anyone of a certain book titled with the year Reagan was reelected? While comparing BART&#8217;s suppression of cell networks underground to Mubarak&#8217;s silencing of all Internet and telephonic communication in the entire country of Egypt is a stretch, it does follow that if citizens are content to allow a small government agency to shut off our communication systems in the name of possible threats to public safety, it would be hard for those citizens to complain about a bigger agency doing the same thing. It sets a dangerous precedent.</p>
 
@@ -340,23 +389,27 @@ I&#8217;m far from the first to note that <a href="http://www.nytimes.com/2012/0
 <p>Then again, maybe compromised data is the new risk of protesting; the 21st equivalent of getting arrested for sitting at a lunch counter. That would be like MLK arresting the people for the police, or directing the fire hoses. Most people knew it was a possibility going into the protests, but in the civil rights movement, when people were arrested it reinforced the movement&#8217;s legitimacy.</p>
 
 <p>A while ago <a title="Weak Ties Build Movements" href="http://harmsboone.org/weak-ties-build-movements">I railed against Malcolm Gladwell&#8217;s</a> argument that social movements require &#8220;huge sacrifices&#8221; in order to be successful, and that the lack of sacrifices in online social movements is proof that &#8220;the revolution will not be tweeted.&#8221; Is this the &#8220;huge sacrifice&#8221; people will be required to make, that if you protest you risk having any data connected to the institution you are protesting against compromised? Weigh in, share your thoughts in the comments.</p>
+
+		
+		
+	</div>
+
+<div class="meta">
+	
 </div>
-  
-  
+</article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/07/15/why-im-still-excited-about-google/">Why I&#8217;m (Still) Excited About Google+</a></h1>
-    
-    
-      <p class="meta">
-        
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2011/07/15/why-im-still-excited-about-google/">
+		
+			Why I&#8217;m (Still) Excited About Google+</a>
+	</h2>
+    <div class="entry-content">
+    <div class="meta">
+      <div class="date">Published on: 
 
 
 
@@ -368,14 +421,16 @@ I&#8217;m far from the first to note that <a href="http://www.nytimes.com/2012/0
   
 
 
-<time datetime="2011-07-15T00:00:00-04:00" pubdate data-updated="true">Jul 15<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
+<time datetime="2011-07-15T00:00:00-04:00" pubdate data-updated="true">Jul 15<span>th</span>, 2011</time></div>
+      <div class="tags">Tags: 
 
 
-  <div class="entry-content"><p>It wasn&#8217;t until the Facebook/Skype marriage that I remembered Google were tackling a new social service. Eventually I got into the system to give it a spin and I have to say I&#8217;m impressed. I&#8217;m not quite ready to ditch Facebook, or say that anybody should or will ditch Zuck &amp; Co.&#8217;s popular if addled monster, but I am impressed. Apparently the fifth try is the charm.</p>
+	<a class='category' href='/blog/categories/commentary/'>Commentary</a>, <a class='category' href='/blog/categories/google/'>google</a>, <a class='category' href='/blog/categories/internet/'>internet</a>, <a class='category' href='/blog/categories/social-networks/'>social networks</a>, <a class='category' href='/blog/categories/web/'>web</a>
+
+
+</div>
+    </div>
+		<p>It wasn&#8217;t until the Facebook/Skype marriage that I remembered Google were tackling a new social service. Eventually I got into the system to give it a spin and I have to say I&#8217;m impressed. I&#8217;m not quite ready to ditch Facebook, or say that anybody should or will ditch Zuck &amp; Co.&#8217;s popular if addled monster, but I am impressed. Apparently the fifth try is the charm.</p>
 
 <p>To be sure, Google+ is still lacking one major feature: people. The trial period means that not every Snodgrass@gmail.com can sign up for an account. But bear in mind that when Facebook launched it also lacked people, almost pretentiously so, and people still used it. In Facebook&#8217;s early days anybody without an email address ending .edu and any school where Facebook &#8220;wasn&#8217;t yet available,&#8221; were sure out of luck until Zuckerberg opened things up. What Google lacks in population (<a title="Google+ Hits 10 Million Users" href="http://www.theatlanticwire.com/technology/2011/07/google-hits-10-million-users-should-facebook-freak-out/39854/" target="_blank">though if it keeps up these growth rates, it could well have solved that problem soon</a>) it more than makes up for in user experience by providing G+ users with a natural, easy, and safe way to connect with each other.</p>
 
@@ -398,23 +453,27 @@ I&#8217;m far from the first to note that <a href="http://www.nytimes.com/2012/0
 <p>G+ has the best privacy controls of any social application on the web today. Twitter is straightforward: everything you post is either shared with everyone, or only the people you allow; you&#8217;re either all in or not. Facebook is too complicated to summarize in one sentence without long-winded independent and parenthetical clauses (that&#8217;s a double-dog dare). G+ users decide on every post who gets to see it and who doesn&#8217;t. While setting a default (from public, like Twitter, to private, meaning just you, and everything in between) is possible, Google have made it incredibly easy to decide on the fly. And it isn&#8217;t hard to see the benefits. Circles allows users to be more like curators, or focused conversationalists rather than forcing them to be broadcasters. And it works both ways, users control whose posts they see by cycling through circles, so if someone in a user&#8217;s circles is being too noisy, there&#8217;s always the ability to create the &#8220;isolation chamber&#8221; circle.</p>
 
 <p>The <a title="Facebook's Big Wake-Up Call" href="http://www.wallstreetdaily.com/2011/07/13/facebooks-google-plus-social-networking/">Wall Street Daily</a> was right when they called Circles &#8220;Google’s answer to Facebook’s clumsy &#8216;groups&#8217; feature.&#8221; Circles is seamless, natural and is at the foundation of Google+. It&#8217;s a great way to share. Some are starting to see some <a title="Google's new social network: Circles and the Efficiency/Serendipity Trade Off" href="http://www.economist.com/blogs/babbage/2011/07/googles-new-social-network?fsrc=scn/tw/te/bl/circlesandthetradeoff">disadvantages with this kind of forced manual sorting</a>, that the inherent segmentation may actually lead to less interesting online interactions, but in general Circles seems to be the best answer to the online privacy problem so far. If you want everyone and anyone to weigh in on a question, and if you want to see everything and anything shared with you, that is all still possible. But when you know there is something not everyone should see, G+ has your back.</p>
+
+		
+		
+	</div>
+
+<div class="meta">
+	
 </div>
-  
-  
+</article>
 
 
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/05/26/wherein-a-northfield-game-inspired-a-lesson/">Wherein a Northfield Game Inspired a Lesson Plan</a></h1>
-    
-    
-      <p class="meta">
-        
+    <article class="post">
+	<h2 class="title">
+		
+		<a href="/blog/2011/05/26/wherein-a-northfield-game-inspired-a-lesson/">
+		
+			Wherein a Northfield Game Inspired a Lesson Plan</a>
+	</h2>
+    <div class="entry-content">
+    <div class="meta">
+      <div class="date">Published on: 
 
 
 
@@ -426,14 +485,16 @@ I&#8217;m far from the first to note that <a href="http://www.nytimes.com/2012/0
   
 
 
-<time datetime="2011-05-26T00:00:00-04:00" pubdate data-updated="true">May 26<span>th</span>, 2011</time>
-        
-      </p>
-    
-  </header>
+<time datetime="2011-05-26T00:00:00-04:00" pubdate data-updated="true">May 26<span>th</span>, 2011</time></div>
+      <div class="tags">Tags: 
 
 
-  <div class="entry-content"><p>People who came of age in the State of Minnesota sometime in the last decade likely have heard of <a title="Tricadecathlonomania: Official Website" href="http://trica.clockworkdistractions.com" target="_blank">Tricadecathlonomania</a>, particularly those of us who know someone Northfield. For anyone who hasn&#8217;t heard of it,  Trica, as it&#8217;s commonly known, is a scavenger hunt of epic proportion. It is not the scavenger hunt where you find a big list of things and bring them back to whomever gave you the list, nay it is far greater than that. With a whopping 288 items on the 2010 list, Trica is perhaps the most ambitious type of scavenger hunt there is; and here&#8217;s the catch: the list, whatever of it you can manage, must be completed in 24 hours. Thus was born &#8220;Tricadecathlonomania: The Lesson Plan.&#8221;</p>
+	<a class='category' href='/blog/categories/hungary/'>Hungary</a>, <a class='category' href='/blog/categories/games/'>games</a>, <a class='category' href='/blog/categories/lesson-plans/'>lesson plans</a>, <a class='category' href='/blog/categories/teaching/'>teaching</a>, <a class='category' href='/blog/categories/tricca/'>tricca</a>
+
+
+</div>
+    </div>
+		<p>People who came of age in the State of Minnesota sometime in the last decade likely have heard of <a title="Tricadecathlonomania: Official Website" href="http://trica.clockworkdistractions.com" target="_blank">Tricadecathlonomania</a>, particularly those of us who know someone Northfield. For anyone who hasn&#8217;t heard of it,  Trica, as it&#8217;s commonly known, is a scavenger hunt of epic proportion. It is not the scavenger hunt where you find a big list of things and bring them back to whomever gave you the list, nay it is far greater than that. With a whopping 288 items on the 2010 list, Trica is perhaps the most ambitious type of scavenger hunt there is; and here&#8217;s the catch: the list, whatever of it you can manage, must be completed in 24 hours. Thus was born &#8220;Tricadecathlonomania: The Lesson Plan.&#8221;</p>
 
 <p>The weather here in Hungary, simply put, has been gorgeous lately. The Magyars must have settled in this ancient ocean in April or May because I can&#8217;t imagine a better time to mosey on through the Magyarföld. Consequently, I was pestered nearly every lesson, every day, to go out to the park, have class outside, or play some kind of game. At first I was unsure if it was allowed, or if I should just stay on the Munkácsy property, or if it was allright to go to the nearby Berzsenyi Park. It turns out it is perfectly okay, so the only thing I needed to dream up was what to do once we got there. Then, it dawned on me. Students. Giant park. Nice weather. The conditions were perfect for a scavenger hunt. I contemplated different ways of doing it and ultimately settled on Trica style.</p>
 
@@ -452,137 +513,55 @@ I&#8217;m far from the first to note that <a href="http://www.nytimes.com/2012/0
 <p>None of the teams attempted no. 6, there was only one bank within the playing area, so it may have been too hard. It also didn&#8217;t help that in Hungarian &#8220;gyro&#8221; is spelled &#8220;gyros&#8221; and pronounced &#8220;ghee-rhoss&#8221; and Euro is pronounced nothing like that in Hungarian. No. 30 confused almost all the groups, apparently the 12 Days of Christmas carol isn&#8217;t as popular here—though one group earned a whopping 360 points for doing all 12 by bringing in a video tape of a 12 Days cartoon—either that or all the groups were giving it way too much though.</p>
 
 <p>In all it was among the most fun I&#8217;ve ever had teaching, certainly the most fun I&#8217;ve had since September.</p>
+
+		
+		
+	</div>
+
+<div class="meta">
+	
 </div>
-  
-  
+</article>
 
-
-    </article>
-  
-  <div class="pagination">
+<nav id="pagenavi">
     
-    <a href="/blog/archives">Blog Archives</a>
     
-  </div>
-</div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>Recent Posts</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2013/08/03/a-week-into-octopress/">A Week Into Octopress</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2013/07/28/what-i-learned-about-git-this-week/">What I Learned About Git This Week</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/12/30/tussle-over-technology-controversy-the-patent-act/">Tussle Over Technology: Controversy & the Patent Act</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/08/15/20-years-of-gustavus-a-birds-eye-view/">20 Years of Gustavus: A Bird&#8217;s Eye View</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2011/12/13/the-soft-power-of-online-diplomacy/">The Soft Power of Online Diplomacy</a>
-      </li>
-    
-  </ul>
-</section>
-
-<section>
-  <h1>GitHub Repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-  
-  <a href="https://github.com/gboone">@gboone</a> on GitHub
-  
-  <script type="text/javascript">
-    $(document).ready(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'gboone',
-            count: 3,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-<section>
-  <h1>On Delicious</h1>
-  <div id="delicious"></div>
-  <script type="text/javascript" src="http://feeds.delicious.com/v2/json/gboone42?count=3&amp;sort=date&amp;callback=renderDeliciousLinks"></script>
-  <p><a href="http://delicious.com/gboone42">My Delicious Bookmarks &raquo;</a></p>
-</section>
-
-
-<section class="googleplus googleplus-hidden">
-  <h1>
-    <a href="https://plus.google.com/boone.greg?rel=author">
-      <img src="http://www.google.com/images/icons/ui/gprofile_button-32.png" width="32" height="32">
-      Google+
-    </a>
-  </h1>
-</section>
-
-
-
-  
-</aside>
+    <div class="center"><a href="/blog/archives">Blog Archives</a></div>
+</nav>
 
     </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Greg Boone -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
-</p>
+    <footer id="footer">
+    <div style="display:inline">
+    Copyright &copy; 2013
 
-</footer>
-  
-
-
+    Greg Boone
+. Powered by <a href="http://octopress.org">Octopress</a> | 
+    Theme <a href="http://github.com/panks/fabric">fabric</a> by <a href="http://panks.me">Pankaj Kumar</a>
+</div>
 
 
-
-  <script type="text/javascript">
-    (function() {
-      var script = document.createElement('script'); script.type = 'text/javascript'; script.async = true;
-      script.src = 'https://apis.google.com/js/plusone.js';
-      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(script, s);
-    })();
-  </script>
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = '//platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
+    </footer>
+    <script src="/javascripts/fabric.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
 
 
 
 
 
+
+<!-- end toload --> 
+</div>
+</div>
+<script src="/javascripts/jquery.ui.totop.js" type="text/javascript"></script>
+<script type="text/javascript">
+/*<![CDATA[*/
+;(function($){$().UItoTop({easingType:'easeOutCirc'});})(jQuery); 
+/*]]>*/
+</script><!-- remove it to remove the scroll to top button -->
 </body>
 </html>
