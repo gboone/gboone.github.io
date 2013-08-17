@@ -4,7 +4,7 @@
   <title><![CDATA[Merge Conflicts]]></title>
   <link href="http://gboone.github.io/atom.xml" rel="self"/>
   <link href="http://gboone.github.io/"/>
-  <updated>2013-08-17T14:26:23-04:00</updated>
+  <updated>2013-08-17T14:27:17-04:00</updated>
   <id>http://gboone.github.io/</id>
   <author>
     <name><![CDATA[Greg Boone]]></name>
@@ -18,7 +18,7 @@
     <link href="http://gboone.github.io/blog/2013/08/17/how-can-i-do-browser-testing-with-wordpress/"/>
     <updated>2013-08-17T13:38:00-04:00</updated>
     <id>http://gboone.github.io/blog/2013/08/17/how-can-i-do-browser-testing-with-wordpress</id>
-    <content type="html"><![CDATA[<p>Browser testing is a basic component of a concept called behavior driven development (BDD), and one that has helped me become a better WordPress developer in the last few months. The concept of BDD is simple: test and develop around your software&rsquo;s expected behavior. <a href="http://blog.excella.com/how-can-wordpress-developers-do-behavior-driven-development-bdd/">I recently wrote about BDD for Excella&rsquo;s company blog</a>, and this post will go a bit more technical than that. The upshot of behavior testing is you can find problems with both your code and your requirements. Before we get into that, a bit of background on the tools.</p>
+    <content type="html"><![CDATA[<p>Browser testing is a basic component of a concept called behavior driven development (BDD), and one that has helped me become a better WordPress developer in the last few months. The concept of BDD is simple: test and develop around your software&rsquo;s expected behavior. <a href="http://blog.excella.com/how-can-wordpress-developers-do-behavior-driven-development-bdd/">I recently wrote about BDD for Excella&rsquo;s company blog</a>, and this post will go a bit more technical than that. The upshot of behavior testing is you can find problems with both your code and your requirements. Before we get into that, a bit of background on the tools.<!-- more --></p>
 
 <p>My BDD testing setup requires the following tools: <a href="http://pythonhosted.org/behave/">behave</a>, <a href="http://docs.seleniumhq.org/">selenium</a>, and the <a href="https://code.google.com/p/chromedriver/">chromedriver</a> on a Mac. Behave and selenium can be installed with PIP (<code>pip install behave; pip install selenium</code>) and chromedriver is available through <a href="https://github.com/mxcl/homebrew/">homebrew</a>. The workflow goes something like this:</p>
 
