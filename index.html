@@ -7,7 +7,7 @@
 	<meta name="author" content="Greg Boone">
 
 	
-	<meta name="description" content="Aug 7th, 2013 Software development concepts, git How to Explain Git to Non-developers Since starting with Excella in January I&rsquo;ve found myself &hellip;">
+	<meta name="description" content="Aug 17th, 2013 How Can I Do Browser Testing With WordPress? Browser testing is a basic component of a concept called behavior driven development ( &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -97,6 +97,115 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner">
 <div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-17T13:38:00-04:00" data-updated="true" itemprop="datePublished">Aug 17<span>th</span>, 2013</time></div>
+		<div class="tags">
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/08/17/how-can-i-do-browser-testing-with-wordpress/" itemprop="url">How Can I Do Browser Testing With WordPress?</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Browser testing is a basic component of a concept called behavior driven development (BDD), and one that has helped me become a better WordPress developer in the last few months. The concept of BDD is simple: test and develop around your software&rsquo;s expected behavior. <a href="http://blog.excella.com/how-can-wordpress-developers-do-behavior-driven-development-bdd/">I recently wrote about BDD for Excella&rsquo;s company blog</a>, and this post will go a bit more technical than that. The upshot of behavior testing is you can find problems with both your code and your requirements. Before we get into that, a bit of background on the tools.</p>
+
+<p>My BDD testing setup requires the following tools: <a href="http://pythonhosted.org/behave/">behave</a>, <a href="http://docs.seleniumhq.org/">selenium</a>, and the <a href="https://code.google.com/p/chromedriver/">chromedriver</a> on a Mac. Behave and selenium can be installed with PIP (<code>pip install behave; pip install selenium</code>) and chromedriver is available through <a href="https://github.com/mxcl/homebrew/">homebrew</a>. The workflow goes something like this:</p>
+
+<ol>
+<li>Tests written in gherkin</li>
+<li>Tests executed through behave, passed through selenium</li>
+<li>Google Chrome Driver walks through the tests and tells me what failed.</li>
+</ol>
+
+
+<p>Each test is a &ldquo;scenario&rdquo; that is part of a feature defined like an agile user story. For example</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='gherkin'><span class='line'><span class="k">Feature:</span><span class="nf"> A simple about page</span>
+</span><span class='line'><span class="nf">    As a website owner</span>
+</span><span class='line'><span class="nf">    I want an about page</span>
+</span><span class='line'><span class="nf">    So that visitors can learn more about what I do</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Which might have a scenario under it like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='gherkin'><span class='line'><span class="nt">@about_page_test</span><span class="nf"></span>
+</span><span class='line'><span class="k">Scenario:</span><span class="nf"></span>
+</span><span class='line'><span class="k">    Given </span><span class="nf">I visit the home page</span>
+</span><span class='line'><span class="nf">    </span><span class="k">When </span><span class="nf">I click the about link</span>
+</span><span class='line'><span class="nf">    </span><span class="k">Then </span><span class="nf">I should be directed to the about page</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The test is executed with <code>behave -t=about_page_test</code> and selenium passes the appropriate steps to the Chrome web driver. I&rsquo;m  developing a complex options page for a WordPress plugin and wrote a behavior test that would fill in the entire form in about 10 seconds without any typos or missing any fields. It immediately saved me a lot of time and keystrokes.</p>
+
+<p>Behave can also do &ldquo;scenario outlines&rdquo; where you write a single test with variables and then pass variables through an Examples table. Let&rsquo;s say our website from above got more complex and now has a few different pages and we also want to check the content of that page. I could write a scenario outline like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='gherkin'><span class='line'><span class="nt">@test_pages</span><span class="nf"></span>
+</span><span class='line'><span class="nf">Scenario outline:</span>
+</span><span class='line'><span class="nf">    </span><span class="k">Given </span><span class="nf">I visit the home page</span>
+</span><span class='line'><span class="nf">    </span><span class="k">When </span><span class="nf">I click the </span><span class="nv">&lt;page-title&gt;</span><span class="nf"> link</span>
+</span><span class='line'><span class="nf">    </span><span class="k">Then </span><span class="nf">I sohuld be directed to the </span><span class="nv">&lt;page-title&gt;</span><span class="nf"> page</span>
+</span><span class='line'><span class="nf">    </span><span class="k">And </span><span class="nf">I should find the text </span><span class="nv">&lt;target-text&gt;</span><span class="nf"> on the page</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">Examples:</span>
+</span><span class='line'><span class="k">|</span><span class="nv"> page-title</span><span class="k"> |</span><span class="nv"> target-text</span><span class="k">            |</span><span class="nf"></span>
+</span><span class='line'><span class="nf">| about</span><span class="k">      |</span><span class="s"> This is the about page</span><span class="k"> |</span><span class="nf"></span>
+</span><span class='line'><span class="nf">| contact</span><span class="k">    |</span><span class="s"> contact me</span><span class="k">             |</span><span class="nf"></span>
+</span><span class='line'><span class="nf">| photos</span><span class="k">     |</span><span class="s"> A photo of my cat</span><span class="k">      |</span><span class="nf"></span>
+</span><span class='line'><span class="nf">| blog</span><span class="k">       |</span><span class="s"> My blog</span><span class="k">                |</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As part of an upcoming content migration we will have to add a set of tags to each post of a certain post type. The product owners sent me a spreadsheet of the post titles and the tags and I wrote a form that take the title and attach that tags. It&rsquo;s a pretty simple form, but I needed to make sure that when the time came we could add these tags as quickly as possible, so I wrote a scenario outline, exported the Excel sheet in the format above, and ran the whole sheet through the form. Selenium was able to check 307 posts in less than an hour. Pretty sweet.</p>
+
+<p>This checked not only my code, but the data the product owners gave me. I noticed there some of the tags were plural while others singular: cat vs. cats, some were not real words, and about 12 of them didn&rsquo;t work. These 12 were the focus of my concern for the morning and I was able to discover that of them, only two were missed because of my code. One of them started with a space that was truncated somewhere along the way and the other was a duplicate post WordPress was tripped up by.</p>
+
+<p>Without running the table through a massive test we probably wouldn&rsquo;t have discovered these problems until the day we launched and then it would have been a problem that consumed the better part of a day trying to solve. With them, we were able to discover the problem early on, get it sorted and learn the limitations of our code well ahead of any deployment. That&rsquo;s the power of browser testing.</p>
+
+<p>Browser testing is but one among a large set of tests that can be run against code. Another effective kind of test for development is unit testing, which tests the code itself without a browser. If done correctly testing can drastically reduce the amoung of time spent debugging and improve overall reliability of the software we write. Plus, it makes you a better developer.</p>
+
+		
+		
+	</div>
+
+</article>
 
 
     <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
