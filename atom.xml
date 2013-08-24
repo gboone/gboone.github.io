@@ -4,7 +4,7 @@
   <title><![CDATA[Merge Conflicts]]></title>
   <link href="http://gboone.github.io/atom.xml" rel="self"/>
   <link href="http://gboone.github.io/"/>
-  <updated>2013-08-17T14:27:17-04:00</updated>
+  <updated>2013-08-24T14:59:39-05:00</updated>
   <id>http://gboone.github.io/</id>
   <author>
     <name><![CDATA[Greg Boone]]></name>
@@ -14,9 +14,57 @@
 
   
   <entry>
+    <title type="html"><![CDATA[How to Maybe Flush WordPress's Rewrite Rules]]></title>
+    <link href="http://gboone.github.io/blog/2013/08/24/how-to-maybe-flush-wordpresss-rewrite-rules/"/>
+    <updated>2013-08-24T09:16:00-05:00</updated>
+    <id>http://gboone.github.io/blog/2013/08/24/how-to-maybe-flush-wordpresss-rewrite-rules</id>
+    <content type="html"><![CDATA[<p>Custom post types and taxonomies are one of the most powerful tools to transform WordPress from a blogging platform to a full CMS. One of the most common problems beginning developers have when starting to use them is understanding how they work. It&rsquo;s easy to think that calling <code>register_post_type</code> is all it takes only to discover that their new post type archives are not working. This likely leads to a long dive into first (hopefully) the code to see if something was written incorrectly and then to the WordPress support forums to figure out what the problem is. 99% percent of the time I wager it&rsquo;s because the developer forgot to flush WordPress&rsquo;s rewrite rules.<!-- more --></p>
+
+<p>The misunderstanding is in thinking that the &lsquo;register&rsquo; in <code>register_post_type</code> means there is some kind of database entry or global variable that completely installs the new post type. Not so. What it actually does is hook your new post types into the list of post types WordPress looks for on every page load. Even if you pass the <code>has_archive</code> and <code>rewrite</code> arguments, post type registration does not touch the rewrite <em>rules</em> that tell your webserver where and how to find the new post type, just what those rules should be once they are created.</p>
+
+<p>Unlike post types, rewrite rules are stored in the database and are occasionally cached so they aren&rsquo;t pulled on every page load. The <code>wp_rewrite</code> row of the <code>wp_options</code> table might be quite large depending on what your permalink settings are, how many post types and taxonomies you have, and whether you have any rewrites going outside of WordPress. The only way to change the content of the global variable $wp_rewrite is to call <code>flush_rewrite_rules</code>, typically done by saving permalinks settings in wp-admin, this function clears the rewrite row and re-saves it.</p>
+
+<p>Sometimes it isn&rsquo;t possible to click that button. Consider, for example, a production server without wp-admin accessible. How are you supposed to flush the rules? The <code>flush_rewrite_rules</code> function is costly, as noted in the codex, but must be hooked into <code>init</code> to work effectively. The problem is, flushing is expensive, espcially if you have a high-triffic website, and hooking to <code>init</code> means it will happen on every page load. What to do? Check if rewrite rules are correct and flush only if needed.</p>
+
+<p>We have such a configuration at CFPB where wp-admin is generally inaccessible and we&rsquo;ve been struggling with exactly this problem every time we create a new post-type. I sloved the problem with a simple function called <a href="https://gist.github.com/gboone/6294720"><code>maybe_flush_rewrite</code></a>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> <span class="nf">maybe_flush_rewrite_rules</span><span class="p">(</span><span class="nv">$target</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$rules</span> <span class="o">=</span> <span class="nx">get_option</span><span class="p">(</span> <span class="s1">&#39;rewrite_rules&#39;</span> <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span> <span class="nv">$rules</span><span class="p">[</span> <span class="nv">$target</span> <span class="o">.</span> <span class="s1">&#39;/?$&#39;</span> <span class="p">]</span> <span class="o">!=</span>  <span class="s1">&#39;index.php?post_type=&#39;</span> <span class="o">.</span> <span class="nv">$target</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">flush_rewrite_rules</span><span class="p">(</span> <span class="nv">$hard</span> <span class="o">=</span> <span class="k">true</span> <span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">// then pass the post type name to maybe flush rewrite rules</span>
+</span><span class='line'><span class="nx">maybe_flush_rewrite_rules</span><span class="p">(</span> <span class="s1">&#39;your_post_type&#39;</span> <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>YMMV with this function because I&rsquo;m guessing it may be dependent on your permalinks settings, but after poking around the content of the <code>wp_rewrite</code> table I realized that if a custom post type had an archive it would have a rewrite structure similar to <code>index.php?post_Type=&lt;post_type_name&gt;</code>. This function takes a post type name as the <code>$target</code> parameter, checks if it is registered, and flushes only if it is not in the rewrite table. Now you can register a post type and call <code>maybe_flush_rewrite_rules</code> anywhere to clear the rules only if needed.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[How can I do browser testing with WordPress?]]></title>
     <link href="http://gboone.github.io/blog/2013/08/17/how-can-i-do-browser-testing-with-wordpress/"/>
-    <updated>2013-08-17T13:38:00-04:00</updated>
+    <updated>2013-08-17T13:38:00-05:00</updated>
     <id>http://gboone.github.io/blog/2013/08/17/how-can-i-do-browser-testing-with-wordpress</id>
     <content type="html"><![CDATA[<p>Browser testing is a basic component of a concept called behavior driven development (BDD), and one that has helped me become a better WordPress developer in the last few months. The concept of BDD is simple: test and develop around your software&rsquo;s expected behavior. <a href="http://blog.excella.com/how-can-wordpress-developers-do-behavior-driven-development-bdd/">I recently wrote about BDD for Excella&rsquo;s company blog</a>, and this post will go a bit more technical than that. The upshot of behavior testing is you can find problems with both your code and your requirements. Before we get into that, a bit of background on the tools.<!-- more --></p>
 
@@ -103,7 +151,7 @@
   <entry>
     <title type="html"><![CDATA[How to explain git to non-developers]]></title>
     <link href="http://gboone.github.io/blog/2013/08/07/how-to-explain-git-to-non-developers/"/>
-    <updated>2013-08-07T17:13:00-04:00</updated>
+    <updated>2013-08-07T17:13:00-05:00</updated>
     <id>http://gboone.github.io/blog/2013/08/07/how-to-explain-git-to-non-developers</id>
     <content type="html"><![CDATA[<p>Since starting with <a href="http://excella.com">Excella</a> in January I&rsquo;ve found myself explaining <code>git</code> and the underlying concept of version control to a lot of non-developers. People like to ask me what I&rsquo;m doing at my job, what I&rsquo;m learning, and git was a big one I had to learn early on. What I usually focus on when explaining <em>git</em> is how it is fundamentally different from revision history tools like those included with Google Documents and other word processors.<!-- more --></p>
 
@@ -124,7 +172,7 @@
   <entry>
     <title type="html"><![CDATA[A week into Octopress]]></title>
     <link href="http://gboone.github.io/blog/2013/08/03/a-week-into-octopress/"/>
-    <updated>2013-08-03T11:39:00-04:00</updated>
+    <updated>2013-08-03T11:39:00-05:00</updated>
     <id>http://gboone.github.io/blog/2013/08/03/a-week-into-octopress</id>
     <content type="html"><![CDATA[<p>About a week ago I successfully migrated some of my posts from <a href="http://harmsboone.org">harmsboone.org</a> to this blog, I also wrote a post about <a href="http://greg.harmsboone.org/blog/2013/07/28/what-i-learned-about-git-this-week/">some things I learned about git that week</a>. WordPress is great. I wouldn&rsquo;t recommend it (and I almost always do) if it weren&rsquo;t. For someone who wants to spin up a blog and maybe some day more in a pinch, WordPress is the go-to platform. In fact, the rest of harmsboone.org still runs it. Earlier this year, though, Danielle and I started talking about ditching the one-blog-for-both solution. When we were both living and teaching abroad sharing one blog made sense but now with the both of us starting different careers, we have different things to say.</p>
 
@@ -172,7 +220,7 @@
   <entry>
     <title type="html"><![CDATA[What I learned about git this week]]></title>
     <link href="http://gboone.github.io/blog/2013/07/28/what-i-learned-about-git-this-week/"/>
-    <updated>2013-07-28T09:50:00-04:00</updated>
+    <updated>2013-07-28T09:50:00-05:00</updated>
     <id>http://gboone.github.io/blog/2013/07/28/what-i-learned-about-git-this-week</id>
     <content type="html"><![CDATA[<p>I love hidden features in software. Whether it&rsquo;s finding a <a href="http://www.vogue.co.uk/">konami code in unexpected places</a> or that I can add or remove all the dots and underscores to my gmail address I want and I&rsquo;ll still get the emails, something about them are great. That was what made Zach Holman&rsquo;s presentation &lsquo;More Git &amp; GitHub Secrets&rsquo; such an enjoyable read this week.</p>
 
@@ -201,7 +249,7 @@ git merge pr
   <entry>
     <title type="html"><![CDATA[Tussle over Technology: Controversy & the Patent Act]]></title>
     <link href="http://gboone.github.io/blog/2012/12/30/tussle-over-technology-controversy-the-patent-act/"/>
-    <updated>2012-12-30T00:00:00-05:00</updated>
+    <updated>2012-12-30T00:00:00-06:00</updated>
     <id>http://gboone.github.io/blog/2012/12/30/tussle-over-technology-controversy-the-patent-act</id>
     <content type="html"><![CDATA[<h2>Abstract</h2>
 
@@ -330,7 +378,7 @@ git merge pr
   <entry>
     <title type="html"><![CDATA[20 Years of Gustavus: A bird's eye view]]></title>
     <link href="http://gboone.github.io/blog/2012/08/15/20-years-of-gustavus-a-birds-eye-view/"/>
-    <updated>2012-08-15T00:00:00-04:00</updated>
+    <updated>2012-08-15T00:00:00-05:00</updated>
     <id>http://gboone.github.io/blog/2012/08/15/20-years-of-gustavus-a-birds-eye-view</id>
     <content type="html"><![CDATA[Inspired by the <a href="http://googleearthtimemachine.blogspot.fr/">Google Earth Time Machine blog</a> highlighted by Kottke.org a few days ago, I decided to see how far back the imagery over my college campus reached. I figured it being in rural area, there was probably a lot of agricultural aerial photography going on, but I was wrong, the imagery only went back as far as 1992. Perhaps if I paid for some extra features it would stretch back further, but who knows. Those familiar with Gustavus Adolphus College will recall the infamous 1998 Tornado, the ten-year anniversary of which was commemorated while I was a student. The big thing I remember hearing about the campus was tree loss. The big takeaway watching the recruitment video from the 90s they were still using when I was a freshman was &#8216;where did all those giant trees on the quad go? What I did not think about, and what never really got talked about, was how many more trees there are now, and this was immediately evident comparing the 92 aerial imagery with the photographs taken 20 years later.
 <a href="http://www.harmsboone.org/wp-content/uploads/2012/08/GAC121.jpg"><img class="alignleft size-medium wp-image-1596" title="Gustavus 2012" src="http://www.harmsboone.org/wp-content/uploads/2012/08/GAC121-512x318.jpg" alt="" width="512" height="318" /></a>
@@ -352,7 +400,7 @@ I&#8217;m far from the first to note that <a href="http://www.nytimes.com/2012/0
   <entry>
     <title type="html"><![CDATA[The Soft Power of Online Diplomacy]]></title>
     <link href="http://gboone.github.io/blog/2011/12/13/the-soft-power-of-online-diplomacy/"/>
-    <updated>2011-12-13T00:00:00-05:00</updated>
+    <updated>2011-12-13T00:00:00-06:00</updated>
     <id>http://gboone.github.io/blog/2011/12/13/the-soft-power-of-online-diplomacy</id>
     <content type="html"><![CDATA[<p><strong>Abstract</strong></p>
 
@@ -591,7 +639,7 @@ I&#8217;m far from the first to note that <a href="http://www.nytimes.com/2012/0
   <entry>
     <title type="html"><![CDATA[Hacking as Protest?]]></title>
     <link href="http://gboone.github.io/blog/2011/08/16/hacking-as-protest/"/>
-    <updated>2011-08-16T00:00:00-04:00</updated>
+    <updated>2011-08-16T00:00:00-05:00</updated>
     <id>http://gboone.github.io/blog/2011/08/16/hacking-as-protest</id>
     <content type="html"><![CDATA[<p>I posted this question to my Google+ contacts earlier this morning, but decided it was worth blogging about too.</p>
 
@@ -612,7 +660,7 @@ I&#8217;m far from the first to note that <a href="http://www.nytimes.com/2012/0
   <entry>
     <title type="html"><![CDATA[Why I'm (still) Excited about Google+]]></title>
     <link href="http://gboone.github.io/blog/2011/07/15/why-im-still-excited-about-google/"/>
-    <updated>2011-07-15T00:00:00-04:00</updated>
+    <updated>2011-07-15T00:00:00-05:00</updated>
     <id>http://gboone.github.io/blog/2011/07/15/why-im-still-excited-about-google</id>
     <content type="html"><![CDATA[<p>It wasn&#8217;t until the Facebook/Skype marriage that I remembered Google were tackling a new social service. Eventually I got into the system to give it a spin and I have to say I&#8217;m impressed. I&#8217;m not quite ready to ditch Facebook, or say that anybody should or will ditch Zuck &amp; Co.&#8217;s popular if addled monster, but I am impressed. Apparently the fifth try is the charm.</p>
 
@@ -643,7 +691,7 @@ I&#8217;m far from the first to note that <a href="http://www.nytimes.com/2012/0
   <entry>
     <title type="html"><![CDATA[Wherein a Northfield Game Inspired a Lesson Plan]]></title>
     <link href="http://gboone.github.io/blog/2011/05/26/wherein-a-northfield-game-inspired-a-lesson/"/>
-    <updated>2011-05-26T00:00:00-04:00</updated>
+    <updated>2011-05-26T00:00:00-05:00</updated>
     <id>http://gboone.github.io/blog/2011/05/26/wherein-a-northfield-game-inspired-a-lesson</id>
     <content type="html"><![CDATA[<p>People who came of age in the State of Minnesota sometime in the last decade likely have heard of <a title="Tricadecathlonomania: Official Website" href="http://trica.clockworkdistractions.com" target="_blank">Tricadecathlonomania</a>, particularly those of us who know someone Northfield. For anyone who hasn&#8217;t heard of it,  Trica, as it&#8217;s commonly known, is a scavenger hunt of epic proportion. It is not the scavenger hunt where you find a big list of things and bring them back to whomever gave you the list, nay it is far greater than that. With a whopping 288 items on the 2010 list, Trica is perhaps the most ambitious type of scavenger hunt there is; and here&#8217;s the catch: the list, whatever of it you can manage, must be completed in 24 hours. Thus was born &#8220;Tricadecathlonomania: The Lesson Plan.&#8221;</p>
 
