@@ -219,6 +219,8 @@
 <p>Then, when you&rsquo;re  ready to toggle the feature, add a line like this to your <a href="http://httpd.apache.org/docs/2.0/mod/mod_env.html#setenv">Apache configuration</a>: <code>SetEnv VARIABLE_NAME value</code> where VARIABLE_NAME matches the <code>get_env()</code> parameter from above. Finally, restart Apache to trigger the change. To turn it off again, remove the <code>SetEnv</code> line and restart Apache.</p>
 
 <p>In this example, it doesn&rsquo;t matter what the variable is set to; as long as it exists, the <code>if</code> condition is true. Now you have an effective feature switch that doesn&rsquo;t depend on your source code. You could even play around with setting multiple conditions using <code>elseif</code>. And that&rsquo;s how you use feature switches in WordPress.</p>
+
+<p><a href="https://news.ycombinator.com/item?id=6389250">Discuss on Hacker News.</a></p>
 </div>
 
 </article>
