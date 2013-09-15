@@ -4,7 +4,7 @@
   <title><![CDATA[Merge Conflicts]]></title>
   <link href="http://gboone.github.io/atom.xml" rel="self"/>
   <link href="http://gboone.github.io/"/>
-  <updated>2013-08-24T14:59:39-05:00</updated>
+  <updated>2013-09-15T10:43:07-04:00</updated>
   <id>http://gboone.github.io/</id>
   <author>
     <name><![CDATA[Greg Boone]]></name>
@@ -14,9 +14,139 @@
 
   
   <entry>
+    <title type="html"><![CDATA[How can I use feature switches in WordPress?]]></title>
+    <link href="http://gboone.github.io/blog/2013/09/15/how-can-i-use-feature-switches-in-wordpress/"/>
+    <updated>2013-09-15T07:54:00-04:00</updated>
+    <id>http://gboone.github.io/blog/2013/09/15/how-can-i-use-feature-switches-in-wordpress</id>
+    <content type="html"><![CDATA[<p>While a colleague and I were discussing the rollout of a new feature to our public facing website, he asked me if it would be possible to &ldquo;hide&rdquo; the new content behind a toggle. Effectively, he was asking me to write a <a href="http://en.wikipedia.org/wiki/Feature_toggle">feature switch</a>, a best practice of continuous integration that <a href="http://martinfowler.com/bliki/FeatureToggle.html">allows you to push some source code while hiding future features not yet ready</a>. WordPress has some of this idea built into it&rsquo;s core: plugins, for example, can be activated and deactivated to turn things on and off. Within plugins and themes, options pages can be used to turn on different features. SEO plugins do this quite a bit, turning on different SEO features depending on whether the user <em>wants</em> them. Feature switches are a bit different, and in our case leverage the power of Apache environment variables to show and hide developing features.</p>
+
+<!-- more -->
+
+
+<h2>The problem</h2>
+
+<p>The problem we faced was that we had <em>n</em> posts that we needed to first convert to a new post type and then present in a radically different way. The UI was getting a major refresh and we were sorting and storing these posts in a more logical way. The problem was that while most of the code was ready, it had to go through the normal UAT that everything else did and in order to run the content migration script, the bulk of the source code had to be live on at least our staging environment, but none of the new features should be exposed to the world until all of this was complete.</p>
+
+<p>Our post type and taxonomy registration was done through a plugin we built for an earlier project, so turning that off was not an option, but we could change the way we registered <em>this</em> new post type by manipulating some of the parameters in <code>register_post_type();</code>.</p>
+
+<p>Typically, if you&rsquo;re going to register a post type you want to use and see it right away. You might even use a generator to do it for you:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nx">add_action</span><span class="p">(</span> <span class="s1">&#39;init&#39;</span><span class="p">,</span> <span class="s1">&#39;register_cpt_post_type&#39;</span> <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> <span class="nf">register_cpt_post_type</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nv">$labels</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>        <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;Post type&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;singular_name&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;Post type&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;add_new&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;Add New&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;add_new_item&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;Add New Post type&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;edit_item&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;Edit Post type&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;new_item&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;New Post type&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;view_item&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;View Post type&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;search_items&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;Search Post type&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;not_found&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;No post type found&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;not_found_in_trash&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;No post type found in Trash&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;parent_item_colon&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;Parent Post type:&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;menu_name&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;Post type&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>    <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nv">$args</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>        <span class="s1">&#39;labels&#39;</span> <span class="o">=&gt;</span> <span class="nv">$labels</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;hierarchical&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;supports&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;editor&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;public&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;show_ui&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;show_in_menu&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;show_in_nav_menus&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;publicly_queryable&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;exclude_from_search&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;has_archive&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;query_var&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;can_export&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;rewrite&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;capability_type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;post&#39;</span>
+</span><span class='line'>    <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">register_post_type</span><span class="p">(</span> <span class="s1">&#39;post_type&#39;</span><span class="p">,</span> <span class="nv">$args</span> <span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Zoom in on two of the <code>$args</code>: <code>public</code> and <code>has_archive</code>. The first turns the post type on in the backend and lets you create new posts of that type. The second controls whether typing <code>http://your.url/your_post_type</code> will lead to an archive or something else. In our case, we wanted <code>/your_post_type</code> to hit a WordPress page called <code>your_post_type</code> (the default behavior) until we were ready to launch the new feature at which point it should hit the post type archive. Remember, we don&rsquo;t want to launch until all the content is migrated to the new post type, so it was critical that we have it accessible on the back-end (<code>public =&gt; true</code>) but it&rsquo;s archive remain hidden on the front (<code>with_archive =&gt; false</code>).</p>
+
+<h3>Possible solutions</h3>
+
+<p>We could have stored the switch in an option, but that would require hitting or caching a database value for every page load. That&rsquo;s not terribly expensive, but putting the switch at the application level is faster, more elegant, and reserves the <code>wp_options</code> table for storing our actual options. So originally we tried locating the switch as a variable in the plugin registration function. Since it was hooked to <code>plugins_loaded</code> it would fire, before post type registration, on every page load. That was less than elegant, however, because it effectively meant we had to maintain different branches of code for each environment, which could get confusing and/or messy.</p>
+
+<h2>Enter <code>get_env();</code></h2>
+
+<p>PHP&rsquo;s <code>get_env()</code> function is a simple one that fetches a specified <a href="http://en.wikipedia.org/wiki/Environment_variable">environment variable</a> from the server configuration. Environment variables do all kinds of cool things, and if you set one in your Apache configuration, you can wrap new features in conditionals based on whether and to what value it is set.</p>
+
+<p>First, write some PHP code like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$env</span> <span class="o">=</span> <span class="nx">get_env</span><span class="p">(</span><span class="nx">VARIABLE_NAME</span><span class="p">);</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span> <span class="nb">isset</span><span class="p">(</span><span class="nv">$env</span><span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// do stuff</span>
+</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// do other stuff</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then, when you&rsquo;re  ready to toggle the feature, add a line like this to your apache configuration: <code>[SetEnv](http://httpd.apache.org/docs/2.0/mod/mod_env.html#setenv) VARIABLE_NAME=value</code> where VARIABLE_NAME matches the <code>get_env()</code> parameter from above. Finally, restart Apache to trigger the change. To turn it off again, remove the <code>SetEnv</code> line and restart Apache.</p>
+
+<p>In this example, it doesn&rsquo;t matter what the variable is set to, as long as it exists, the <code>if</code> condition is true. Now you have an effective feature switch that doesn&rsquo;t depend on your source code.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[How to Maybe Flush WordPress's Rewrite Rules]]></title>
     <link href="http://gboone.github.io/blog/2013/08/24/how-to-maybe-flush-wordpresss-rewrite-rules/"/>
-    <updated>2013-08-24T09:16:00-05:00</updated>
+    <updated>2013-08-24T09:16:00-04:00</updated>
     <id>http://gboone.github.io/blog/2013/08/24/how-to-maybe-flush-wordpresss-rewrite-rules</id>
     <content type="html"><![CDATA[<p>Custom post types and taxonomies are one of the most powerful tools to transform WordPress from a blogging platform to a full CMS. One of the most common problems beginning developers have when starting to use them is understanding how they work. It&rsquo;s easy to think that calling <code>register_post_type</code> is all it takes only to discover that their new post type archives are not working. This likely leads to a long dive into first (hopefully) the code to see if something was written incorrectly and then to the WordPress support forums to figure out what the problem is. 99% percent of the time I wager it&rsquo;s because the developer forgot to flush WordPress&rsquo;s rewrite rules.<!-- more --></p>
 
@@ -64,7 +194,7 @@
   <entry>
     <title type="html"><![CDATA[How can I do browser testing with WordPress?]]></title>
     <link href="http://gboone.github.io/blog/2013/08/17/how-can-i-do-browser-testing-with-wordpress/"/>
-    <updated>2013-08-17T13:38:00-05:00</updated>
+    <updated>2013-08-17T13:38:00-04:00</updated>
     <id>http://gboone.github.io/blog/2013/08/17/how-can-i-do-browser-testing-with-wordpress</id>
     <content type="html"><![CDATA[<p>Browser testing is a basic component of a concept called behavior driven development (BDD), and one that has helped me become a better WordPress developer in the last few months. The concept of BDD is simple: test and develop around your software&rsquo;s expected behavior. <a href="http://blog.excella.com/how-can-wordpress-developers-do-behavior-driven-development-bdd/">I recently wrote about BDD for Excella&rsquo;s company blog</a>, and this post will go a bit more technical than that. The upshot of behavior testing is you can find problems with both your code and your requirements. Before we get into that, a bit of background on the tools.<!-- more --></p>
 
@@ -151,7 +281,7 @@
   <entry>
     <title type="html"><![CDATA[How to explain git to non-developers]]></title>
     <link href="http://gboone.github.io/blog/2013/08/07/how-to-explain-git-to-non-developers/"/>
-    <updated>2013-08-07T17:13:00-05:00</updated>
+    <updated>2013-08-07T17:13:00-04:00</updated>
     <id>http://gboone.github.io/blog/2013/08/07/how-to-explain-git-to-non-developers</id>
     <content type="html"><![CDATA[<p>Since starting with <a href="http://excella.com">Excella</a> in January I&rsquo;ve found myself explaining <code>git</code> and the underlying concept of version control to a lot of non-developers. People like to ask me what I&rsquo;m doing at my job, what I&rsquo;m learning, and git was a big one I had to learn early on. What I usually focus on when explaining <em>git</em> is how it is fundamentally different from revision history tools like those included with Google Documents and other word processors.<!-- more --></p>
 
@@ -172,7 +302,7 @@
   <entry>
     <title type="html"><![CDATA[A week into Octopress]]></title>
     <link href="http://gboone.github.io/blog/2013/08/03/a-week-into-octopress/"/>
-    <updated>2013-08-03T11:39:00-05:00</updated>
+    <updated>2013-08-03T11:39:00-04:00</updated>
     <id>http://gboone.github.io/blog/2013/08/03/a-week-into-octopress</id>
     <content type="html"><![CDATA[<p>About a week ago I successfully migrated some of my posts from <a href="http://harmsboone.org">harmsboone.org</a> to this blog, I also wrote a post about <a href="http://greg.harmsboone.org/blog/2013/07/28/what-i-learned-about-git-this-week/">some things I learned about git that week</a>. WordPress is great. I wouldn&rsquo;t recommend it (and I almost always do) if it weren&rsquo;t. For someone who wants to spin up a blog and maybe some day more in a pinch, WordPress is the go-to platform. In fact, the rest of harmsboone.org still runs it. Earlier this year, though, Danielle and I started talking about ditching the one-blog-for-both solution. When we were both living and teaching abroad sharing one blog made sense but now with the both of us starting different careers, we have different things to say.</p>
 
@@ -220,7 +350,7 @@
   <entry>
     <title type="html"><![CDATA[What I learned about git this week]]></title>
     <link href="http://gboone.github.io/blog/2013/07/28/what-i-learned-about-git-this-week/"/>
-    <updated>2013-07-28T09:50:00-05:00</updated>
+    <updated>2013-07-28T09:50:00-04:00</updated>
     <id>http://gboone.github.io/blog/2013/07/28/what-i-learned-about-git-this-week</id>
     <content type="html"><![CDATA[<p>I love hidden features in software. Whether it&rsquo;s finding a <a href="http://www.vogue.co.uk/">konami code in unexpected places</a> or that I can add or remove all the dots and underscores to my gmail address I want and I&rsquo;ll still get the emails, something about them are great. That was what made Zach Holman&rsquo;s presentation &lsquo;More Git &amp; GitHub Secrets&rsquo; such an enjoyable read this week.</p>
 
@@ -249,7 +379,7 @@ git merge pr
   <entry>
     <title type="html"><![CDATA[Tussle over Technology: Controversy & the Patent Act]]></title>
     <link href="http://gboone.github.io/blog/2012/12/30/tussle-over-technology-controversy-the-patent-act/"/>
-    <updated>2012-12-30T00:00:00-06:00</updated>
+    <updated>2012-12-30T00:00:00-05:00</updated>
     <id>http://gboone.github.io/blog/2012/12/30/tussle-over-technology-controversy-the-patent-act</id>
     <content type="html"><![CDATA[<h2>Abstract</h2>
 
@@ -378,7 +508,7 @@ git merge pr
   <entry>
     <title type="html"><![CDATA[20 Years of Gustavus: A bird's eye view]]></title>
     <link href="http://gboone.github.io/blog/2012/08/15/20-years-of-gustavus-a-birds-eye-view/"/>
-    <updated>2012-08-15T00:00:00-05:00</updated>
+    <updated>2012-08-15T00:00:00-04:00</updated>
     <id>http://gboone.github.io/blog/2012/08/15/20-years-of-gustavus-a-birds-eye-view</id>
     <content type="html"><![CDATA[Inspired by the <a href="http://googleearthtimemachine.blogspot.fr/">Google Earth Time Machine blog</a> highlighted by Kottke.org a few days ago, I decided to see how far back the imagery over my college campus reached. I figured it being in rural area, there was probably a lot of agricultural aerial photography going on, but I was wrong, the imagery only went back as far as 1992. Perhaps if I paid for some extra features it would stretch back further, but who knows. Those familiar with Gustavus Adolphus College will recall the infamous 1998 Tornado, the ten-year anniversary of which was commemorated while I was a student. The big thing I remember hearing about the campus was tree loss. The big takeaway watching the recruitment video from the 90s they were still using when I was a freshman was &#8216;where did all those giant trees on the quad go? What I did not think about, and what never really got talked about, was how many more trees there are now, and this was immediately evident comparing the 92 aerial imagery with the photographs taken 20 years later.
 <a href="http://www.harmsboone.org/wp-content/uploads/2012/08/GAC121.jpg"><img class="alignleft size-medium wp-image-1596" title="Gustavus 2012" src="http://www.harmsboone.org/wp-content/uploads/2012/08/GAC121-512x318.jpg" alt="" width="512" height="318" /></a>
@@ -400,7 +530,7 @@ I&#8217;m far from the first to note that <a href="http://www.nytimes.com/2012/0
   <entry>
     <title type="html"><![CDATA[The Soft Power of Online Diplomacy]]></title>
     <link href="http://gboone.github.io/blog/2011/12/13/the-soft-power-of-online-diplomacy/"/>
-    <updated>2011-12-13T00:00:00-06:00</updated>
+    <updated>2011-12-13T00:00:00-05:00</updated>
     <id>http://gboone.github.io/blog/2011/12/13/the-soft-power-of-online-diplomacy</id>
     <content type="html"><![CDATA[<p><strong>Abstract</strong></p>
 
@@ -639,7 +769,7 @@ I&#8217;m far from the first to note that <a href="http://www.nytimes.com/2012/0
   <entry>
     <title type="html"><![CDATA[Hacking as Protest?]]></title>
     <link href="http://gboone.github.io/blog/2011/08/16/hacking-as-protest/"/>
-    <updated>2011-08-16T00:00:00-05:00</updated>
+    <updated>2011-08-16T00:00:00-04:00</updated>
     <id>http://gboone.github.io/blog/2011/08/16/hacking-as-protest</id>
     <content type="html"><![CDATA[<p>I posted this question to my Google+ contacts earlier this morning, but decided it was worth blogging about too.</p>
 
@@ -660,7 +790,7 @@ I&#8217;m far from the first to note that <a href="http://www.nytimes.com/2012/0
   <entry>
     <title type="html"><![CDATA[Why I'm (still) Excited about Google+]]></title>
     <link href="http://gboone.github.io/blog/2011/07/15/why-im-still-excited-about-google/"/>
-    <updated>2011-07-15T00:00:00-05:00</updated>
+    <updated>2011-07-15T00:00:00-04:00</updated>
     <id>http://gboone.github.io/blog/2011/07/15/why-im-still-excited-about-google</id>
     <content type="html"><![CDATA[<p>It wasn&#8217;t until the Facebook/Skype marriage that I remembered Google were tackling a new social service. Eventually I got into the system to give it a spin and I have to say I&#8217;m impressed. I&#8217;m not quite ready to ditch Facebook, or say that anybody should or will ditch Zuck &amp; Co.&#8217;s popular if addled monster, but I am impressed. Apparently the fifth try is the charm.</p>
 
@@ -691,7 +821,7 @@ I&#8217;m far from the first to note that <a href="http://www.nytimes.com/2012/0
   <entry>
     <title type="html"><![CDATA[Wherein a Northfield Game Inspired a Lesson Plan]]></title>
     <link href="http://gboone.github.io/blog/2011/05/26/wherein-a-northfield-game-inspired-a-lesson/"/>
-    <updated>2011-05-26T00:00:00-05:00</updated>
+    <updated>2011-05-26T00:00:00-04:00</updated>
     <id>http://gboone.github.io/blog/2011/05/26/wherein-a-northfield-game-inspired-a-lesson</id>
     <content type="html"><![CDATA[<p>People who came of age in the State of Minnesota sometime in the last decade likely have heard of <a title="Tricadecathlonomania: Official Website" href="http://trica.clockworkdistractions.com" target="_blank">Tricadecathlonomania</a>, particularly those of us who know someone Northfield. For anyone who hasn&#8217;t heard of it,  Trica, as it&#8217;s commonly known, is a scavenger hunt of epic proportion. It is not the scavenger hunt where you find a big list of things and bring them back to whomever gave you the list, nay it is far greater than that. With a whopping 288 items on the 2010 list, Trica is perhaps the most ambitious type of scavenger hunt there is; and here&#8217;s the catch: the list, whatever of it you can manage, must be completed in 24 hours. Thus was born &#8220;Tricadecathlonomania: The Lesson Plan.&#8221;</p>
 

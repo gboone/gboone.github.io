@@ -4,7 +4,7 @@
   <title><![CDATA[Category: GitHub | Merge Conflicts]]></title>
   <link href="http://gboone.github.io/blog/categories/github/atom.xml" rel="self"/>
   <link href="http://gboone.github.io/"/>
-  <updated>2013-08-24T14:59:39-05:00</updated>
+  <updated>2013-09-15T10:43:07-04:00</updated>
   <id>http://gboone.github.io/</id>
   <author>
     <name><![CDATA[Greg Boone]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[What I learned about git this week]]></title>
     <link href="http://gboone.github.io/blog/2013/07/28/what-i-learned-about-git-this-week/"/>
-    <updated>2013-07-28T09:50:00-05:00</updated>
+    <updated>2013-07-28T09:50:00-04:00</updated>
     <id>http://gboone.github.io/blog/2013/07/28/what-i-learned-about-git-this-week</id>
     <content type="html"><![CDATA[<p>I love hidden features in software. Whether it&rsquo;s finding a <a href="http://www.vogue.co.uk/">konami code in unexpected places</a> or that I can add or remove all the dots and underscores to my gmail address I want and I&rsquo;ll still get the emails, something about them are great. That was what made Zach Holman&rsquo;s presentation &lsquo;More Git &amp; GitHub Secrets&rsquo; such an enjoyable read this week.</p>
 
