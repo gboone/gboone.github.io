@@ -4,7 +4,7 @@
   <title><![CDATA[Merge Conflicts]]></title>
   <link href="http://gboone.github.io/atom.xml" rel="self"/>
   <link href="http://gboone.github.io/"/>
-  <updated>2013-09-15T10:52:37-04:00</updated>
+  <updated>2013-09-15T10:53:31-04:00</updated>
   <id>http://gboone.github.io/</id>
   <author>
     <name><![CDATA[Greg Boone]]></name>
@@ -116,7 +116,7 @@
 
 <p>We could have stored the switch in an option, but that would require hitting or caching a database value for every page load. That&rsquo;s not terribly expensive, but putting the switch at the application level is faster, more elegant, and reserves the <code>wp_options</code> table for storing our actual options. So originally we tried locating the switch as a variable in the plugin registration function. Since it was hooked to <code>plugins_loaded</code> it would fire, before post type registration, on every page load. That was less than elegant, however, because it effectively meant we had to maintain different branches of code for each environment, which could get confusing and/or messy.</p>
 
-<h2>Enter SetEnv and <code>get_env();</code></h2>
+<h2>Enter SetEnv and get_env();</h2>
 
 <p>PHP&rsquo;s <code>get_env()</code> function is a simple one that fetches a specified <a href="http://en.wikipedia.org/wiki/Environment_variable">environment variable</a> from the server configuration. Environment variables do all kinds of cool things, and if you set one in your Apache configuration, you can wrap new features in conditionals based on whether and to what value it is set.</p>
 
@@ -137,7 +137,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Then, when you&rsquo;re  ready to toggle the feature, add a line like this to your <a href="http://httpd.apache.org/docs/2.0/mod/mod_env.html#setenv">Apache configuration</a>: <code>SetEnv VARIABLE_NAME=value</code> where VARIABLE_NAME matches the <code>get_env()</code> parameter from above. Finally, restart Apache to trigger the change. To turn it off again, remove the <code>SetEnv</code> line and restart Apache.</p>
+<p>Then, when you&rsquo;re  ready to toggle the feature, add a line like this to your <a href="http://httpd.apache.org/docs/2.0/mod/mod_env.html#setenv">Apache configuration</a>: <code>SetEnv VARIABLE_NAME value</code> where VARIABLE_NAME matches the <code>get_env()</code> parameter from above. Finally, restart Apache to trigger the change. To turn it off again, remove the <code>SetEnv</code> line and restart Apache.</p>
 
 <p>In this example, it doesn&rsquo;t matter what the variable is set to; as long as it exists, the <code>if</code> condition is true. Now you have an effective feature switch that doesn&rsquo;t depend on your source code. You could even play around with setting multiple conditions using <code>elseif</code>. And that&rsquo;s how you use feature switches in WordPress.</p>
 ]]></content>
