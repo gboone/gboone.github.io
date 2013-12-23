@@ -4,7 +4,7 @@
   <title><![CDATA[Category: unit | Merge Conflicts]]></title>
   <link href="http://gboone.github.io/blog/categories/unit/atom.xml" rel="self"/>
   <link href="http://gboone.github.io/"/>
-  <updated>2013-12-23T15:23:08-06:00</updated>
+  <updated>2013-12-23T15:29:14-06:00</updated>
   <id>http://gboone.github.io/</id>
   <author>
     <name><![CDATA[Greg Boone]]></name>
@@ -12,100 +12,6 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
-  
-  <entry>
-    <title type="html"><![CDATA[Writing Unit Tests for WordPress]]></title>
-    <link href="http://gboone.github.io/blog/2013/12/23/writing-unit-tests-for-wordpress/"/>
-    <updated>2013-12-23T10:52:00-06:00</updated>
-    <id>http://gboone.github.io/blog/2013/12/23/writing-unit-tests-for-wordpress</id>
-    <content type="html"><![CDATA[<p>In my last post I wrote about two testing libraries for WordPress and discussed the difference between integration tests and unit tests. I also mentioned a concept called test driven development and breifly explained how it might help write better code from the start. This post will expand on that and show how to write a simple WordPress plugin from a test-first approach. Since we&rsquo;re writing unit tests, we&rsquo;re going to use WP-Mock to create a test double for us and we&rsquo;ll use PHPunit for our test runner.</p>
-
-<p>TDD starts with an idea. In this case, let&rsquo;s say we have a plugin that will add some metadata to a post with the title &ldquo;Test&rdquo;. Since that&rsquo;s going to require us to mock some WordPress core functionality, <a href="http://github.com/10up/wp-mock">make sure WP-Mock is configured in your working environment</a>. We&rsquo;ll should start by writing a test that verifies the metadata was attached to the post. In order to write unit tests we first need to extend the base test suite. In our plugin&rsquo;s root directory, add a directory called &lsquo;tests&rsquo; and inside it create a file called test-plugin.php. To extend the test suite, we simply create a class (this is explained inthe WP-Mock README):</p>
-
-<p>```
-&lt;?</p>
-
-<pre><code>Class OurTestSuite extends extends PHPUnit_Framework_TestCase {
-</code></pre>
-
-<p>}
-?>
-```</p>
-
-<p>Now that we have a class, we can call any of PHPunit&rsquo;s methods for testing including all of their assertions. Inside this OurTestSuite is where we will write all our testing methods. We start with setUp and tearDown, commonly named methods that instantiate some conditions we will want for all our classes. We&rsquo;ll want to make sure our setUp and tearDown methods clean up our test environment as well as any mocks we create out of WP_Mock. So we&rsquo;ll declare:</p>
-
-<p>```
-&lt;?php</p>
-
-<pre><code>public funciton setUp() {
-    parent::setUp();
-}
-
-public function tearDown() {
-    parent::tearDown();
-}
-</code></pre>
-
-<p>?>
-```</p>
-
-<p>If we had other things we wanted in here, other objects we want available throughout the test suite, etc., we could declare those too. If you run the test now you&rsquo;ll get some output, but no tests will run because we haven&rsquo;t written any. Now let&rsquo;s write our test for our <code>save_meta</code> method. There are three basic sections to our test: Arrange, Act, Assert. The first section is for all the bits our method needs for input. In our case, we&rsquo;ll need the post ID for a post called &ldquo;Test&rdquo; and a key and value pair to save as metadata. Since the ID could be any integer on a given system, we can arrange our test with any integer we like. The next piece, the key-value pair, will be set in the method, but we&rsquo;ll want to decide now what they&rsquo;ll be.</p>
-
-<p>The &ldquo;Act&rdquo; section is where we call the method. In this case, we&rsquo;re going to call a method called <code>save_meta_data</code> out of the <code>MethodsClass</code> object. Finally, the &ldquo;Assert&rdquo; section is where we decide what the method should expect to see at the end. This section might be empty depending on whether the method under test returns an output or simply passes data somewherelse. In our case, it&rsquo;s the latter. Instead, for us, the test passes if <code>update_post_meta</code> is called exactly once. Right now our test is looking something like this:</p>
-
-<p>```
-&lt;?php
-&hellip;</p>
-
-<pre><code>public function testTestPostExpectsMetaDataSaved(){
-    // Arrange
-    $post_id = 42;
-
-    // Act
-    $methods = new MethodsClass();
-    $methods-&gt;save_meta_data($post_id);
-
-    // Assert
-}
-</code></pre>
-
-<p>&hellip;
-?>
-```</p>
-
-<p>Not a bad looking test, but we have some mocking to do. We already know we&rsquo;ll need to mock <code>update_post_meta()</code>, but we&rsquo;re also going to need <code>get_post()</code> as well. In both cases, we&rsquo;re going to make PHPunit handle calls to those methods and return what we want back. In this case, from <code>get_post()</code> we&rsquo;re going to want it to return <code>$post-&gt;Name</code> equal to &ldquo;Test&rdquo;, so we can positively test that the post named &ldquo;Test&rdquo; get&rsquo;s updated meta data. We know what to expect if we call <code>update_post_meta</code>: if all is well with our WordPress install, we expect it would add new information to the post object. So we don&rsquo;t need to verify that, all we really need to do is verify it&rsquo;s being called exactly once. So let&rsquo;s add our mocks to the &ldquo;Arrange&rdquo; section.</p>
-
-<p>Fully mocking a function like <code>get_post()</code> uses the static method <code>wpFunction()</code> from the WP_Mock class. We can call it with: <code>\WP_Mock::wpFunciton()</code>. We can also pass wpFunction some parameters like &lsquo;times&rsquo;, for how many times we expect the mocked function to fire, and &lsquo;parameters&rsquo;, and &lsquo;return&rsquo;. These will all help us send some data to <code>get_post</code>, have it handled predictably, and return something else. A full example is below.</p>
-
-<p>```
-&lt;?php</p>
-
-<pre><code>...
-// Arrange
-$post = \WP_Mock::wpFunction('get_post')
-...
-</code></pre>
-
-<p>?>
-```</p>
-
-<p>Finally, we need to address <code>update_post_meta</code>, but since we don&rsquo;t particularly care what we get back from this method, we can instead &lsquo;stub&rsquo; it. WP_Mock has a help method for wpFunction that make this easy, it&rsquo;s called <code>wpPassthruFunction()</code> and can take many of the same parameters, but fills in the return value for you. In our case, we want to know that update_post_meta fired once, so we can write something like:</p>
-
-<p>```
-&lt;?php</p>
-
-<pre><code>...
-// Arrange
-\WP_Mock::wpPassthruFunction('update_post_meta', array('times' =&gt; 1));
-...
-</code></pre>
-
-<p>?>
-```</p>
-
-<p>Now, if we go to our test runner and run <code>phpunit</code>, we get an F, or maybe an E, since we haven&rsquo;t written any code yet. Now let&rsquo;s make that test pass.</p>
-]]></content>
-  </entry>
   
   <entry>
     <title type="html"><![CDATA[Why Unit Testing in WordPress Matters]]></title>
