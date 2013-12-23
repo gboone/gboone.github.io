@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Continuous | Merge Conflicts]]></title>
   <link href="http://gboone.github.io/blog/categories/continuous/atom.xml" rel="self"/>
   <link href="http://gboone.github.io/"/>
-  <updated>2013-09-15T10:54:44-04:00</updated>
+  <updated>2013-12-23T15:23:08-06:00</updated>
   <id>http://gboone.github.io/</id>
   <author>
     <name><![CDATA[Greg Boone]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[How can I use feature switches in WordPress?]]></title>
     <link href="http://gboone.github.io/blog/2013/09/15/how-can-i-use-feature-switches-in-wordpress/"/>
-    <updated>2013-09-15T07:54:00-04:00</updated>
+    <updated>2013-09-15T07:54:00-05:00</updated>
     <id>http://gboone.github.io/blog/2013/09/15/how-can-i-use-feature-switches-in-wordpress</id>
     <content type="html"><![CDATA[<p>While a colleague and I were discussing the rollout of a new feature to our public facing website, he asked me if it would be possible to &ldquo;hide&rdquo; the new content behind a toggle. Effectively, he was asking me to write a <a href="http://en.wikipedia.org/wiki/Feature_toggle">feature switch</a>, a best practice of continuous integration that <a href="http://martinfowler.com/bliki/FeatureToggle.html">allows you to push some source code while hiding future features</a>. WordPress has some of this idea built into it&rsquo;s core: plugins, for example, can be activated and deactivated to turn things on and off. Within plugins and themes, options pages can be used to turn on different features. SEO plugins, for example, let users turn on and off different optimizaiton tools. Feature switches are a little different, and in our case leverage the power of Apache environment variables to show and hide different parts of our site.</p>
 

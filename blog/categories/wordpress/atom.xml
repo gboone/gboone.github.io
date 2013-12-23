@@ -4,7 +4,7 @@
   <title><![CDATA[Category: WordPress, | Merge Conflicts]]></title>
   <link href="http://gboone.github.io/blog/categories/wordpress/atom.xml" rel="self"/>
   <link href="http://gboone.github.io/"/>
-  <updated>2013-09-15T10:54:44-04:00</updated>
+  <updated>2013-12-23T15:23:08-06:00</updated>
   <id>http://gboone.github.io/</id>
   <author>
     <name><![CDATA[Greg Boone]]></name>
@@ -14,9 +14,126 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Writing Unit Tests for WordPress]]></title>
+    <link href="http://gboone.github.io/blog/2013/12/23/writing-unit-tests-for-wordpress/"/>
+    <updated>2013-12-23T10:52:00-06:00</updated>
+    <id>http://gboone.github.io/blog/2013/12/23/writing-unit-tests-for-wordpress</id>
+    <content type="html"><![CDATA[<p>In my last post I wrote about two testing libraries for WordPress and discussed the difference between integration tests and unit tests. I also mentioned a concept called test driven development and breifly explained how it might help write better code from the start. This post will expand on that and show how to write a simple WordPress plugin from a test-first approach. Since we&rsquo;re writing unit tests, we&rsquo;re going to use WP-Mock to create a test double for us and we&rsquo;ll use PHPunit for our test runner.</p>
+
+<p>TDD starts with an idea. In this case, let&rsquo;s say we have a plugin that will add some metadata to a post with the title &ldquo;Test&rdquo;. Since that&rsquo;s going to require us to mock some WordPress core functionality, <a href="http://github.com/10up/wp-mock">make sure WP-Mock is configured in your working environment</a>. We&rsquo;ll should start by writing a test that verifies the metadata was attached to the post. In order to write unit tests we first need to extend the base test suite. In our plugin&rsquo;s root directory, add a directory called &lsquo;tests&rsquo; and inside it create a file called test-plugin.php. To extend the test suite, we simply create a class (this is explained inthe WP-Mock README):</p>
+
+<p>```
+&lt;?</p>
+
+<pre><code>Class OurTestSuite extends extends PHPUnit_Framework_TestCase {
+</code></pre>
+
+<p>}
+?>
+```</p>
+
+<p>Now that we have a class, we can call any of PHPunit&rsquo;s methods for testing including all of their assertions. Inside this OurTestSuite is where we will write all our testing methods. We start with setUp and tearDown, commonly named methods that instantiate some conditions we will want for all our classes. We&rsquo;ll want to make sure our setUp and tearDown methods clean up our test environment as well as any mocks we create out of WP_Mock. So we&rsquo;ll declare:</p>
+
+<p>```
+&lt;?php</p>
+
+<pre><code>public funciton setUp() {
+    parent::setUp();
+}
+
+public function tearDown() {
+    parent::tearDown();
+}
+</code></pre>
+
+<p>?>
+```</p>
+
+<p>If we had other things we wanted in here, other objects we want available throughout the test suite, etc., we could declare those too. If you run the test now you&rsquo;ll get some output, but no tests will run because we haven&rsquo;t written any. Now let&rsquo;s write our test for our <code>save_meta</code> method. There are three basic sections to our test: Arrange, Act, Assert. The first section is for all the bits our method needs for input. In our case, we&rsquo;ll need the post ID for a post called &ldquo;Test&rdquo; and a key and value pair to save as metadata. Since the ID could be any integer on a given system, we can arrange our test with any integer we like. The next piece, the key-value pair, will be set in the method, but we&rsquo;ll want to decide now what they&rsquo;ll be.</p>
+
+<p>The &ldquo;Act&rdquo; section is where we call the method. In this case, we&rsquo;re going to call a method called <code>save_meta_data</code> out of the <code>MethodsClass</code> object. Finally, the &ldquo;Assert&rdquo; section is where we decide what the method should expect to see at the end. This section might be empty depending on whether the method under test returns an output or simply passes data somewherelse. In our case, it&rsquo;s the latter. Instead, for us, the test passes if <code>update_post_meta</code> is called exactly once. Right now our test is looking something like this:</p>
+
+<p>```
+&lt;?php
+&hellip;</p>
+
+<pre><code>public function testTestPostExpectsMetaDataSaved(){
+    // Arrange
+    $post_id = 42;
+
+    // Act
+    $methods = new MethodsClass();
+    $methods-&gt;save_meta_data($post_id);
+
+    // Assert
+}
+</code></pre>
+
+<p>&hellip;
+?>
+```</p>
+
+<p>Not a bad looking test, but we have some mocking to do. We already know we&rsquo;ll need to mock <code>update_post_meta()</code>, but we&rsquo;re also going to need <code>get_post()</code> as well. In both cases, we&rsquo;re going to make PHPunit handle calls to those methods and return what we want back. In this case, from <code>get_post()</code> we&rsquo;re going to want it to return <code>$post-&gt;Name</code> equal to &ldquo;Test&rdquo;, so we can positively test that the post named &ldquo;Test&rdquo; get&rsquo;s updated meta data. We know what to expect if we call <code>update_post_meta</code>: if all is well with our WordPress install, we expect it would add new information to the post object. So we don&rsquo;t need to verify that, all we really need to do is verify it&rsquo;s being called exactly once. So let&rsquo;s add our mocks to the &ldquo;Arrange&rdquo; section.</p>
+
+<p>Fully mocking a function like <code>get_post()</code> uses the static method <code>wpFunction()</code> from the WP_Mock class. We can call it with: <code>\WP_Mock::wpFunciton()</code>. We can also pass wpFunction some parameters like &lsquo;times&rsquo;, for how many times we expect the mocked function to fire, and &lsquo;parameters&rsquo;, and &lsquo;return&rsquo;. These will all help us send some data to <code>get_post</code>, have it handled predictably, and return something else. A full example is below.</p>
+
+<p>```
+&lt;?php</p>
+
+<pre><code>...
+// Arrange
+$post = \WP_Mock::wpFunction('get_post')
+...
+</code></pre>
+
+<p>?>
+```</p>
+
+<p>Finally, we need to address <code>update_post_meta</code>, but since we don&rsquo;t particularly care what we get back from this method, we can instead &lsquo;stub&rsquo; it. WP_Mock has a help method for wpFunction that make this easy, it&rsquo;s called <code>wpPassthruFunction()</code> and can take many of the same parameters, but fills in the return value for you. In our case, we want to know that update_post_meta fired once, so we can write something like:</p>
+
+<p>```
+&lt;?php</p>
+
+<pre><code>...
+// Arrange
+\WP_Mock::wpPassthruFunction('update_post_meta', array('times' =&gt; 1));
+...
+</code></pre>
+
+<p>?>
+```</p>
+
+<p>Now, if we go to our test runner and run <code>phpunit</code>, we get an F, or maybe an E, since we haven&rsquo;t written any code yet. Now let&rsquo;s make that test pass.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Why Unit Testing in WordPress Matters]]></title>
+    <link href="http://gboone.github.io/blog/2013/12/23/why-unit-testing-in-wordpress-matters/"/>
+    <updated>2013-12-23T07:20:00-06:00</updated>
+    <id>http://gboone.github.io/blog/2013/12/23/why-unit-testing-in-wordpress-matters</id>
+    <content type="html"><![CDATA[<p>Testing WordPress has become a favorite topic of mine lately: moving away from hitting refresh and toward something more holistic, reliable, and automatable. I&rsquo;ve written before about <a href="http://greg.harmsboone.org/blog/2013/08/17/how-can-i-do-browser-testing-with-wordpress/">a testing method called called browser testing</a>, which verifies a webpage has some expected behavior. These kinds of tests are great but they&rsquo;re not perfect. They require a lot o dependencies and that someone else would need to verify your code. There is a better way, one that doesn&rsquo;t require any of those dependencies and verfies the code down to the exact lines you wrote—it can even be independent of WordPress. It&rsquo;s called unit testing and it will make you a better developer.</p>
+
+<p>Unit testing is a method that reduces and tests the system down to it&rsquo;s smallest functional pieces. Each &lsquo;unit&rsquo; should be as isolated as possible from any others in the system. The test should verify only the correctness of one unit. It has many benefits for all of software development but is relatively new to WordPress. It&rsquo;s hard to say for sure why but there have been two important advancements in the area recently that will hopefully compel us WordPress devs to be more intentional about testing and verifying our code.</p>
+
+<p>The first is the WordPress Unit Test Suite (WPUTS), detailed on the <a href="http://make.wordpress.org/core/handbook/automated-testing/">WP Core development blog</a>. This suite contains tests covering much of the core files installed with a WordPress.org site. This test suite can even be installed <a href="http://wp-cli.org/">through the fantastic WP-CLI project</a>. According to <a href="https://travis-ci.org/tierra/wordpress/jobs/15867662">a recent build on Travis</a>, 1889 tests are currently available. That build shows the output of PHP&rsquo;s test runner, <a href="http://phpunit.de">PHPunit</a> at around line 724. Each test generates either a dot for a passed test or an S, I, F or E if the test is (s)kipped, (i)gnored, (f)ails, or encounters an (e)rror. In that build you see only 2 failures and a whole bunch of skipped tests. You can also see, at line 777, that phpunit took 1:28 to run all the tests and used 141.75MB of memory. That&rsquo;s pretty good for testing an application the size of WordPress. <a href="https://github.com/wp-cli/wp-cli/wiki/Plugin-Unit-Tests">With a few simple commands in WP-CLI</a> you can install these tests on your own and extend them to cover your own plugin.</p>
+
+<p>WPUTS was introduced sometime in late 2012 and unit testing through the core suite was recently integrated into the core development workflow. Another important project is <a href="https://github.com/10up/wp_mock/">WP-Mock</a>, a wonderful project from the folks at 10up that allows you to &lsquo;mock&rsquo; or &lsquo;stub&rsquo; only the parts of WordPress you need for each test. If you need call <code>update_post_meta()</code>, WP-Mock would allow you to just pass an integer, a key, and a value. The ideas is if your code verfies with a <a href="http://phpunit.de/manual/3.7/en/test-doubles.html">test double</a>, it will verify once it&rsquo;s hooked into the real thing.</p>
+
+<p>There are two key differences between these two test suites: dependencies and what is tested. Compared to browser tests, both suites remove your code&rsquo;s dependency on existing content, a web server, selenium, and behave, but WPUTS still requires WordPress and a MySQL database on top of your code, PHP, and PHPunit. WP-Mock requires only the last three. This means, if you want to run your tests in a continuous integration server like Jenkins or Travis, with WP-Mock the only thing you need to set up that environment is your code, PHP, and PHPunit.</p>
+
+<p>With WPUTS, what you are really testing is whether your code properly integrates with its dependencies, and are useful for exactly that purpose. A WordPress plugin, for example, might have integration tests written to determine whether post meta data is in fact updated when <code>update_post_meta</code> is called within one of its methods. That does not necessarily verify whether the code written is correct. True unit tests start lower, focusing on whether the code <em>you</em> wrote for <em>this</em> method generates the correct output if the dependencies behave as expected. The difference is subtle but also important.</p>
+
+<p>With this distinction in mind, WPUTS might be better named the &lsquo;WordPress Integration Test Suite&rsquo; as it allows you to access to a full installation of WordPress and manipulation of its database. What it doesn&rsquo;t do is tell you whether you&rsquo;re manipulating that database too much. Maybe your method called <code>update_post_meta</code> twice, WPUTS will not necessarily tell you that. It will only tell you that the post was, in fact, updated. That&rsquo;s useful, but so is knowing you only did it once. Writing to a database can be expensive, doing it too many times might slow down your application.</p>
+
+<p>Writing tests before writing code is called Test Driven Development and is a software engineering best practice. It forces you to write your test, then write code to make your test pass. In the end, this makes you a better developer because you are focused to break your problems down into smaller pieces that do more discrete testable things. How to write those tests is a subject for another blog.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[How can I use feature switches in WordPress?]]></title>
     <link href="http://gboone.github.io/blog/2013/09/15/how-can-i-use-feature-switches-in-wordpress/"/>
-    <updated>2013-09-15T07:54:00-04:00</updated>
+    <updated>2013-09-15T07:54:00-05:00</updated>
     <id>http://gboone.github.io/blog/2013/09/15/how-can-i-use-feature-switches-in-wordpress</id>
     <content type="html"><![CDATA[<p>While a colleague and I were discussing the rollout of a new feature to our public facing website, he asked me if it would be possible to &ldquo;hide&rdquo; the new content behind a toggle. Effectively, he was asking me to write a <a href="http://en.wikipedia.org/wiki/Feature_toggle">feature switch</a>, a best practice of continuous integration that <a href="http://martinfowler.com/bliki/FeatureToggle.html">allows you to push some source code while hiding future features</a>. WordPress has some of this idea built into it&rsquo;s core: plugins, for example, can be activated and deactivated to turn things on and off. Within plugins and themes, options pages can be used to turn on different features. SEO plugins, for example, let users turn on and off different optimizaiton tools. Feature switches are a little different, and in our case leverage the power of Apache environment variables to show and hide different parts of our site.</p>
 
