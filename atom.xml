@@ -4,7 +4,7 @@
   <title><![CDATA[Merge Conflicts]]></title>
   <link href="http://gboone.github.io/atom.xml" rel="self"/>
   <link href="http://gboone.github.io/"/>
-  <updated>2014-01-01T09:30:44-06:00</updated>
+  <updated>2014-01-01T09:31:27-06:00</updated>
   <id>http://gboone.github.io/</id>
   <author>
     <name><![CDATA[Greg Boone]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Writing Unit Tests for WordPress]]></title>
     <link href="http://gboone.github.io/blog/2014/01/01/writing-unit-tests-for-wordpress/"/>
-    <updated>2014-01-01T10:52:00-06:00</updated>
+    <updated>2014-01-01T09:30:00-06:00</updated>
     <id>http://gboone.github.io/blog/2014/01/01/writing-unit-tests-for-wordpress</id>
     <content type="html"><![CDATA[<p>In <a href="blog/2013/12/23/why-unit-testing-in-wordpress-matters/">my last post</a> I wrote about two testing libraries for WordPress and briefly discussed the difference between integration tests and unit tests. I also mentioned a concept called test driven development (TDD) and breifly explained how it might help write better code from the start. This post will expand on that and show how to write a simple WordPress plugin from a test-first approach. Since we&rsquo;re writing unit tests, we&rsquo;re going to use WP-Mock to create a test double for us and we&rsquo;ll use PHPunit for our test runner.</p>
 
