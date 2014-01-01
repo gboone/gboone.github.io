@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: unit | Merge Conflicts]]></title>
-  <link href="http://gboone.github.io/blog/categories/unit/atom.xml" rel="self"/>
+  <title><![CDATA[Category: unit_testing | Merge Conflicts]]></title>
+  <link href="http://gboone.github.io/blog/categories/unit-testing/atom.xml" rel="self"/>
   <link href="http://gboone.github.io/"/>
-  <updated>2013-12-23T15:32:13-06:00</updated>
+  <updated>2014-01-01T09:13:54-06:00</updated>
   <id>http://gboone.github.io/</id>
   <author>
     <name><![CDATA[Greg Boone]]></name>
@@ -19,6 +19,9 @@
     <updated>2013-12-23T07:20:00-06:00</updated>
     <id>http://gboone.github.io/blog/2013/12/23/why-unit-testing-in-wordpress-matters</id>
     <content type="html"><![CDATA[<p>Testing WordPress has become a favorite topic of mine lately: moving away from hitting refresh and toward something more holistic, reliable, and automatable. I&rsquo;ve written before about <a href="http://greg.harmsboone.org/blog/2013/08/17/how-can-i-do-browser-testing-with-wordpress/">a testing method called called browser testing</a>, which verifies a webpage has some expected behavior. These kinds of tests are great but they&rsquo;re not perfect. They require a lot o dependencies and that someone else would need to verify your code. There is a better way, one that doesn&rsquo;t require any of those dependencies and verfies the code down to the exact lines you wrote—it can even be independent of WordPress. It&rsquo;s called unit testing and it will make you a better developer.</p>
+
+<!-- more -->
+
 
 <p>Unit testing is a method that reduces and tests the system down to it&rsquo;s smallest functional pieces. Each &lsquo;unit&rsquo; should be as isolated as possible from any others in the system. The test should verify only the correctness of one unit. It has many benefits for all of software development but is relatively new to WordPress. It&rsquo;s hard to say for sure why but there have been two important advancements in the area recently that will hopefully compel us WordPress devs to be more intentional about testing and verifying our code.</p>
 
