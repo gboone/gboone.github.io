@@ -4,7 +4,7 @@
   <title><![CDATA[Merge Conflicts]]></title>
   <link href="http://gboone.github.io/atom.xml" rel="self"/>
   <link href="http://gboone.github.io/"/>
-  <updated>2014-01-01T09:33:12-06:00</updated>
+  <updated>2014-01-01T09:41:29-06:00</updated>
   <id>http://gboone.github.io/</id>
   <author>
     <name><![CDATA[Greg Boone]]></name>
@@ -162,51 +162,88 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Now, if we run <code>phpunit</code>, we get a dot and an F, or maybe an E, since we haven&rsquo;t written any code yet. Now we can write the actual code with the following workflow:
-1. Write some code
-2. Run the test
-3. Modify the test and code as necessary
-4. Repeat 2-3 until the test passes</p>
+<p>Now, if we run <code>phpunit</code>, we get a dot and an F, or maybe an E, since we haven&rsquo;t written any code yet. Now we can write the actual code with the following workflow:</p>
+
+<ol>
+<li>Write some code</li>
+<li>Run the test</li>
+<li>Modify the test and code as necessary</li>
+<li>Repeat 2-3 until the test passes</li>
+</ol>
+
 
 <p>A full example of our test is below:</p>
 
-<p>&#8220;`PHP
-&lt;?php
-Class OurTestSuite extends extends PHPUnit_Framework_TestCase {</p>
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class='line'><span class="k">Class</span> <span class="nc">OurTestSuite</span> <span class="k">extends</span> <span class="k">extends</span> <span class="nx">PHPUnit_Framework_TestCase</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">setUp</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">parent</span><span class="o">::</span><span class="na">setUp</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">tearDown</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">parent</span><span class="o">::</span><span class="na">tearDown</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">testOneExpectsOneAdded</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// Arrange</span>
+</span><span class='line'>        <span class="nv">$foo</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// Act</span>
+</span><span class='line'>        <span class="nv">$bar</span> <span class="o">=</span> <span class="nv">$foo</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// Assert</span>
+</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="nv">$bar</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Variable $bar does not equal two.&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">testTestPostExpectsMetaDataSaved</span><span class="p">(){</span>
+</span><span class='line'>        <span class="c1">// Arrange</span>
+</span><span class='line'>        <span class="nv">$post_id</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+</span><span class='line'>        <span class="nv">$post</span> <span class="o">=</span> <span class="nx">\WP_Mock</span><span class="o">::</span><span class="na">wpFunction</span><span class="p">(</span><span class="s1">&#39;get_post&#39;</span><span class="p">);</span>
+</span><span class='line'>        <span class="nx">\WP_Mock</span><span class="o">::</span><span class="na">wpPassthruFunction</span><span class="p">(</span><span class="s1">&#39;update_post_meta&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;times&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">));</span>
+</span><span class='line'>        <span class="c1">// Act</span>
+</span><span class='line'>        <span class="nv">$methods</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MetaMethods</span><span class="p">();</span>
+</span><span class='line'>        <span class="nv">$methods</span><span class="o">-&gt;</span><span class="na">save_meta_data</span><span class="p">(</span><span class="nv">$post_id</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// Assert</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
 
-<pre><code>public function setUp() {
-    parent::setUp();
-}
-
-public function tearDown() {
-    parent::tearDown();
-}
-
-public function testOneExpectsOneAdded() {
-    // Arrange
-    $foo = 1;
-
-    // Act
-    $bar = $foo + 1;
-
-    // Assert
-    $this-&gt;assertEquals($bar, 2, 'Variable $bar does not equal two.');
-}
-
-public function testTestPostExpectsMetaDataSaved(){
-    // Arrange
-    $post_id = 42;
-    $post = \WP_Mock::wpFunction('get_post');
-    \WP_Mock::wpPassthruFunction('update_post_meta', array('times' =&gt; 1));
-    // Act
-    $methods = new MetaMethods();
-    $methods-&gt;save_meta_data($post_id);
-
-    // Assert
-}
-</code></pre>
-
-<p>}</p>
 ]]></content>
   </entry>
   

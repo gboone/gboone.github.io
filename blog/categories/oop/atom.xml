@@ -4,7 +4,7 @@
   <title><![CDATA[Category: oop | Merge Conflicts]]></title>
   <link href="http://gboone.github.io/blog/categories/oop/atom.xml" rel="self"/>
   <link href="http://gboone.github.io/"/>
-  <updated>2014-01-01T09:33:12-06:00</updated>
+  <updated>2014-01-01T09:41:29-06:00</updated>
   <id>http://gboone.github.io/</id>
   <author>
     <name><![CDATA[Greg Boone]]></name>
@@ -128,15 +128,19 @@ $post = \WP_Mock::wpFunction('get_post')
 <p>?>
 ```</p>
 
-<p>Now, if we run <code>phpunit</code>, we get a dot and an F, or maybe an E, since we haven&rsquo;t written any code yet. Now we can write the actual code with the following workflow:
-1. Write some code
-2. Run the test
-3. Modify the test and code as necessary
-4. Repeat 2-3 until the test passes</p>
+<p>Now, if we run <code>phpunit</code>, we get a dot and an F, or maybe an E, since we haven&rsquo;t written any code yet. Now we can write the actual code with the following workflow:</p>
+
+<ol>
+<li>Write some code</li>
+<li>Run the test</li>
+<li>Modify the test and code as necessary</li>
+<li>Repeat 2-3 until the test passes</li>
+</ol>
+
 
 <p>A full example of our test is below:</p>
 
-<p>```PHP
+<p>```
 &lt;?php
 Class OurTestSuite extends extends PHPUnit_Framework_TestCase {</p>
 
@@ -172,7 +176,9 @@ public function testTestPostExpectsMetaDataSaved(){
 }
 </code></pre>
 
-<p>}</p>
+<p>}
+?>
+```</p>
 ]]></content>
   </entry>
   
