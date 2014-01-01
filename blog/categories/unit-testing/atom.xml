@@ -4,7 +4,7 @@
   <title><![CDATA[Category: unit_testing | Merge Conflicts]]></title>
   <link href="http://gboone.github.io/blog/categories/unit-testing/atom.xml" rel="self"/>
   <link href="http://gboone.github.io/"/>
-  <updated>2014-01-01T09:31:27-06:00</updated>
+  <updated>2014-01-01T09:33:12-06:00</updated>
   <id>http://gboone.github.io/</id>
   <author>
     <name><![CDATA[Greg Boone]]></name>
@@ -25,7 +25,7 @@
 <p>In order to write unit tests we first need to extend the base test suite:</p>
 
 <p>```
-&lt;?</p>
+&lt;?php</p>
 
 <pre><code>Class OurTestSuite extends extends PHPUnit_Framework_TestCase {
 </code></pre>
