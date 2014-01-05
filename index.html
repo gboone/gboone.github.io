@@ -7,7 +7,7 @@
 	<meta name="author" content="Greg Boone">
 
 	
-	<meta name="description" content="Jan 1st, 2014 WordPress, best_practices, continuous_integration, oop, php, testing, unit_testing Writing Unit Tests for WordPress In my last post I &hellip;">
+	<meta name="description" content="Jan 8th, 2014 PHP, PHP namespacing, WordPress, best practices, namespacing How Can I Use PHP Namespaces in WordPress Plugins PHP has long had a &hellip;">
 	
 
   <!-- http://t.co/dKP3o1e -->
@@ -113,6 +113,180 @@
   
 
 
+<time datetime="2014-01-08T11:29:00-06:00" data-updated="true" itemprop="datePublished">Jan 8<span>th</span>, 2014</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/php-namespacing/'>PHP namespacing</a>, <a class='category' href='/blog/categories/wordpress/'>WordPress</a>, <a class='category' href='/blog/categories/best-practices/'>best practices</a>, <a class='category' href='/blog/categories/namespacing/'>namespacing</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/01/08/how-can-i-use-php-namespaces-in-wordpress-plugins/" itemprop="url">How Can I Use PHP Namespaces in WordPress Plugins</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>PHP has long had a problem of naming collisions. Because older versions of PHP had no way of declaring methods outside the global space, developers came up with several different ways of preventing and checking for namespace collisions, none of which treated the underlying condition. These many and varied solutions begged for a unifying standard as they made things like autoloading and package management increasingly difficult. PHP 5.3 introduced a feature called &lsquo;namespacing&rsquo; to solve this problem and WordPress developers should begin adopting. With proper namespacing, WordPress plugin and themes will become clearer, more stable, and more portable.</p>
+
+<p>Prior to PHP 5, if you tried to name a method or class <code>foo</code> it might conflict with another similarly nammed method elsewhere in the system. Developers came to terms with this by &lsquo;namespacing&rsquo; methods with a prefix. With this standard, <code>foo</code> became <code>my_foo</code> or <code>gb_foo</code> where the <code>my_</code> or <code>gb_</code> corresponded to vendor prefixes (gb, being my initials). It also led to wrapping every method in a conditional to check for namespace collisions:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="nb">function_exists</span><span class="p">(</span><span class="nx">gb_foo</span><span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">function</span> <span class="nf">gb_foo</span><span class="p">(</span> <span class="nv">$bar</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">echo</span> <span class="nv">$bar</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">gb_foo</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Look familiar? The problem with this should be easy to see. If that conditional returns false, my method <code>gb_foo</code> will never be fired and any time it&rsquo;s called, that other <code>gb_foo</code> method will. Imagine if <code>gb_foo</code> was something like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">function</span> <span class="nf">gb_foo</span><span class="p">(</span><span class="nv">$bar</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nb">mysql_query</span><span class="p">(</span><span class="s1">&#39;DROP TABLES *&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I think we can all agree that would be bad.</p>
+
+<p>Namespacing is a concept familiar to many other programming languages that isolates your application from others in a standardized way. The global space should be reserved for only those things that should be available at all times. There is typically a character or pair of characters which globally signifies a namespace seperator. In PHP it&rsquo;s the backslash .</p>
+
+<p>If properly namespaced, you can name your method <code>foo()</code> without any possibility of your method conflicting with anything else (unless you declare it twice in the namespace).</p>
+
+<p>Namespacing also alleviates your need to wrap your methods in that conditional. A properly namespaced <code>foo()</code> method would look like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">namespace</span> <span class="nx">gb</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> <span class="nf">foo</span><span class="p">(</span><span class="nv">$bar</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">echo</span> <span class="nv">$bar</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let&rsquo;s take a look at what&rsquo;s going on here. On the first line we declare the namespace we want to use, in this case my initials <code>gb</code>. We can then declare classes and methods without worrying about stepping on any other methods. This is sort of like putting things in classes, but it&rsquo;s even more safe. To call that &lsquo;foo&rsquo; method, just type <code>\gb\foo('baz');</code> which should output &lsquo;baz&rsquo;. You can also declare classes inside the namespace just like you would normally, the difference is that when these are called, the namespace must be too. There are a few different ways of approaching this:</p>
+
+<p>Consider the application lives in a file called test.php and all our files are in the same directory.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="c1">// test.php</span>
+</span><span class='line'><span class="k">namespace</span> <span class="nx">gb</span><span class="p">;</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Bar</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">foo</span><span class="p">(</span><span class="nv">$bar</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">echo</span> <span class="nv">$bar</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Example one: &lsquo;Use&rsquo; the namespace, declared at the top of the second file.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">require_once</span><span class="p">(</span><span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/test.php&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="k">use</span> <span class="nx">\gb\Bar</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Bar</span><span class="o">::</span><span class="na">foo</span><span class="p">(</span><span class="s1">&#39;baz&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Example two: Call the method with the namespace and class prefixed.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">require_once</span><span class="p">(</span><span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/test.php&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">\gb\Bar</span><span class="o">::</span><span class="na">foo</span><span class="p">(</span><span class="s1">&#39;baz&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Example three: Instantiate the class as an object and declare the method from the object.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">require_once</span><span class="p">(</span><span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/test.php&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$object</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\gb\Bar</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$object</span><span class="o">-&gt;</span><span class="na">foo</span><span class="p">(</span><span class="s1">&#39;baz&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>They&rsquo;re all very similar and should look familiar. Again, all the namespace does is add a layer of abstraction away from the global space in order to prevent collisions. Where it becomes particularly useful is in autoloading with tools like composer. With namespaces autoloaded, developers do not even need to require the files where those classes exist. They only need to know the namespaces. Example one, then, becomes:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">use</span> <span class="nx">\gb\Bar</span><span class="p">;</span>
+</span><span class='line'><span class="nx">Bar</span><span class="o">::</span><span class="na">foo</span><span class="p">(</span><span class="s1">&#39;baz&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<blockquote>Pro tip: you can &#8216;use&#8217; a namespace under another name. So if you have two classes Bar, you can redeclare them like this:
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">use</span> <span class="nx">\namespace\Bar</span> <span class="k">as</span> <span class="nx">Bar</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nx">\gb\Bar</span> <span class="k">as</span> <span class="nx">Baz</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Baz</span><span class="o">::</span><span class="na">foo</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure></blockquote>
+
+
+<p>You can also stack namespaces to isolate your individual plugins from each other: <code>namespace gb\myAwesomePlugin;</code> and <code>namespace gb\anotherAwesomePlugin</code> serve as different namespaces for different plugins. It also keeps me safe from other &lsquo;gb&rsquo;s out there crowding my namespace.</p>
+
+<p>Namespaces can also indicate <em>where</em> to find your application. With a fully namespaced plugin, you could even configure your WordPress install to use your plugin without &lsquo;installing&rsquo; it.  If you have composer doing that for you, you can autoload the plugin preconfigured the way you want it. WordPress is becoming an incresingly vibrant application development platform and namespacing will be key to it living in harmony with other PHP applications in complex systems.</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
 <time datetime="2014-01-01T09:30:00-06:00" data-updated="true" itemprop="datePublished">Jan 1<span>st</span>, 2014</time></div>
 		<div class="tags">
 
@@ -125,235 +299,9 @@
 	</div>
 	<h1 class="title" itemprop="name"><a href="/blog/2014/01/01/writing-unit-tests-for-wordpress/" itemprop="url">Writing Unit Tests for WordPress</a></h1>
 	<div class="entry-content" itemprop="articleBody">
-		<p>In <a href="blog/2013/12/23/why-unit-testing-in-wordpress-matters/">my last post</a> I wrote about two testing libraries for WordPress and briefly discussed the difference between integration tests and unit tests. I also mentioned a concept called test driven development (TDD) and breifly explained how it might help write better code from the start. This post will expand on that and show how to write a simple WordPress plugin from a test-first approach. Since we&rsquo;re writing unit tests, we&rsquo;re going to use WP-Mock to create a test double for us and we&rsquo;ll use PHPunit for our test runner.</p>
-
-<p>TDD starts with a problem you want to solve—the same problem your plugin wants to solve. In this case, let&rsquo;s say we have a plugin that will add some metadata to a post with the title &ldquo;Test&rdquo;. Since that&rsquo;s going to require us to mock some WordPress core functionality, <a href="https://github.com/10up/wp_mock">make sure WP-Mock is configured in your working environment</a>. We&rsquo;ll start by writing a test that verifies the metadata was attached to the post.</p>
-
-<p>In order to write unit tests we first need to extend the base test suite:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?php
-</span><span class='line'>    Class OurTestSuite extends extends PHPUnit_Framework_TestCase {
-</span><span class='line'>
-</span><span class='line'>}
-</span><span class='line'>?&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now that we have a class, we can call any of PHPunit&rsquo;s methods for testing including all of its assertions. Inside OurTestSuite is where we will write all our testing methods. We start with setUp and tearDown, commonly named methods that instantiate some conditions we will want for all our classes. We&rsquo;ll want to make sure our setUp and tearDown methods clean up our test environment as well as any mocks we create out of WP_Mock. So we&rsquo;ll declare:</p>
-
-<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?php
-</span><span class='line'>    public function setUp() {
-</span><span class='line'>        parent::setUp();
-</span><span class='line'>    }
-</span><span class='line'>
-</span><span class='line'>    public function tearDown() {
-</span><span class='line'>        parent::tearDown();
-</span><span class='line'>    }
-</span><span class='line'>?&gt;</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If we had other objects, variables, or settings we wanted available throughout the test suite, etc., we could declare those too. If you run the test now you&rsquo;ll get some output, but no tests will run because we haven&rsquo;t written any. Every test is a method within this class. Let&rsquo;s write one that will always pass just to see PHPunit give us something.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
-</span><span class='line'>    <span class="o">...</span>
-</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">testOneExpectsOneAdded</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="c1">// Arrange</span>
-</span><span class='line'>        <span class="nv">$foo</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c1">// Act</span>
-</span><span class='line'>        <span class="nv">$bar</span> <span class="o">=</span> <span class="nv">$foo</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c1">// Assert</span>
-</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nv">$bar</span><span class="p">,</span> <span class="s1">&#39;Variable $bar does not equal two.&#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>If you run PHPunit on that test, you should get a dot. Congratulations!</p>
-
-<p>Now let&rsquo;s write our test for our <code>save_meta</code> method. There are three basic sections to our test: Arrange, Act, and Assert. The first section is for all the bits our method needs for input. In our case, we&rsquo;ll need the post ID for a post called &ldquo;Test&rdquo; and a key and value pair to save as metadata. Since the ID could be any integer on a given system, we can arrange our test with any integer we like. The next piece, the key-value pair, will be set in the method, but we&rsquo;ll want to decide now what they&rsquo;ll be.</p>
-
-<p>The &ldquo;Act&rdquo; section is where we call the method. In this case, we&rsquo;re going to call a method called <code>save_meta_data</code> out of the <code>MetaMethods</code> object. Finally, the &ldquo;Assert&rdquo; section is where we decide what the method should expect to see at the end. This section might be empty depending on whether the method under test returns an output or calls some other method. In our case, it&rsquo;s the latter. The test passes if <code>update_post_meta</code> is called exactly once. Right now our test is looking something like this:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
-</span><span class='line'><span class="o">...</span>
-</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">testTestPostExpectsMetaDataSaved</span><span class="p">(){</span>
-</span><span class='line'>        <span class="c1">// Arrange</span>
-</span><span class='line'>        <span class="nv">$post_id</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c1">// Act</span>
-</span><span class='line'>        <span class="nv">$methods</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MetaMethods</span><span class="p">();</span>
-</span><span class='line'>        <span class="nv">$methods</span><span class="o">-&gt;</span><span class="na">save_meta_data</span><span class="p">(</span><span class="nv">$post_id</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c1">// Assert</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="o">...</span>
-</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Not a bad looking test, but we have some mocking to do. We already know we&rsquo;ll need to mock <code>update_post_meta()</code>, but we&rsquo;re also going to need <code>get_post()</code> as well. In both cases, we&rsquo;re going to make PHPunit handle calls to those methods and return what we want back. We know what to expect if we call <code>update_post_meta</code>: if all is well with our WordPress install, we expect it would add new information to the post object. So we don&rsquo;t need to verify that, all we really need to do is verify it&rsquo;s being called exactly once. So let&rsquo;s add our mocks to the &ldquo;Arrange&rdquo; section.</p>
-
-<p>Fully mocking a function like <code>get_post()</code> uses the static method <code>wpFunction()</code> from WP_Mock. We can call it with: <code>\WP_Mock::wpFunciton()</code>. We can also pass wpFunction some parameters like &lsquo;times&rsquo;, for how many times we expect the mocked function to fire, and &lsquo;parameters&rsquo;, and &lsquo;return&rsquo;. These help us create a fully function test double of <code>get_post</code>.</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
-</span><span class='line'>    <span class="o">...</span>
-</span><span class='line'>    <span class="c1">// Arrange</span>
-</span><span class='line'>    <span class="nv">$post</span> <span class="o">=</span> <span class="nx">\WP_Mock</span><span class="o">::</span><span class="na">wpFunction</span><span class="p">(</span><span class="s1">&#39;get_post&#39;</span><span class="p">)</span>
-</span><span class='line'>    <span class="o">...</span>
-</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Finally, we need to address <code>update_post_meta</code>, but since we don&rsquo;t particularly care what we get back from this method, we can instead &lsquo;stub&rsquo; it. <code>WP_Mock</code> has a wrapper for <code>wpFunction</code> that make this easy, it&rsquo;s called <code>wpPassthruFunction()</code> and can take many of the same parameters, but fills in the return value for you. In our case, we want to know that update_post_meta fired once, so we can write something like:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
-</span><span class='line'>    <span class="o">...</span>
-</span><span class='line'>    <span class="c1">// Arrange</span>
-</span><span class='line'>    <span class="nx">\WP_Mock</span><span class="o">::</span><span class="na">wpPassthruFunction</span><span class="p">(</span><span class="s1">&#39;update_post_meta&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;times&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">));</span>
-</span><span class='line'>    <span class="o">...</span>
-</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>Now, if we run <code>phpunit</code>, we get a dot and an F, or maybe an E, since we haven&rsquo;t written any code yet. Now we can write the actual code with the following workflow:</p>
-
-<ol>
-<li>Write some code</li>
-<li>Run the test</li>
-<li>Modify the test and code as necessary</li>
-<li>Repeat 2-3 until the test passes</li>
-</ol>
-
-
-<p>A full example of our test is below:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-<span class='line-number'>5</span>
-<span class='line-number'>6</span>
-<span class='line-number'>7</span>
-<span class='line-number'>8</span>
-<span class='line-number'>9</span>
-<span class='line-number'>10</span>
-<span class='line-number'>11</span>
-<span class='line-number'>12</span>
-<span class='line-number'>13</span>
-<span class='line-number'>14</span>
-<span class='line-number'>15</span>
-<span class='line-number'>16</span>
-<span class='line-number'>17</span>
-<span class='line-number'>18</span>
-<span class='line-number'>19</span>
-<span class='line-number'>20</span>
-<span class='line-number'>21</span>
-<span class='line-number'>22</span>
-<span class='line-number'>23</span>
-<span class='line-number'>24</span>
-<span class='line-number'>25</span>
-<span class='line-number'>26</span>
-<span class='line-number'>27</span>
-<span class='line-number'>28</span>
-<span class='line-number'>29</span>
-<span class='line-number'>30</span>
-<span class='line-number'>31</span>
-<span class='line-number'>32</span>
-<span class='line-number'>33</span>
-<span class='line-number'>34</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
-</span><span class='line'><span class="k">Class</span> <span class="nc">OurTestSuite</span> <span class="k">extends</span> <span class="k">extends</span> <span class="nx">PHPUnit_Framework_TestCase</span> <span class="p">{</span>
-</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">setUp</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">parent</span><span class="o">::</span><span class="na">setUp</span><span class="p">();</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">tearDown</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="k">parent</span><span class="o">::</span><span class="na">tearDown</span><span class="p">();</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">testOneExpectsOneAdded</span><span class="p">()</span> <span class="p">{</span>
-</span><span class='line'>        <span class="c1">// Arrange</span>
-</span><span class='line'>        <span class="nv">$foo</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c1">// Act</span>
-</span><span class='line'>        <span class="nv">$bar</span> <span class="o">=</span> <span class="nv">$foo</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c1">// Assert</span>
-</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="nv">$bar</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Variable $bar does not equal two.&#39;</span><span class="p">);</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'>
-</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">testTestPostExpectsMetaDataSaved</span><span class="p">(){</span>
-</span><span class='line'>        <span class="c1">// Arrange</span>
-</span><span class='line'>        <span class="nv">$post_id</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
-</span><span class='line'>        <span class="nv">$post</span> <span class="o">=</span> <span class="nx">\WP_Mock</span><span class="o">::</span><span class="na">wpFunction</span><span class="p">(</span><span class="s1">&#39;get_post&#39;</span><span class="p">);</span>
-</span><span class='line'>        <span class="nx">\WP_Mock</span><span class="o">::</span><span class="na">wpPassthruFunction</span><span class="p">(</span><span class="s1">&#39;update_post_meta&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;times&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">));</span>
-</span><span class='line'>        <span class="c1">// Act</span>
-</span><span class='line'>        <span class="nv">$methods</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MetaMethods</span><span class="p">();</span>
-</span><span class='line'>        <span class="nv">$methods</span><span class="o">-&gt;</span><span class="na">save_meta_data</span><span class="p">(</span><span class="nv">$post_id</span><span class="p">);</span>
-</span><span class='line'>
-</span><span class='line'>        <span class="c1">// Assert</span>
-</span><span class='line'>    <span class="p">}</span>
-</span><span class='line'><span class="p">}</span>
-</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
-</span></code></pre></td></tr></table></div></figure>
-
-
+		<p>In <a href="blog/2013/12/23/why-unit-testing-in-wordpress-matters/">my last post</a> I wrote about two testing libraries for WordPress and briefly discussed the difference between integration tests and unit tests. I also mentioned a concept called test driven development (TDD) and breifly explained how it might help write better code from the start. This post will expand on that and show how to write a simple WordPress plugin from a test-first approach. Since we&rsquo;re writing unit tests, we&rsquo;re going to use WP-Mock to create a test double for us and we&rsquo;ll use PHPunit for our test runner.
 		
-		
+		<a href="/blog/2014/01/01/writing-unit-tests-for-wordpress/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>
@@ -377,7 +325,7 @@
 		<div class="tags">
 
 
-	<a class='category' href='/blog/categories/wordpress/'>WordPress</a>, <a class='category' href='/blog/categories/best-practices/'>best_practices</a>, <a class='category' href='/blog/categories/integration-testing/'>integration_testing</a>, <a class='category' href='/blog/categories/testing/'>testing</a>, <a class='category' href='/blog/categories/unit-testing/'>unit_testing</a>
+	<a class='category' href='/blog/categories/wordpress/'>WordPress</a>, <a class='category' href='/blog/categories/best-practices/'>best practices</a>, <a class='category' href='/blog/categories/integration-testing/'>integration testing</a>, <a class='category' href='/blog/categories/testing/'>testing</a>, <a class='category' href='/blog/categories/unit-testing/'>unit testing</a>
 
 
 </div>
@@ -650,54 +598,6 @@ git merge pr
   <p>The United States Constitution instructed the First Congress of the United States to enact laws &#8220;securing for limited Times to Authors and Inventors the exclusive Right to their respective Writings and Discoveries.&#8221; This instruction, commonly referred to as the Intellectual Property Clause, demanded a set of laws based on the broad idea that inventors are best incentivized and remunerated for their works through a system of guaranteed exclusive rights. What exactly the scope of those rights were, who had authority to hand them out, and under what conditions they would be given, were all left to Congress to sort out; it was among the earliest controversies over science and technology in the United States of America. 
 		
 		<a href="/blog/2012/12/30/tussle-over-technology-controversy-the-patent-act/" class="more-link">Read on &rarr;</a>
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-15T00:00:00-05:00" data-updated="true" itemprop="datePublished">Aug 15<span>th</span>, 2012</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/aerial-photography/'>aerial photography</a>, <a class='category' href='/blog/categories/cartography/'>cartography</a>, <a class='category' href='/blog/categories/college-costs/'>college costs</a>, <a class='category' href='/blog/categories/gustavus/'>gustavus</a>, <a class='category' href='/blog/categories/gustavus-adolphus-college/'>gustavus adolphus college</a>, <a class='category' href='/blog/categories/human-geography/'>human geography</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2012/08/15/20-years-of-gustavus-a-birds-eye-view/" itemprop="url">20 Years of Gustavus: A Bird&#8217;s Eye View</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		Inspired by the <a href="http://googleearthtimemachine.blogspot.fr/">Google Earth Time Machine blog</a> highlighted by Kottke.org a few days ago, I decided to see how far back the imagery over my college campus reached. I figured it being in rural area, there was probably a lot of agricultural aerial photography going on, but I was wrong, the imagery only went back as far as 1992. Perhaps if I paid for some extra features it would stretch back further, but who knows. Those familiar with Gustavus Adolphus College will recall the infamous 1998 Tornado, the ten-year anniversary of which was commemorated while I was a student. The big thing I remember hearing about the campus was tree loss. The big takeaway watching the recruitment video from the 90s they were still using when I was a freshman was &#8216;where did all those giant trees on the quad go? What I did not think about, and what never really got talked about, was how many more trees there are now, and this was immediately evident comparing the 92 aerial imagery with the photographs taken 20 years later.
-<a href="http://www.harmsboone.org/wp-content/uploads/2012/08/GAC121.jpg"><img class="alignleft size-medium wp-image-1596" title="Gustavus 2012" src="http://www.harmsboone.org/wp-content/uploads/2012/08/GAC121-512x318.jpg" alt="" width="512" height="318" /></a>
-
-One thing that was especially interesting was where there were more trees in 2012, where the trees were smaller, and where they were actually larger. The Linnaeus Arboretum sort of hugs the Westernmost part of the campus. In 2012 the Arb, as we affectionately knew it, is densely populated with trees on the North side, strikingly so compared to the same image in 1992. The South side is a bit more dense, but, being that it&#8217;s a bit more prairie on that end of the Arb, it&#8217;s not as noticeable. What&#8217;s strange here is that all the trees actually look a lot bigger, 20 years bigger, in fact. Did the Arb somehow survive the tornado, or was it replanted with really big trees? On the South-Southeast side of the campus, headed down the hill from (the old) Old Main the tree cover is definitely sparser in &#8216;92, but the trees much larger. There are also more paved paths headed up the hill from Rundstrom Hall, something I would have welcomed when I lived there.
-
-Apart from trees, the campus was busy constructing, moving, or demolishing campus facilities in the last twenty years. The facilities are highlighted on the 2012 map <em>supra</em> and color-coded according to whether they are sports (blue), academic (yellow), housing (green), public spaces (orange), and parking (red). I also made some notes in white. One thing is clear straight away, housing at Gustavus has changed a lot in the last twenty years. On the Southern edge of the campus were added the Arbor View Apartments, on the Western edge before the Arb, Southwest and Prairie View halls (the latter meant to be temporary after the tornado) and the International Center. On the South-Southeast side of campus (a barren patch of grass circled in green) was Wahlstrom Hall, a building demolished the summer before I enrolled. Gusties have also changed the way they play sports, with the football field moved to behind Lund Center on the North End of campus. The new stadium, built in the summer of 2007, is right next to a soccer field, and is across Ring Rd. from a baseball field and a multi-purpose field for practices (and other things? My golf class met there, I imagine that&#8217;s not all). All of these fields are either new or have moved since 1992. The 2012 stadium is directly atop the 1992 baseball field, and the 2012 baseball and multi-purpose fields appear to be atop 1992&#8217;s farmland. It&#8217;s not clear whether the rugby pitch behind Southwest Hall is new, or if it was so used in 1992. The 1992 football stadium is now covered by a mall stretching NE from Christ Chapel, one of two new public spaces. The others were an expansion of the campus center that happened after the tornado to include the Marketplace, and the creation of the Big Hill Farm West of the Arb.
-
-<a href="http://www.harmsboone.org/wp-content/uploads/2012/08/GAC92.png"><img class="alignleft size-medium wp-image-1594" title="Gustavus 1992" src="http://www.harmsboone.org/wp-content/uploads/2012/08/GAC92-512x319.png" alt="" width="512" height="319" /></a>
-
-The last thing I noted was how little the campus expanded its academic buildings. The three buildings in yellow are Mattson Hall, housing the Nursing and Education Departments; Old Main, renovated in 2005; and Beck Academic Hall completed about one year ago. This illustration of how the campus has changed is by no means scientific. Certainly academics can expand without constructing new buildings unlike, say, housing, and it&#8217;s possible some of these buildings were renovated internally, or that departments were moved around campus as they outgrew their homes. The old library, better known as the SSC in my day or A. H. Anderson Hall officially, is currently not occupied by any department, though I believe is still used for its classrooms (correct me if I&#8217;m wrong). The departments that were once there have all moved to Beck Hall now. It is nevertheless interesting to think about this aerial transformation in terms of a college&#8217;s priorities.
-
-I&#8217;m far from the first to note that <a href="http://www.nytimes.com/2012/05/15/business/colleges-begin-to-confront-higher-costs-and-students-debt.html?pagewanted=all">college</a> <a href="http://www.npr.org/2011/05/16/136214779/college-student-debt-grows-is-it-worth-it">costs</a> <a href="http://money.cnn.com/2011/10/26/pf/college/college_tuition_cost/index.htm">are</a> <a href="http://www.forbes.com/sites/peterjreilly/2012/03/19/why-college-prices-keep-rising/">on</a> <a href="http://www.npr.org/templates/story/story.php?storyId=130895432">the</a> <a href="http://www.theatlantic.com/business/archive/2012/06/how-in-the-world-did-college-costs-rise-15-in-only-2-years/258463/">rise</a>, and I&#8217;m far from the first to wonder why colleges <a href="http://www.pbs.org/wnet/need-to-know/pitchroom/are-college-sports-worth-the-cost/7827/">seem to spend more on fancy athletic and housing facilities than the academic program</a> (and whether that even matters), and <a href="http://www.newyorker.com/talk/comment/2012/05/28/120528taco_talk_lemann">what drives</a> <a href="http://blogs.edweek.org/edweek/college_bound/2012/04/some_perspective_on_the_high_cost_of_college.html">spending by college administrators</a>. Nevertheless, it is hard to argue that, at least from a bird&#8217;s eye view, my college seems to have its priorities in two key areas: athletics, and student facilities.
-
-<em>Edited for grammar and spelling, 8/15 at 7:37pm.</em>
-
-		
-		
 	</div>
 
 </article>

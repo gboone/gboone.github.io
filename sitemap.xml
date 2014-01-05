@@ -34,7 +34,7 @@
     </url>
     <url>
         <loc>http://gboone.github.io/blog/2013/08/03/a-week-into-octopress/</loc>
-        <lastmod>2013-08-03T13:12:26-05:00</lastmod>
+        <lastmod>2014-01-05T06:23:48-06:00</lastmod>
     </url>
     <url>
         <loc>http://gboone.github.io/blog/2013/08/07/how-to-explain-git-to-non-developers/</loc>
@@ -60,23 +60,29 @@
     </url>
     <url>
         <loc>http://gboone.github.io/blog/2013/12/23/why-unit-testing-in-wordpress-matters/</loc>
-        <lastmod>2014-01-01T09:10:29-06:00</lastmod>
+        <lastmod>2014-01-05T09:28:26-06:00</lastmod>
     </url>
     <url>
         <loc>http://gboone.github.io/blog/2014/01/01/writing-unit-tests-for-wordpress/</loc>
-        <lastmod>2014-01-01T09:39:19-06:00</lastmod>
+        <lastmod>2014-01-05T15:05:08-06:00</lastmod>
+    </url>
+    <url>
+        <loc>
+            http://gboone.github.io/blog/2014/01/08/how-can-i-use-php-namespaces-in-wordpress-plugins/
+        </loc>
+        <lastmod>2014-01-05T15:06:17-06:00</lastmod>
     </url>
     <url>
         <loc>http://gboone.github.io/about/</loc>
-        <lastmod>2014-01-01T09:39:19-06:00</lastmod>
+        <lastmod>2014-01-05T15:06:17-06:00</lastmod>
     </url>
     <url>
         <loc>http://gboone.github.io/blog/archives/</loc>
-        <lastmod>2014-01-01T09:39:19-06:00</lastmod>
+        <lastmod>2014-01-05T15:06:17-06:00</lastmod>
     </url>
     <url>
         <loc>http://gboone.github.io/</loc>
-        <lastmod>2014-01-01T09:39:19-06:00</lastmod>
+        <lastmod>2014-01-05T15:06:17-06:00</lastmod>
     </url>
     <url>
         <loc>http://gboone.github.io/robots.txt</loc>

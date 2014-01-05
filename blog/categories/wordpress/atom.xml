@@ -4,7 +4,7 @@
   <title><![CDATA[Category: WordPress | Merge Conflicts]]></title>
   <link href="http://gboone.github.io/blog/categories/wordpress/atom.xml" rel="self"/>
   <link href="http://gboone.github.io/"/>
-  <updated>2014-01-01T09:41:29-06:00</updated>
+  <updated>2014-01-05T15:07:06-06:00</updated>
   <id>http://gboone.github.io/</id>
   <author>
     <name><![CDATA[Greg Boone]]></name>
@@ -14,11 +14,130 @@
 
   
   <entry>
+    <title type="html"><![CDATA[How can I use PHP Namespaces in WordPress Plugins]]></title>
+    <link href="http://gboone.github.io/blog/2014/01/08/how-can-i-use-php-namespaces-in-wordpress-plugins/"/>
+    <updated>2014-01-08T11:29:00-06:00</updated>
+    <id>http://gboone.github.io/blog/2014/01/08/how-can-i-use-php-namespaces-in-wordpress-plugins</id>
+    <content type="html"><![CDATA[<p>PHP has long had a problem of naming collisions. Because older versions of PHP had no way of declaring methods outside the global space, developers came up with several different ways of preventing and checking for namespace collisions, none of which treated the underlying condition. These many and varied solutions begged for a unifying standard as they made things like autoloading and package management increasingly difficult. PHP 5.3 introduced a feature called &lsquo;namespacing&rsquo; to solve this problem and WordPress developers should begin adopting. With proper namespacing, WordPress plugin and themes will become clearer, more stable, and more portable.</p>
+
+<p>Prior to PHP 5, if you tried to name a method or class <code>foo</code> it might conflict with another similarly nammed method elsewhere in the system. Developers came to terms with this by &lsquo;namespacing&rsquo; methods with a prefix. With this standard, <code>foo</code> became <code>my_foo</code> or <code>gb_foo</code> where the <code>my_</code> or <code>gb_</code> corresponded to vendor prefixes (gb, being my initials). It also led to wrapping every method in a conditional to check for namespace collisions:</p>
+
+<p>```php
+if ( !function_exists(gb_foo) ) {</p>
+
+<pre><code>function gb_foo( $bar ) {
+    echo $bar;
+}
+</code></pre>
+
+<p>}</p>
+
+<p>gb_foo(&lsquo;bar&rsquo;);
+```</p>
+
+<p>Look familiar? The problem with this should be easy to see. If that conditional returns false, my method <code>gb_foo</code> will never be fired and any time it&rsquo;s called, that other <code>gb_foo</code> method will. Imagine if <code>gb_foo</code> was something like this:</p>
+
+<p>```php
+function gb_foo($bar) {</p>
+
+<pre><code>mysql_query('DROP TABLES *');
+</code></pre>
+
+<p>}
+```
+I think we can all agree that would be bad.</p>
+
+<p>Namespacing is a concept familiar to many other programming languages that isolates your application from others in a standardized way. The global space should be reserved for only those things that should be available at all times. There is typically a character or pair of characters which globally signifies a namespace seperator. In PHP it&rsquo;s the backslash .</p>
+
+<p>If properly namespaced, you can name your method <code>foo()</code> without any possibility of your method conflicting with anything else (unless you declare it twice in the namespace).</p>
+
+<p>Namespacing also alleviates your need to wrap your methods in that conditional. A properly namespaced <code>foo()</code> method would look like this:</p>
+
+<p>```php
+namespace gb;</p>
+
+<p>function foo($bar) {</p>
+
+<pre><code>echo $bar;
+</code></pre>
+
+<p>}</p>
+
+<p>```</p>
+
+<p>Let&rsquo;s take a look at what&rsquo;s going on here. On the first line we declare the namespace we want to use, in this case my initials <code>gb</code>. We can then declare classes and methods without worrying about stepping on any other methods. This is sort of like putting things in classes, but it&rsquo;s even more safe. To call that &lsquo;foo&rsquo; method, just type <code>\gb\foo('baz');</code> which should output &lsquo;baz&rsquo;. You can also declare classes inside the namespace just like you would normally, the difference is that when these are called, the namespace must be too. There are a few different ways of approaching this:</p>
+
+<p>Consider the application lives in a file called test.php and all our files are in the same directory.</p>
+
+<p>```php
+// test.php
+namespace gb;
+class Bar {</p>
+
+<pre><code>public static function foo($bar) {
+    echo $bar;
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Example one: &lsquo;Use&rsquo; the namespace, declared at the top of the second file.
+```php</p>
+
+<p>require_once(<strong>DIR</strong> . &lsquo;/test.php&rsquo;);
+use \gb\Bar;</p>
+
+<p>Bar::foo(&lsquo;baz&rsquo;);
+```</p>
+
+<p>Example two: Call the method with the namespace and class prefixed.
+```php
+require_once(<strong>DIR</strong> . &lsquo;/test.php&rsquo;);</p>
+
+<p>\gb\Bar::foo(&lsquo;baz&rsquo;);</p>
+
+<p>```</p>
+
+<p>Example three: Instantiate the class as an object and declare the method from the object.</p>
+
+<p>```php
+require_once(<strong>DIR</strong> . &lsquo;/test.php&rsquo;);</p>
+
+<p>$object = new \gb\Bar();</p>
+
+<p>$object->foo(&lsquo;baz&rsquo;);
+```</p>
+
+<p>They&rsquo;re all very similar and should look familiar. Again, all the namespace does is add a layer of abstraction away from the global space in order to prevent collisions. Where it becomes particularly useful is in autoloading with tools like composer. With namespaces autoloaded, developers do not even need to require the files where those classes exist. They only need to know the namespaces. Example one, then, becomes:</p>
+
+<p><code>php
+use \gb\Bar;
+Bar::foo('baz');
+</code></p>
+
+<blockquote>Pro tip: you can 'use' a namespace under another name. So if you have two classes Bar, you can redeclare them like this:
+
+```php 
+use \namespace\Bar as Bar;
+use \gb\Bar as Baz;
+
+Baz::foo('bar');
+```</blockquote>
+
+
+<p>You can also stack namespaces to isolate your individual plugins from each other: <code>namespace gb\myAwesomePlugin;</code> and <code>namespace gb\anotherAwesomePlugin</code> serve as different namespaces for different plugins. It also keeps me safe from other &lsquo;gb&rsquo;s out there crowding my namespace.</p>
+
+<p>Namespaces can also indicate <em>where</em> to find your application. With a fully namespaced plugin, you could even configure your WordPress install to use your plugin without &lsquo;installing&rsquo; it.  If you have composer doing that for you, you can autoload the plugin preconfigured the way you want it. WordPress is becoming an incresingly vibrant application development platform and namespacing will be key to it living in harmony with other PHP applications in complex systems.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Writing Unit Tests for WordPress]]></title>
     <link href="http://gboone.github.io/blog/2014/01/01/writing-unit-tests-for-wordpress/"/>
     <updated>2014-01-01T09:30:00-06:00</updated>
     <id>http://gboone.github.io/blog/2014/01/01/writing-unit-tests-for-wordpress</id>
-    <content type="html"><![CDATA[<p>In <a href="blog/2013/12/23/why-unit-testing-in-wordpress-matters/">my last post</a> I wrote about two testing libraries for WordPress and briefly discussed the difference between integration tests and unit tests. I also mentioned a concept called test driven development (TDD) and breifly explained how it might help write better code from the start. This post will expand on that and show how to write a simple WordPress plugin from a test-first approach. Since we&rsquo;re writing unit tests, we&rsquo;re going to use WP-Mock to create a test double for us and we&rsquo;ll use PHPunit for our test runner.</p>
+    <content type="html"><![CDATA[<p>In <a href="blog/2013/12/23/why-unit-testing-in-wordpress-matters/">my last post</a> I wrote about two testing libraries for WordPress and briefly discussed the difference between integration tests and unit tests. I also mentioned a concept called test driven development (TDD) and breifly explained how it might help write better code from the start. This post will expand on that and show how to write a simple WordPress plugin from a test-first approach. Since we&rsquo;re writing unit tests, we&rsquo;re going to use WP-Mock to create a test double for us and we&rsquo;ll use PHPunit for our test runner.<!-- more --></p>
 
 <p>TDD starts with a problem you want to solve—the same problem your plugin wants to solve. In this case, let&rsquo;s say we have a plugin that will add some metadata to a post with the title &ldquo;Test&rdquo;. Since that&rsquo;s going to require us to mock some WordPress core functionality, <a href="https://github.com/10up/wp_mock">make sure WP-Mock is configured in your working environment</a>. We&rsquo;ll start by writing a test that verifies the metadata was attached to the post.</p>
 

@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
-  <title><![CDATA[Category: best_practices | Merge Conflicts]]></title>
+  <title><![CDATA[Category: best practices | Merge Conflicts]]></title>
   <link href="http://gboone.github.io/blog/categories/best-practices/atom.xml" rel="self"/>
   <link href="http://gboone.github.io/"/>
-  <updated>2014-01-01T09:41:29-06:00</updated>
+  <updated>2014-01-05T15:07:06-06:00</updated>
   <id>http://gboone.github.io/</id>
   <author>
     <name><![CDATA[Greg Boone]]></name>
@@ -14,171 +14,121 @@
 
   
   <entry>
-    <title type="html"><![CDATA[Writing Unit Tests for WordPress]]></title>
-    <link href="http://gboone.github.io/blog/2014/01/01/writing-unit-tests-for-wordpress/"/>
-    <updated>2014-01-01T09:30:00-06:00</updated>
-    <id>http://gboone.github.io/blog/2014/01/01/writing-unit-tests-for-wordpress</id>
-    <content type="html"><![CDATA[<p>In <a href="blog/2013/12/23/why-unit-testing-in-wordpress-matters/">my last post</a> I wrote about two testing libraries for WordPress and briefly discussed the difference between integration tests and unit tests. I also mentioned a concept called test driven development (TDD) and breifly explained how it might help write better code from the start. This post will expand on that and show how to write a simple WordPress plugin from a test-first approach. Since we&rsquo;re writing unit tests, we&rsquo;re going to use WP-Mock to create a test double for us and we&rsquo;ll use PHPunit for our test runner.</p>
+    <title type="html"><![CDATA[How can I use PHP Namespaces in WordPress Plugins]]></title>
+    <link href="http://gboone.github.io/blog/2014/01/08/how-can-i-use-php-namespaces-in-wordpress-plugins/"/>
+    <updated>2014-01-08T11:29:00-06:00</updated>
+    <id>http://gboone.github.io/blog/2014/01/08/how-can-i-use-php-namespaces-in-wordpress-plugins</id>
+    <content type="html"><![CDATA[<p>PHP has long had a problem of naming collisions. Because older versions of PHP had no way of declaring methods outside the global space, developers came up with several different ways of preventing and checking for namespace collisions, none of which treated the underlying condition. These many and varied solutions begged for a unifying standard as they made things like autoloading and package management increasingly difficult. PHP 5.3 introduced a feature called &lsquo;namespacing&rsquo; to solve this problem and WordPress developers should begin adopting. With proper namespacing, WordPress plugin and themes will become clearer, more stable, and more portable.</p>
 
-<p>TDD starts with a problem you want to solve—the same problem your plugin wants to solve. In this case, let&rsquo;s say we have a plugin that will add some metadata to a post with the title &ldquo;Test&rdquo;. Since that&rsquo;s going to require us to mock some WordPress core functionality, <a href="https://github.com/10up/wp_mock">make sure WP-Mock is configured in your working environment</a>. We&rsquo;ll start by writing a test that verifies the metadata was attached to the post.</p>
-
-<p>In order to write unit tests we first need to extend the base test suite:</p>
-
-<p>```
-&lt;?php</p>
-
-<pre><code>Class OurTestSuite extends extends PHPUnit_Framework_TestCase {
-</code></pre>
-
-<p>}
-?>
-```</p>
-
-<p>Now that we have a class, we can call any of PHPunit&rsquo;s methods for testing including all of its assertions. Inside OurTestSuite is where we will write all our testing methods. We start with setUp and tearDown, commonly named methods that instantiate some conditions we will want for all our classes. We&rsquo;ll want to make sure our setUp and tearDown methods clean up our test environment as well as any mocks we create out of WP_Mock. So we&rsquo;ll declare:</p>
-
-<p>```
-&lt;?php</p>
-
-<pre><code>public function setUp() {
-    parent::setUp();
-}
-
-public function tearDown() {
-    parent::tearDown();
-}
-</code></pre>
-
-<p>?>
-```</p>
-
-<p>If we had other objects, variables, or settings we wanted available throughout the test suite, etc., we could declare those too. If you run the test now you&rsquo;ll get some output, but no tests will run because we haven&rsquo;t written any. Every test is a method within this class. Let&rsquo;s write one that will always pass just to see PHPunit give us something.</p>
+<p>Prior to PHP 5, if you tried to name a method or class <code>foo</code> it might conflict with another similarly nammed method elsewhere in the system. Developers came to terms with this by &lsquo;namespacing&rsquo; methods with a prefix. With this standard, <code>foo</code> became <code>my_foo</code> or <code>gb_foo</code> where the <code>my_</code> or <code>gb_</code> corresponded to vendor prefixes (gb, being my initials). It also led to wrapping every method in a conditional to check for namespace collisions:</p>
 
 <p>```php
-&lt;?php</p>
+if ( !function_exists(gb_foo) ) {</p>
 
-<pre><code>...
-public function testOneExpectsOneAdded() {
-    // Arrange
-    $foo = 1;
-
-    // Act
-    $bar = $foo + 1;
-
-    // Assert
-    $this-&gt;assertEquals(2, $bar, 'Variable $bar does not equal two.');
+<pre><code>function gb_foo( $bar ) {
+    echo $bar;
 }
 </code></pre>
 
-<p>?>
+<p>}</p>
+
+<p>gb_foo(&lsquo;bar&rsquo;);
 ```</p>
 
-<p>If you run PHPunit on that test, you should get a dot. Congratulations!</p>
+<p>Look familiar? The problem with this should be easy to see. If that conditional returns false, my method <code>gb_foo</code> will never be fired and any time it&rsquo;s called, that other <code>gb_foo</code> method will. Imagine if <code>gb_foo</code> was something like this:</p>
 
-<p>Now let&rsquo;s write our test for our <code>save_meta</code> method. There are three basic sections to our test: Arrange, Act, and Assert. The first section is for all the bits our method needs for input. In our case, we&rsquo;ll need the post ID for a post called &ldquo;Test&rdquo; and a key and value pair to save as metadata. Since the ID could be any integer on a given system, we can arrange our test with any integer we like. The next piece, the key-value pair, will be set in the method, but we&rsquo;ll want to decide now what they&rsquo;ll be.</p>
+<p>```php
+function gb_foo($bar) {</p>
 
-<p>The &ldquo;Act&rdquo; section is where we call the method. In this case, we&rsquo;re going to call a method called <code>save_meta_data</code> out of the <code>MetaMethods</code> object. Finally, the &ldquo;Assert&rdquo; section is where we decide what the method should expect to see at the end. This section might be empty depending on whether the method under test returns an output or calls some other method. In our case, it&rsquo;s the latter. The test passes if <code>update_post_meta</code> is called exactly once. Right now our test is looking something like this:</p>
-
-<p>```
-&lt;?php
-&hellip;</p>
-
-<pre><code>public function testTestPostExpectsMetaDataSaved(){
-    // Arrange
-    $post_id = 42;
-
-    // Act
-    $methods = new MetaMethods();
-    $methods-&gt;save_meta_data($post_id);
-
-    // Assert
-}
+<pre><code>mysql_query('DROP TABLES *');
 </code></pre>
 
-<p>&hellip;
-?>
-```</p>
+<p>}
+```
+I think we can all agree that would be bad.</p>
 
-<p>Not a bad looking test, but we have some mocking to do. We already know we&rsquo;ll need to mock <code>update_post_meta()</code>, but we&rsquo;re also going to need <code>get_post()</code> as well. In both cases, we&rsquo;re going to make PHPunit handle calls to those methods and return what we want back. We know what to expect if we call <code>update_post_meta</code>: if all is well with our WordPress install, we expect it would add new information to the post object. So we don&rsquo;t need to verify that, all we really need to do is verify it&rsquo;s being called exactly once. So let&rsquo;s add our mocks to the &ldquo;Arrange&rdquo; section.</p>
+<p>Namespacing is a concept familiar to many other programming languages that isolates your application from others in a standardized way. The global space should be reserved for only those things that should be available at all times. There is typically a character or pair of characters which globally signifies a namespace seperator. In PHP it&rsquo;s the backslash .</p>
 
-<p>Fully mocking a function like <code>get_post()</code> uses the static method <code>wpFunction()</code> from WP_Mock. We can call it with: <code>\WP_Mock::wpFunciton()</code>. We can also pass wpFunction some parameters like &lsquo;times&rsquo;, for how many times we expect the mocked function to fire, and &lsquo;parameters&rsquo;, and &lsquo;return&rsquo;. These help us create a fully function test double of <code>get_post</code>.</p>
+<p>If properly namespaced, you can name your method <code>foo()</code> without any possibility of your method conflicting with anything else (unless you declare it twice in the namespace).</p>
 
-<p>```
-&lt;?php</p>
+<p>Namespacing also alleviates your need to wrap your methods in that conditional. A properly namespaced <code>foo()</code> method would look like this:</p>
 
-<pre><code>...
-// Arrange
-$post = \WP_Mock::wpFunction('get_post')
-...
+<p>```php
+namespace gb;</p>
+
+<p>function foo($bar) {</p>
+
+<pre><code>echo $bar;
 </code></pre>
 
-<p>?>
-```</p>
+<p>}</p>
 
-<p>Finally, we need to address <code>update_post_meta</code>, but since we don&rsquo;t particularly care what we get back from this method, we can instead &lsquo;stub&rsquo; it. <code>WP_Mock</code> has a wrapper for <code>wpFunction</code> that make this easy, it&rsquo;s called <code>wpPassthruFunction()</code> and can take many of the same parameters, but fills in the return value for you. In our case, we want to know that update_post_meta fired once, so we can write something like:</p>
+<p>```</p>
 
-<p>```
-&lt;?php</p>
+<p>Let&rsquo;s take a look at what&rsquo;s going on here. On the first line we declare the namespace we want to use, in this case my initials <code>gb</code>. We can then declare classes and methods without worrying about stepping on any other methods. This is sort of like putting things in classes, but it&rsquo;s even more safe. To call that &lsquo;foo&rsquo; method, just type <code>\gb\foo('baz');</code> which should output &lsquo;baz&rsquo;. You can also declare classes inside the namespace just like you would normally, the difference is that when these are called, the namespace must be too. There are a few different ways of approaching this:</p>
 
-<pre><code>...
-// Arrange
-\WP_Mock::wpPassthruFunction('update_post_meta', array('times' =&gt; 1));
-...
-</code></pre>
+<p>Consider the application lives in a file called test.php and all our files are in the same directory.</p>
 
-<p>?>
-```</p>
+<p>```php
+// test.php
+namespace gb;
+class Bar {</p>
 
-<p>Now, if we run <code>phpunit</code>, we get a dot and an F, or maybe an E, since we haven&rsquo;t written any code yet. Now we can write the actual code with the following workflow:</p>
-
-<ol>
-<li>Write some code</li>
-<li>Run the test</li>
-<li>Modify the test and code as necessary</li>
-<li>Repeat 2-3 until the test passes</li>
-</ol>
-
-
-<p>A full example of our test is below:</p>
-
-<p>```
-&lt;?php
-Class OurTestSuite extends extends PHPUnit_Framework_TestCase {</p>
-
-<pre><code>public function setUp() {
-    parent::setUp();
-}
-
-public function tearDown() {
-    parent::tearDown();
-}
-
-public function testOneExpectsOneAdded() {
-    // Arrange
-    $foo = 1;
-
-    // Act
-    $bar = $foo + 1;
-
-    // Assert
-    $this-&gt;assertEquals($bar, 2, 'Variable $bar does not equal two.');
-}
-
-public function testTestPostExpectsMetaDataSaved(){
-    // Arrange
-    $post_id = 42;
-    $post = \WP_Mock::wpFunction('get_post');
-    \WP_Mock::wpPassthruFunction('update_post_meta', array('times' =&gt; 1));
-    // Act
-    $methods = new MetaMethods();
-    $methods-&gt;save_meta_data($post_id);
-
-    // Assert
+<pre><code>public static function foo($bar) {
+    echo $bar;
 }
 </code></pre>
 
 <p>}
-?>
 ```</p>
+
+<p>Example one: &lsquo;Use&rsquo; the namespace, declared at the top of the second file.
+```php</p>
+
+<p>require_once(<strong>DIR</strong> . &lsquo;/test.php&rsquo;);
+use \gb\Bar;</p>
+
+<p>Bar::foo(&lsquo;baz&rsquo;);
+```</p>
+
+<p>Example two: Call the method with the namespace and class prefixed.
+```php
+require_once(<strong>DIR</strong> . &lsquo;/test.php&rsquo;);</p>
+
+<p>\gb\Bar::foo(&lsquo;baz&rsquo;);</p>
+
+<p>```</p>
+
+<p>Example three: Instantiate the class as an object and declare the method from the object.</p>
+
+<p>```php
+require_once(<strong>DIR</strong> . &lsquo;/test.php&rsquo;);</p>
+
+<p>$object = new \gb\Bar();</p>
+
+<p>$object->foo(&lsquo;baz&rsquo;);
+```</p>
+
+<p>They&rsquo;re all very similar and should look familiar. Again, all the namespace does is add a layer of abstraction away from the global space in order to prevent collisions. Where it becomes particularly useful is in autoloading with tools like composer. With namespaces autoloaded, developers do not even need to require the files where those classes exist. They only need to know the namespaces. Example one, then, becomes:</p>
+
+<p><code>php
+use \gb\Bar;
+Bar::foo('baz');
+</code></p>
+
+<blockquote>Pro tip: you can 'use' a namespace under another name. So if you have two classes Bar, you can redeclare them like this:
+
+```php 
+use \namespace\Bar as Bar;
+use \gb\Bar as Baz;
+
+Baz::foo('bar');
+```</blockquote>
+
+
+<p>You can also stack namespaces to isolate your individual plugins from each other: <code>namespace gb\myAwesomePlugin;</code> and <code>namespace gb\anotherAwesomePlugin</code> serve as different namespaces for different plugins. It also keeps me safe from other &lsquo;gb&rsquo;s out there crowding my namespace.</p>
+
+<p>Namespaces can also indicate <em>where</em> to find your application. With a fully namespaced plugin, you could even configure your WordPress install to use your plugin without &lsquo;installing&rsquo; it.  If you have composer doing that for you, you can autoload the plugin preconfigured the way you want it. WordPress is becoming an incresingly vibrant application development platform and namespacing will be key to it living in harmony with other PHP applications in complex systems.</p>
 ]]></content>
   </entry>
   
@@ -205,102 +155,6 @@ public function testTestPostExpectsMetaDataSaved(){
 <p>With this distinction in mind, WPUTS might be better named the &lsquo;WordPress Integration Test Suite&rsquo; as it allows you to access to a full installation of WordPress and manipulation of its database. What it doesn&rsquo;t do is tell you whether you&rsquo;re manipulating that database too much. Maybe your method called <code>update_post_meta</code> twice, WPUTS will not necessarily tell you that. It will only tell you that the post was, in fact, updated. That&rsquo;s useful, but so is knowing you only did it once. Writing to a database can be expensive, doing it too many times might slow down your application.</p>
 
 <p>Writing tests before writing code is called Test Driven Development and is a software engineering best practice. It forces you to write your test, then write code to make your test pass. In the end, this makes you a better developer because you are focused to break your problems down into smaller pieces that do more discrete testable things. How to write those tests is a subject for another blog.</p>
-]]></content>
-  </entry>
-  
-  <entry>
-    <title type="html"><![CDATA[How can I use feature switches in WordPress?]]></title>
-    <link href="http://gboone.github.io/blog/2013/09/15/how-can-i-use-feature-switches-in-wordpress/"/>
-    <updated>2013-09-15T07:54:00-05:00</updated>
-    <id>http://gboone.github.io/blog/2013/09/15/how-can-i-use-feature-switches-in-wordpress</id>
-    <content type="html"><![CDATA[<p>While a colleague and I were discussing the rollout of a new feature to our public facing website, he asked me if it would be possible to &ldquo;hide&rdquo; the new content behind a toggle. Effectively, he was asking me to write a <a href="http://en.wikipedia.org/wiki/Feature_toggle">feature switch</a>, a best practice of continuous integration that <a href="http://martinfowler.com/bliki/FeatureToggle.html">allows you to push some source code while hiding future features</a>. WordPress has some of this idea built into it&rsquo;s core: plugins, for example, can be activated and deactivated to turn things on and off. Within plugins and themes, options pages can be used to turn on different features. SEO plugins, for example, let users turn on and off different optimizaiton tools. Feature switches are a little different, and in our case leverage the power of Apache environment variables to show and hide different parts of our site.</p>
-
-<!-- more -->
-
-
-<h2>The problem</h2>
-
-<p>The end goal was to take <em>n</em> posts, convert each to a new post type and then display them on a new archive template. (How we did the migration is another blog.) The problem was that while most of the code was ready, the content wasn&rsquo;t and the UAT was in progress. In order to run the content migration script, the bulk of the source code had to be live on at least our staging environment, but until everything else was finished, the archive needed to stay hidden.</p>
-
-<p>Post type and taxonomy registration was done through another plugin, and turning that off was not an option, but we could change the way we registered <em>this</em> particular post type by manipulating some of the arguments passed to <code>register_post_type()</code>.</p>
-
-<p>Typically, if you&rsquo;re going to register a post type you want to use and see it right away. You might even use a generator to do it for you:</p>
-
-<p>``` php
-add_action( &lsquo;init&rsquo;, &lsquo;register_cpt_post_type&rsquo; );</p>
-
-<p>function register_cpt_post_type() {</p>
-
-<pre><code>$labels = array( 
-    'name' =&gt; _x( 'Post type', 'post_type' ),
-    'singular_name' =&gt; _x( 'Post type', 'post_type' ),
-    'add_new' =&gt; _x( 'Add New', 'post_type' ),
-    'add_new_item' =&gt; _x( 'Add New Post type', 'post_type' ),
-    'edit_item' =&gt; _x( 'Edit Post type', 'post_type' ),
-    'new_item' =&gt; _x( 'New Post type', 'post_type' ),
-    'view_item' =&gt; _x( 'View Post type', 'post_type' ),
-    'search_items' =&gt; _x( 'Search Post type', 'post_type' ),
-    'not_found' =&gt; _x( 'No post type found', 'post_type' ),
-    'not_found_in_trash' =&gt; _x( 'No post type found in Trash', 'post_type' ),
-    'parent_item_colon' =&gt; _x( 'Parent Post type:', 'post_type' ),
-    'menu_name' =&gt; _x( 'Post type', 'post_type' ),
-);
-
-$args = array( 
-    'labels' =&gt; $labels,
-    'hierarchical' =&gt; true,
-    'supports' =&gt; array( 'title', 'editor' ),
-    'public' =&gt; true,
-    'show_ui' =&gt; true,
-    'show_in_menu' =&gt; true,
-    'show_in_nav_menus' =&gt; true,
-    'publicly_queryable' =&gt; true,
-    'exclude_from_search' =&gt; false,
-    'has_archive' =&gt; true,
-    'query_var' =&gt; true,
-    'can_export' =&gt; true,
-    'rewrite' =&gt; true,
-    'capability_type' =&gt; 'post'
-);
-
-register_post_type( 'post_type', $args );
-</code></pre>
-
-<p>}
-```</p>
-
-<p>Zoom in on two of the <code>$args</code>: <code>public</code> and <code>has_archive</code>. The first turns the post type on in the backend and lets you create new posts of that type. The second controls whether typing <code>http://your.url/your_post_type</code> will lead to an archive or something else. In our case, we wanted <code>/your_post_type</code> to hit a WordPress page called <code>your_post_type</code> (the default behavior) until we were ready to launch the new feature at which point it should hit the post type archive. Remember, we don&rsquo;t want to launch until all the content is migrated to the new post type, so it was critical that we have it accessible on the back-end (<code>public =&gt; true</code>) but it&rsquo;s archive remain hidden on the front (<code>with_archive =&gt; false</code>).</p>
-
-<h3>Possible solutions</h3>
-
-<p>We could have stored the switch in an option, but that would require hitting or caching a database value for every page load. That&rsquo;s not terribly expensive, but putting the switch at the application level is faster, more elegant, and reserves the <code>wp_options</code> table for storing our actual options. So originally we tried locating the switch as a variable in the plugin registration function. Since it was hooked to <code>plugins_loaded</code> it would fire, before post type registration, on every page load. That was less than elegant, however, because it effectively meant we had to maintain different branches of code for each environment, which could get confusing and/or messy.</p>
-
-<h2>Enter SetEnv and get_env();</h2>
-
-<p>PHP&rsquo;s <code>get_env()</code> function is a simple one that fetches a specified <a href="http://en.wikipedia.org/wiki/Environment_variable">environment variable</a> from the server configuration. Environment variables do all kinds of cool things, and if you set one in your Apache configuration, you can wrap new features in conditionals based on whether and to what value it is set.</p>
-
-<p>First, write some PHP code like this:</p>
-
-<p>``` php
-$env = get_env(VARIABLE_NAME);
-if ( isset($env) ) {</p>
-
-<pre><code>// do stuff
-</code></pre>
-
-<p>} else {</p>
-
-<pre><code>// do other stuff
-</code></pre>
-
-<p>}
-```</p>
-
-<p>Then, when you&rsquo;re  ready to toggle the feature, add a line like this to your <a href="http://httpd.apache.org/docs/2.0/mod/mod_env.html#setenv">Apache configuration</a>: <code>SetEnv VARIABLE_NAME value</code> where VARIABLE_NAME matches the <code>get_env()</code> parameter from above. Finally, restart Apache to trigger the change. To turn it off again, remove the <code>SetEnv</code> line and restart Apache.</p>
-
-<p>In this example, it doesn&rsquo;t matter what the variable is set to; as long as it exists, the <code>if</code> condition is true. Now you have an effective feature switch that doesn&rsquo;t depend on your source code. You could even play around with setting multiple conditions using <code>elseif</code>. And that&rsquo;s how you use feature switches in WordPress.</p>
-
-<p><a href="https://news.ycombinator.com/item?id=6389250">Discuss on Hacker News.</a></p>
 ]]></content>
   </entry>
   
