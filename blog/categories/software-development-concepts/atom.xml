@@ -4,7 +4,7 @@
   <title><![CDATA[Category: Software development concepts | Merge Conflicts]]></title>
   <link href="http://gboone.github.io/blog/categories/software-development-concepts/atom.xml" rel="self"/>
   <link href="http://gboone.github.io/"/>
-  <updated>2014-01-05T15:07:06-06:00</updated>
+  <updated>2014-01-12T11:22:01-05:00</updated>
   <id>http://gboone.github.io/</id>
   <author>
     <name><![CDATA[Greg Boone]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[How to explain git to non-developers]]></title>
     <link href="http://gboone.github.io/blog/2013/08/07/how-to-explain-git-to-non-developers/"/>
-    <updated>2013-08-07T17:13:00-05:00</updated>
+    <updated>2013-08-07T17:13:00-04:00</updated>
     <id>http://gboone.github.io/blog/2013/08/07/how-to-explain-git-to-non-developers</id>
     <content type="html"><![CDATA[<p>Since starting with <a href="http://excella.com">Excella</a> in January I&rsquo;ve found myself explaining <code>git</code> and the underlying concept of version control to a lot of non-developers. People like to ask me what I&rsquo;m doing at my job, what I&rsquo;m learning, and git was a big one I had to learn early on. What I usually focus on when explaining <em>git</em> is how it is fundamentally different from revision history tools like those included with Google Documents and other word processors.<!-- more --></p>
 

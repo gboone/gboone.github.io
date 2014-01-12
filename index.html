@@ -113,7 +113,165 @@
   
 
 
-<time datetime="2014-01-08T11:29:00-06:00" data-updated="true" itemprop="datePublished">Jan 8<span>th</span>, 2014</time></div>
+<time datetime="2014-01-08T11:29:00-05:00" data-updated="true" itemprop="datePublished">Jan 8<span>th</span>, 2014</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/php-namespacing/'>PHP namespacing</a>, <a class='category' href='/blog/categories/wordpress/'>WordPress</a>, <a class='category' href='/blog/categories/best-practices/'>best practices</a>, <a class='category' href='/blog/categories/namespacing/'>namespacing</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/01/08/how-can-i-use-php-namespaces-in-wordpress-plugins/" itemprop="url">How Can I Use PHP Namespaces in WordPress Plugins</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>PHP has long had a problem of naming collisions. Because older versions of PHP had no way of declaring methods outside the global space, developers came up with several different ways of preventing and checking for namespace collisions, none of which treated the underlying condition: everything is declared globally and must have a unique name. Many and varied solutions begged for a unifying standard as they made things like autoloading and package management increasingly difficult. PHP 5.3 standardized namespacing and WordPress developers should begin adopting. With proper namespacing, WordPress plugins and themes will become clearer, more stable, and more portable.</p>
+
+<p>Prior to PHP 5, if you tried to name a method or class <code>foo</code> it might conflict with another similarly nammed method elsewhere in the system. Developers came to terms with this by &lsquo;namespacing&rsquo; methods with a prefix. With this standard, <code>foo</code> became <code>my_foo</code> or <code>gb_foo</code> where the `prefix said nothing about the method other than identifying the vendor. It also led to wrapping every method in a conditional to check for namespace collisions:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="nb">function_exists</span><span class="p">(</span><span class="nx">gb_foo</span><span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">function</span> <span class="nf">gb_foo</span><span class="p">(</span> <span class="nv">$bar</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">echo</span> <span class="nv">$bar</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">gb_foo</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Look familiar? The problem with this should be easy to see. If that conditional returns false, my method <code>gb_foo</code> will never be fired and any time it&rsquo;s called, that other <code>gb_foo</code> method will. Imagine if <code>gb_foo</code> included malicious code; I think we can all agree that&rsquo;s a bad pattern.</p>
+
+<p>Namespacing is a concept familiar to many other programming languages that isolates your application from others in a standardized way. The global space should be reserved for only those things that should be available at all times. There is typically a character or pair of characters which globally signifies a namespace seperator. In PHP it&rsquo;s the backslash .</p>
+
+<p>If properly namespaced, you can name your method <code>foo()</code> without any possibility of your method conflicting with anything else (unless you declare it twice in the namespace).</p>
+
+<p>Namespacing also alleviates your need to wrap your methods in that conditional. A properly namespaced <code>foo()</code> method would look like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">namespace</span> <span class="nx">gb</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> <span class="nf">foo</span><span class="p">(</span><span class="nv">$bar</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">echo</span> <span class="nv">$bar</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let&rsquo;s take a look at what&rsquo;s going on here. On the first line we declare the namespace we want to use, in this case my initials <code>gb</code>. We can then declare classes and methods without worrying about stepping on any other methods. Calling the method requires the fully qualified namespace to do it: <code>\gb\foo();</code>. You can also declare classes inside the namespace just like you would normally, the difference is that when these are called, the namespace must be too. There are a few different ways of approaching this:</p>
+
+<p>Consider the application lives in a file called test.php and all our files are in the same directory.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="c1">// test.php</span>
+</span><span class='line'><span class="k">namespace</span> <span class="nx">gb</span><span class="p">;</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Bar</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">foo</span><span class="p">(</span><span class="nv">$bar</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">echo</span> <span class="nv">$bar</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Example one: &lsquo;Use&rsquo; the namespace, declared at the top of the second file.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">require_once</span><span class="p">(</span><span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/test.php&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="k">use</span> <span class="nx">\gb\Bar</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Bar</span><span class="o">::</span><span class="na">foo</span><span class="p">(</span><span class="s1">&#39;baz&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Example two: Call the method with the namespace and class prefixed.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">require_once</span><span class="p">(</span><span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/test.php&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">\gb\Bar</span><span class="o">::</span><span class="na">foo</span><span class="p">(</span><span class="s1">&#39;baz&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Example three: Instantiate the class as an object and declare the method from the object.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">require_once</span><span class="p">(</span><span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/test.php&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$object</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\gb\Bar</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$object</span><span class="o">-&gt;</span><span class="na">foo</span><span class="p">(</span><span class="s1">&#39;baz&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>They&rsquo;re all very similar and should look familiar. Again, all the namespace does is add a layer of abstraction away from the global space in order to prevent collisions. Where it becomes particularly useful is in autoloading with tools like composer. With namespaces autoloaded, developers do not even need to require the files where those classes exist. They only need to know the namespaces. Example one, then, becomes:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">use</span> <span class="nx">\gb\Bar</span><span class="p">;</span>
+</span><span class='line'><span class="nx">Bar</span><span class="o">::</span><span class="na">foo</span><span class="p">(</span><span class="s1">&#39;baz&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<pre><code>Pro tip: you can 'use' a namespace under another name. So if you have two classes Bar, you can redeclare them like this:
+
+```php 
+use \namespace\Bar as Bar;
+use \gb\Bar as Baz;
+
+Baz::foo('bar');
+```
+</code></pre>
+
+<p>You can also stack namespaces to isolate your individual plugins from each other: <code>namespace gb\myAwesomePlugin;</code> and <code>namespace gb\anotherAwesomePlugin</code> serve as different namespaces for different plugins. It also keeps me safe from other &lsquo;gb&rsquo;s out there crowding my namespace.</p>
+
+<p>Namespaces can also indicate <em>where</em> to find your application. With a fully namespaced plugin, you could even configure your WordPress install to use your plugin without &lsquo;installing&rsquo; it.  If you have composer doing that for you, you can autoload the plugin preconfigured the way you want it. WordPress is becoming an incresingly vibrant application development platform and namespacing will be key to it living in harmony with other PHP applications in complex systems.</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-08T11:29:00-05:00" data-updated="true" itemprop="datePublished">Jan 8<span>th</span>, 2014</time></div>
 		<div class="tags">
 
 
@@ -259,7 +417,8 @@
 </span><span class='line'><span class="k">use</span> <span class="nx">\gb\Bar</span> <span class="k">as</span> <span class="nx">Baz</span><span class="p">;</span>
 </span><span class='line'>
 </span><span class='line'><span class="nx">Baz</span><span class="o">::</span><span class="na">foo</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure></blockquote>
+</span></code></pre></td></tr></table></div></figure>
+</blockquote>
 
 
 <p>You can also stack namespaces to isolate your individual plugins from each other: <code>namespace gb\myAwesomePlugin;</code> and <code>namespace gb\anotherAwesomePlugin</code> serve as different namespaces for different plugins. It also keeps me safe from other &lsquo;gb&rsquo;s out there crowding my namespace.</p>
@@ -287,7 +446,7 @@
   
 
 
-<time datetime="2014-01-01T09:30:00-06:00" data-updated="true" itemprop="datePublished">Jan 1<span>st</span>, 2014</time></div>
+<time datetime="2014-01-01T09:30:00-05:00" data-updated="true" itemprop="datePublished">Jan 1<span>st</span>, 2014</time></div>
 		<div class="tags">
 
 
@@ -321,7 +480,7 @@
   
 
 
-<time datetime="2013-12-23T07:20:00-06:00" data-updated="true" itemprop="datePublished">Dec 23<span>rd</span>, 2013</time></div>
+<time datetime="2013-12-23T07:20:00-05:00" data-updated="true" itemprop="datePublished">Dec 23<span>rd</span>, 2013</time></div>
 		<div class="tags">
 
 
@@ -357,7 +516,7 @@
   
 
 
-<time datetime="2013-09-15T07:54:00-05:00" data-updated="true" itemprop="datePublished">Sep 15<span>th</span>, 2013</time></div>
+<time datetime="2013-09-15T07:54:00-04:00" data-updated="true" itemprop="datePublished">Sep 15<span>th</span>, 2013</time></div>
 		<div class="tags">
 
 
@@ -393,7 +552,7 @@
   
 
 
-<time datetime="2013-08-24T09:16:00-05:00" data-updated="true" itemprop="datePublished">Aug 24<span>th</span>, 2013</time></div>
+<time datetime="2013-08-24T09:16:00-04:00" data-updated="true" itemprop="datePublished">Aug 24<span>th</span>, 2013</time></div>
 		<div class="tags">
 
 </div>
@@ -423,7 +582,7 @@
   
 
 
-<time datetime="2013-08-17T13:38:00-05:00" data-updated="true" itemprop="datePublished">Aug 17<span>th</span>, 2013</time></div>
+<time datetime="2013-08-17T13:38:00-04:00" data-updated="true" itemprop="datePublished">Aug 17<span>th</span>, 2013</time></div>
 		<div class="tags">
 
 </div>
@@ -453,7 +612,7 @@
   
 
 
-<time datetime="2013-08-07T17:13:00-05:00" data-updated="true" itemprop="datePublished">Aug 7<span>th</span>, 2013</time></div>
+<time datetime="2013-08-07T17:13:00-04:00" data-updated="true" itemprop="datePublished">Aug 7<span>th</span>, 2013</time></div>
 		<div class="tags">
 
 
@@ -487,7 +646,7 @@
   
 
 
-<time datetime="2013-08-03T11:39:00-05:00" data-updated="true" itemprop="datePublished">Aug 3<span>rd</span>, 2013</time></div>
+<time datetime="2013-08-03T11:39:00-04:00" data-updated="true" itemprop="datePublished">Aug 3<span>rd</span>, 2013</time></div>
 		<div class="tags">
 
 
@@ -525,7 +684,7 @@
   
 
 
-<time datetime="2013-07-28T09:50:00-05:00" data-updated="true" itemprop="datePublished">Jul 28<span>th</span>, 2013</time></div>
+<time datetime="2013-07-28T09:50:00-04:00" data-updated="true" itemprop="datePublished">Jul 28<span>th</span>, 2013</time></div>
 		<div class="tags">
 
 
@@ -561,43 +720,6 @@ git merge pr
 
 		
 		
-	</div>
-
-</article>
-
-
-    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
-	<div class="meta">
-		<div class="date">
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-12-30T00:00:00-06:00" data-updated="true" itemprop="datePublished">Dec 30<span>th</span>, 2012</time></div>
-		<div class="tags">
-
-
-	<a class='category' href='/blog/categories/sts/'>STS</a>, <a class='category' href='/blog/categories/controversy/'>controversy</a>, <a class='category' href='/blog/categories/history/'>history</a>, <a class='category' href='/blog/categories/patents/'>patents</a>, <a class='category' href='/blog/categories/policy-paradigms/'>policy paradigms</a>, <a class='category' href='/blog/categories/politics/'>politics</a>, <a class='category' href='/blog/categories/scholarship/'>scholarship</a>, <a class='category' href='/blog/categories/science-and-technology-studies/'>science and technology studies</a>, <a class='category' href='/blog/categories/us-congress/'>us congress</a>
-
-
-</div>
-		
-	</div>
-	<h1 class="title" itemprop="name"><a href="/blog/2012/12/30/tussle-over-technology-controversy-the-patent-act/" itemprop="url">Tussle Over Technology: Controversy & the Patent Act</a></h1>
-	<div class="entry-content" itemprop="articleBody">
-		<h2>Abstract</h2>
-
-<blockquote>
-  <p>The United States Constitution instructed the First Congress of the United States to enact laws &#8220;securing for limited Times to Authors and Inventors the exclusive Right to their respective Writings and Discoveries.&#8221; This instruction, commonly referred to as the Intellectual Property Clause, demanded a set of laws based on the broad idea that inventors are best incentivized and remunerated for their works through a system of guaranteed exclusive rights. What exactly the scope of those rights were, who had authority to hand them out, and under what conditions they would be given, were all left to Congress to sort out; it was among the earliest controversies over science and technology in the United States of America. 
-		
-		<a href="/blog/2012/12/30/tussle-over-technology-controversy-the-patent-act/" class="more-link">Read on &rarr;</a>
 	</div>
 
 </article>

@@ -4,7 +4,7 @@
   <title><![CDATA[Category: testing | Merge Conflicts]]></title>
   <link href="http://gboone.github.io/blog/categories/testing/atom.xml" rel="self"/>
   <link href="http://gboone.github.io/"/>
-  <updated>2014-01-05T15:07:06-06:00</updated>
+  <updated>2014-01-12T11:22:01-05:00</updated>
   <id>http://gboone.github.io/</id>
   <author>
     <name><![CDATA[Greg Boone]]></name>
@@ -16,7 +16,7 @@
   <entry>
     <title type="html"><![CDATA[Writing Unit Tests for WordPress]]></title>
     <link href="http://gboone.github.io/blog/2014/01/01/writing-unit-tests-for-wordpress/"/>
-    <updated>2014-01-01T09:30:00-06:00</updated>
+    <updated>2014-01-01T09:30:00-05:00</updated>
     <id>http://gboone.github.io/blog/2014/01/01/writing-unit-tests-for-wordpress</id>
     <content type="html"><![CDATA[<p>In <a href="blog/2013/12/23/why-unit-testing-in-wordpress-matters/">my last post</a> I wrote about two testing libraries for WordPress and briefly discussed the difference between integration tests and unit tests. I also mentioned a concept called test driven development (TDD) and breifly explained how it might help write better code from the start. This post will expand on that and show how to write a simple WordPress plugin from a test-first approach. Since we&rsquo;re writing unit tests, we&rsquo;re going to use WP-Mock to create a test double for us and we&rsquo;ll use PHPunit for our test runner.<!-- more --></p>
 
@@ -185,7 +185,7 @@ public function testTestPostExpectsMetaDataSaved(){
   <entry>
     <title type="html"><![CDATA[Why Unit Testing in WordPress Matters]]></title>
     <link href="http://gboone.github.io/blog/2013/12/23/why-unit-testing-in-wordpress-matters/"/>
-    <updated>2013-12-23T07:20:00-06:00</updated>
+    <updated>2013-12-23T07:20:00-05:00</updated>
     <id>http://gboone.github.io/blog/2013/12/23/why-unit-testing-in-wordpress-matters</id>
     <content type="html"><![CDATA[<p>Testing WordPress has become a favorite topic of mine lately: moving away from hitting refresh and toward something more holistic, reliable, and automatable. I&rsquo;ve written before about <a href="http://greg.harmsboone.org/blog/2013/08/17/how-can-i-do-browser-testing-with-wordpress/">a testing method called called browser testing</a>, which verifies a webpage has some expected behavior. These kinds of tests are great but they&rsquo;re not perfect. They require a lot o dependencies and that someone else would need to verify your code. There is a better way, one that doesn&rsquo;t require any of those dependencies and verfies the code down to the exact lines you wrote—it can even be independent of WordPress. It&rsquo;s called unit testing and it will make you a better developer.</p>
 

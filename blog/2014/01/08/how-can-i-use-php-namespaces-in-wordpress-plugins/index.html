@@ -97,9 +97,9 @@
 			<div class="mid-col-container">
 				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 	<h1 class="title" itemprop="name">How Can I Use PHP Namespaces in WordPress Plugins</h1>
-	<div class="entry-content" itemprop="articleBody"><p>PHP has long had a problem of naming collisions. Because older versions of PHP had no way of declaring methods outside the global space, developers came up with several different ways of preventing and checking for namespace collisions, none of which treated the underlying condition. These many and varied solutions begged for a unifying standard as they made things like autoloading and package management increasingly difficult. PHP 5.3 introduced a feature called &lsquo;namespacing&rsquo; to solve this problem and WordPress developers should begin adopting. With proper namespacing, WordPress plugin and themes will become clearer, more stable, and more portable.</p>
+	<div class="entry-content" itemprop="articleBody"><p>PHP has long had a problem of naming collisions. Because older versions of PHP had no way of declaring methods outside the global space, developers came up with several different ways of preventing and checking for namespace collisions, none of which treated the underlying condition: everything is declared globally and must have a unique name. Many and varied solutions begged for a unifying standard as they made things like autoloading and package management increasingly difficult. PHP 5.3 standardized namespacing and WordPress developers should begin adopting. With proper namespacing, WordPress plugins and themes will become clearer, more stable, and more portable.</p>
 
-<p>Prior to PHP 5, if you tried to name a method or class <code>foo</code> it might conflict with another similarly nammed method elsewhere in the system. Developers came to terms with this by &lsquo;namespacing&rsquo; methods with a prefix. With this standard, <code>foo</code> became <code>my_foo</code> or <code>gb_foo</code> where the <code>my_</code> or <code>gb_</code> corresponded to vendor prefixes (gb, being my initials). It also led to wrapping every method in a conditional to check for namespace collisions:</p>
+<p>Prior to PHP 5, if you tried to name a method or class <code>foo</code> it might conflict with another similarly nammed method elsewhere in the system. Developers came to terms with this by &lsquo;namespacing&rsquo; methods with a prefix. With this standard, <code>foo</code> became <code>my_foo</code> or <code>gb_foo</code> where the `prefix said nothing about the method other than identifying the vendor. It also led to wrapping every method in a conditional to check for namespace collisions:</p>
 
 <figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
 <span class='line-number'>2</span>
@@ -118,18 +118,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Look familiar? The problem with this should be easy to see. If that conditional returns false, my method <code>gb_foo</code> will never be fired and any time it&rsquo;s called, that other <code>gb_foo</code> method will. Imagine if <code>gb_foo</code> was something like this:</p>
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">function</span> <span class="nf">gb_foo</span><span class="p">(</span><span class="nv">$bar</span><span class="p">)</span> <span class="p">{</span>
-</span><span class='line'>    <span class="nb">mysql_query</span><span class="p">(</span><span class="s1">&#39;DROP TABLES *&#39;</span><span class="p">);</span>
-</span><span class='line'><span class="p">}</span>
-</span></code></pre></td></tr></table></div></figure>
-
-
-<p>I think we can all agree that would be bad.</p>
+<p>Look familiar? The problem with this should be easy to see. If that conditional returns false, my method <code>gb_foo</code> will never be fired and any time it&rsquo;s called, that other <code>gb_foo</code> method will. Imagine if <code>gb_foo</code> included malicious code; I think we can all agree that&rsquo;s a bad pattern.</p>
 
 <p>Namespacing is a concept familiar to many other programming languages that isolates your application from others in a standardized way. The global space should be reserved for only those things that should be available at all times. There is typically a character or pair of characters which globally signifies a namespace seperator. In PHP it&rsquo;s the backslash .</p>
 
@@ -150,7 +139,7 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
-<p>Let&rsquo;s take a look at what&rsquo;s going on here. On the first line we declare the namespace we want to use, in this case my initials <code>gb</code>. We can then declare classes and methods without worrying about stepping on any other methods. This is sort of like putting things in classes, but it&rsquo;s even more safe. To call that &lsquo;foo&rsquo; method, just type <code>\gb\foo('baz');</code> which should output &lsquo;baz&rsquo;. You can also declare classes inside the namespace just like you would normally, the difference is that when these are called, the namespace must be too. There are a few different ways of approaching this:</p>
+<p>Let&rsquo;s take a look at what&rsquo;s going on here. On the first line we declare the namespace we want to use, in this case my initials <code>gb</code>. We can then declare classes and methods without worrying about stepping on any other methods. Calling the method requires the fully qualified namespace to do it: <code>\gb\foo();</code>. You can also declare classes inside the namespace just like you would normally, the difference is that when these are called, the namespace must be too. There are a few different ways of approaching this:</p>
 
 <p>Consider the application lives in a file called test.php and all our files are in the same directory.</p>
 
@@ -219,20 +208,15 @@
 </span></code></pre></td></tr></table></div></figure>
 
 
+<pre><code>Pro tip: you can 'use' a namespace under another name. So if you have two classes Bar, you can redeclare them like this:
 
+```php 
+use \namespace\Bar as Bar;
+use \gb\Bar as Baz;
 
-<blockquote>Pro tip: you can &#8216;use&#8217; a namespace under another name. So if you have two classes Bar, you can redeclare them like this:
-
-<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-<span class='line-number'>2</span>
-<span class='line-number'>3</span>
-<span class='line-number'>4</span>
-</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">use</span> <span class="nx">\namespace\Bar</span> <span class="k">as</span> <span class="nx">Bar</span><span class="p">;</span>
-</span><span class='line'><span class="k">use</span> <span class="nx">\gb\Bar</span> <span class="k">as</span> <span class="nx">Baz</span><span class="p">;</span>
-</span><span class='line'>
-</span><span class='line'><span class="nx">Baz</span><span class="o">::</span><span class="na">foo</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">);</span>
-</span></code></pre></td></tr></table></div></figure></blockquote>
-
+Baz::foo('bar');
+```
+</code></pre>
 
 <p>You can also stack namespaces to isolate your individual plugins from each other: <code>namespace gb\myAwesomePlugin;</code> and <code>namespace gb\anotherAwesomePlugin</code> serve as different namespaces for different plugins. It also keeps me safe from other &lsquo;gb&rsquo;s out there crowding my namespace.</p>
 
