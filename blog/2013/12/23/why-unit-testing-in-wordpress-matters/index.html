@@ -1,0 +1,164 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Why Unit Testing in WordPress Matters - Merge Conflicts</title>
+	<meta name="author" content="Greg Boone">
+
+	
+	<meta name="description" content="Why Unit Testing in WordPress Matters Testing WordPress has become a favorite topic of mine lately: moving away from hitting refresh and toward &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Merge Conflicts" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://gboone.github.io/blog/2013/12/23/why-unit-testing-in-wordpress-matters/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("boone.greg@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+</div>
+
+<p class="subtitle">Lessons in Web Development</p>
+<nav id="main-nav"><!-- use full url including 'index.html' for navigation bar if you are using ajax -->
+<ul id="nav">
+	<li id="ajax"><a href="/index.html">Home</a></li>
+	<li id="ajax"><a href="/blog/archives/index.html">Archives</a></li>
+    <li><a href="/atom.xml">RSS</a></li>
+    
+    <li>
+    <div id="dark">
+        <form method="get" action="/search.html" id="search">
+            <input name="query" type="text" placeholder="Search..." x-webkit-speech />
+        </form>
+    </div>
+    </li>
+        
+</ul>
+
+
+<section class="aboutme">
+  <p>
+    I'm a web developer for Excella Consulting. I learn something new just about every day and write about it here.
+  </p>
+</section>
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		<a class="twitter" href="http://twitter.com/gboone42" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/gboone" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		<a class="delicious" href="http://delicious.com/gboone42" title="Delicious">Delicious</a>
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">Why Unit Testing in WordPress Matters</h1>
+	<div class="entry-content" itemprop="articleBody"><p>Testing WordPress has become a favorite topic of mine lately: moving away from hitting refresh and toward something more holistic, reliable, and automatable. I&rsquo;ve written before about <a href="http://greg.harmsboone.org/blog/2013/08/17/how-can-i-do-browser-testing-with-wordpress/">a testing method called called browser testing</a>, which verifies a webpage has some expected behavior. These kinds of tests are great but they&rsquo;re not perfect. They require a lot o dependencies and that someone else would need to verify your code. There is a better way, one that doesn&rsquo;t require any of those dependencies and verfies the code down to the exact lines you wrote—it can even be independent of WordPress. It&rsquo;s called unit testing and it will make you a better developer.</p>
+
+<!-- more -->
+
+
+<p>Unit testing is a method that reduces and tests the system down to it&rsquo;s smallest functional pieces. Each &lsquo;unit&rsquo; should be as isolated as possible from any others in the system. The test should verify only the correctness of one unit. It has many benefits for all of software development but is relatively new to WordPress. It&rsquo;s hard to say for sure why but there have been two important advancements in the area recently that will hopefully compel us WordPress devs to be more intentional about testing and verifying our code.</p>
+
+<p>The first is the WordPress Unit Test Suite (WPUTS), detailed on the <a href="http://make.wordpress.org/core/handbook/automated-testing/">WP Core development blog</a>. This suite contains tests covering much of the core files installed with a WordPress.org site. This test suite can even be installed <a href="http://wp-cli.org/">through the fantastic WP-CLI project</a>. According to <a href="https://travis-ci.org/tierra/wordpress/jobs/15867662">a recent build on Travis</a>, 1889 tests are currently available. That build shows the output of PHP&rsquo;s test runner, <a href="http://phpunit.de">PHPunit</a> at around line 724. Each test generates either a dot for a passed test or an S, I, F or E if the test is (s)kipped, (i)gnored, (f)ails, or encounters an (e)rror. In that build you see only 2 failures and a whole bunch of skipped tests. You can also see, at line 777, that phpunit took 1:28 to run all the tests and used 141.75MB of memory. That&rsquo;s pretty good for testing an application the size of WordPress. <a href="https://github.com/wp-cli/wp-cli/wiki/Plugin-Unit-Tests">With a few simple commands in WP-CLI</a> you can install these tests on your own and extend them to cover your own plugin.</p>
+
+<p>WPUTS was introduced sometime in late 2012 and unit testing through the core suite was recently integrated into the core development workflow. Another important project is <a href="https://github.com/10up/wp_mock/">WP-Mock</a>, a wonderful project from the folks at 10up that allows you to &lsquo;mock&rsquo; or &lsquo;stub&rsquo; only the parts of WordPress you need for each test. If you need call <code>update_post_meta()</code>, WP-Mock would allow you to just pass an integer, a key, and a value. The ideas is if your code verfies with a <a href="http://phpunit.de/manual/3.7/en/test-doubles.html">test double</a>, it will verify once it&rsquo;s hooked into the real thing.</p>
+
+<p>There are two key differences between these two test suites: dependencies and what is tested. Compared to browser tests, both suites remove your code&rsquo;s dependency on existing content, a web server, selenium, and behave, but WPUTS still requires WordPress and a MySQL database on top of your code, PHP, and PHPunit. WP-Mock requires only the last three. This means, if you want to run your tests in a continuous integration server like Jenkins or Travis, with WP-Mock the only thing you need to set up that environment is your code, PHP, and PHPunit.</p>
+
+<p>With WPUTS, what you are really testing is whether your code properly integrates with its dependencies, and are useful for exactly that purpose. A WordPress plugin, for example, might have integration tests written to determine whether post meta data is in fact updated when <code>update_post_meta</code> is called within one of its methods. That does not necessarily verify whether the code written is correct. True unit tests start lower, focusing on whether the code <em>you</em> wrote for <em>this</em> method generates the correct output if the dependencies behave as expected. The difference is subtle but also important.</p>
+
+<p>With this distinction in mind, WPUTS might be better named the &lsquo;WordPress Integration Test Suite&rsquo; as it allows you to access to a full installation of WordPress and manipulation of its database. What it doesn&rsquo;t do is tell you whether you&rsquo;re manipulating that database too much. Maybe your method called <code>update_post_meta</code> twice, WPUTS will not necessarily tell you that. It will only tell you that the post was, in fact, updated. That&rsquo;s useful, but so is knowing you only did it once. Writing to a database can be expensive, doing it too many times might slow down your application.</p>
+
+<p>Writing tests before writing code is called Test Driven Development and is a software engineering best practice. It forces you to write your test, then write code to make your test pass. In the end, this makes you a better developer because you are focused to break your problems down into smaller pieces that do more discrete testable things. How to write those tests is a subject for another blog.</p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+</div>
+			</div>
+			<footer id="footer" class="inner"><div style="display:inline">
+    Copyright &copy; 2014
+
+    Greg Boone
+. Powered by <a href="http://octopress.org">Octopress</a> | 
+    Theme <a href="http://github.com/panks/fabric">fabric</a> by <a href="http://panks.me">Pankaj Kumar</a>
+</div>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,271 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: best practices | Merge Conflicts]]></title>
+  <link href="http://gboone.github.io/blog/categories/best-practices/atom.xml" rel="self"/>
+  <link href="http://gboone.github.io/"/>
+  <updated>2014-01-12T11:22:01-05:00</updated>
+  <id>http://gboone.github.io/</id>
+  <author>
+    <name><![CDATA[Greg Boone]]></name>
+    <email><![CDATA[boone.greg@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How can I use PHP Namespaces in WordPress Plugins]]></title>
+    <link href="http://gboone.github.io/blog/2014/01/08/how-can-i-use-php-namespaces-in-wordpress-plugins/"/>
+    <updated>2014-01-08T11:29:00-05:00</updated>
+    <id>http://gboone.github.io/blog/2014/01/08/how-can-i-use-php-namespaces-in-wordpress-plugins</id>
+    <content type="html"><![CDATA[<p>PHP has long had a problem of naming collisions. Because older versions of PHP had no way of declaring methods outside the global space, developers came up with several different ways of preventing and checking for namespace collisions, none of which treated the underlying condition: everything is declared globally and must have a unique name. Many and varied solutions begged for a unifying standard as they made things like autoloading and package management increasingly difficult. PHP 5.3 standardized namespacing and WordPress developers should begin adopting. With proper namespacing, WordPress plugins and themes will become clearer, more stable, and more portable.</p>
+
+<p>Prior to PHP 5, if you tried to name a method or class <code>foo</code> it might conflict with another similarly nammed method elsewhere in the system. Developers came to terms with this by &lsquo;namespacing&rsquo; methods with a prefix. With this standard, <code>foo</code> became <code>my_foo</code> or <code>gb_foo</code> where the `prefix said nothing about the method other than identifying the vendor. It also led to wrapping every method in a conditional to check for namespace collisions:</p>
+
+<p>```php
+if ( !function_exists(gb_foo) ) {</p>
+
+<pre><code>function gb_foo( $bar ) {
+    echo $bar;
+}
+</code></pre>
+
+<p>}</p>
+
+<p>gb_foo(&lsquo;bar&rsquo;);
+```</p>
+
+<p>Look familiar? The problem with this should be easy to see. If that conditional returns false, my method <code>gb_foo</code> will never be fired and any time it&rsquo;s called, that other <code>gb_foo</code> method will. Imagine if <code>gb_foo</code> included malicious code; I think we can all agree that&rsquo;s a bad pattern.</p>
+
+<p>Namespacing is a concept familiar to many other programming languages that isolates your application from others in a standardized way. The global space should be reserved for only those things that should be available at all times. There is typically a character or pair of characters which globally signifies a namespace seperator. In PHP it&rsquo;s the backslash .</p>
+
+<p>If properly namespaced, you can name your method <code>foo()</code> without any possibility of your method conflicting with anything else (unless you declare it twice in the namespace).</p>
+
+<p>Namespacing also alleviates your need to wrap your methods in that conditional. A properly namespaced <code>foo()</code> method would look like this:</p>
+
+<p>```php
+namespace gb;</p>
+
+<p>function foo($bar) {</p>
+
+<pre><code>echo $bar;
+</code></pre>
+
+<p>}</p>
+
+<p>```</p>
+
+<p>Let&rsquo;s take a look at what&rsquo;s going on here. On the first line we declare the namespace we want to use, in this case my initials <code>gb</code>. We can then declare classes and methods without worrying about stepping on any other methods. Calling the method requires the fully qualified namespace to do it: <code>\gb\foo();</code>. You can also declare classes inside the namespace just like you would normally, the difference is that when these are called, the namespace must be too. There are a few different ways of approaching this:</p>
+
+<p>Consider the application lives in a file called test.php and all our files are in the same directory.</p>
+
+<p>```php
+// test.php
+namespace gb;
+class Bar {</p>
+
+<pre><code>public static function foo($bar) {
+    echo $bar;
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Example one: &lsquo;Use&rsquo; the namespace, declared at the top of the second file.
+```php</p>
+
+<p>require_once(<strong>DIR</strong> . &lsquo;/test.php&rsquo;);
+use \gb\Bar;</p>
+
+<p>Bar::foo(&lsquo;baz&rsquo;);
+```</p>
+
+<p>Example two: Call the method with the namespace and class prefixed.
+```php
+require_once(<strong>DIR</strong> . &lsquo;/test.php&rsquo;);</p>
+
+<p>\gb\Bar::foo(&lsquo;baz&rsquo;);</p>
+
+<p>```</p>
+
+<p>Example three: Instantiate the class as an object and declare the method from the object.</p>
+
+<p>```php
+require_once(<strong>DIR</strong> . &lsquo;/test.php&rsquo;);</p>
+
+<p>$object = new \gb\Bar();</p>
+
+<p>$object->foo(&lsquo;baz&rsquo;);
+```</p>
+
+<p>They&rsquo;re all very similar and should look familiar. Again, all the namespace does is add a layer of abstraction away from the global space in order to prevent collisions. Where it becomes particularly useful is in autoloading with tools like composer. With namespaces autoloaded, developers do not even need to require the files where those classes exist. They only need to know the namespaces. Example one, then, becomes:</p>
+
+<p><code>php
+use \gb\Bar;
+Bar::foo('baz');
+</code></p>
+
+<pre><code>Pro tip: you can 'use' a namespace under another name. So if you have two classes Bar, you can redeclare them like this:
+
+```php 
+use \namespace\Bar as Bar;
+use \gb\Bar as Baz;
+
+Baz::foo('bar');
+```
+</code></pre>
+
+<p>You can also stack namespaces to isolate your individual plugins from each other: <code>namespace gb\myAwesomePlugin;</code> and <code>namespace gb\anotherAwesomePlugin</code> serve as different namespaces for different plugins. It also keeps me safe from other &lsquo;gb&rsquo;s out there crowding my namespace.</p>
+
+<p>Namespaces can also indicate <em>where</em> to find your application. With a fully namespaced plugin, you could even configure your WordPress install to use your plugin without &lsquo;installing&rsquo; it.  If you have composer doing that for you, you can autoload the plugin preconfigured the way you want it. WordPress is becoming an incresingly vibrant application development platform and namespacing will be key to it living in harmony with other PHP applications in complex systems.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How can I use PHP Namespaces in WordPress Plugins]]></title>
+    <link href="http://gboone.github.io/blog/2014/01/08/how-can-i-use-php-namespaces-in-wordpress-plugins/"/>
+    <updated>2014-01-08T11:29:00-05:00</updated>
+    <id>http://gboone.github.io/blog/2014/01/08/how-can-i-use-php-namespaces-in-wordpress-plugins</id>
+    <content type="html"><![CDATA[<p>PHP has long had a problem of naming collisions. Because older versions of PHP had no way of declaring methods outside the global space, developers came up with several different ways of preventing and checking for namespace collisions, none of which treated the underlying condition. These many and varied solutions begged for a unifying standard as they made things like autoloading and package management increasingly difficult. PHP 5.3 introduced a feature called &lsquo;namespacing&rsquo; to solve this problem and WordPress developers should begin adopting. With proper namespacing, WordPress plugin and themes will become clearer, more stable, and more portable.</p>
+
+<p>Prior to PHP 5, if you tried to name a method or class <code>foo</code> it might conflict with another similarly nammed method elsewhere in the system. Developers came to terms with this by &lsquo;namespacing&rsquo; methods with a prefix. With this standard, <code>foo</code> became <code>my_foo</code> or <code>gb_foo</code> where the <code>my_</code> or <code>gb_</code> corresponded to vendor prefixes (gb, being my initials). It also led to wrapping every method in a conditional to check for namespace collisions:</p>
+
+<p>```php
+if ( !function_exists(gb_foo) ) {</p>
+
+<pre><code>function gb_foo( $bar ) {
+    echo $bar;
+}
+</code></pre>
+
+<p>}</p>
+
+<p>gb_foo(&lsquo;bar&rsquo;);
+```</p>
+
+<p>Look familiar? The problem with this should be easy to see. If that conditional returns false, my method <code>gb_foo</code> will never be fired and any time it&rsquo;s called, that other <code>gb_foo</code> method will. Imagine if <code>gb_foo</code> was something like this:</p>
+
+<p>```php
+function gb_foo($bar) {</p>
+
+<pre><code>mysql_query('DROP TABLES *');
+</code></pre>
+
+<p>}
+```
+I think we can all agree that would be bad.</p>
+
+<p>Namespacing is a concept familiar to many other programming languages that isolates your application from others in a standardized way. The global space should be reserved for only those things that should be available at all times. There is typically a character or pair of characters which globally signifies a namespace seperator. In PHP it&rsquo;s the backslash .</p>
+
+<p>If properly namespaced, you can name your method <code>foo()</code> without any possibility of your method conflicting with anything else (unless you declare it twice in the namespace).</p>
+
+<p>Namespacing also alleviates your need to wrap your methods in that conditional. A properly namespaced <code>foo()</code> method would look like this:</p>
+
+<p>```php
+namespace gb;</p>
+
+<p>function foo($bar) {</p>
+
+<pre><code>echo $bar;
+</code></pre>
+
+<p>}</p>
+
+<p>```</p>
+
+<p>Let&rsquo;s take a look at what&rsquo;s going on here. On the first line we declare the namespace we want to use, in this case my initials <code>gb</code>. We can then declare classes and methods without worrying about stepping on any other methods. This is sort of like putting things in classes, but it&rsquo;s even more safe. To call that &lsquo;foo&rsquo; method, just type <code>\gb\foo('baz');</code> which should output &lsquo;baz&rsquo;. You can also declare classes inside the namespace just like you would normally, the difference is that when these are called, the namespace must be too. There are a few different ways of approaching this:</p>
+
+<p>Consider the application lives in a file called test.php and all our files are in the same directory.</p>
+
+<p>```php
+// test.php
+namespace gb;
+class Bar {</p>
+
+<pre><code>public static function foo($bar) {
+    echo $bar;
+}
+</code></pre>
+
+<p>}
+```</p>
+
+<p>Example one: &lsquo;Use&rsquo; the namespace, declared at the top of the second file.
+```php</p>
+
+<p>require_once(<strong>DIR</strong> . &lsquo;/test.php&rsquo;);
+use \gb\Bar;</p>
+
+<p>Bar::foo(&lsquo;baz&rsquo;);
+```</p>
+
+<p>Example two: Call the method with the namespace and class prefixed.
+```php
+require_once(<strong>DIR</strong> . &lsquo;/test.php&rsquo;);</p>
+
+<p>\gb\Bar::foo(&lsquo;baz&rsquo;);</p>
+
+<p>```</p>
+
+<p>Example three: Instantiate the class as an object and declare the method from the object.</p>
+
+<p>```php
+require_once(<strong>DIR</strong> . &lsquo;/test.php&rsquo;);</p>
+
+<p>$object = new \gb\Bar();</p>
+
+<p>$object->foo(&lsquo;baz&rsquo;);
+```</p>
+
+<p>They&rsquo;re all very similar and should look familiar. Again, all the namespace does is add a layer of abstraction away from the global space in order to prevent collisions. Where it becomes particularly useful is in autoloading with tools like composer. With namespaces autoloaded, developers do not even need to require the files where those classes exist. They only need to know the namespaces. Example one, then, becomes:</p>
+
+<p><code>php
+use \gb\Bar;
+Bar::foo('baz');
+</code></p>
+
+<blockquote>Pro tip: you can 'use' a namespace under another name. So if you have two classes Bar, you can redeclare them like this:
+
+```php 
+use \namespace\Bar as Bar;
+use \gb\Bar as Baz;
+
+Baz::foo('bar');
+```
+</blockquote>
+
+
+<p>You can also stack namespaces to isolate your individual plugins from each other: <code>namespace gb\myAwesomePlugin;</code> and <code>namespace gb\anotherAwesomePlugin</code> serve as different namespaces for different plugins. It also keeps me safe from other &lsquo;gb&rsquo;s out there crowding my namespace.</p>
+
+<p>Namespaces can also indicate <em>where</em> to find your application. With a fully namespaced plugin, you could even configure your WordPress install to use your plugin without &lsquo;installing&rsquo; it.  If you have composer doing that for you, you can autoload the plugin preconfigured the way you want it. WordPress is becoming an incresingly vibrant application development platform and namespacing will be key to it living in harmony with other PHP applications in complex systems.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Why Unit Testing in WordPress Matters]]></title>
+    <link href="http://gboone.github.io/blog/2013/12/23/why-unit-testing-in-wordpress-matters/"/>
+    <updated>2013-12-23T07:20:00-05:00</updated>
+    <id>http://gboone.github.io/blog/2013/12/23/why-unit-testing-in-wordpress-matters</id>
+    <content type="html"><![CDATA[<p>Testing WordPress has become a favorite topic of mine lately: moving away from hitting refresh and toward something more holistic, reliable, and automatable. I&rsquo;ve written before about <a href="http://greg.harmsboone.org/blog/2013/08/17/how-can-i-do-browser-testing-with-wordpress/">a testing method called called browser testing</a>, which verifies a webpage has some expected behavior. These kinds of tests are great but they&rsquo;re not perfect. They require a lot o dependencies and that someone else would need to verify your code. There is a better way, one that doesn&rsquo;t require any of those dependencies and verfies the code down to the exact lines you wrote—it can even be independent of WordPress. It&rsquo;s called unit testing and it will make you a better developer.</p>
+
+<!-- more -->
+
+
+<p>Unit testing is a method that reduces and tests the system down to it&rsquo;s smallest functional pieces. Each &lsquo;unit&rsquo; should be as isolated as possible from any others in the system. The test should verify only the correctness of one unit. It has many benefits for all of software development but is relatively new to WordPress. It&rsquo;s hard to say for sure why but there have been two important advancements in the area recently that will hopefully compel us WordPress devs to be more intentional about testing and verifying our code.</p>
+
+<p>The first is the WordPress Unit Test Suite (WPUTS), detailed on the <a href="http://make.wordpress.org/core/handbook/automated-testing/">WP Core development blog</a>. This suite contains tests covering much of the core files installed with a WordPress.org site. This test suite can even be installed <a href="http://wp-cli.org/">through the fantastic WP-CLI project</a>. According to <a href="https://travis-ci.org/tierra/wordpress/jobs/15867662">a recent build on Travis</a>, 1889 tests are currently available. That build shows the output of PHP&rsquo;s test runner, <a href="http://phpunit.de">PHPunit</a> at around line 724. Each test generates either a dot for a passed test or an S, I, F or E if the test is (s)kipped, (i)gnored, (f)ails, or encounters an (e)rror. In that build you see only 2 failures and a whole bunch of skipped tests. You can also see, at line 777, that phpunit took 1:28 to run all the tests and used 141.75MB of memory. That&rsquo;s pretty good for testing an application the size of WordPress. <a href="https://github.com/wp-cli/wp-cli/wiki/Plugin-Unit-Tests">With a few simple commands in WP-CLI</a> you can install these tests on your own and extend them to cover your own plugin.</p>
+
+<p>WPUTS was introduced sometime in late 2012 and unit testing through the core suite was recently integrated into the core development workflow. Another important project is <a href="https://github.com/10up/wp_mock/">WP-Mock</a>, a wonderful project from the folks at 10up that allows you to &lsquo;mock&rsquo; or &lsquo;stub&rsquo; only the parts of WordPress you need for each test. If you need call <code>update_post_meta()</code>, WP-Mock would allow you to just pass an integer, a key, and a value. The ideas is if your code verfies with a <a href="http://phpunit.de/manual/3.7/en/test-doubles.html">test double</a>, it will verify once it&rsquo;s hooked into the real thing.</p>
+
+<p>There are two key differences between these two test suites: dependencies and what is tested. Compared to browser tests, both suites remove your code&rsquo;s dependency on existing content, a web server, selenium, and behave, but WPUTS still requires WordPress and a MySQL database on top of your code, PHP, and PHPunit. WP-Mock requires only the last three. This means, if you want to run your tests in a continuous integration server like Jenkins or Travis, with WP-Mock the only thing you need to set up that environment is your code, PHP, and PHPunit.</p>
+
+<p>With WPUTS, what you are really testing is whether your code properly integrates with its dependencies, and are useful for exactly that purpose. A WordPress plugin, for example, might have integration tests written to determine whether post meta data is in fact updated when <code>update_post_meta</code> is called within one of its methods. That does not necessarily verify whether the code written is correct. True unit tests start lower, focusing on whether the code <em>you</em> wrote for <em>this</em> method generates the correct output if the dependencies behave as expected. The difference is subtle but also important.</p>
+
+<p>With this distinction in mind, WPUTS might be better named the &lsquo;WordPress Integration Test Suite&rsquo; as it allows you to access to a full installation of WordPress and manipulation of its database. What it doesn&rsquo;t do is tell you whether you&rsquo;re manipulating that database too much. Maybe your method called <code>update_post_meta</code> twice, WPUTS will not necessarily tell you that. It will only tell you that the post was, in fact, updated. That&rsquo;s useful, but so is knowing you only did it once. Writing to a database can be expensive, doing it too many times might slow down your application.</p>
+
+<p>Writing tests before writing code is called Test Driven Development and is a software engineering best practice. It forces you to write your test, then write code to make your test pass. In the end, this makes you a better developer because you are focused to break your problems down into smaller pieces that do more discrete testable things. How to write those tests is a subject for another blog.</p>
+]]></content>
+  </entry>
+  
+</feed>

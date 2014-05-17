@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: git | Merge Conflicts]]></title>
+  <link href="http://gboone.github.io/blog/categories/git/atom.xml" rel="self"/>
+  <link href="http://gboone.github.io/"/>
+  <updated>2014-01-12T11:22:01-05:00</updated>
+  <id>http://gboone.github.io/</id>
+  <author>
+    <name><![CDATA[Greg Boone]]></name>
+    <email><![CDATA[boone.greg@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How to explain git to non-developers]]></title>
+    <link href="http://gboone.github.io/blog/2013/08/07/how-to-explain-git-to-non-developers/"/>
+    <updated>2013-08-07T17:13:00-04:00</updated>
+    <id>http://gboone.github.io/blog/2013/08/07/how-to-explain-git-to-non-developers</id>
+    <content type="html"><![CDATA[<p>Since starting with <a href="http://excella.com">Excella</a> in January I&rsquo;ve found myself explaining <code>git</code> and the underlying concept of version control to a lot of non-developers. People like to ask me what I&rsquo;m doing at my job, what I&rsquo;m learning, and git was a big one I had to learn early on. What I usually focus on when explaining <em>git</em> is how it is fundamentally different from revision history tools like those included with Google Documents and other word processors.<!-- more --></p>
+
+<p>I was familiar enough with the idea of version control systems (VCS) before I started, but never saw the need to figure out their complexities. I tried setting up harmsboone.org as a git remote at one point, but lost the patience. Plus, I was just a lone coder working on a WordPress theme, it seemed like a lot of work to keep track of changes only I was making. What I lacked was a fundamental understanding of the value of a VCS. Now that I have that, I realize how potentially valuable it would have been for a simple WordPress theme or even an academic paper.</p>
+
+<p>These days, when I explain git to people, I usually say it&rsquo;s a way of grouping all the files I&rsquo;m working on in a given project together in a system that can watch for changes, log them, and quickly move to different points in time. The reaction this usually invokes is &lsquo;oh, so basically like Google Docs.&rsquo; And yes, it is a little like Google Docs, but also very different on some fundamental levels.</p>
+
+<p>The first is that Google Docs, and other tools like it, are <em>revision history</em> trackers. That is, Google keeps a log of everything I type at any given moment. If I want to branch out, try something different or experimental for a minute, I can do that, but all those revisions are still logged to the file I&rsquo;m working on. Going back means browsing through what could be days worth of revisions to find where I started. With a VCS like git, I can create a branch off of the current project, make some changes, even save those changes, to that branch&rsquo;s revision history (or <code>git log</code> as we might say) and if at the end I&rsquo;m not happy with them, I can just &lsquo;checkout&rsquo; the original starting point.</p>
+
+<p>Another advantage is project-wide tracking. Imagine using Google Docs to write a book. You want to have one file that&rsquo;s the master manuscript, and other files for chapters you&rsquo;ll add in when they&rsquo;re ready. Each file is tracked, but the whole project is not. Git, on the other hand, watches the whole project. When you write a chapter, create a branch, write it, commit all the changes as you go, then switch back to master and create another branch for chapter two. Now imagine you&rsquo;re 22 chapters in and you want to rethink chapter one. You could go back to your chapter one branch and edit it, or you could create a new branch, non-destructively rewrite the chapter, then decide which is better at the end. When you&rsquo;re done merge all the branches together into master and finish it up. Now you have a unique version history for each chapter and for the whole book.</p>
+
+<p>The last is an extension of the others. In a word processor, collaborating on a document means one of two things: 1) group editing of the same file <em>ala</em> Google Docs, or 2) emailing around documents with filenames like: final-draft3-groupreport-jane-todd-revisions-04152012(2)(2).docx, where there are <em>n</em> older versions somewhere. The latter usually results in a chaotic folder dedicated to one assignment every version in it. The former forces everyone to work on the same revision history. Though that may be elegant in many ways, it can be impossible to tell who added what and when (let alone why) to a document without going mintue by minute through the revision history. Git allows everyone to non-destructively work on the same project and for the group to decide how it all comes together. It&rsquo;s the best of both options.</p>
+
+<p>Git is a powerful tool that allows granular tracking of code across an entire project and there are more features than can be listed here to prove that point. It also allows sophisticated collaboration that, despite being a bit technical, could be applicable to any kind of task. This is perhaps what Wired meant when they declared &ldquo;we&rsquo;re all open source&rdquo; now, referring to the rise of GitHub as a collaborative software development platform. Hopefully people outside programming communities can put it to good use.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[What I learned about git this week]]></title>
+    <link href="http://gboone.github.io/blog/2013/07/28/what-i-learned-about-git-this-week/"/>
+    <updated>2013-07-28T09:50:00-04:00</updated>
+    <id>http://gboone.github.io/blog/2013/07/28/what-i-learned-about-git-this-week</id>
+    <content type="html"><![CDATA[<p>I love hidden features in software. Whether it&rsquo;s finding a <a href="http://www.vogue.co.uk/">konami code in unexpected places</a> or that I can add or remove all the dots and underscores to my gmail address I want and I&rsquo;ll still get the emails, something about them are great. That was what made Zach Holman&rsquo;s presentation &lsquo;More Git &amp; GitHub Secrets&rsquo; such an enjoyable read this week.</p>
+
+<p>Git can be at once incredibly powerful and overwhelming. It has one of the longest manual pages I&rsquo;ve ever seen, and sub-commands have an equally long manuals. Picking up the basics, it&rsquo;s easier to rely on a book, the book: <a href="http://git-scm.com/book">ProGit</a>, which can take you from installation to power user, but there are all kinds of hidden features built into git you can only find by using git <em>all the time</em>.</p>
+
+<p>I get the impression that people at GitHub spend a lot of time digging into git and it&rsquo;s probably why GitHub is so good at what it does. And, like git, it&rsquo;s full of hidden features. For example, in <a href="http://zachholman.com">@holman&rsquo;s</a> recent talk, he talked about fetching pull requests into a specific branch, a conveinent short cut to the typical:</p>
+
+<pre><code>git checkout -b pr
+git pull &lt;git URI&gt; &lt;branch&gt;
+&lt;fix any mrege conflicts&gt;
+git checkout &lt;branch&gt;
+git merge pr
+</code></pre>
+
+<p>You can fetch a pull request into a branch with:</p>
+
+<pre><code>git fetch origin pull/&lt;##&gt;/head:pr
+</code></pre>
+
+<p>Woah, way handy, git, GitHub! Another highlight, <code>git merge --abort</code>. You know that one time you accepted a pull request into the wrong branch and had a billion merge conflicts? This one little command will abort the merge and reset your tree without any rebasing or having to push <code>git commit -m 'fixing erroneous merge to the wrong branch'</code> to your remote.</p>
+
+<p>There are lots of other great tips in this and Holman&rsquo;s previous talks. <a href="http://zachholman.com/talk/more-git-and-github-secrets/">Check them out at his website, zachholman.com.</a></p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,761 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Merge Conflicts</title>
+	<meta name="author" content="Greg Boone">
+
+	
+	<meta name="description" content="Jan 8th, 2014 PHP, PHP namespacing, WordPress, best practices, namespacing How Can I Use PHP Namespaces in WordPress Plugins PHP has long had a &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Merge Conflicts" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://gboone.github.io/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("boone.greg@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+</div>
+
+<p class="subtitle">Lessons in Web Development</p>
+<nav id="main-nav"><!-- use full url including 'index.html' for navigation bar if you are using ajax -->
+<ul id="nav">
+	<li id="ajax"><a href="/index.html">Home</a></li>
+	<li id="ajax"><a href="/blog/archives/index.html">Archives</a></li>
+    <li><a href="/atom.xml">RSS</a></li>
+    
+    <li>
+    <div id="dark">
+        <form method="get" action="/search.html" id="search">
+            <input name="query" type="text" placeholder="Search..." x-webkit-speech />
+        </form>
+    </div>
+    </li>
+        
+</ul>
+
+
+<section class="aboutme">
+  <p>
+    I'm a web developer for Excella Consulting. I learn something new just about every day and write about it here.
+  </p>
+</section>
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		<a class="twitter" href="http://twitter.com/gboone42" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/gboone" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		<a class="delicious" href="http://delicious.com/gboone42" title="Delicious">Delicious</a>
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner">
+<div itemscope itemtype="http://schema.org/Blog">
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-08T11:29:00-05:00" data-updated="true" itemprop="datePublished">Jan 8<span>th</span>, 2014</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/php-namespacing/'>PHP namespacing</a>, <a class='category' href='/blog/categories/wordpress/'>WordPress</a>, <a class='category' href='/blog/categories/best-practices/'>best practices</a>, <a class='category' href='/blog/categories/namespacing/'>namespacing</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/01/08/how-can-i-use-php-namespaces-in-wordpress-plugins/" itemprop="url">How Can I Use PHP Namespaces in WordPress Plugins</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>PHP has long had a problem of naming collisions. Because older versions of PHP had no way of declaring methods outside the global space, developers came up with several different ways of preventing and checking for namespace collisions, none of which treated the underlying condition: everything is declared globally and must have a unique name. Many and varied solutions begged for a unifying standard as they made things like autoloading and package management increasingly difficult. PHP 5.3 standardized namespacing and WordPress developers should begin adopting. With proper namespacing, WordPress plugins and themes will become clearer, more stable, and more portable.</p>
+
+<p>Prior to PHP 5, if you tried to name a method or class <code>foo</code> it might conflict with another similarly nammed method elsewhere in the system. Developers came to terms with this by &lsquo;namespacing&rsquo; methods with a prefix. With this standard, <code>foo</code> became <code>my_foo</code> or <code>gb_foo</code> where the `prefix said nothing about the method other than identifying the vendor. It also led to wrapping every method in a conditional to check for namespace collisions:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="nb">function_exists</span><span class="p">(</span><span class="nx">gb_foo</span><span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">function</span> <span class="nf">gb_foo</span><span class="p">(</span> <span class="nv">$bar</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">echo</span> <span class="nv">$bar</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">gb_foo</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Look familiar? The problem with this should be easy to see. If that conditional returns false, my method <code>gb_foo</code> will never be fired and any time it&rsquo;s called, that other <code>gb_foo</code> method will. Imagine if <code>gb_foo</code> included malicious code; I think we can all agree that&rsquo;s a bad pattern.</p>
+
+<p>Namespacing is a concept familiar to many other programming languages that isolates your application from others in a standardized way. The global space should be reserved for only those things that should be available at all times. There is typically a character or pair of characters which globally signifies a namespace seperator. In PHP it&rsquo;s the backslash .</p>
+
+<p>If properly namespaced, you can name your method <code>foo()</code> without any possibility of your method conflicting with anything else (unless you declare it twice in the namespace).</p>
+
+<p>Namespacing also alleviates your need to wrap your methods in that conditional. A properly namespaced <code>foo()</code> method would look like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">namespace</span> <span class="nx">gb</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> <span class="nf">foo</span><span class="p">(</span><span class="nv">$bar</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">echo</span> <span class="nv">$bar</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let&rsquo;s take a look at what&rsquo;s going on here. On the first line we declare the namespace we want to use, in this case my initials <code>gb</code>. We can then declare classes and methods without worrying about stepping on any other methods. Calling the method requires the fully qualified namespace to do it: <code>\gb\foo();</code>. You can also declare classes inside the namespace just like you would normally, the difference is that when these are called, the namespace must be too. There are a few different ways of approaching this:</p>
+
+<p>Consider the application lives in a file called test.php and all our files are in the same directory.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="c1">// test.php</span>
+</span><span class='line'><span class="k">namespace</span> <span class="nx">gb</span><span class="p">;</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Bar</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">foo</span><span class="p">(</span><span class="nv">$bar</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">echo</span> <span class="nv">$bar</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Example one: &lsquo;Use&rsquo; the namespace, declared at the top of the second file.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">require_once</span><span class="p">(</span><span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/test.php&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="k">use</span> <span class="nx">\gb\Bar</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Bar</span><span class="o">::</span><span class="na">foo</span><span class="p">(</span><span class="s1">&#39;baz&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Example two: Call the method with the namespace and class prefixed.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">require_once</span><span class="p">(</span><span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/test.php&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">\gb\Bar</span><span class="o">::</span><span class="na">foo</span><span class="p">(</span><span class="s1">&#39;baz&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Example three: Instantiate the class as an object and declare the method from the object.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">require_once</span><span class="p">(</span><span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/test.php&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$object</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\gb\Bar</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$object</span><span class="o">-&gt;</span><span class="na">foo</span><span class="p">(</span><span class="s1">&#39;baz&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>They&rsquo;re all very similar and should look familiar. Again, all the namespace does is add a layer of abstraction away from the global space in order to prevent collisions. Where it becomes particularly useful is in autoloading with tools like composer. With namespaces autoloaded, developers do not even need to require the files where those classes exist. They only need to know the namespaces. Example one, then, becomes:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">use</span> <span class="nx">\gb\Bar</span><span class="p">;</span>
+</span><span class='line'><span class="nx">Bar</span><span class="o">::</span><span class="na">foo</span><span class="p">(</span><span class="s1">&#39;baz&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<pre><code>Pro tip: you can 'use' a namespace under another name. So if you have two classes Bar, you can redeclare them like this:
+
+```php 
+use \namespace\Bar as Bar;
+use \gb\Bar as Baz;
+
+Baz::foo('bar');
+```
+</code></pre>
+
+<p>You can also stack namespaces to isolate your individual plugins from each other: <code>namespace gb\myAwesomePlugin;</code> and <code>namespace gb\anotherAwesomePlugin</code> serve as different namespaces for different plugins. It also keeps me safe from other &lsquo;gb&rsquo;s out there crowding my namespace.</p>
+
+<p>Namespaces can also indicate <em>where</em> to find your application. With a fully namespaced plugin, you could even configure your WordPress install to use your plugin without &lsquo;installing&rsquo; it.  If you have composer doing that for you, you can autoload the plugin preconfigured the way you want it. WordPress is becoming an incresingly vibrant application development platform and namespacing will be key to it living in harmony with other PHP applications in complex systems.</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-08T11:29:00-05:00" data-updated="true" itemprop="datePublished">Jan 8<span>th</span>, 2014</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/php/'>PHP</a>, <a class='category' href='/blog/categories/php-namespacing/'>PHP namespacing</a>, <a class='category' href='/blog/categories/wordpress/'>WordPress</a>, <a class='category' href='/blog/categories/best-practices/'>best practices</a>, <a class='category' href='/blog/categories/namespacing/'>namespacing</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/01/08/how-can-i-use-php-namespaces-in-wordpress-plugins/" itemprop="url">How Can I Use PHP Namespaces in WordPress Plugins</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>PHP has long had a problem of naming collisions. Because older versions of PHP had no way of declaring methods outside the global space, developers came up with several different ways of preventing and checking for namespace collisions, none of which treated the underlying condition. These many and varied solutions begged for a unifying standard as they made things like autoloading and package management increasingly difficult. PHP 5.3 introduced a feature called &lsquo;namespacing&rsquo; to solve this problem and WordPress developers should begin adopting. With proper namespacing, WordPress plugin and themes will become clearer, more stable, and more portable.</p>
+
+<p>Prior to PHP 5, if you tried to name a method or class <code>foo</code> it might conflict with another similarly nammed method elsewhere in the system. Developers came to terms with this by &lsquo;namespacing&rsquo; methods with a prefix. With this standard, <code>foo</code> became <code>my_foo</code> or <code>gb_foo</code> where the <code>my_</code> or <code>gb_</code> corresponded to vendor prefixes (gb, being my initials). It also led to wrapping every method in a conditional to check for namespace collisions:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="nb">function_exists</span><span class="p">(</span><span class="nx">gb_foo</span><span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">function</span> <span class="nf">gb_foo</span><span class="p">(</span> <span class="nv">$bar</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">echo</span> <span class="nv">$bar</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">gb_foo</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Look familiar? The problem with this should be easy to see. If that conditional returns false, my method <code>gb_foo</code> will never be fired and any time it&rsquo;s called, that other <code>gb_foo</code> method will. Imagine if <code>gb_foo</code> was something like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">function</span> <span class="nf">gb_foo</span><span class="p">(</span><span class="nv">$bar</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nb">mysql_query</span><span class="p">(</span><span class="s1">&#39;DROP TABLES *&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I think we can all agree that would be bad.</p>
+
+<p>Namespacing is a concept familiar to many other programming languages that isolates your application from others in a standardized way. The global space should be reserved for only those things that should be available at all times. There is typically a character or pair of characters which globally signifies a namespace seperator. In PHP it&rsquo;s the backslash .</p>
+
+<p>If properly namespaced, you can name your method <code>foo()</code> without any possibility of your method conflicting with anything else (unless you declare it twice in the namespace).</p>
+
+<p>Namespacing also alleviates your need to wrap your methods in that conditional. A properly namespaced <code>foo()</code> method would look like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">namespace</span> <span class="nx">gb</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> <span class="nf">foo</span><span class="p">(</span><span class="nv">$bar</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">echo</span> <span class="nv">$bar</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let&rsquo;s take a look at what&rsquo;s going on here. On the first line we declare the namespace we want to use, in this case my initials <code>gb</code>. We can then declare classes and methods without worrying about stepping on any other methods. This is sort of like putting things in classes, but it&rsquo;s even more safe. To call that &lsquo;foo&rsquo; method, just type <code>\gb\foo('baz');</code> which should output &lsquo;baz&rsquo;. You can also declare classes inside the namespace just like you would normally, the difference is that when these are called, the namespace must be too. There are a few different ways of approaching this:</p>
+
+<p>Consider the application lives in a file called test.php and all our files are in the same directory.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="c1">// test.php</span>
+</span><span class='line'><span class="k">namespace</span> <span class="nx">gb</span><span class="p">;</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Bar</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">foo</span><span class="p">(</span><span class="nv">$bar</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">echo</span> <span class="nv">$bar</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Example one: &lsquo;Use&rsquo; the namespace, declared at the top of the second file.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">require_once</span><span class="p">(</span><span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/test.php&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="k">use</span> <span class="nx">\gb\Bar</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Bar</span><span class="o">::</span><span class="na">foo</span><span class="p">(</span><span class="s1">&#39;baz&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Example two: Call the method with the namespace and class prefixed.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">require_once</span><span class="p">(</span><span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/test.php&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">\gb\Bar</span><span class="o">::</span><span class="na">foo</span><span class="p">(</span><span class="s1">&#39;baz&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Example three: Instantiate the class as an object and declare the method from the object.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">require_once</span><span class="p">(</span><span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/test.php&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$object</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\gb\Bar</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$object</span><span class="o">-&gt;</span><span class="na">foo</span><span class="p">(</span><span class="s1">&#39;baz&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>They&rsquo;re all very similar and should look familiar. Again, all the namespace does is add a layer of abstraction away from the global space in order to prevent collisions. Where it becomes particularly useful is in autoloading with tools like composer. With namespaces autoloaded, developers do not even need to require the files where those classes exist. They only need to know the namespaces. Example one, then, becomes:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">use</span> <span class="nx">\gb\Bar</span><span class="p">;</span>
+</span><span class='line'><span class="nx">Bar</span><span class="o">::</span><span class="na">foo</span><span class="p">(</span><span class="s1">&#39;baz&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<blockquote>Pro tip: you can &#8216;use&#8217; a namespace under another name. So if you have two classes Bar, you can redeclare them like this:
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">use</span> <span class="nx">\namespace\Bar</span> <span class="k">as</span> <span class="nx">Bar</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nx">\gb\Bar</span> <span class="k">as</span> <span class="nx">Baz</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Baz</span><span class="o">::</span><span class="na">foo</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+</blockquote>
+
+
+<p>You can also stack namespaces to isolate your individual plugins from each other: <code>namespace gb\myAwesomePlugin;</code> and <code>namespace gb\anotherAwesomePlugin</code> serve as different namespaces for different plugins. It also keeps me safe from other &lsquo;gb&rsquo;s out there crowding my namespace.</p>
+
+<p>Namespaces can also indicate <em>where</em> to find your application. With a fully namespaced plugin, you could even configure your WordPress install to use your plugin without &lsquo;installing&rsquo; it.  If you have composer doing that for you, you can autoload the plugin preconfigured the way you want it. WordPress is becoming an incresingly vibrant application development platform and namespacing will be key to it living in harmony with other PHP applications in complex systems.</p>
+
+		
+		
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-01T09:30:00-05:00" data-updated="true" itemprop="datePublished">Jan 1<span>st</span>, 2014</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/wordpress/'>WordPress</a>, <a class='category' href='/blog/categories/best-practices/'>best_practices</a>, <a class='category' href='/blog/categories/continuous-integration/'>continuous_integration</a>, <a class='category' href='/blog/categories/oop/'>oop</a>, <a class='category' href='/blog/categories/php/'>php</a>, <a class='category' href='/blog/categories/testing/'>testing</a>, <a class='category' href='/blog/categories/unit-testing/'>unit_testing</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2014/01/01/writing-unit-tests-for-wordpress/" itemprop="url">Writing Unit Tests for WordPress</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>In <a href="blog/2013/12/23/why-unit-testing-in-wordpress-matters/">my last post</a> I wrote about two testing libraries for WordPress and briefly discussed the difference between integration tests and unit tests. I also mentioned a concept called test driven development (TDD) and breifly explained how it might help write better code from the start. This post will expand on that and show how to write a simple WordPress plugin from a test-first approach. Since we&rsquo;re writing unit tests, we&rsquo;re going to use WP-Mock to create a test double for us and we&rsquo;ll use PHPunit for our test runner.
+		
+		<a href="/blog/2014/01/01/writing-unit-tests-for-wordpress/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-12-23T07:20:00-05:00" data-updated="true" itemprop="datePublished">Dec 23<span>rd</span>, 2013</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/wordpress/'>WordPress</a>, <a class='category' href='/blog/categories/best-practices/'>best practices</a>, <a class='category' href='/blog/categories/integration-testing/'>integration testing</a>, <a class='category' href='/blog/categories/testing/'>testing</a>, <a class='category' href='/blog/categories/unit-testing/'>unit testing</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/12/23/why-unit-testing-in-wordpress-matters/" itemprop="url">Why Unit Testing in WordPress Matters</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Testing WordPress has become a favorite topic of mine lately: moving away from hitting refresh and toward something more holistic, reliable, and automatable. I&rsquo;ve written before about <a href="http://greg.harmsboone.org/blog/2013/08/17/how-can-i-do-browser-testing-with-wordpress/">a testing method called called browser testing</a>, which verifies a webpage has some expected behavior. These kinds of tests are great but they&rsquo;re not perfect. They require a lot o dependencies and that someone else would need to verify your code. There is a better way, one that doesn&rsquo;t require any of those dependencies and verfies the code down to the exact lines you wrote—it can even be independent of WordPress. It&rsquo;s called unit testing and it will make you a better developer.</p>
+
+
+		
+		<a href="/blog/2013/12/23/why-unit-testing-in-wordpress-matters/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-09-15T07:54:00-04:00" data-updated="true" itemprop="datePublished">Sep 15<span>th</span>, 2013</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/wordpress/'>WordPress</a>, <a class='category' href='/blog/categories/best-practices/'>best_practices</a>, <a class='category' href='/blog/categories/continuous-integration/'>continuous_integration</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/09/15/how-can-i-use-feature-switches-in-wordpress/" itemprop="url">How Can I Use Feature Switches in WordPress?</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>While a colleague and I were discussing the rollout of a new feature to our public facing website, he asked me if it would be possible to &ldquo;hide&rdquo; the new content behind a toggle. Effectively, he was asking me to write a <a href="http://en.wikipedia.org/wiki/Feature_toggle">feature switch</a>, a best practice of continuous integration that <a href="http://martinfowler.com/bliki/FeatureToggle.html">allows you to push some source code while hiding future features</a>. WordPress has some of this idea built into it&rsquo;s core: plugins, for example, can be activated and deactivated to turn things on and off. Within plugins and themes, options pages can be used to turn on different features. SEO plugins, for example, let users turn on and off different optimizaiton tools. Feature switches are a little different, and in our case leverage the power of Apache environment variables to show and hide different parts of our site.</p>
+
+
+		
+		<a href="/blog/2013/09/15/how-can-i-use-feature-switches-in-wordpress/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-24T09:16:00-04:00" data-updated="true" itemprop="datePublished">Aug 24<span>th</span>, 2013</time></div>
+		<div class="tags">
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/08/24/how-to-maybe-flush-wordpresss-rewrite-rules/" itemprop="url">How to Maybe Flush WordPress&#8217;s Rewrite Rules</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Custom post types and taxonomies are one of the most powerful tools to transform WordPress from a blogging platform to a full CMS. One of the most common problems beginning developers have when starting to use them is understanding how they work. It&rsquo;s easy to think that calling <code>register_post_type</code> is all it takes only to discover that their new post type archives are not working. This likely leads to a long dive into first (hopefully) the code to see if something was written incorrectly and then to the WordPress support forums to figure out what the problem is. 99% percent of the time I wager it&rsquo;s because the developer forgot to flush WordPress&rsquo;s rewrite rules.
+		
+		<a href="/blog/2013/08/24/how-to-maybe-flush-wordpresss-rewrite-rules/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-17T13:38:00-04:00" data-updated="true" itemprop="datePublished">Aug 17<span>th</span>, 2013</time></div>
+		<div class="tags">
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/08/17/how-can-i-do-browser-testing-with-wordpress/" itemprop="url">How Can I Do Browser Testing With WordPress?</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Browser testing is a basic component of a concept called behavior driven development (BDD), and one that has helped me become a better WordPress developer in the last few months. The concept of BDD is simple: test and develop around your software&rsquo;s expected behavior. <a href="http://blog.excella.com/how-can-wordpress-developers-do-behavior-driven-development-bdd/">I recently wrote about BDD for Excella&rsquo;s company blog</a>, and this post will go a bit more technical than that. The upshot of behavior testing is you can find problems with both your code and your requirements. Before we get into that, a bit of background on the tools.
+		
+		<a href="/blog/2013/08/17/how-can-i-do-browser-testing-with-wordpress/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-07T17:13:00-04:00" data-updated="true" itemprop="datePublished">Aug 7<span>th</span>, 2013</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/software-development-concepts/'>Software development concepts</a>, <a class='category' href='/blog/categories/git/'>git</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/08/07/how-to-explain-git-to-non-developers/" itemprop="url">How to Explain Git to Non-developers</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>Since starting with <a href="http://excella.com">Excella</a> in January I&rsquo;ve found myself explaining <code>git</code> and the underlying concept of version control to a lot of non-developers. People like to ask me what I&rsquo;m doing at my job, what I&rsquo;m learning, and git was a big one I had to learn early on. What I usually focus on when explaining <em>git</em> is how it is fundamentally different from revision history tools like those included with Google Documents and other word processors.
+		
+		<a href="/blog/2013/08/07/how-to-explain-git-to-non-developers/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-08-03T11:39:00-04:00" data-updated="true" itemprop="datePublished">Aug 3<span>rd</span>, 2013</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/octopress/'>Octopress</a>, <a class='category' href='/blog/categories/wordpress/'>WordPress</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/08/03/a-week-into-octopress/" itemprop="url">A Week Into Octopress</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>About a week ago I successfully migrated some of my posts from <a href="http://harmsboone.org">harmsboone.org</a> to this blog, I also wrote a post about <a href="http://greg.harmsboone.org/blog/2013/07/28/what-i-learned-about-git-this-week/">some things I learned about git that week</a>. WordPress is great. I wouldn&rsquo;t recommend it (and I almost always do) if it weren&rsquo;t. For someone who wants to spin up a blog and maybe some day more in a pinch, WordPress is the go-to platform. In fact, the rest of harmsboone.org still runs it. Earlier this year, though, Danielle and I started talking about ditching the one-blog-for-both solution. When we were both living and teaching abroad sharing one blog made sense but now with the both of us starting different careers, we have different things to say.</p>
+
+<p>We decided to keep HarmsBoone.org as an archive of the last four years and also create new blogs for the both of us. Since I was starting from scratch anyway, might as well strike out with something new.</p>
+
+
+		
+		<a href="/blog/2013/08/03/a-week-into-octopress/" class="more-link">Read on &rarr;</a>
+	</div>
+
+</article>
+
+
+    <article class="post" itemprop="blogPost" itemscope itemtype="http://schema.org/BlogPosting">
+	<div class="meta">
+		<div class="date">
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-07-28T09:50:00-04:00" data-updated="true" itemprop="datePublished">Jul 28<span>th</span>, 2013</time></div>
+		<div class="tags">
+
+
+	<a class='category' href='/blog/categories/github/'>GitHub</a>, <a class='category' href='/blog/categories/git/'>git</a>
+
+
+</div>
+		
+	</div>
+	<h1 class="title" itemprop="name"><a href="/blog/2013/07/28/what-i-learned-about-git-this-week/" itemprop="url">What I Learned About Git This Week</a></h1>
+	<div class="entry-content" itemprop="articleBody">
+		<p>I love hidden features in software. Whether it&rsquo;s finding a <a href="http://www.vogue.co.uk/">konami code in unexpected places</a> or that I can add or remove all the dots and underscores to my gmail address I want and I&rsquo;ll still get the emails, something about them are great. That was what made Zach Holman&rsquo;s presentation &lsquo;More Git &amp; GitHub Secrets&rsquo; such an enjoyable read this week.</p>
+
+<p>Git can be at once incredibly powerful and overwhelming. It has one of the longest manual pages I&rsquo;ve ever seen, and sub-commands have an equally long manuals. Picking up the basics, it&rsquo;s easier to rely on a book, the book: <a href="http://git-scm.com/book">ProGit</a>, which can take you from installation to power user, but there are all kinds of hidden features built into git you can only find by using git <em>all the time</em>.</p>
+
+<p>I get the impression that people at GitHub spend a lot of time digging into git and it&rsquo;s probably why GitHub is so good at what it does. And, like git, it&rsquo;s full of hidden features. For example, in <a href="http://zachholman.com">@holman&rsquo;s</a> recent talk, he talked about fetching pull requests into a specific branch, a conveinent short cut to the typical:</p>
+
+<pre><code>git checkout -b pr
+git pull &lt;git URI&gt; &lt;branch&gt;
+&lt;fix any mrege conflicts&gt;
+git checkout &lt;branch&gt;
+git merge pr
+</code></pre>
+
+<p>You can fetch a pull request into a branch with:</p>
+
+<pre><code>git fetch origin pull/&lt;##&gt;/head:pr
+</code></pre>
+
+<p>Woah, way handy, git, GitHub! Another highlight, <code>git merge --abort</code>. You know that one time you accepted a pull request into the wrong branch and had a billion merge conflicts? This one little command will abort the merge and reset your tree without any rebasing or having to push <code>git commit -m 'fixing erroneous merge to the wrong branch'</code> to your remote.</p>
+
+<p>There are lots of other great tips in this and Holman&rsquo;s previous talks. <a href="http://zachholman.com/talk/more-git-and-github-secrets/">Check them out at his website, zachholman.com.</a></p>
+
+		
+		
+	</div>
+
+</article>
+
+</div>
+<nav id="pagenavi">
+    
+    
+        <a href="/blog/page/2/" class="next">Next</a>
+    
+    <div class="center"><a href="/blog/archives">Blog Archives</a></div>
+</nav></div>
+			</div>
+			<footer id="footer" class="inner"><div style="display:inline">
+    Copyright &copy; 2014
+
+    Greg Boone
+. Powered by <a href="http://octopress.org">Octopress</a> | 
+    Theme <a href="http://github.com/panks/fabric">fabric</a> by <a href="http://panks.me">Pankaj Kumar</a>
+</div>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,270 @@
+
+<!DOCTYPE HTML>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>How can I use feature switches in WordPress? - Merge Conflicts</title>
+	<meta name="author" content="Greg Boone">
+
+	
+	<meta name="description" content="How Can I Use Feature Switches in WordPress? While a colleague and I were discussing the rollout of a new feature to our public facing website, he &hellip;">
+	
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<link href="/atom.xml" rel="alternate" title="Merge Conflicts" type="application/atom+xml">
+	
+	<link rel="canonical" href="http://gboone.github.io/blog/2013/09/15/how-can-i-use-feature-switches-in-wordpress/">
+	<link href="/favicon.png" rel="shortcut icon">
+	<link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+	<!--[if lt IE 9]><script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script><![endif]-->
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,400,700' rel='stylesheet' type='text/css'>
+	
+</head>
+
+
+<body>
+	<div class="container">
+		<div class="left-col">
+			<div class="intrude-less">
+			<header id="header" class="inner"><div class="profilepic">
+	<script src="/javascripts/md5.js"></script>
+	<script type="text/javascript">
+		$(function(){
+			$('.profilepic').append("<img src='http://www.gravatar.com/avatar/" + MD5("boone.greg@gmail.com") + "?s=160' alt='Profile Picture' style='width: 160px;' />");
+		});
+	</script>
+</div>
+
+<p class="subtitle">Lessons in Web Development</p>
+<nav id="main-nav"><!-- use full url including 'index.html' for navigation bar if you are using ajax -->
+<ul id="nav">
+	<li id="ajax"><a href="/index.html">Home</a></li>
+	<li id="ajax"><a href="/blog/archives/index.html">Archives</a></li>
+    <li><a href="/atom.xml">RSS</a></li>
+    
+    <li>
+    <div id="dark">
+        <form method="get" action="/search.html" id="search">
+            <input name="query" type="text" placeholder="Search..." x-webkit-speech />
+        </form>
+    </div>
+    </li>
+        
+</ul>
+
+
+<section class="aboutme">
+  <p>
+    I'm a web developer for Excella Consulting. I learn something new just about every day and write about it here.
+  </p>
+</section>
+</nav>
+<nav id="sub-nav">
+	<div class="social">
+		
+		
+		
+		<a class="twitter" href="http://twitter.com/gboone42" title="Twitter">Twitter</a>
+		
+		
+		<a class="github" href="https://github.com/gboone" title="GitHub">GitHub</a>
+		
+		
+		
+		
+		
+		
+		<a class="delicious" href="http://delicious.com/gboone42" title="Delicious">Delicious</a>
+		
+		
+		
+		<a class="rss" href="/atom.xml" title="RSS">RSS</a>
+		
+	</div>
+</nav>
+</header>				
+			</div>
+		</div>	
+		<div class="mid-col">
+			
+				
+			
+			<div class="mid-col-container">
+				<div id="content" class="inner"><article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+	<h1 class="title" itemprop="name">How Can I Use Feature Switches in WordPress?</h1>
+	<div class="entry-content" itemprop="articleBody"><p>While a colleague and I were discussing the rollout of a new feature to our public facing website, he asked me if it would be possible to &ldquo;hide&rdquo; the new content behind a toggle. Effectively, he was asking me to write a <a href="http://en.wikipedia.org/wiki/Feature_toggle">feature switch</a>, a best practice of continuous integration that <a href="http://martinfowler.com/bliki/FeatureToggle.html">allows you to push some source code while hiding future features</a>. WordPress has some of this idea built into it&rsquo;s core: plugins, for example, can be activated and deactivated to turn things on and off. Within plugins and themes, options pages can be used to turn on different features. SEO plugins, for example, let users turn on and off different optimizaiton tools. Feature switches are a little different, and in our case leverage the power of Apache environment variables to show and hide different parts of our site.</p>
+
+<!-- more -->
+
+
+<h2>The problem</h2>
+
+<p>The end goal was to take <em>n</em> posts, convert each to a new post type and then display them on a new archive template. (How we did the migration is another blog.) The problem was that while most of the code was ready, the content wasn&rsquo;t and the UAT was in progress. In order to run the content migration script, the bulk of the source code had to be live on at least our staging environment, but until everything else was finished, the archive needed to stay hidden.</p>
+
+<p>Post type and taxonomy registration was done through another plugin, and turning that off was not an option, but we could change the way we registered <em>this</em> particular post type by manipulating some of the arguments passed to <code>register_post_type()</code>.</p>
+
+<p>Typically, if you&rsquo;re going to register a post type you want to use and see it right away. You might even use a generator to do it for you:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nx">add_action</span><span class="p">(</span> <span class="s1">&#39;init&#39;</span><span class="p">,</span> <span class="s1">&#39;register_cpt_post_type&#39;</span> <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> <span class="nf">register_cpt_post_type</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nv">$labels</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>        <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;Post type&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;singular_name&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;Post type&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;add_new&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;Add New&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;add_new_item&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;Add New Post type&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;edit_item&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;Edit Post type&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;new_item&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;New Post type&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;view_item&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;View Post type&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;search_items&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;Search Post type&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;not_found&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;No post type found&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;not_found_in_trash&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;No post type found in Trash&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;parent_item_colon&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;Parent Post type:&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;menu_name&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;Post type&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>    <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nv">$args</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>        <span class="s1">&#39;labels&#39;</span> <span class="o">=&gt;</span> <span class="nv">$labels</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;hierarchical&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;supports&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;editor&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;public&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;show_ui&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;show_in_menu&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;show_in_nav_menus&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;publicly_queryable&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;exclude_from_search&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;has_archive&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;query_var&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;can_export&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;rewrite&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;capability_type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;post&#39;</span>
+</span><span class='line'>    <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">register_post_type</span><span class="p">(</span> <span class="s1">&#39;post_type&#39;</span><span class="p">,</span> <span class="nv">$args</span> <span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Zoom in on two of the <code>$args</code>: <code>public</code> and <code>has_archive</code>. The first turns the post type on in the backend and lets you create new posts of that type. The second controls whether typing <code>http://your.url/your_post_type</code> will lead to an archive or something else. In our case, we wanted <code>/your_post_type</code> to hit a WordPress page called <code>your_post_type</code> (the default behavior) until we were ready to launch the new feature at which point it should hit the post type archive. Remember, we don&rsquo;t want to launch until all the content is migrated to the new post type, so it was critical that we have it accessible on the back-end (<code>public =&gt; true</code>) but it&rsquo;s archive remain hidden on the front (<code>with_archive =&gt; false</code>).</p>
+
+<h3>Possible solutions</h3>
+
+<p>We could have stored the switch in an option, but that would require hitting or caching a database value for every page load. That&rsquo;s not terribly expensive, but putting the switch at the application level is faster, more elegant, and reserves the <code>wp_options</code> table for storing our actual options. So originally we tried locating the switch as a variable in the plugin registration function. Since it was hooked to <code>plugins_loaded</code> it would fire, before post type registration, on every page load. That was less than elegant, however, because it effectively meant we had to maintain different branches of code for each environment, which could get confusing and/or messy.</p>
+
+<h2>Enter SetEnv and get_env();</h2>
+
+<p>PHP&rsquo;s <code>get_env()</code> function is a simple one that fetches a specified <a href="http://en.wikipedia.org/wiki/Environment_variable">environment variable</a> from the server configuration. Environment variables do all kinds of cool things, and if you set one in your Apache configuration, you can wrap new features in conditionals based on whether and to what value it is set.</p>
+
+<p>First, write some PHP code like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$env</span> <span class="o">=</span> <span class="nx">get_env</span><span class="p">(</span><span class="nx">VARIABLE_NAME</span><span class="p">);</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span> <span class="nb">isset</span><span class="p">(</span><span class="nv">$env</span><span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// do stuff</span>
+</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// do other stuff</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then, when you&rsquo;re  ready to toggle the feature, add a line like this to your <a href="http://httpd.apache.org/docs/2.0/mod/mod_env.html#setenv">Apache configuration</a>: <code>SetEnv VARIABLE_NAME value</code> where VARIABLE_NAME matches the <code>get_env()</code> parameter from above. Finally, restart Apache to trigger the change. To turn it off again, remove the <code>SetEnv</code> line and restart Apache.</p>
+
+<p>In this example, it doesn&rsquo;t matter what the variable is set to; as long as it exists, the <code>if</code> condition is true. Now you have an effective feature switch that doesn&rsquo;t depend on your source code. You could even play around with setting multiple conditions using <code>elseif</code>. And that&rsquo;s how you use feature switches in WordPress.</p>
+
+<p><a href="https://news.ycombinator.com/item?id=6389250">Discuss on Hacker News.</a></p>
+</div>
+
+</article>
+
+	<div class="share">
+	<div class="addthis_toolbox addthis_default_style ">
+	
+	
+	<a class="addthis_button_tweet"></a>
+	
+	
+	<a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+	
+	<a class="addthis_counter addthis_pill_style"></a>
+	</div>
+  <script type="text/javascript" src="http://s7.addthis.com/js/250/addthis_widget.js#pubid="></script>
+</div>
+
+
+</div>
+			</div>
+			<footer id="footer" class="inner"><div style="display:inline">
+    Copyright &copy; 2014
+
+    Greg Boone
+. Powered by <a href="http://octopress.org">Octopress</a> | 
+    Theme <a href="http://github.com/panks/fabric">fabric</a> by <a href="http://panks.me">Pankaj Kumar</a>
+</div>
+
+Design credit: <a href="http://shashankmehta.in/archive/2012/greyshade.html">Shashank Mehta</a></footer>
+			<script src="/javascripts/slash.js"></script>
+<script src="/javascripts/jquery.fancybox.pack.js"></script>
+<script type="text/javascript">
+(function($){
+	$('.fancybox').fancybox();
+})(jQuery);
+</script> <!-- Delete or comment this line to disable Fancybox -->
+
+
+
+
+
+
+		</div>
+	</div>
+</body>
+</html>

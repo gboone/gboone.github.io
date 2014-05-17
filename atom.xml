@@ -1,0 +1,1391 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Merge Conflicts]]></title>
+  <link href="http://gboone.github.io/atom.xml" rel="self"/>
+  <link href="http://gboone.github.io/"/>
+  <updated>2014-01-12T11:22:01-05:00</updated>
+  <id>http://gboone.github.io/</id>
+  <author>
+    <name><![CDATA[Greg Boone]]></name>
+    <email><![CDATA[boone.greg@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[How can I use PHP Namespaces in WordPress Plugins]]></title>
+    <link href="http://gboone.github.io/blog/2014/01/08/how-can-i-use-php-namespaces-in-wordpress-plugins/"/>
+    <updated>2014-01-08T11:29:00-05:00</updated>
+    <id>http://gboone.github.io/blog/2014/01/08/how-can-i-use-php-namespaces-in-wordpress-plugins</id>
+    <content type="html"><![CDATA[<p>PHP has long had a problem of naming collisions. Because older versions of PHP had no way of declaring methods outside the global space, developers came up with several different ways of preventing and checking for namespace collisions, none of which treated the underlying condition: everything is declared globally and must have a unique name. Many and varied solutions begged for a unifying standard as they made things like autoloading and package management increasingly difficult. PHP 5.3 standardized namespacing and WordPress developers should begin adopting. With proper namespacing, WordPress plugins and themes will become clearer, more stable, and more portable.</p>
+
+<p>Prior to PHP 5, if you tried to name a method or class <code>foo</code> it might conflict with another similarly nammed method elsewhere in the system. Developers came to terms with this by &lsquo;namespacing&rsquo; methods with a prefix. With this standard, <code>foo</code> became <code>my_foo</code> or <code>gb_foo</code> where the `prefix said nothing about the method other than identifying the vendor. It also led to wrapping every method in a conditional to check for namespace collisions:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="nb">function_exists</span><span class="p">(</span><span class="nx">gb_foo</span><span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">function</span> <span class="nf">gb_foo</span><span class="p">(</span> <span class="nv">$bar</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">echo</span> <span class="nv">$bar</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">gb_foo</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Look familiar? The problem with this should be easy to see. If that conditional returns false, my method <code>gb_foo</code> will never be fired and any time it&rsquo;s called, that other <code>gb_foo</code> method will. Imagine if <code>gb_foo</code> included malicious code; I think we can all agree that&rsquo;s a bad pattern.</p>
+
+<p>Namespacing is a concept familiar to many other programming languages that isolates your application from others in a standardized way. The global space should be reserved for only those things that should be available at all times. There is typically a character or pair of characters which globally signifies a namespace seperator. In PHP it&rsquo;s the backslash .</p>
+
+<p>If properly namespaced, you can name your method <code>foo()</code> without any possibility of your method conflicting with anything else (unless you declare it twice in the namespace).</p>
+
+<p>Namespacing also alleviates your need to wrap your methods in that conditional. A properly namespaced <code>foo()</code> method would look like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">namespace</span> <span class="nx">gb</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> <span class="nf">foo</span><span class="p">(</span><span class="nv">$bar</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">echo</span> <span class="nv">$bar</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let&rsquo;s take a look at what&rsquo;s going on here. On the first line we declare the namespace we want to use, in this case my initials <code>gb</code>. We can then declare classes and methods without worrying about stepping on any other methods. Calling the method requires the fully qualified namespace to do it: <code>\gb\foo();</code>. You can also declare classes inside the namespace just like you would normally, the difference is that when these are called, the namespace must be too. There are a few different ways of approaching this:</p>
+
+<p>Consider the application lives in a file called test.php and all our files are in the same directory.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="c1">// test.php</span>
+</span><span class='line'><span class="k">namespace</span> <span class="nx">gb</span><span class="p">;</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Bar</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">foo</span><span class="p">(</span><span class="nv">$bar</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">echo</span> <span class="nv">$bar</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Example one: &lsquo;Use&rsquo; the namespace, declared at the top of the second file.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">require_once</span><span class="p">(</span><span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/test.php&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="k">use</span> <span class="nx">\gb\Bar</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Bar</span><span class="o">::</span><span class="na">foo</span><span class="p">(</span><span class="s1">&#39;baz&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Example two: Call the method with the namespace and class prefixed.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">require_once</span><span class="p">(</span><span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/test.php&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">\gb\Bar</span><span class="o">::</span><span class="na">foo</span><span class="p">(</span><span class="s1">&#39;baz&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Example three: Instantiate the class as an object and declare the method from the object.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">require_once</span><span class="p">(</span><span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/test.php&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$object</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\gb\Bar</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$object</span><span class="o">-&gt;</span><span class="na">foo</span><span class="p">(</span><span class="s1">&#39;baz&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>They&rsquo;re all very similar and should look familiar. Again, all the namespace does is add a layer of abstraction away from the global space in order to prevent collisions. Where it becomes particularly useful is in autoloading with tools like composer. With namespaces autoloaded, developers do not even need to require the files where those classes exist. They only need to know the namespaces. Example one, then, becomes:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">use</span> <span class="nx">\gb\Bar</span><span class="p">;</span>
+</span><span class='line'><span class="nx">Bar</span><span class="o">::</span><span class="na">foo</span><span class="p">(</span><span class="s1">&#39;baz&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<pre><code>Pro tip: you can 'use' a namespace under another name. So if you have two classes Bar, you can redeclare them like this:
+
+```php 
+use \namespace\Bar as Bar;
+use \gb\Bar as Baz;
+
+Baz::foo('bar');
+```
+</code></pre>
+
+<p>You can also stack namespaces to isolate your individual plugins from each other: <code>namespace gb\myAwesomePlugin;</code> and <code>namespace gb\anotherAwesomePlugin</code> serve as different namespaces for different plugins. It also keeps me safe from other &lsquo;gb&rsquo;s out there crowding my namespace.</p>
+
+<p>Namespaces can also indicate <em>where</em> to find your application. With a fully namespaced plugin, you could even configure your WordPress install to use your plugin without &lsquo;installing&rsquo; it.  If you have composer doing that for you, you can autoload the plugin preconfigured the way you want it. WordPress is becoming an incresingly vibrant application development platform and namespacing will be key to it living in harmony with other PHP applications in complex systems.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How can I use PHP Namespaces in WordPress Plugins]]></title>
+    <link href="http://gboone.github.io/blog/2014/01/08/how-can-i-use-php-namespaces-in-wordpress-plugins/"/>
+    <updated>2014-01-08T11:29:00-05:00</updated>
+    <id>http://gboone.github.io/blog/2014/01/08/how-can-i-use-php-namespaces-in-wordpress-plugins</id>
+    <content type="html"><![CDATA[<p>PHP has long had a problem of naming collisions. Because older versions of PHP had no way of declaring methods outside the global space, developers came up with several different ways of preventing and checking for namespace collisions, none of which treated the underlying condition. These many and varied solutions begged for a unifying standard as they made things like autoloading and package management increasingly difficult. PHP 5.3 introduced a feature called &lsquo;namespacing&rsquo; to solve this problem and WordPress developers should begin adopting. With proper namespacing, WordPress plugin and themes will become clearer, more stable, and more portable.</p>
+
+<p>Prior to PHP 5, if you tried to name a method or class <code>foo</code> it might conflict with another similarly nammed method elsewhere in the system. Developers came to terms with this by &lsquo;namespacing&rsquo; methods with a prefix. With this standard, <code>foo</code> became <code>my_foo</code> or <code>gb_foo</code> where the <code>my_</code> or <code>gb_</code> corresponded to vendor prefixes (gb, being my initials). It also led to wrapping every method in a conditional to check for namespace collisions:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">if</span> <span class="p">(</span> <span class="o">!</span><span class="nb">function_exists</span><span class="p">(</span><span class="nx">gb_foo</span><span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">function</span> <span class="nf">gb_foo</span><span class="p">(</span> <span class="nv">$bar</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">echo</span> <span class="nv">$bar</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">gb_foo</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Look familiar? The problem with this should be easy to see. If that conditional returns false, my method <code>gb_foo</code> will never be fired and any time it&rsquo;s called, that other <code>gb_foo</code> method will. Imagine if <code>gb_foo</code> was something like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">function</span> <span class="nf">gb_foo</span><span class="p">(</span><span class="nv">$bar</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nb">mysql_query</span><span class="p">(</span><span class="s1">&#39;DROP TABLES *&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I think we can all agree that would be bad.</p>
+
+<p>Namespacing is a concept familiar to many other programming languages that isolates your application from others in a standardized way. The global space should be reserved for only those things that should be available at all times. There is typically a character or pair of characters which globally signifies a namespace seperator. In PHP it&rsquo;s the backslash .</p>
+
+<p>If properly namespaced, you can name your method <code>foo()</code> without any possibility of your method conflicting with anything else (unless you declare it twice in the namespace).</p>
+
+<p>Namespacing also alleviates your need to wrap your methods in that conditional. A properly namespaced <code>foo()</code> method would look like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">namespace</span> <span class="nx">gb</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> <span class="nf">foo</span><span class="p">(</span><span class="nv">$bar</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">echo</span> <span class="nv">$bar</span><span class="p">;</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Let&rsquo;s take a look at what&rsquo;s going on here. On the first line we declare the namespace we want to use, in this case my initials <code>gb</code>. We can then declare classes and methods without worrying about stepping on any other methods. This is sort of like putting things in classes, but it&rsquo;s even more safe. To call that &lsquo;foo&rsquo; method, just type <code>\gb\foo('baz');</code> which should output &lsquo;baz&rsquo;. You can also declare classes inside the namespace just like you would normally, the difference is that when these are called, the namespace must be too. There are a few different ways of approaching this:</p>
+
+<p>Consider the application lives in a file called test.php and all our files are in the same directory.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="c1">// test.php</span>
+</span><span class='line'><span class="k">namespace</span> <span class="nx">gb</span><span class="p">;</span>
+</span><span class='line'><span class="k">class</span> <span class="nc">Bar</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">foo</span><span class="p">(</span><span class="nv">$bar</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">echo</span> <span class="nv">$bar</span><span class="p">;</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Example one: &lsquo;Use&rsquo; the namespace, declared at the top of the second file.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">require_once</span><span class="p">(</span><span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/test.php&#39;</span><span class="p">);</span>
+</span><span class='line'><span class="k">use</span> <span class="nx">\gb\Bar</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Bar</span><span class="o">::</span><span class="na">foo</span><span class="p">(</span><span class="s1">&#39;baz&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Example two: Call the method with the namespace and class prefixed.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">require_once</span><span class="p">(</span><span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/test.php&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">\gb\Bar</span><span class="o">::</span><span class="na">foo</span><span class="p">(</span><span class="s1">&#39;baz&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Example three: Instantiate the class as an object and declare the method from the object.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">require_once</span><span class="p">(</span><span class="nx">__DIR__</span> <span class="o">.</span> <span class="s1">&#39;/test.php&#39;</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$object</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">\gb\Bar</span><span class="p">();</span>
+</span><span class='line'>
+</span><span class='line'><span class="nv">$object</span><span class="o">-&gt;</span><span class="na">foo</span><span class="p">(</span><span class="s1">&#39;baz&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>They&rsquo;re all very similar and should look familiar. Again, all the namespace does is add a layer of abstraction away from the global space in order to prevent collisions. Where it becomes particularly useful is in autoloading with tools like composer. With namespaces autoloaded, developers do not even need to require the files where those classes exist. They only need to know the namespaces. Example one, then, becomes:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">use</span> <span class="nx">\gb\Bar</span><span class="p">;</span>
+</span><span class='line'><span class="nx">Bar</span><span class="o">::</span><span class="na">foo</span><span class="p">(</span><span class="s1">&#39;baz&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+
+
+<blockquote>Pro tip: you can &#8216;use&#8217; a namespace under another name. So if you have two classes Bar, you can redeclare them like this:
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="k">use</span> <span class="nx">\namespace\Bar</span> <span class="k">as</span> <span class="nx">Bar</span><span class="p">;</span>
+</span><span class='line'><span class="k">use</span> <span class="nx">\gb\Bar</span> <span class="k">as</span> <span class="nx">Baz</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="nx">Baz</span><span class="o">::</span><span class="na">foo</span><span class="p">(</span><span class="s1">&#39;bar&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+</blockquote>
+
+
+<p>You can also stack namespaces to isolate your individual plugins from each other: <code>namespace gb\myAwesomePlugin;</code> and <code>namespace gb\anotherAwesomePlugin</code> serve as different namespaces for different plugins. It also keeps me safe from other &lsquo;gb&rsquo;s out there crowding my namespace.</p>
+
+<p>Namespaces can also indicate <em>where</em> to find your application. With a fully namespaced plugin, you could even configure your WordPress install to use your plugin without &lsquo;installing&rsquo; it.  If you have composer doing that for you, you can autoload the plugin preconfigured the way you want it. WordPress is becoming an incresingly vibrant application development platform and namespacing will be key to it living in harmony with other PHP applications in complex systems.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Writing Unit Tests for WordPress]]></title>
+    <link href="http://gboone.github.io/blog/2014/01/01/writing-unit-tests-for-wordpress/"/>
+    <updated>2014-01-01T09:30:00-05:00</updated>
+    <id>http://gboone.github.io/blog/2014/01/01/writing-unit-tests-for-wordpress</id>
+    <content type="html"><![CDATA[<p>In <a href="blog/2013/12/23/why-unit-testing-in-wordpress-matters/">my last post</a> I wrote about two testing libraries for WordPress and briefly discussed the difference between integration tests and unit tests. I also mentioned a concept called test driven development (TDD) and breifly explained how it might help write better code from the start. This post will expand on that and show how to write a simple WordPress plugin from a test-first approach. Since we&rsquo;re writing unit tests, we&rsquo;re going to use WP-Mock to create a test double for us and we&rsquo;ll use PHPunit for our test runner.<!-- more --></p>
+
+<p>TDD starts with a problem you want to solve—the same problem your plugin wants to solve. In this case, let&rsquo;s say we have a plugin that will add some metadata to a post with the title &ldquo;Test&rdquo;. Since that&rsquo;s going to require us to mock some WordPress core functionality, <a href="https://github.com/10up/wp_mock">make sure WP-Mock is configured in your working environment</a>. We&rsquo;ll start by writing a test that verifies the metadata was attached to the post.</p>
+
+<p>In order to write unit tests we first need to extend the base test suite:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?php
+</span><span class='line'>    Class OurTestSuite extends extends PHPUnit_Framework_TestCase {
+</span><span class='line'>
+</span><span class='line'>}
+</span><span class='line'>?&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now that we have a class, we can call any of PHPunit&rsquo;s methods for testing including all of its assertions. Inside OurTestSuite is where we will write all our testing methods. We start with setUp and tearDown, commonly named methods that instantiate some conditions we will want for all our classes. We&rsquo;ll want to make sure our setUp and tearDown methods clean up our test environment as well as any mocks we create out of WP_Mock. So we&rsquo;ll declare:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>&lt;?php
+</span><span class='line'>    public function setUp() {
+</span><span class='line'>        parent::setUp();
+</span><span class='line'>    }
+</span><span class='line'>
+</span><span class='line'>    public function tearDown() {
+</span><span class='line'>        parent::tearDown();
+</span><span class='line'>    }
+</span><span class='line'>?&gt;</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If we had other objects, variables, or settings we wanted available throughout the test suite, etc., we could declare those too. If you run the test now you&rsquo;ll get some output, but no tests will run because we haven&rsquo;t written any. Every test is a method within this class. Let&rsquo;s write one that will always pass just to see PHPunit give us something.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class='line'>    <span class="o">...</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">testOneExpectsOneAdded</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// Arrange</span>
+</span><span class='line'>        <span class="nv">$foo</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// Act</span>
+</span><span class='line'>        <span class="nv">$bar</span> <span class="o">=</span> <span class="nv">$foo</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// Assert</span>
+</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="nv">$bar</span><span class="p">,</span> <span class="s1">&#39;Variable $bar does not equal two.&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you run PHPunit on that test, you should get a dot. Congratulations!</p>
+
+<p>Now let&rsquo;s write our test for our <code>save_meta</code> method. There are three basic sections to our test: Arrange, Act, and Assert. The first section is for all the bits our method needs for input. In our case, we&rsquo;ll need the post ID for a post called &ldquo;Test&rdquo; and a key and value pair to save as metadata. Since the ID could be any integer on a given system, we can arrange our test with any integer we like. The next piece, the key-value pair, will be set in the method, but we&rsquo;ll want to decide now what they&rsquo;ll be.</p>
+
+<p>The &ldquo;Act&rdquo; section is where we call the method. In this case, we&rsquo;re going to call a method called <code>save_meta_data</code> out of the <code>MetaMethods</code> object. Finally, the &ldquo;Assert&rdquo; section is where we decide what the method should expect to see at the end. This section might be empty depending on whether the method under test returns an output or calls some other method. In our case, it&rsquo;s the latter. The test passes if <code>update_post_meta</code> is called exactly once. Right now our test is looking something like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class='line'><span class="o">...</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">testTestPostExpectsMetaDataSaved</span><span class="p">(){</span>
+</span><span class='line'>        <span class="c1">// Arrange</span>
+</span><span class='line'>        <span class="nv">$post_id</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// Act</span>
+</span><span class='line'>        <span class="nv">$methods</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MetaMethods</span><span class="p">();</span>
+</span><span class='line'>        <span class="nv">$methods</span><span class="o">-&gt;</span><span class="na">save_meta_data</span><span class="p">(</span><span class="nv">$post_id</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// Assert</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="o">...</span>
+</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Not a bad looking test, but we have some mocking to do. We already know we&rsquo;ll need to mock <code>update_post_meta()</code>, but we&rsquo;re also going to need <code>get_post()</code> as well. In both cases, we&rsquo;re going to make PHPunit handle calls to those methods and return what we want back. We know what to expect if we call <code>update_post_meta</code>: if all is well with our WordPress install, we expect it would add new information to the post object. So we don&rsquo;t need to verify that, all we really need to do is verify it&rsquo;s being called exactly once. So let&rsquo;s add our mocks to the &ldquo;Arrange&rdquo; section.</p>
+
+<p>Fully mocking a function like <code>get_post()</code> uses the static method <code>wpFunction()</code> from WP_Mock. We can call it with: <code>\WP_Mock::wpFunciton()</code>. We can also pass wpFunction some parameters like &lsquo;times&rsquo;, for how many times we expect the mocked function to fire, and &lsquo;parameters&rsquo;, and &lsquo;return&rsquo;. These help us create a fully function test double of <code>get_post</code>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class='line'>    <span class="o">...</span>
+</span><span class='line'>    <span class="c1">// Arrange</span>
+</span><span class='line'>    <span class="nv">$post</span> <span class="o">=</span> <span class="nx">\WP_Mock</span><span class="o">::</span><span class="na">wpFunction</span><span class="p">(</span><span class="s1">&#39;get_post&#39;</span><span class="p">)</span>
+</span><span class='line'>    <span class="o">...</span>
+</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Finally, we need to address <code>update_post_meta</code>, but since we don&rsquo;t particularly care what we get back from this method, we can instead &lsquo;stub&rsquo; it. <code>WP_Mock</code> has a wrapper for <code>wpFunction</code> that make this easy, it&rsquo;s called <code>wpPassthruFunction()</code> and can take many of the same parameters, but fills in the return value for you. In our case, we want to know that update_post_meta fired once, so we can write something like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class='line'>    <span class="o">...</span>
+</span><span class='line'>    <span class="c1">// Arrange</span>
+</span><span class='line'>    <span class="nx">\WP_Mock</span><span class="o">::</span><span class="na">wpPassthruFunction</span><span class="p">(</span><span class="s1">&#39;update_post_meta&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;times&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">));</span>
+</span><span class='line'>    <span class="o">...</span>
+</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Now, if we run <code>phpunit</code>, we get a dot and an F, or maybe an E, since we haven&rsquo;t written any code yet. Now we can write the actual code with the following workflow:</p>
+
+<ol>
+<li>Write some code</li>
+<li>Run the test</li>
+<li>Modify the test and code as necessary</li>
+<li>Repeat 2-3 until the test passes</li>
+</ol>
+
+
+<p>A full example of our test is below:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class='line'><span class="k">Class</span> <span class="nc">OurTestSuite</span> <span class="k">extends</span> <span class="k">extends</span> <span class="nx">PHPUnit_Framework_TestCase</span> <span class="p">{</span>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">setUp</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">parent</span><span class="o">::</span><span class="na">setUp</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">tearDown</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="k">parent</span><span class="o">::</span><span class="na">tearDown</span><span class="p">();</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">testOneExpectsOneAdded</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>        <span class="c1">// Arrange</span>
+</span><span class='line'>        <span class="nv">$foo</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// Act</span>
+</span><span class='line'>        <span class="nv">$bar</span> <span class="o">=</span> <span class="nv">$foo</span> <span class="o">+</span> <span class="mi">1</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// Assert</span>
+</span><span class='line'>        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertEquals</span><span class="p">(</span><span class="nv">$bar</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="s1">&#39;Variable $bar does not equal two.&#39;</span><span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">public</span> <span class="k">function</span> <span class="nf">testTestPostExpectsMetaDataSaved</span><span class="p">(){</span>
+</span><span class='line'>        <span class="c1">// Arrange</span>
+</span><span class='line'>        <span class="nv">$post_id</span> <span class="o">=</span> <span class="mi">42</span><span class="p">;</span>
+</span><span class='line'>        <span class="nv">$post</span> <span class="o">=</span> <span class="nx">\WP_Mock</span><span class="o">::</span><span class="na">wpFunction</span><span class="p">(</span><span class="s1">&#39;get_post&#39;</span><span class="p">);</span>
+</span><span class='line'>        <span class="nx">\WP_Mock</span><span class="o">::</span><span class="na">wpPassthruFunction</span><span class="p">(</span><span class="s1">&#39;update_post_meta&#39;</span><span class="p">,</span> <span class="k">array</span><span class="p">(</span><span class="s1">&#39;times&#39;</span> <span class="o">=&gt;</span> <span class="mi">1</span><span class="p">));</span>
+</span><span class='line'>        <span class="c1">// Act</span>
+</span><span class='line'>        <span class="nv">$methods</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">MetaMethods</span><span class="p">();</span>
+</span><span class='line'>        <span class="nv">$methods</span><span class="o">-&gt;</span><span class="na">save_meta_data</span><span class="p">(</span><span class="nv">$post_id</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>        <span class="c1">// Assert</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Why Unit Testing in WordPress Matters]]></title>
+    <link href="http://gboone.github.io/blog/2013/12/23/why-unit-testing-in-wordpress-matters/"/>
+    <updated>2013-12-23T07:20:00-05:00</updated>
+    <id>http://gboone.github.io/blog/2013/12/23/why-unit-testing-in-wordpress-matters</id>
+    <content type="html"><![CDATA[<p>Testing WordPress has become a favorite topic of mine lately: moving away from hitting refresh and toward something more holistic, reliable, and automatable. I&rsquo;ve written before about <a href="http://greg.harmsboone.org/blog/2013/08/17/how-can-i-do-browser-testing-with-wordpress/">a testing method called called browser testing</a>, which verifies a webpage has some expected behavior. These kinds of tests are great but they&rsquo;re not perfect. They require a lot o dependencies and that someone else would need to verify your code. There is a better way, one that doesn&rsquo;t require any of those dependencies and verfies the code down to the exact lines you wrote—it can even be independent of WordPress. It&rsquo;s called unit testing and it will make you a better developer.</p>
+
+<!-- more -->
+
+
+<p>Unit testing is a method that reduces and tests the system down to it&rsquo;s smallest functional pieces. Each &lsquo;unit&rsquo; should be as isolated as possible from any others in the system. The test should verify only the correctness of one unit. It has many benefits for all of software development but is relatively new to WordPress. It&rsquo;s hard to say for sure why but there have been two important advancements in the area recently that will hopefully compel us WordPress devs to be more intentional about testing and verifying our code.</p>
+
+<p>The first is the WordPress Unit Test Suite (WPUTS), detailed on the <a href="http://make.wordpress.org/core/handbook/automated-testing/">WP Core development blog</a>. This suite contains tests covering much of the core files installed with a WordPress.org site. This test suite can even be installed <a href="http://wp-cli.org/">through the fantastic WP-CLI project</a>. According to <a href="https://travis-ci.org/tierra/wordpress/jobs/15867662">a recent build on Travis</a>, 1889 tests are currently available. That build shows the output of PHP&rsquo;s test runner, <a href="http://phpunit.de">PHPunit</a> at around line 724. Each test generates either a dot for a passed test or an S, I, F or E if the test is (s)kipped, (i)gnored, (f)ails, or encounters an (e)rror. In that build you see only 2 failures and a whole bunch of skipped tests. You can also see, at line 777, that phpunit took 1:28 to run all the tests and used 141.75MB of memory. That&rsquo;s pretty good for testing an application the size of WordPress. <a href="https://github.com/wp-cli/wp-cli/wiki/Plugin-Unit-Tests">With a few simple commands in WP-CLI</a> you can install these tests on your own and extend them to cover your own plugin.</p>
+
+<p>WPUTS was introduced sometime in late 2012 and unit testing through the core suite was recently integrated into the core development workflow. Another important project is <a href="https://github.com/10up/wp_mock/">WP-Mock</a>, a wonderful project from the folks at 10up that allows you to &lsquo;mock&rsquo; or &lsquo;stub&rsquo; only the parts of WordPress you need for each test. If you need call <code>update_post_meta()</code>, WP-Mock would allow you to just pass an integer, a key, and a value. The ideas is if your code verfies with a <a href="http://phpunit.de/manual/3.7/en/test-doubles.html">test double</a>, it will verify once it&rsquo;s hooked into the real thing.</p>
+
+<p>There are two key differences between these two test suites: dependencies and what is tested. Compared to browser tests, both suites remove your code&rsquo;s dependency on existing content, a web server, selenium, and behave, but WPUTS still requires WordPress and a MySQL database on top of your code, PHP, and PHPunit. WP-Mock requires only the last three. This means, if you want to run your tests in a continuous integration server like Jenkins or Travis, with WP-Mock the only thing you need to set up that environment is your code, PHP, and PHPunit.</p>
+
+<p>With WPUTS, what you are really testing is whether your code properly integrates with its dependencies, and are useful for exactly that purpose. A WordPress plugin, for example, might have integration tests written to determine whether post meta data is in fact updated when <code>update_post_meta</code> is called within one of its methods. That does not necessarily verify whether the code written is correct. True unit tests start lower, focusing on whether the code <em>you</em> wrote for <em>this</em> method generates the correct output if the dependencies behave as expected. The difference is subtle but also important.</p>
+
+<p>With this distinction in mind, WPUTS might be better named the &lsquo;WordPress Integration Test Suite&rsquo; as it allows you to access to a full installation of WordPress and manipulation of its database. What it doesn&rsquo;t do is tell you whether you&rsquo;re manipulating that database too much. Maybe your method called <code>update_post_meta</code> twice, WPUTS will not necessarily tell you that. It will only tell you that the post was, in fact, updated. That&rsquo;s useful, but so is knowing you only did it once. Writing to a database can be expensive, doing it too many times might slow down your application.</p>
+
+<p>Writing tests before writing code is called Test Driven Development and is a software engineering best practice. It forces you to write your test, then write code to make your test pass. In the end, this makes you a better developer because you are focused to break your problems down into smaller pieces that do more discrete testable things. How to write those tests is a subject for another blog.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How can I use feature switches in WordPress?]]></title>
+    <link href="http://gboone.github.io/blog/2013/09/15/how-can-i-use-feature-switches-in-wordpress/"/>
+    <updated>2013-09-15T07:54:00-04:00</updated>
+    <id>http://gboone.github.io/blog/2013/09/15/how-can-i-use-feature-switches-in-wordpress</id>
+    <content type="html"><![CDATA[<p>While a colleague and I were discussing the rollout of a new feature to our public facing website, he asked me if it would be possible to &ldquo;hide&rdquo; the new content behind a toggle. Effectively, he was asking me to write a <a href="http://en.wikipedia.org/wiki/Feature_toggle">feature switch</a>, a best practice of continuous integration that <a href="http://martinfowler.com/bliki/FeatureToggle.html">allows you to push some source code while hiding future features</a>. WordPress has some of this idea built into it&rsquo;s core: plugins, for example, can be activated and deactivated to turn things on and off. Within plugins and themes, options pages can be used to turn on different features. SEO plugins, for example, let users turn on and off different optimizaiton tools. Feature switches are a little different, and in our case leverage the power of Apache environment variables to show and hide different parts of our site.</p>
+
+<!-- more -->
+
+
+<h2>The problem</h2>
+
+<p>The end goal was to take <em>n</em> posts, convert each to a new post type and then display them on a new archive template. (How we did the migration is another blog.) The problem was that while most of the code was ready, the content wasn&rsquo;t and the UAT was in progress. In order to run the content migration script, the bulk of the source code had to be live on at least our staging environment, but until everything else was finished, the archive needed to stay hidden.</p>
+
+<p>Post type and taxonomy registration was done through another plugin, and turning that off was not an option, but we could change the way we registered <em>this</em> particular post type by manipulating some of the arguments passed to <code>register_post_type()</code>.</p>
+
+<p>Typically, if you&rsquo;re going to register a post type you want to use and see it right away. You might even use a generator to do it for you:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+<span class='line-number'>23</span>
+<span class='line-number'>24</span>
+<span class='line-number'>25</span>
+<span class='line-number'>26</span>
+<span class='line-number'>27</span>
+<span class='line-number'>28</span>
+<span class='line-number'>29</span>
+<span class='line-number'>30</span>
+<span class='line-number'>31</span>
+<span class='line-number'>32</span>
+<span class='line-number'>33</span>
+<span class='line-number'>34</span>
+<span class='line-number'>35</span>
+<span class='line-number'>36</span>
+<span class='line-number'>37</span>
+<span class='line-number'>38</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nx">add_action</span><span class="p">(</span> <span class="s1">&#39;init&#39;</span><span class="p">,</span> <span class="s1">&#39;register_cpt_post_type&#39;</span> <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> <span class="nf">register_cpt_post_type</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nv">$labels</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>        <span class="s1">&#39;name&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;Post type&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;singular_name&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;Post type&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;add_new&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;Add New&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;add_new_item&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;Add New Post type&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;edit_item&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;Edit Post type&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;new_item&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;New Post type&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;view_item&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;View Post type&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;search_items&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;Search Post type&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;not_found&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;No post type found&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;not_found_in_trash&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;No post type found in Trash&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;parent_item_colon&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;Parent Post type:&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;menu_name&#39;</span> <span class="o">=&gt;</span> <span class="nx">_x</span><span class="p">(</span> <span class="s1">&#39;Post type&#39;</span><span class="p">,</span> <span class="s1">&#39;post_type&#39;</span> <span class="p">),</span>
+</span><span class='line'>    <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nv">$args</span> <span class="o">=</span> <span class="k">array</span><span class="p">(</span>
+</span><span class='line'>        <span class="s1">&#39;labels&#39;</span> <span class="o">=&gt;</span> <span class="nv">$labels</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;hierarchical&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;supports&#39;</span> <span class="o">=&gt;</span> <span class="k">array</span><span class="p">(</span> <span class="s1">&#39;title&#39;</span><span class="p">,</span> <span class="s1">&#39;editor&#39;</span> <span class="p">),</span>
+</span><span class='line'>        <span class="s1">&#39;public&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;show_ui&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;show_in_menu&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;show_in_nav_menus&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;publicly_queryable&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;exclude_from_search&#39;</span> <span class="o">=&gt;</span> <span class="k">false</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;has_archive&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;query_var&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;can_export&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;rewrite&#39;</span> <span class="o">=&gt;</span> <span class="k">true</span><span class="p">,</span>
+</span><span class='line'>        <span class="s1">&#39;capability_type&#39;</span> <span class="o">=&gt;</span> <span class="s1">&#39;post&#39;</span>
+</span><span class='line'>    <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="nx">register_post_type</span><span class="p">(</span> <span class="s1">&#39;post_type&#39;</span><span class="p">,</span> <span class="nv">$args</span> <span class="p">);</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Zoom in on two of the <code>$args</code>: <code>public</code> and <code>has_archive</code>. The first turns the post type on in the backend and lets you create new posts of that type. The second controls whether typing <code>http://your.url/your_post_type</code> will lead to an archive or something else. In our case, we wanted <code>/your_post_type</code> to hit a WordPress page called <code>your_post_type</code> (the default behavior) until we were ready to launch the new feature at which point it should hit the post type archive. Remember, we don&rsquo;t want to launch until all the content is migrated to the new post type, so it was critical that we have it accessible on the back-end (<code>public =&gt; true</code>) but it&rsquo;s archive remain hidden on the front (<code>with_archive =&gt; false</code>).</p>
+
+<h3>Possible solutions</h3>
+
+<p>We could have stored the switch in an option, but that would require hitting or caching a database value for every page load. That&rsquo;s not terribly expensive, but putting the switch at the application level is faster, more elegant, and reserves the <code>wp_options</code> table for storing our actual options. So originally we tried locating the switch as a variable in the plugin registration function. Since it was hooked to <code>plugins_loaded</code> it would fire, before post type registration, on every page load. That was less than elegant, however, because it effectively meant we had to maintain different branches of code for each environment, which could get confusing and/or messy.</p>
+
+<h2>Enter SetEnv and get_env();</h2>
+
+<p>PHP&rsquo;s <code>get_env()</code> function is a simple one that fetches a specified <a href="http://en.wikipedia.org/wiki/Environment_variable">environment variable</a> from the server configuration. Environment variables do all kinds of cool things, and if you set one in your Apache configuration, you can wrap new features in conditionals based on whether and to what value it is set.</p>
+
+<p>First, write some PHP code like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="nv">$env</span> <span class="o">=</span> <span class="nx">get_env</span><span class="p">(</span><span class="nx">VARIABLE_NAME</span><span class="p">);</span>
+</span><span class='line'><span class="k">if</span> <span class="p">(</span> <span class="nb">isset</span><span class="p">(</span><span class="nv">$env</span><span class="p">)</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// do stuff</span>
+</span><span class='line'><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// do other stuff</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Then, when you&rsquo;re  ready to toggle the feature, add a line like this to your <a href="http://httpd.apache.org/docs/2.0/mod/mod_env.html#setenv">Apache configuration</a>: <code>SetEnv VARIABLE_NAME value</code> where VARIABLE_NAME matches the <code>get_env()</code> parameter from above. Finally, restart Apache to trigger the change. To turn it off again, remove the <code>SetEnv</code> line and restart Apache.</p>
+
+<p>In this example, it doesn&rsquo;t matter what the variable is set to; as long as it exists, the <code>if</code> condition is true. Now you have an effective feature switch that doesn&rsquo;t depend on your source code. You could even play around with setting multiple conditions using <code>elseif</code>. And that&rsquo;s how you use feature switches in WordPress.</p>
+
+<p><a href="https://news.ycombinator.com/item?id=6389250">Discuss on Hacker News.</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to Maybe Flush WordPress's Rewrite Rules]]></title>
+    <link href="http://gboone.github.io/blog/2013/08/24/how-to-maybe-flush-wordpresss-rewrite-rules/"/>
+    <updated>2013-08-24T09:16:00-04:00</updated>
+    <id>http://gboone.github.io/blog/2013/08/24/how-to-maybe-flush-wordpresss-rewrite-rules</id>
+    <content type="html"><![CDATA[<p>Custom post types and taxonomies are one of the most powerful tools to transform WordPress from a blogging platform to a full CMS. One of the most common problems beginning developers have when starting to use them is understanding how they work. It&rsquo;s easy to think that calling <code>register_post_type</code> is all it takes only to discover that their new post type archives are not working. This likely leads to a long dive into first (hopefully) the code to see if something was written incorrectly and then to the WordPress support forums to figure out what the problem is. 99% percent of the time I wager it&rsquo;s because the developer forgot to flush WordPress&rsquo;s rewrite rules.<!-- more --></p>
+
+<p>The misunderstanding is in thinking that the &lsquo;register&rsquo; in <code>register_post_type</code> means there is some kind of database entry or global variable that completely installs the new post type. Not so. What it actually does is hook your new post types into the list of post types WordPress looks for on every page load. Even if you pass the <code>has_archive</code> and <code>rewrite</code> arguments, post type registration does not touch the rewrite <em>rules</em> that tell your webserver where and how to find the new post type, just what those rules should be once they are created.</p>
+
+<p>Unlike post types, rewrite rules are stored in the database and are occasionally cached so they aren&rsquo;t pulled on every page load. The <code>wp_rewrite</code> row of the <code>wp_options</code> table might be quite large depending on what your permalink settings are, how many post types and taxonomies you have, and whether you have any rewrites going outside of WordPress. The only way to change the content of the global variable $wp_rewrite is to call <code>flush_rewrite_rules</code>, typically done by saving permalinks settings in wp-admin, this function clears the rewrite row and re-saves it.</p>
+
+<p>Sometimes it isn&rsquo;t possible to click that button. Consider, for example, a production server without wp-admin accessible. How are you supposed to flush the rules? The <code>flush_rewrite_rules</code> function is costly, as noted in the codex, but must be hooked into <code>init</code> to work effectively. The problem is, flushing is expensive, espcially if you have a high-triffic website, and hooking to <code>init</code> means it will happen on every page load. What to do? Check if rewrite rules are correct and flush only if needed.</p>
+
+<p>We have such a configuration at CFPB where wp-admin is generally inaccessible and we&rsquo;ve been struggling with exactly this problem every time we create a new post-type. I sloved the problem with a simple function called <a href="https://gist.github.com/gboone/6294720"><code>maybe_flush_rewrite</code></a>.</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='php'><span class='line'><span class="o">&lt;?</span><span class="nx">php</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">function</span> <span class="nf">maybe_flush_rewrite_rules</span><span class="p">(</span><span class="nv">$target</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="nv">$rules</span> <span class="o">=</span> <span class="nx">get_option</span><span class="p">(</span> <span class="s1">&#39;rewrite_rules&#39;</span> <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="k">if</span> <span class="p">(</span> <span class="nv">$rules</span><span class="p">[</span> <span class="nv">$target</span> <span class="o">.</span> <span class="s1">&#39;/?$&#39;</span> <span class="p">]</span> <span class="o">!=</span>  <span class="s1">&#39;index.php?post_type=&#39;</span> <span class="o">.</span> <span class="nv">$target</span> <span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>        <span class="nx">flush_rewrite_rules</span><span class="p">(</span> <span class="nv">$hard</span> <span class="o">=</span> <span class="k">true</span> <span class="p">);</span>
+</span><span class='line'>    <span class="p">}</span>
+</span><span class='line'><span class="p">}</span>
+</span><span class='line'><span class="c1">// then pass the post type name to maybe flush rewrite rules</span>
+</span><span class='line'><span class="nx">maybe_flush_rewrite_rules</span><span class="p">(</span> <span class="s1">&#39;your_post_type&#39;</span> <span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'><span class="cp">?&gt;</span><span class="x"></span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>YMMV with this function because I&rsquo;m guessing it may be dependent on your permalinks settings, but after poking around the content of the <code>wp_rewrite</code> table I realized that if a custom post type had an archive it would have a rewrite structure similar to <code>index.php?post_Type=&lt;post_type_name&gt;</code>. This function takes a post type name as the <code>$target</code> parameter, checks if it is registered, and flushes only if it is not in the rewrite table. Now you can register a post type and call <code>maybe_flush_rewrite_rules</code> anywhere to clear the rules only if needed.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How can I do browser testing with WordPress?]]></title>
+    <link href="http://gboone.github.io/blog/2013/08/17/how-can-i-do-browser-testing-with-wordpress/"/>
+    <updated>2013-08-17T13:38:00-04:00</updated>
+    <id>http://gboone.github.io/blog/2013/08/17/how-can-i-do-browser-testing-with-wordpress</id>
+    <content type="html"><![CDATA[<p>Browser testing is a basic component of a concept called behavior driven development (BDD), and one that has helped me become a better WordPress developer in the last few months. The concept of BDD is simple: test and develop around your software&rsquo;s expected behavior. <a href="http://blog.excella.com/how-can-wordpress-developers-do-behavior-driven-development-bdd/">I recently wrote about BDD for Excella&rsquo;s company blog</a>, and this post will go a bit more technical than that. The upshot of behavior testing is you can find problems with both your code and your requirements. Before we get into that, a bit of background on the tools.<!-- more --></p>
+
+<p>My BDD testing setup requires the following tools: <a href="http://pythonhosted.org/behave/">behave</a>, <a href="http://docs.seleniumhq.org/">selenium</a>, and the <a href="https://code.google.com/p/chromedriver/">chromedriver</a> on a Mac. Behave and selenium can be installed with PIP (<code>pip install behave; pip install selenium</code>) and chromedriver is available through <a href="https://github.com/mxcl/homebrew/">homebrew</a>. The workflow goes something like this:</p>
+
+<ol>
+<li>Tests written in gherkin</li>
+<li>Tests executed through behave, passed through selenium</li>
+<li>Google Chrome Driver walks through the tests and tells me what failed.</li>
+</ol>
+
+
+<p>Each test is a &ldquo;scenario&rdquo; that is part of a feature defined like an agile user story. For example</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='gherkin'><span class='line'><span class="k">Feature:</span><span class="nf"> A simple about page</span>
+</span><span class='line'><span class="nf">    As a website owner</span>
+</span><span class='line'><span class="nf">    I want an about page</span>
+</span><span class='line'><span class="nf">    So that visitors can learn more about what I do</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Which might have a scenario under it like:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='gherkin'><span class='line'><span class="nt">@about_page_test</span><span class="nf"></span>
+</span><span class='line'><span class="k">Scenario:</span><span class="nf"></span>
+</span><span class='line'><span class="k">    Given </span><span class="nf">I visit the home page</span>
+</span><span class='line'><span class="nf">    </span><span class="k">When </span><span class="nf">I click the about link</span>
+</span><span class='line'><span class="nf">    </span><span class="k">Then </span><span class="nf">I should be directed to the about page</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The test is executed with <code>behave -t=about_page_test</code> and selenium passes the appropriate steps to the Chrome web driver. I&rsquo;m  developing a complex options page for a WordPress plugin and wrote a behavior test that would fill in the entire form in about 10 seconds without any typos or missing any fields. It immediately saved me a lot of time and keystrokes.</p>
+
+<p>Behave can also do &ldquo;scenario outlines&rdquo; where you write a single test with variables and then pass variables through an Examples table. Let&rsquo;s say our website from above got more complex and now has a few different pages and we also want to check the content of that page. I could write a scenario outline like this:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='gherkin'><span class='line'><span class="nt">@test_pages</span><span class="nf"></span>
+</span><span class='line'><span class="nf">Scenario outline:</span>
+</span><span class='line'><span class="nf">    </span><span class="k">Given </span><span class="nf">I visit the home page</span>
+</span><span class='line'><span class="nf">    </span><span class="k">When </span><span class="nf">I click the </span><span class="nv">&lt;page-title&gt;</span><span class="nf"> link</span>
+</span><span class='line'><span class="nf">    </span><span class="k">Then </span><span class="nf">I sohuld be directed to the </span><span class="nv">&lt;page-title&gt;</span><span class="nf"> page</span>
+</span><span class='line'><span class="nf">    </span><span class="k">And </span><span class="nf">I should find the text </span><span class="nv">&lt;target-text&gt;</span><span class="nf"> on the page</span>
+</span><span class='line'>
+</span><span class='line'><span class="k">Examples:</span>
+</span><span class='line'><span class="k">|</span><span class="nv"> page-title</span><span class="k"> |</span><span class="nv"> target-text</span><span class="k">            |</span><span class="nf"></span>
+</span><span class='line'><span class="nf">| about</span><span class="k">      |</span><span class="s"> This is the about page</span><span class="k"> |</span><span class="nf"></span>
+</span><span class='line'><span class="nf">| contact</span><span class="k">    |</span><span class="s"> contact me</span><span class="k">             |</span><span class="nf"></span>
+</span><span class='line'><span class="nf">| photos</span><span class="k">     |</span><span class="s"> A photo of my cat</span><span class="k">      |</span><span class="nf"></span>
+</span><span class='line'><span class="nf">| blog</span><span class="k">       |</span><span class="s"> My blog</span><span class="k">                |</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>As part of an upcoming content migration we will have to add a set of tags to each post of a certain post type. The product owners sent me a spreadsheet of the post titles and the tags and I wrote a form that take the title and attach that tags. It&rsquo;s a pretty simple form, but I needed to make sure that when the time came we could add these tags as quickly as possible, so I wrote a scenario outline, exported the Excel sheet in the format above, and ran the whole sheet through the form. Selenium was able to check 307 posts in less than an hour. Pretty sweet.</p>
+
+<p>This checked not only my code, but the data the product owners gave me. I noticed there some of the tags were plural while others singular: cat vs. cats, some were not real words, and about 12 of them didn&rsquo;t work. These 12 were the focus of my concern for the morning and I was able to discover that of them, only two were missed because of my code. One of them started with a space that was truncated somewhere along the way and the other was a duplicate post WordPress was tripped up by.</p>
+
+<p>Without running the table through a massive test we probably wouldn&rsquo;t have discovered these problems until the day we launched and then it would have been a problem that consumed the better part of a day trying to solve. With them, we were able to discover the problem early on, get it sorted and learn the limitations of our code well ahead of any deployment. That&rsquo;s the power of browser testing.</p>
+
+<p>Browser testing is but one among a large set of tests that can be run against code. Another effective kind of test for development is unit testing, which tests the code itself without a browser. If done correctly testing can drastically reduce the amoung of time spent debugging and improve overall reliability of the software we write. Plus, it makes you a better developer.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[How to explain git to non-developers]]></title>
+    <link href="http://gboone.github.io/blog/2013/08/07/how-to-explain-git-to-non-developers/"/>
+    <updated>2013-08-07T17:13:00-04:00</updated>
+    <id>http://gboone.github.io/blog/2013/08/07/how-to-explain-git-to-non-developers</id>
+    <content type="html"><![CDATA[<p>Since starting with <a href="http://excella.com">Excella</a> in January I&rsquo;ve found myself explaining <code>git</code> and the underlying concept of version control to a lot of non-developers. People like to ask me what I&rsquo;m doing at my job, what I&rsquo;m learning, and git was a big one I had to learn early on. What I usually focus on when explaining <em>git</em> is how it is fundamentally different from revision history tools like those included with Google Documents and other word processors.<!-- more --></p>
+
+<p>I was familiar enough with the idea of version control systems (VCS) before I started, but never saw the need to figure out their complexities. I tried setting up harmsboone.org as a git remote at one point, but lost the patience. Plus, I was just a lone coder working on a WordPress theme, it seemed like a lot of work to keep track of changes only I was making. What I lacked was a fundamental understanding of the value of a VCS. Now that I have that, I realize how potentially valuable it would have been for a simple WordPress theme or even an academic paper.</p>
+
+<p>These days, when I explain git to people, I usually say it&rsquo;s a way of grouping all the files I&rsquo;m working on in a given project together in a system that can watch for changes, log them, and quickly move to different points in time. The reaction this usually invokes is &lsquo;oh, so basically like Google Docs.&rsquo; And yes, it is a little like Google Docs, but also very different on some fundamental levels.</p>
+
+<p>The first is that Google Docs, and other tools like it, are <em>revision history</em> trackers. That is, Google keeps a log of everything I type at any given moment. If I want to branch out, try something different or experimental for a minute, I can do that, but all those revisions are still logged to the file I&rsquo;m working on. Going back means browsing through what could be days worth of revisions to find where I started. With a VCS like git, I can create a branch off of the current project, make some changes, even save those changes, to that branch&rsquo;s revision history (or <code>git log</code> as we might say) and if at the end I&rsquo;m not happy with them, I can just &lsquo;checkout&rsquo; the original starting point.</p>
+
+<p>Another advantage is project-wide tracking. Imagine using Google Docs to write a book. You want to have one file that&rsquo;s the master manuscript, and other files for chapters you&rsquo;ll add in when they&rsquo;re ready. Each file is tracked, but the whole project is not. Git, on the other hand, watches the whole project. When you write a chapter, create a branch, write it, commit all the changes as you go, then switch back to master and create another branch for chapter two. Now imagine you&rsquo;re 22 chapters in and you want to rethink chapter one. You could go back to your chapter one branch and edit it, or you could create a new branch, non-destructively rewrite the chapter, then decide which is better at the end. When you&rsquo;re done merge all the branches together into master and finish it up. Now you have a unique version history for each chapter and for the whole book.</p>
+
+<p>The last is an extension of the others. In a word processor, collaborating on a document means one of two things: 1) group editing of the same file <em>ala</em> Google Docs, or 2) emailing around documents with filenames like: final-draft3-groupreport-jane-todd-revisions-04152012(2)(2).docx, where there are <em>n</em> older versions somewhere. The latter usually results in a chaotic folder dedicated to one assignment every version in it. The former forces everyone to work on the same revision history. Though that may be elegant in many ways, it can be impossible to tell who added what and when (let alone why) to a document without going mintue by minute through the revision history. Git allows everyone to non-destructively work on the same project and for the group to decide how it all comes together. It&rsquo;s the best of both options.</p>
+
+<p>Git is a powerful tool that allows granular tracking of code across an entire project and there are more features than can be listed here to prove that point. It also allows sophisticated collaboration that, despite being a bit technical, could be applicable to any kind of task. This is perhaps what Wired meant when they declared &ldquo;we&rsquo;re all open source&rdquo; now, referring to the rise of GitHub as a collaborative software development platform. Hopefully people outside programming communities can put it to good use.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[A week into Octopress]]></title>
+    <link href="http://gboone.github.io/blog/2013/08/03/a-week-into-octopress/"/>
+    <updated>2013-08-03T11:39:00-04:00</updated>
+    <id>http://gboone.github.io/blog/2013/08/03/a-week-into-octopress</id>
+    <content type="html"><![CDATA[<p>About a week ago I successfully migrated some of my posts from <a href="http://harmsboone.org">harmsboone.org</a> to this blog, I also wrote a post about <a href="http://greg.harmsboone.org/blog/2013/07/28/what-i-learned-about-git-this-week/">some things I learned about git that week</a>. WordPress is great. I wouldn&rsquo;t recommend it (and I almost always do) if it weren&rsquo;t. For someone who wants to spin up a blog and maybe some day more in a pinch, WordPress is the go-to platform. In fact, the rest of harmsboone.org still runs it. Earlier this year, though, Danielle and I started talking about ditching the one-blog-for-both solution. When we were both living and teaching abroad sharing one blog made sense but now with the both of us starting different careers, we have different things to say.</p>
+
+<p>We decided to keep HarmsBoone.org as an archive of the last four years and also create new blogs for the both of us. Since I was starting from scratch anyway, might as well strike out with something new.</p>
+
+<!-- more -->
+
+
+<p>Octopress required a different way of thinking. It&rsquo;s a static file generator, not a server-database system. I knew that. I even knew I wanted to host it on GitHub but nevertheless, for whatever reason, my first step was to fire up a server for greg.harmsboone.org and installing octopress in parallel on the server and my local machine, just like I would if I were setting up WordPress. Wrong. When I stopped overcomplicating and <a href="http://octopress.org/docs">followed the directions</a>, everything fell right into palce. (For anyone trying to launch their Octopress site, it&rsquo;s a lot easier when you <code>rake new_post[]</code> or <code>rake new_page[]</code> before trying to deploy.)</p>
+
+<h2>Things to like:</h2>
+
+<h4>1. Simplicty.</h4>
+
+<p>I love how clean and simple the Octopress interface is. There&rsquo;s no menu-laden backend to interface with, no menus to customize, or sidebars to fiddle with. All of that lives in HTML files that live on my machine and backed up on github.</p>
+
+<h4>2. Backed up, version controlled</h4>
+
+<p>Since the site is hosted on GitHub, I&rsquo;m forced to use version control on my posts, pages, and template files. This has the added bonus of all my posts being backed up as soon as their published. With WordPress, they were trapped on a MySQL database at Dreamhost. Sure I could have shelled out for <a href="">RAMP</a>, <a href="">Backup Buddy</a> or <a href="">VaultPress</a>, but one of those would just be another plugin I&rsquo;d have to deal with and would still not version control my blog.</p>
+
+<h4>3. <code>rake preview</code></h4>
+
+<p>What? No MAMP/XAMPP/AMPPS? Done. Over. Next.</p>
+
+<h3>Things I miss:</h3>
+
+<p>This is not to say Octopress land is all roses and unicorns. There are some major disadvantages to the new frontier.</p>
+
+<h4>1. The web interface</h4>
+
+<p>WP-Admin has the distinct advantage of being a web-based content editing interface that lives in the same place where the content is hosted. It also generates those posts automatically. With Octopress, I have to <code>rake deploy</code> to publish. That&rsquo;s less convenient.</p>
+
+<h4>2. Mobile Apps</h4>
+
+<p>With little exception, I&rsquo;ve been laptop-free since we got back from Hungary. The iPad did just about everything I needed to do away from my desktop while I was in grad school. Tablets are great and have the added benefit of being able to stay in my backpack in security lines (at least in the US).</p>
+
+<p>The WordPress mobile app is great and updating blogs from it is really. Octopress isn&rsquo;t quite there. If I wanted to blog from a tablet, <a href="http://www.candlerblog.com/2012/04/01/remote-octopress-workflow/">I&rsquo;d have to have a remote server syncing and auto-deploying from dropbox or GitHub</a>. I&rsquo;ll probably end up brigning a laptop, at least until <code>rake watch --autodeploy</code> becomes a thing.</p>
+
+<h4>3. For Hackers Only</h4>
+
+<p>One appealing thing about working in WordPress was that everything was on the same system. Octopress bring the terminal-centric, that rules out a lot of possible users who are not also developers. People who don&rsquo;t have patience to learn Markdown or git are out. WordPress, to some extent, just works. It&rsquo;s intuitive, has a UI, and requires very little maintenance beyond an occasional software update.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[What I learned about git this week]]></title>
+    <link href="http://gboone.github.io/blog/2013/07/28/what-i-learned-about-git-this-week/"/>
+    <updated>2013-07-28T09:50:00-04:00</updated>
+    <id>http://gboone.github.io/blog/2013/07/28/what-i-learned-about-git-this-week</id>
+    <content type="html"><![CDATA[<p>I love hidden features in software. Whether it&rsquo;s finding a <a href="http://www.vogue.co.uk/">konami code in unexpected places</a> or that I can add or remove all the dots and underscores to my gmail address I want and I&rsquo;ll still get the emails, something about them are great. That was what made Zach Holman&rsquo;s presentation &lsquo;More Git &amp; GitHub Secrets&rsquo; such an enjoyable read this week.</p>
+
+<p>Git can be at once incredibly powerful and overwhelming. It has one of the longest manual pages I&rsquo;ve ever seen, and sub-commands have an equally long manuals. Picking up the basics, it&rsquo;s easier to rely on a book, the book: <a href="http://git-scm.com/book">ProGit</a>, which can take you from installation to power user, but there are all kinds of hidden features built into git you can only find by using git <em>all the time</em>.</p>
+
+<p>I get the impression that people at GitHub spend a lot of time digging into git and it&rsquo;s probably why GitHub is so good at what it does. And, like git, it&rsquo;s full of hidden features. For example, in <a href="http://zachholman.com">@holman&rsquo;s</a> recent talk, he talked about fetching pull requests into a specific branch, a conveinent short cut to the typical:</p>
+
+<pre><code>git checkout -b pr
+git pull &lt;git URI&gt; &lt;branch&gt;
+&lt;fix any mrege conflicts&gt;
+git checkout &lt;branch&gt;
+git merge pr
+</code></pre>
+
+<p>You can fetch a pull request into a branch with:</p>
+
+<pre><code>git fetch origin pull/&lt;##&gt;/head:pr
+</code></pre>
+
+<p>Woah, way handy, git, GitHub! Another highlight, <code>git merge --abort</code>. You know that one time you accepted a pull request into the wrong branch and had a billion merge conflicts? This one little command will abort the merge and reset your tree without any rebasing or having to push <code>git commit -m 'fixing erroneous merge to the wrong branch'</code> to your remote.</p>
+
+<p>There are lots of other great tips in this and Holman&rsquo;s previous talks. <a href="http://zachholman.com/talk/more-git-and-github-secrets/">Check them out at his website, zachholman.com.</a></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Tussle over Technology: Controversy & the Patent Act]]></title>
+    <link href="http://gboone.github.io/blog/2012/12/30/tussle-over-technology-controversy-the-patent-act/"/>
+    <updated>2012-12-30T00:00:00-05:00</updated>
+    <id>http://gboone.github.io/blog/2012/12/30/tussle-over-technology-controversy-the-patent-act</id>
+    <content type="html"><![CDATA[<h2>Abstract</h2>
+
+<blockquote>
+  <p>The United States Constitution instructed the First Congress of the United States to enact laws &#8220;securing for limited Times to Authors and Inventors the exclusive Right to their respective Writings and Discoveries.&#8221; This instruction, commonly referred to as the Intellectual Property Clause, demanded a set of laws based on the broad idea that inventors are best incentivized and remunerated for their works through a system of guaranteed exclusive rights. What exactly the scope of those rights were, who had authority to hand them out, and under what conditions they would be given, were all left to Congress to sort out; it was among the earliest controversies over science and technology in the United States of America. <!--more--></p>
+</blockquote>
+
+<h1>Introduction</h1>
+
+<p>In the United States of America, the working definition of a patent is best encapsulated not in US Code, but from the United Nations’ World Intellectual Property Organization (WIPO). One of a handful of specialized UN agencies, WIPO’s mission is “to promote… a balanced and effective international intellectual property (IP) system.” Today, U.S. IP law is as much shaped by WIPO treaties and other international agreements as by the U.S. Congress. On its face a patent is nothing more than a legal document but the legal power endowed upon it is mighty. A patent grants to an inventor the power to exclude and determine who is allowed to ‘practice,’ or “make, use, or build,” an invention, in exchange the inventor must disclose in some detail how the technology could be made, used, and built (WIPO). A journey through time will show America’s first patent law respond to a specific set of concerns and gave society a way of answering the question: what is technology?</p>
+
+<p>sThe United States Constitution empowered the United States Congress “to promote the Progress of Science and useful Arts, by securing for limited Times to Authors and Inventors the exclusive Right to their respective Writings and Discoveries” (US Constitution, Art. 1, §8, Cl. 8.). The exact scope of those rights, who administered them under what conditions and for how long were all left to Congress to sort out; it was among the earliest controversies over science and technology in the United States of America. The resulting law, the Patent Act of 1790, created a paradigm for how the United States understood the ideas of invention, technology, and science.</p>
+
+<p>Intellectual Property Rights are not the only means of incentivizing creative work, but it had been the custom for many centuries before the Constitution was written. In his “Theories of Intellectual Property,” William Fisher argued for four broad ways of thinking about IP: utilitarian, natural rights, humanist, and desirable society perspectives. Thomas Jefferson reluctantly accepted IP rights as a <em>desirable society utilitarian’s</em> solution to the problem of incentivizing invention. To Jefferson’s (and, he would argue America’s) chagrin “the exclusive right to invention” is given “for the benefit of society,” at the risk of “embarrassment” from its unintended consequences (Jefferson 1813). As Edward Walterscheid tells in his 1997 article “Charting a Novel Course: The Creation of the Patent Act of 1790” there was robust debate in the late 18th Century. Input came from President Washington, Jefferson, inventors, and many others regarding what Congress should do.</p>
+
+<p>The Patent Act of 1790 was a response to a specific set of problems unique to the early United States. It established a policy paradigm the legislation thereafter served to articulate in the same way that “normal science” did for Kuhn’s scientific paradigms (Kuhn 1970). Peter Hall called this “normal policymaking”, in which the established paradigm sets goals around which future policy will operate.</p>
+
+<p>This paper is less concerned with the virtue of the law, about which a great deal has been written by legal scholars that will inform this work. Rather, it will examine the debate and proposals that interpreted the only precedent the US Congress had in its first three years—the Constitution—around the question of what constituted technology in the young republic. It holds that the Patent Act of 1790 was paradigmatic in the sense that Hall extrapolated “policy paradigms” from Kuhn’s scientific and technological paradigms (Hall1993, Kuhn 1970). The law settled a set of specific questions and problems and served as the answer to all disputes until such a time when the relevant parties no longer found the law adequate.</p>
+
+<h1>Intellectual Property Policy Paradigms</h1>
+
+<p>Peter Hall saw policymaking as essentially a process of social learning that “involves three central variables: the overarching goals that guide policy in a particular field, the techniques or policy instruments used to attain those goals, and the precise settings of these instruments.” Using British economic policy from 1970-89 as his object of inquiry, he illustrated a paradigm shift. He argued to think about three orders of policy change, the first and second of which he called “normal policymaking” [@Hall1993]. The third was “marked by the radical changes in the overarching terms of policy discourse” that sometimes led to paradigm shifts.</p>
+
+<p>First and second order changes do not necessarily lead to third order changes. In Kuhn’s terms, normal policymaking has the effect of “further articulation and specification under new or more stringent conditions” (Kuhn 1970). First order change is characterized by “incrementalism, satisficing, and routinized decision making” (Hall 1993). Hall noted first order changes were made every year during the time period he studied. Second order changes happen less frequently; they “alter the instruments… without radically altering the hierarchy of goals behind [the] policy.” In British economic policies, these were changes to the controls on lending and monetary policy routinely made each year (Hall 1993).</p>
+
+<p>A third order change is much more profound, and far rarer. In British economic policy it was a radical shift from the “Keynesian mode of policymaking to one based on monetarist economic theory” (Hall 1993). Third order changes are informed by “policy experimentation and policy failure” and can lead to “movement from one paradigm to another.” The United States Constitution’s Intellectual Property Clause prompted the First Congress to establish a paradigm for granting IP rights.</p>
+
+<h1>Pre-paradigmatic Environment: The Colonies Confederation, and the Constitution</h1>
+
+<p>Edward Walterscheid (1997), showed that IP rights derived from English law abounded in the American Colonies (Walterscheid 1997). Frank D. Prager, writing earlier than Walterscheid, showed that those laws were in turn inspired by even earlier Venetian laws protecting inventions and creative works (Prager 1944). A brief discussion of this custom is necessary to understand the controversy that shaped the first Patent Act.</p>
+
+<p>By the time the American Colonies were legislating, intellectual property rights were generations old (Prager 1944). The Continental Congress, the legislative body under the Articles of Confederation, did not issue any patents or enact any laws establishing a patent <em>system</em> but “there was nonetheless a patent <em>custom</em> extant in both the infant United States and in Great Britain….” That custom, not operating through any formal mechanisms was, by 1787, “timeworn” and failing to address the technological needs of the American and English societies (Walterscheid 1997, emphasis added). The only explicit mention of inventions in law came from South Carolina’s copyright statute which extended the same rights to inventors of “useful machines” as authors had over their writings. It did not, however, create any kind of formal system by which those rights would be conferred. “Consequently, the granting of each patent… required a special act of the legislature” (Walterscheid 1997, Prager1944). This South Carolinian custom would be demonstrated by inventors in petitions to Congress.</p>
+
+<p>What little policy made during the Colonial and Articles of Confederation eras was first and second order policy change. The aging custom of common law IP rights had yet to be replaced. The Constitution prompted a third order change to codify a uniform patent <em>system</em> across all the states in the union. After the constitution was adopted, inventors sought from Congress, a paradigm shift.</p>
+
+<h1>Building a Paradigm: Controversy in Congress</h1>
+
+<p>The First Congress’s goal was simple: grant IP rights. The Constitution said nothing about what those rights should look like or whether they should be create some kind of system or grant them individually as in colonial South Carolina. Walterscheid noted that the First Congress started receiving petitions from inventors waiting for legislation “almost immediately.” The petitioners wanted Congress to individually assign a unique right for each invention. Congress, overwhelmed with all the other obligations it had per the Constitution. The authors and inventors wanted answers from Congress about what they had in mind for a law: how generic it would be, whether one law would cover both inventors and authors, what would happen to them upon death, and how the assignment process would work. Congress did what it would probably do today on a question it had never before considered, “it appointed a committee” (Walterscheid 1997, 458).</p>
+
+<p>Less than a month after Congress convened inventors David Rumsey and John Churchman’s petitions were heard in the House posing just these questions. The committee interviewed Churchman about how his navigational instruments worked and responded directly to him saying that he should be given some kind of exclusive right for a “term of years”, but stopped short of actually giving him one or any indication of how many years it had in mind. The committee’s report generated added controversy within Congress when it recommended giving Churchman “further encouragement to his ingenuity,” upon proof of his invention’s success. Another issue to consider: whether the power given to Congress was to <em>reward</em> or simply <em>encourage</em> inventors (Walterscheid1997, 456-459).</p>
+
+<p>More petitions came from inventor Alexander Lewis claiming to have discovered a novel way of “impelling boats… through the water, against any current or stream,” and asking Congress to pass a law securing a twenty-one year exclusive right to “construct boats upon his model.” Inventor Arthur Greer, asked for the same term length, but specifically used the word patent, for his navigational discoveries, and a third, Englehart Cruse asked for an eight year term over his “improved steam engine.” All of these (and presumably more) were ordered to lie on the table [@Walterscheid1997, 459]. Finally, a petition from John Fitch asked for an exclusive right, not just to build, construct or use the invention, but to enjoin others, like Rumsey, from improving upon his steam boat invention. Fitch also claimed to have exclusive rights over his inventions in several states (Walterscheid 1997, 460-462).</p>
+
+<p>To the extent these petitioners imagined a uniform system for applications, it was in wondering whether Congress might impose one. Each hoped congress would issue a special right over their unique inventions (Walterscheid 1997, Prager 1954). The issues raised nevertheless became central questions for a future patent system: what was a technology (or a Useful Art), and how long was sufficient enough time to protect it to promote their discovery? They were the issues the English system and common law traditions failed to address and were crucial for the First Congress in crafting legislation.</p>
+
+<p>If Prager’s 1954 account is any indication, the public debate surrounding any patent legislation was a battle between Fitch and Rumsey over a perennial question of patent policy: what shall be done with simultaneous discovery? Rumsey wanted a public examination system like that in France, while Fitch wanted a jury mechanism to determine which invention came first similar to Webster’s proposal. On another level Fitch and his supporters also argued that any American system should be predicated on public declarations and disclosures of their inventions, rather than a more secretive but expedient system of closed examination favored by Rumsey. In the end both parties won some part of the argument in the final Patent Act (Prager 1954).</p>
+
+<p>Walterscheid told the story more completely. While Rumsey and Fitch traded barbs, Congress attempted to make law. The first bill introduced built a system aimed at addressing the petitions and solving the many problems the English system faced. Patentability of improvements, for example, was a question for English courts, rather than Parliament, because England’s aging system had no mechanism to deal with them directly; Congress, however, had no system so it could take on that question (Walterscheid 1997).</p>
+
+<p>The bill introduced on June 23, 1789 was ultimately ordered to lie on the table because Congress could not pass it and had other, more pressing things to consider by the session’s end (Walterscheid 1997).</p>
+
+<p>By the opening of its second session, Congress was fully inundated with petitions asking for individual rights for inventions ranging from mills and sundry engines to lightning rods and wheeled boats. Added urgency came from President Washington who, in his 1790 address to a joint session, implored Congress to act on the Intellectual Property Clause and recommended that whatever legislation passed, it include some mechanism for importing useful inventions from abroad. The Senate, responded saying it would pass legislation when it deemed appropriate and the House appointed a committee “look into” his recommendations.<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> Congress wanted the granting of exclusive rights to be handled in a system, rather than an arbitrary case-by-case basis (Walterscheid 1997, 492-498).</p>
+
+<h1>A new Technological Order</h1>
+
+<p>Finally, in 1790, a patent bill was introduced that eventually passed and settled all the controversy described <em>supra</em>. The Act was paradigmatic in that it established a system within which instruments of public policy could be created and predictably used to issue IP rights for technologies.</p>
+
+<h2>What did Congress Say?</h2>
+
+<p>Congress laid out some specifics based on the controversies identified by petitions sent between 1787 and 1790, though mostly these revolved around the formal operation of the system. Congress declared, for example, that inventions worthy of an exclusive right needed to be “sufficiently useful and important,” and would only be granted for a period of fourteen (14) years. Applications would be examined by a patent board within the State Department consisting of the Secretaries of State and War and the Attorney General. Inventors were required to provide a “specification in writing and a drawing, and a model if possible” (Federico 1936, 237). Many were rejected if they lacked a working model. Filing for a patent would cost about five dollars.<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup></p>
+
+<p>One concern of many petitioners regarded whether State patents would be honored as Federal patents. That answer was simply, no. All inventions would have to apply to the Patent Board—consisting of the Secretary of State (Thomas Jefferson), the Attorney General (Edmund Randolph), and the Secretary of War (Henry Knox)—and obtain an original patent. All those who petitioned Congress from 1787 through 1790 would have to file a patent like all other inventors. Rather than attempt to enumerate for the Board a list of criteria, Congress gave broad authority to these three to determine what constituted a “useful and important” invention “not before known or used” (Federico1936, Citing the Patent Act of 1790, p. 238).</p>
+
+<p>Federico wrote that Jefferson was likely the most influential board member because of his many useful and important inventions, some of which earned him awards in France, none of which were patented.<sup id="fnref:3"><a href="#fn:3" rel="footnote">3</a></sup> These three individuals would “meet from time to time and discussed the applications” pending before the Board. Jefferson elucidated the “rules and regulations ” by which these applications would be evaluated through various letters to citizens looking for guidance on licensing or patenting some invention. As legal scholar P.J. Federico wrote about the Act, “a personal letter form Jefferson probably represents an action on an application” (Federico 1936, 239-243).<sup id="fnref:4"><a href="#fn:4" rel="footnote">4</a></sup></p>
+
+<p>Patentability quickly became shaped by what was technology. Jefferson was clear in his letter to Isaac McPherson that new uses for old technologies did not merit a patent, an improvement upon it, however, did (Jefferson 1813). In that same letter, Jefferson identified three rules the Board used that arose largely out of his desirable society view of intellectual property. Exclusive rights, monopolies as he called them, were granted not to protect a natural right, rather they are given for the benefit of society. Putting an old technology to new use did not bring enough benefit to merit a monopoly over that use. Neither did changing the material from which a machine was made: “Making a plowshare of cast rather than of wrought iron” was not sufficiently inventive because it was still a plowshare. His final rule said that “a change of form” was not an invention. A horseshoe was a horseshoe regardless of whether it was “high-quartered” or low (Jefferson1813, Federico 1936). These three rules were not, however, a complete or exhaustive list of the criteria used to judge applications. Federico notes that Jefferson had strong beliefs that “small devices, obvious improvements or…frivolous devices,” should not receive the protections of a patent (Federico 1936, 241). This system was not perfect, but did manage to give both Fitch and Rumsey patents for their respective steamboat inventions.</p>
+
+<p>A report from the clerk’s office showed that of the 114 applications the Board received, only 49 patents were granted during the Act’s first three years [@Federico1936, 246]. As for the 14 steamboat or engine petitions, a Congressional hearing was held and ultimately determined that each invention was uniquely novel and could therefore be patented. Federico described the patent regime established as “conservative” with a keen attention to the scope of the rights being granted (Federico 1936). Jefferson wanted to hold ‘invention’ to a high standard. He worried that too many patents for too inconsequential of discoveries would be embarrassing to the young republic.</p>
+
+<h1>Conclusion: A return to normal science</h1>
+
+<p>Science and Technology Studies (STS) scholars have a history of analyzing the politics of techno-scientific events. Steven Epstein analyzed the politics of inclusion in clinical trials as well as the political transfer from lay person to expert in the controversies of the AIDS epidemic (Epstein 2009, Epstein 1995). More removed from politics, Bruno Latour’s Actor Network Theory is a suitable methodology for studying how a complicated system functions and produces knowledge (Latour 1988). Both Epstein and Latour’s methods could be useful frameworks for examining a lawmaking process; especially one with many nuanced actors like patent regime’s. Sheila Jasanoff wrote more specifically about the formal political process and the roles of STS in advising policymakers (Jasanoff 2011). Her perspective on the tension between highly technological societies and democracy are useful when thinking about passing a normative judgement on a set of policies, particularly if the rules a democracy sets up governing what is or is not technology are the object of study.</p>
+
+<p>This essay, however, sought to understand how the United State’s first patent system came about and the controversies that informed it. To that end, Hall’s notions of policy paradigms were more useful because of its focus on policy being oriented toward goals based on a specific view of how a part of the world works. In Hall’s account of policy paradigms, the new economic order established was one that was “based on a fundamentally different conception of how the economy itself worked.” The shift in British Economics was a radical departure from Keynesian theory and fiscal tools to neoclassical economics and monetary policy tools [@Hall1993]. In the account here, the Americans saw a dramatic shift away from a <em>custom</em> to a <em>codified system</em> for intellectual property rights. The decay of the former and its failure to address new questions of patentability combined with a Constitutional call provoked a third order policy change that set a paradigm changing the fundamental goals of the State regarding the promotion of the “Useful Arts”.</p>
+
+<p>Just as a Kuhnian scientific paradigm ushers in a new wave of “normal science,” (Kuhn 1970), so a policy paradigm brings forth a period of “normal policymaking.” Hall says that after a paradigm shift, first and second order policies are adopted to do the work of “[adjusting] policy without challenging the overall terms” set by the paradigm (Hall1993, 279). Evidence of this in the 1790 Patent Act can be seen immediately following its passage when Congress created the patent clerk (Federico1936). This is a clear first order change where “policy at time-1” (the creation of the clerk) is “deliberately” and directly influenced by “the outcomes of policy at time-0” (the need for one created by the Act). They happen frequently and largely respond to unforeseen consequences of past policy and “new developments” (Hall 1993, 281). The issuing of patents had the collective result of incrementally defining what was and was not useful, obvious, or otherwise patentable. Supreme Court decisions following the Patent Act also shaped this answer as well as the limits of Congressional power for granting patents.</p>
+
+<p>Second order changes are rarer than first but not as profound as third order, paradigm shifting, actions. According to Hall they are instrumental adjustments that change the mechanisms underlying the current paradigm, but not its “hierarchy of goals” (Hall 1993). Walterscheid notes that few were happy with the Patent Act of 1790: not Jefferson, nor the other officials, nor inventors (more than half of whom were rejected by the Patent Board). Congress acted quickly to amend it to essentially remove the examination process inventors and officials alike thought stymied the system. Despite the fact that the system had changed from “one of registration rather than examination,” (Walterscheid 1999) this second Act is only a second order change because it preserved the central goal of the 1790 Act which moved the United States from “a patent custom to a patent system in the United States” (Walterscheid 1997) The standards for obtaining a patent still included non-obviousness and usefulness standards, it was still a formal application and fee based system universally applied, and it remained predicated on the idea that the in exchange for a monopoly over their production and use, useful inventions and discoveries would be disclosed to the public (Walterscheid 1997).</p>
+
+<p>Today, the United States is at a juncture in Intellectual Property policy where new innovations and global governance organizations are pushing the limits of our current patenting paradigm. These new phenomena putting pressure on US Code Title 35 it may not be prepared to sustain. Understanding how IP area paradigms were created and overhauled in the past can be useful to inform these contemporary discussions. The controversy leading to the 1790 Patent Act is one such informative instance. Further examination of Patent Legislation over time will show how for long normal policy making continued after 1790 and at what point it began to fail as new inventions (like methods and software) and patenting mechanisms (like patent pools and thickets) that Congress could not anticipate in its first Act.</p>
+
+<h1>References</h1>
+
+<ol>
+<li>Epstein, Steven (1995). “The Construction of Lay Expertise: AIDS Activism and the Forging of Credibility in the Reform of Clinical Trials.” In: <em>Science, Technology &amp; Human Values</em> 20, pp. 408–437.</li>
+<li>Epstein, Steven (2009). <em>Inclusion: Politics of Difference in Medical Research</em> (Chicago Studies in Practices of Meaning). 1st Paperback. University of Chicago Press.</li>
+<li>Federico, PJ (1936). “Operation of the Patent Act of 1790.” In: <em>J. Pat. Off. Soc’y</em> 18, p. 237. url: http://heinonlinebackup.com/hol-cgi-bin/get_pdf.cgi? handle=hein.journals/jpatos18\&amp;section=43.</li>
+<li>Hall, PA (1993). “Policy Paradigms, Social Learning, and the State: The Case of Economic Policymaking in Britain.” In: <em>Comparative Politics</em>. url: http://www. jstor.org/stable/10.2307/422246.</li>
+<li>Jasanoff, Sheila (Dec. 2011). “Constitutional moments in governing science and technology.” In: <em>Science and Engineering Ethics</em> 4, pp. 621–38. issn: 1471-5546. doi: 10.1007/s11948-011-9302-2. url: http://www.ncbi.nlm.nih.gov/pubmed/ 21879357.</li>
+<li>Jefferson, Thomas (1813). Letter to Isaac McPherson. </li>
+<li>Kuhn, Thomas (1970). <em>The Structure of Scientific Revolutions.</em> 50th Anniv. University of Chicago Press. isbn: 978-0226458083.</li>
+<li>Latour, Bruno (1988). <em>Science in Action: How to Follow Scientists and Engineers Through Society.</em> Harvard University Press. isbn: 978-0674792913.</li>
+<li>Prager, FD (1944). “A History of Intellectual Property from 1545 to 1787.” In: <em>J. Pat. Off. Soc’y</em> 26, p. 711. url: http://heinonlinebackup.com/hol-cgi- bin/get_pdf.cgi?handle=hein.journals/jpatos26\&amp;section=144.</li>
+<li>— (1954). “Proposals for the Patent Act of 1790.” In: <em>J. Pat. Off. Soc’y</em> 36. url: http://heinonlinebackup.com/hol-cgi-bin/get_pdf.cgi?handle=hein. journals/jpatos36\&amp;section=28. </li>
+<li>The Constitution of the United States (1787).</li>
+<li>Walterscheid, EC (1999). “Use and Abuse of History: The Supreme Court’s Interpretation of Thomas Jefferson’s Influence on the Patent Law, The.” In: <em>Idea: The Journal of Law and Technology</em> 39, pp. 195–236. url: http://heinonlinebackup. com/hol-cgi-bin/get_pdf.cgi?handle=hein.journals/idea39\&amp;section= 14.</li>
+<li>Walterscheid, Edward C. (1997). “Charting a Novel Course: The Creation of the Patent Act of 1790.” In: <em>AIPLA QJ.</em> url: http://heinonlinebackup.com/hol- cgi-bin/get_pdf.cgi?handle=hein.journals/aiplaqj25\&amp;section=20.</li>
+<li>WIPO. “WIPO Intellectual Property Handbook.” pp. 17–160.</li>
+</ol>
+
+<div class="footnotes">
+<hr />
+<ol>
+
+<li id="fn:1">
+<p>Francis Bailey came closest to securing a so-called “Special Act” from Congress for his invention of marking paper such that it could not be counterfeited. The Senate’s interest in creating a single system ultimately prevailed over Bailey’s bill.&#160;<a href="#fnref:1" rev="footnote">&#8617;</a></p>
+</li>
+
+<li id="fn:2">
+<p>“Fifty cents plus ten cents per hundred words of specification, two dollars for making out the patent, one dollar for affixing the Great Seal and twenty cents for endorsement and all other services” (Federico 1936, 237).&#160;<a href="#fnref:2" rev="footnote">&#8617;</a></p>
+</li>
+
+<li id="fn:3">
+<p>A colorful list of these inventions can be found at Federico (1936, 239).&#160;<a href="#fnref:3" rev="footnote">&#8617;</a></p>
+</li>
+
+<li id="fn:4">
+<p>The Letter to Isaac McPherson, Jefferson 1813, is one such letter.&#160;<a href="#fnref:4" rev="footnote">&#8617;</a></p>
+</li>
+
+</ol>
+</div>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[20 Years of Gustavus: A bird's eye view]]></title>
+    <link href="http://gboone.github.io/blog/2012/08/15/20-years-of-gustavus-a-birds-eye-view/"/>
+    <updated>2012-08-15T00:00:00-04:00</updated>
+    <id>http://gboone.github.io/blog/2012/08/15/20-years-of-gustavus-a-birds-eye-view</id>
+    <content type="html"><![CDATA[Inspired by the <a href="http://googleearthtimemachine.blogspot.fr/">Google Earth Time Machine blog</a> highlighted by Kottke.org a few days ago, I decided to see how far back the imagery over my college campus reached. I figured it being in rural area, there was probably a lot of agricultural aerial photography going on, but I was wrong, the imagery only went back as far as 1992. Perhaps if I paid for some extra features it would stretch back further, but who knows. Those familiar with Gustavus Adolphus College will recall the infamous 1998 Tornado, the ten-year anniversary of which was commemorated while I was a student. The big thing I remember hearing about the campus was tree loss. The big takeaway watching the recruitment video from the 90s they were still using when I was a freshman was &#8216;where did all those giant trees on the quad go? What I did not think about, and what never really got talked about, was how many more trees there are now, and this was immediately evident comparing the 92 aerial imagery with the photographs taken 20 years later.
+<a href="http://www.harmsboone.org/wp-content/uploads/2012/08/GAC121.jpg"><img class="alignleft size-medium wp-image-1596" title="Gustavus 2012" src="http://www.harmsboone.org/wp-content/uploads/2012/08/GAC121-512x318.jpg" alt="" width="512" height="318" /></a>
+
+One thing that was especially interesting was where there were more trees in 2012, where the trees were smaller, and where they were actually larger. The Linnaeus Arboretum sort of hugs the Westernmost part of the campus. In 2012 the Arb, as we affectionately knew it, is densely populated with trees on the North side, strikingly so compared to the same image in 1992. The South side is a bit more dense, but, being that it&#8217;s a bit more prairie on that end of the Arb, it&#8217;s not as noticeable. What&#8217;s strange here is that all the trees actually look a lot bigger, 20 years bigger, in fact. Did the Arb somehow survive the tornado, or was it replanted with really big trees? On the South-Southeast side of the campus, headed down the hill from (the old) Old Main the tree cover is definitely sparser in &#8216;92, but the trees much larger. There are also more paved paths headed up the hill from Rundstrom Hall, something I would have welcomed when I lived there.
+
+Apart from trees, the campus was busy constructing, moving, or demolishing campus facilities in the last twenty years. The facilities are highlighted on the 2012 map <em>supra</em> and color-coded according to whether they are sports (blue), academic (yellow), housing (green), public spaces (orange), and parking (red). I also made some notes in white. One thing is clear straight away, housing at Gustavus has changed a lot in the last twenty years. On the Southern edge of the campus were added the Arbor View Apartments, on the Western edge before the Arb, Southwest and Prairie View halls (the latter meant to be temporary after the tornado) and the International Center. On the South-Southeast side of campus (a barren patch of grass circled in green) was Wahlstrom Hall, a building demolished the summer before I enrolled. Gusties have also changed the way they play sports, with the football field moved to behind Lund Center on the North End of campus. The new stadium, built in the summer of 2007, is right next to a soccer field, and is across Ring Rd. from a baseball field and a multi-purpose field for practices (and other things? My golf class met there, I imagine that&#8217;s not all). All of these fields are either new or have moved since 1992. The 2012 stadium is directly atop the 1992 baseball field, and the 2012 baseball and multi-purpose fields appear to be atop 1992&#8217;s farmland. It&#8217;s not clear whether the rugby pitch behind Southwest Hall is new, or if it was so used in 1992. The 1992 football stadium is now covered by a mall stretching NE from Christ Chapel, one of two new public spaces. The others were an expansion of the campus center that happened after the tornado to include the Marketplace, and the creation of the Big Hill Farm West of the Arb.
+
+<a href="http://www.harmsboone.org/wp-content/uploads/2012/08/GAC92.png"><img class="alignleft size-medium wp-image-1594" title="Gustavus 1992" src="http://www.harmsboone.org/wp-content/uploads/2012/08/GAC92-512x319.png" alt="" width="512" height="319" /></a>
+
+The last thing I noted was how little the campus expanded its academic buildings. The three buildings in yellow are Mattson Hall, housing the Nursing and Education Departments; Old Main, renovated in 2005; and Beck Academic Hall completed about one year ago. This illustration of how the campus has changed is by no means scientific. Certainly academics can expand without constructing new buildings unlike, say, housing, and it&#8217;s possible some of these buildings were renovated internally, or that departments were moved around campus as they outgrew their homes. The old library, better known as the SSC in my day or A. H. Anderson Hall officially, is currently not occupied by any department, though I believe is still used for its classrooms (correct me if I&#8217;m wrong). The departments that were once there have all moved to Beck Hall now. It is nevertheless interesting to think about this aerial transformation in terms of a college&#8217;s priorities.
+
+I&#8217;m far from the first to note that <a href="http://www.nytimes.com/2012/05/15/business/colleges-begin-to-confront-higher-costs-and-students-debt.html?pagewanted=all">college</a> <a href="http://www.npr.org/2011/05/16/136214779/college-student-debt-grows-is-it-worth-it">costs</a> <a href="http://money.cnn.com/2011/10/26/pf/college/college_tuition_cost/index.htm">are</a> <a href="http://www.forbes.com/sites/peterjreilly/2012/03/19/why-college-prices-keep-rising/">on</a> <a href="http://www.npr.org/templates/story/story.php?storyId=130895432">the</a> <a href="http://www.theatlantic.com/business/archive/2012/06/how-in-the-world-did-college-costs-rise-15-in-only-2-years/258463/">rise</a>, and I&#8217;m far from the first to wonder why colleges <a href="http://www.pbs.org/wnet/need-to-know/pitchroom/are-college-sports-worth-the-cost/7827/">seem to spend more on fancy athletic and housing facilities than the academic program</a> (and whether that even matters), and <a href="http://www.newyorker.com/talk/comment/2012/05/28/120528taco_talk_lemann">what drives</a> <a href="http://blogs.edweek.org/edweek/college_bound/2012/04/some_perspective_on_the_high_cost_of_college.html">spending by college administrators</a>. Nevertheless, it is hard to argue that, at least from a bird&#8217;s eye view, my college seems to have its priorities in two key areas: athletics, and student facilities.
+
+<em>Edited for grammar and spelling, 8/15 at 7:37pm.</em>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[The Soft Power of Online Diplomacy]]></title>
+    <link href="http://gboone.github.io/blog/2011/12/13/the-soft-power-of-online-diplomacy/"/>
+    <updated>2011-12-13T00:00:00-05:00</updated>
+    <id>http://gboone.github.io/blog/2011/12/13/the-soft-power-of-online-diplomacy</id>
+    <content type="html"><![CDATA[<p><strong>Abstract</strong></p>
+
+<p>The age of the state is not over. Though some have written about the power of web 2.0 to topple regimes and destroy state sovereignty, the picture is a little more complicated. The Republic of Korea in the last two decades has taken on a major cultural export campaign. Led by television dramas and pop music, the “Korean Wave,” as it’s called, has strengthened the ROK’s position as a regional power. More recently, the Republic of Korea started a comprehensive online public diplomacy campaign targeted specifically outside Korea’s ordinary sphere of influence with the goal of developing soft power abroad. Through an examination of tourism statistics, public opinion polls, and Google search trends, this paper ask the question: what if any soft power was generated by these online efforts? The results, though not immediately obvious, provide an early model for a state successfully taking on the new challenges posed by information and communication technologies to generate soft power online. <a href="#pdf">Download this article as a PDF.</a> This paper was prepared as part of a course taught by Shanthi Kalathil at Georgetown University.
+<!--more-->
+<strong>Introduction</strong></p>
+
+<p>The age of the state is not over. Though some might enjoy thinking the state will succumb to the power of the Internet, “the state still matters,” Joseph Nye said in a 2010 TED Talk, “but the stage is crowded…” (Nye 2010). Not long ago, communicating at the rates and distances possible today cost fortunes only major institutions could afford. Today communication is cheap, fast, and accessible. A myriad of public voices have soap boxes that never before existed, and governments need to think creatively about how to respond to and manage the competing narratives proliferated by this new diffusion of communicative power to both state and non-state actors. Nye says that “if we&#8217;re going to deal with these two great power shifts&#8230;we&#8217;re going to have to develop a new narrative of power in which we combine hard and soft power into strategies of smart power.”</p>
+
+<p>South Korea was, for a long time, overshadowed by its powerful neighbors Japan and China. But today South Korea engages with the world in an ambitious online campaign deploying both websites and social networking services to communicate to foreign audiences that it is a country both culturally and economically prepared to participate in the global economy. The Republic of Korea’s online efforts to export their culture are forms of public diplomacy that translate into soft power, as evidenced by public opinion polls, tourism, and internet search trends.</p>
+
+<p><strong>Korea since the War</strong></p>
+
+<p>The division of the Korean peninsula after WWII eventually led North Korean forces in the still unresolved Korean War. While North Korea became dictator Kim Il-sung’s Democratic people’s republic of Korea, South Korea’s government struggled to gain stability, moving from one dictator to another. It was the <em>chaebol</em>, sprawling conglomerate firms protected by the government, that ultimately kept Korea stable domestically so it could develop a strong middle class. Scholar John Feffer says the “state-led, export-driven” path that South Korea took “departed significantly from the capitalist norm. It was a ‘miracle’ born of a different model of economic organization.&#8221; (Feffer, 2005) These conglomerates were no doubt supported because of who was running them—neither the state nor the <em>chaebol</em> were immune from corruption and mismanagement—but they were nevertheless crucial to grooming today’s Korea, and remain strong political entities. The Economist noted that Hyundai, a <em>chaebol</em>, “[built Korea’s] roads and then decided to build the cars to drive on them.” (Leaders: The chaebol conundrum, 2010)</p>
+
+<p>In 1981 Korea was selected to host the 1988 Olympic Games. Jarol Manheim noted it was an important moment that put Korea in the international spotlight, and when the nineteen-day June Democracy Movement erupted in 1987 against president Chun Doo-hwan’s government, the eyes of the world were on Seoul awaiting a reaction.</p>
+
+<blockquote>It may or may not have been the anticipation of the Olympics that brought students into the streets in June 1987, but it was surely the anticipation of the Olympics that brought the world’s press to Seoul, Kwangju and elsewhere to cover their activities. And&#8230;the presence of the press, the negative image of South Korea it conveyed to the world, and the legitimacy it conferred on demonstrators and opposition politicians that ultimately forced the ruling party to make significant political concessions (Manheim 1990)</blockquote>
+
+<p>The Olympics were not the reason but the “deadline for a restructuring of the political system” (Manheim 1990) At 23 years, today&#8217;s Republic of Korea (ROK) is the stable product of that political change.</p>
+
+<p>The ROK had high expectations for the ’88 Olympics. They hoped for a “Japanese experience” that would usher them “into the family of nations” (Manheim 1990) Where Japan’s goal for the Olympics was image repair, the ROK’s was hoping to alert the world that North Korea was still a threat, and build some global social capital to aid them in the ongoing conflict. They were hoping to achieve the kind of rise to global importance that Japan did after 1964. Korea&#8217;s peculiar relationship with Japan after WWII, both loathing for the wartime atrocities and envious of the regional and global leader, added competitive fire to the Seoul Olympics that would define the next era of Korean history. Korea’s <em>chaebol</em> went global after the Olympics, and Korea found consumer electronics, automobiles, and semiconductors the profitable exports of the time.</p>
+
+<p>In the 2000s, Korea shifted its focus to culture, not only through restoration of its heritage, but also by actively exporting cultural products. The result was the <em>Korean Wave</em>, a term coined by a Chinese journalist in the early 2000s to describe the rapidly rising demand for Korean goods and culture in China. Since then the wave landed on shores everywhere from Japan to Iran. The wave acts as a form of public diplomacy. As one Korean said, “If we can give [other countries] a little more joy&#8230;and show them another side of Korea, then I can only see that as a plus for us and them” (Faiola, 2010). Korean television dramas led the meteoric rise in popularity abroad. In 2004, Japan became a “full fledged” part of the wave with 90% of Japan having some knowledge of the drama “Winter Sonata” (Hayashi &amp; Lee, 2007). Korean dramas also enjoy normal airplay on television throughout Southeast Asia, even out doing Japan, the previous cultural leader, in places like Singapore. The peninsula also started packaging “K-drama tours,” where tourists visit Seoul to tour the set of their favorite dramas (Dator and Seo 2010; Datar 2010; Shim 2005). The Ministry of Culture and Tourism launched Arirang in 1998 as a “representative international broadcasting station, [that] strives to enhance relationships with the global community” by spreading the image of Korea through its TV and Radio programming. Today, Arirang commands an audience share of 91.9 million worldwide (Arirang, 2011).</p>
+
+<p>In 2008, expanding on the success of Korean drama, the ROK started a project to globalize Korean food through the Ministry of Food, Forest, and Fisheries, with the goal of making Korean “one of the world’s most famous five” cuisines in the next ten years (Kim 2008). The government spun the project off to the private Korean Food Foundation in 2010. The foundation is running scientific experiments to prove Korean food’s fabled health value. Mr. Chung Woon-chun, the foundation’s chairman, “is currently leading [research projects] with a budget of one billion KRW<a id="anchor1" href="#note1">¹</a>&nbsp;on the link between Korean food and its effect on patients with diabetes, hypertension, obesity, hyperlipemia,” and many other diseases (Ku 2010). More compelling than examining these efforts simply as a part of a cultural phenomenon is how these function diplomatically and make the ROK more powerful.</p>
+
+<p><strong>Online Diplomacy the Right Way, the Korean Way</strong></p>
+
+<p>Outside of Arirang, Korea’s public diplomacy since 1988 was episodic, characterized by world events like the Olympics in 1988, the World Cup in 2002, and the G20 summit in 2010. Through these events Korea was able to bring people to the Land of the Morning Calm and put itself in the mind of the world through international press coverage. These events are high-profile, but non permanent, leaving Korea without much lasting presence outside of occasional skirmishes with the North. This prompted Korea to shift its focus to stepping up efforts to embed itself in the mind of the global community.<a id="anchor2" href="#note2">²</a></p>
+
+<p>Part of the solution was online. The Korean Organization for Culture and Information Service (KOCIS) began operating “korea.net” in 2001 (KOCIS 2011). Despite being available in English, Spanish, Arabic, Chinese and Japanese, the site is not translated into Korean<a id="anchor3" href="#note3">³</a>&nbsp;which suggests the KOCIS is trying to communicate everything Korean to everywhere but Korea. The Korea Food Foundation also launched Hansik.org: The Taste of Korea, to bring their mission online. Both the KFF and KOCIS are present on the major western social media outlets including Facebook, Twitter, YouTube and Flickr, and KOCIS recruits foreigners to write for the Korea Blog.</p>
+
+<p>There are plenty of examples of governments bringing diplomacy online. There are fewer examples of governments doing so effectively, in part because these technologies are so new that there is not yet a clear framework for effectiveness. For example, the Voice of America, the United States’ public diplomacy engine has decades of good practices in radio behind it that shape the way their journalists approach the medium; online platforms platform are more emergent in how they should be used.</p>
+
+<p>Nicholas J. Cull described the US State Department&#8217;s attempt to use Twitter abroad in <em>Place Branding and Public Diplomacy</em>. “The first problem the US ran into was the question of exactly how its personnel would conduct themselves on-line.” Another problem was “the fixation with &#8216;broadcast mode&#8217; in US online diplomacy,” the way the US was engaging in online diplomacy was “equivalent of going into a party and shouting about one&#8217;s self and leaving,” unsavory behavior even if the US were the one &#8220;buying all the drinks.&#8221; (Cull 2011) These are not problems unique to the State Department, though, a recent Pew study showed that news organizations are using Twitter as little more than “a glorified RSS feed,” pushing only their own content out to thousands of followers (Garber 2011).</p>
+
+<p>Anthony Olcott views the situation a bit differently. He sees online public diplomacy as a challenge of managing &#8220;cheap, hyper-abundant information,&#8221; and getting the state’s message out credibly above the noise of non-state actors. His &#8220;Six Vs of Information&#8221; provide a framework with which governments might approach their information management in the network economy. The &#8220;Six Vs&#8221; are: volume, velocity, vector, veracity and verifiability, and vulgarity. They do not suggest any specific policy, but offer &#8220;a starting point [for] the main challenges posed,&#8221; by a society of rich information (Olcott 2010).</p>
+
+<p>Joseph Nye and Robert Keohane identify “free information,” or what “actors are willing to create and distribute without financial compensation,” as having “the most dramatic effect on the information revolution.” (Nye and Kohane 1998) It is the “persuasiveness of the free information” disseminated by various actors that translates into power. “If a state can make its power legitimate in the eyes of others,” they argue, “and establish international institutions that encourage others to define their interests in compatible ways,” it may generate soft power. With this in mind, an analysis of KOCIS’s online diplomacy efforts within Olcott’s framework reveals South Korea is doing a remarkable job at legitimizing itself in a way that translates itself into soft power around the world.</p>
+
+<p>The statistics about how much data is transmitted online today is impressive, but more interesting than the volume of information available is how people select what to read and what to ignore. One way is for people to &#8220;cocoon&#8221; themselves inside the &#8220;information company of those who share their interests and assumptions.&#8221; (Olcott 2010) People use these cocoons to insulate themselves from the information they do not want. Cull called this our desire to find and rely on &#8220;someone like me.&#8221; (Cull 2011)</p>
+
+<p>People also engage in something called “satisficing” where they want some information about a topic, but end up acquiring a relatively small amount to what is available. Through this process of &#8220;satisficing&#8221; Olcott argues, &#8220;people are increasingly less likely to read deeply, but rather &#8216;power browse,&#8217;&#8221; to make a superficial connection with the information they are combing. This kind of behavior is encouraged by things like RSS readers, Twitter, and Facebook which more easily give the option of reading a headline and moving on to the next thing. The problem for governments is developing ways to deal with voluminous information generated by non-state actors contrary to the state’s preferred narrative.</p>
+
+<p>Korea’s online strategy is to make its official channels as attractive or more so than non-state actors. When KOCIS launched The Korea Blog, it took existing voices from the cocoon it was trying to infiltrate and promoted them. The information silo was foreigners who blogged about Korea, from both inside and outside of the peninsula. In 2011, the KOCIS began recruiting foreigners who were already blogging in Korea to write for The Korea Blog, the ‘web 2.0’ portion of <a href="http://korea.net">korea.net</a>, effectively promoting a few <em>someone like mes</em> from the thousands of Westerners living in Korea. KOCIS bloggers need not be in Korea, but their posts must originate on their own blog, with cross-promotion as one of the perks (Korea Blog 2011). Korea tapped into the local network of foreign bloggers, among them many English teachers expressing opinions about Korea, often loudly. By giving bloggers a higher profile venue, KOCIS is injecting itself into a community with the hope that by endorsing these foreigners, they will become influential inside their information cocoons, and outsiders or new-comers will &#8216;satisfice&#8217; their need for information about Korea with content from <a href="http://korea.net">korea.net</a>.</p>
+
+<p>Olcott&#8217;s second V is Velocity. He compares the uptake of the viral “Pants on the Ground” video from American Idol with a video of a State Department official giving a speech to illustrate the point that some artifacts are picked up quicker than others. The lesson for public diplomacy is that the state’s information may be really, informative, interesting, even engaging and still lose out to something totally ridiculous simply because of the speed at which information travels is impossible to quantify. While it is difficult to pinpoint exactly how it is staying on top of information velocity, Korea is regularly producing new content. KOCIS’ official Twitter account (@koreanet) tweets 6.8 times per day including pictures, videos, and news articles. The blog produces 12-15 new posts per month. (Korea Blog 2011) Like news organizations and the US State Department, however, Korea&#8217;s Twitter accounts may have a &#8220;talking to oneself&#8221; problem. They follow about a quarter as many people as follow them, (Twitter 2011) and rarely talk to other users on the platform.</p>
+
+<p>Information used to be expensive, and tended to come from straightforward sources. There were a fixed number of newspapers circulating in each city, starting a radio station required vast human and capital resources. Consequently, it was easier to appear objective while presenting a specific narrative and attributed that narrative to human behavior. It was, this is to say, easier to control a sphere of influence to create the illusion of &#8220;broad social consensus,&#8221; because of the predictable vector by which information was delivered (Olcott 2010).</p>
+
+<p>In the past there were three layers of influence that directed public discourse: the spheres of deviancy, legitimate controversy, and consensus (Olcott 2010). The powers who controlled the spread of information also controlled what information populated which spheres. Today each person has the potential to be a media creator, and construct their own spheres. The chaotic vectors by which information may spread around the globe, many of them contrary to Korea’s preferred narrative, are part of Korea’s motivation to employ the available means of persuasion in an attempt at soft power.</p>
+
+<p>Victor Cha and Katrin Katz demonstrated the misinformation about Korea in the United States through analysis of a poll for the Chicago Council on Global Affairs. They noted that despite strong support for the continued military alliance between the US and Korea, many Americans were ignorant to basic facts about the country (Cha &amp; Katz 2011). 40% of surveyed Americans did not know that Korea was a liberal democracy, and 71% were unaware that Korea was one of America&#8217;s top trading partners. They speculated that this accounted for why Koreans generally feel they know more about the US than vice versa (Cha &amp; Katz 2011). Meanwhile, President Obama characterized Korea&nbsp; as a nation with whom the US had an &#8220;enduring alliance,&#8221; and &#8220;a partnership of the heart, that will never be broken&#8221; (Obama 2011). Online efforts, particularly the employment of foreign bloggers to write about Korea, is a response to this relative ignorance abroad.</p>
+
+<p>Not only are there more actors, spreading more information through more channels than ever before, but the actors responsible for information are increasingly careless where it counts: the facts. In the lurch of getting the scoop first, factual verification is often sacrificed by even the most reputable sources, exemplified by the news coverage of the attempted assassination of US Representative Gabriel Giffords. Three major media outlets <em>confirmed</em>, the representative was killed in the attacks when in fact she was still alive albeit in critical condition. NPR first reported her death at 2:15PM, per the word of &#8220;a source in the Pima County sheriff&#8217;s office,&#8221; and for at least an hour juggled conflicting reports about whether she was alive. (Memmott 2011) This is perhaps an illustration of all six of Olcott&#8217;s V&#8217;s, but &#8220;the increase in information velocity has placed even greater pressure&#8230;to get information out as quickly as possible,&#8221; while reducing the amount of energy news sources can even attempt to put into verifying information (Olcott 2010).</p>
+
+<p>Foreign bloggers who teach English in South Korea are notorious for lacking a full, verified story, and the state is aware of this. Perhaps the largest goal of the Korea Blog, then, is to discredit some of the stories perpetuated by people like Jameson Lannister, who lambasts Korean culture in her post (and video) about an altercation on the subway. The altercation between an angry elderly woman and a young female is terrifically violent, but so is the energy poured into criticizing it as a product of &#8220;cultural insanity,&#8221; as a commenter put it, and a culture made up of what the author called &#8220;irrational rules and demands that are used to break people down, make them feel small, ashamed, crazy and alone&#8221; (Lannister 2010) Korea obviously does not want people abroad thinking their culture is insane, or that this kind of event is an every-day occurrence. Neither do they want people thinking that cultural norms are so difficult to parse that even their own citizens cannot understand them.</p>
+
+<p>To respond to a situation like this, Korea has a few choices. An obvious one would be to hire people to hunt down blogs like this and post veracious comments trying to discredit her story. If they did that, however, they risk wasting time on commenters without credibility perceived as hired shills. Rather than risk losing more credibility on the topic of their own culture, KOCIS sought to saturate the web with positive imagery and bloggers who will adhere to the narrative it wants to promote. By giving already active bloggers a promoted venue and community within the official communication lines, they can more effectively respond to Lannister’s story as the one-off event it is. The best result the ROK can hope for is to discredit these bloggers and their stories as apocryphal.</p>
+
+<p>If Lannister’s “Evil Ajumma” story is an example of blogging with a careless regard for the facts, it is an even greater artifact of vulgarity, the last of Olcott’s Vs. Vulgarity here does not mean rude or offensive language; according to Olcott the challenge governments face is the ability of ordinary people to speak ordinarily online, a classic definition of “vulgar” that derives from its Latin root for “people.” (Olcott 2010) The attention foreigners living in Korea give to events like Lannister’s Seoul Metro fight, and the language with which they describe them, are quietly contributing to an image KOCIS is working to supplant.</p>
+
+<p>Korea’s aggressive online diplomacy is the early entrant into a broader attempt at building its image abroad, but the nation’s branding goes deeper than blogging and tweeting to international audiences, it also includes “greater involvement in addressing global issues like poverty or climate change” (Strouther 2009). It is no coincidence, then, that the government was so aggressive at securing the KORUS free trade agreement in 2011, won the 2018 Winter Olympics bid, and created a Peace Corps.-like organization called World Friends Korea (WFK) in 2009 that sent 2,000 Koreans abroad to volunteer. The plan was to make South Korea second only to the US in the number of global volunteers (Na 2009).</p>
+
+<p>Government initiatives describe some of Korea’s public diplomacy, but a tremendous amount is done by non-state actors. Hyundai USA engaged in a kind of public diplomacy when it started the “Cash for Clunkers” program three weeks before federal funds were available. When added to existing incentives, a new Hyundai cost as low as $6,670 (Motavalli 2009). To the extent that people know they are Korean products, every LG washing machine, Samsung smartphone, or Kia automobile functions diplomatically in the same way McDonalds, Cocca-Cola, GE and Boeing represent America. As long as these companies continue to act in the state’s interest, they benefit mutually from globalization.</p>
+
+<p><strong>The Soft Power of Pop Culture</strong></p>
+
+<p>Joseph Nye defined soft power as “getting what you want through&#8230;the attractiveness of a country’s culture, political ideals, and policies”(Nye 2004). Shashi Tharoor, in a TED Talk said that soft power is something that emerges “partly because of governance, but partly despite governance&#8221; (Tharoor 2010) India’s entertainment industry took &#8220;a certain aspect of Indian-ness and Indian culture around the globe,” and not just to people who are Indian or know about India. He tells about an illiterate woman in Senegal who travels to Dakar each week to watch her favorite Indian television program and cites an Indian soap opera being “the most popular television show in Afghan history,” despite an absence of Indian military in Afghanistan (Tharoor 2010). The show was so successful there that crime rates reportedly rose during its time slot because security personnel were too engaged with the show to do their jobs: “That’s soft power,” he said during his TED Talk, “and that is what India is developing” (Tharoor, 2010). In this context, soft power is the product of successful public diplomacy.</p>
+
+<p>Certainly the anecdotal evidence presented in the popular and academic literature suggest this was true for the Korean Wave, at least in Asia. Some have written about the implications the Korean Wave had on domestic and international politics. Jim Dator and Yeongseok Seo wrote “Korea may be the first nation <em>consciously</em> to recognize, and&#8230;take action towards,” a &#8220;dream society of icons&#8221; where audiovisual content is more important than information and traditional goods and services (Dator &amp; Seo 2004). Doobo Shim wrote about the power of Korean companies and dramas to shape long-standing political attitudes about the country. Finally, Hayashi and Lee discussed the limited but real extent to which the drama &#8220;Winter Sonata&#8221; translated into soft power over Japan (Hayashi &amp; Lee 2007). The Korean Wave had an important role in shaping attitudes about Korea, but has not chilled the tensions between Japan and its one-time colony. (Hayashi &amp; Lee, 2007) &#8220;At best,&#8221; they wrote, &#8220;the most conspicuous result of the popularity of the drama in Japan may be that an increasing number of the general public has now started to engage with South Korea as never before in the postwar period, be it in a positive or negative way&#8221; (Hayashi &amp; Lee 2007).</p>
+
+<p>Both the Washington Post and BBC noted the recent tremendous increase in tourism to Korea, especially relative to China and Japan. The BBC reports that tourism to Korea saw a 46% increase, while China and Japan rose only 10% (Datar 2011). In 2006, Japanese women were flocking to Korea to “Catch the Korean Wave” (Faiola 2010). According to the Post, “more than 6,400 female clients” had registered with an online Korean-Japanese match making service who saw its membership “skyrocket since 2004, when ‘Winter Sonata’ became the first of many hot Korean television dramas to hit Japan” (Faiola 2010). While these figures do not bespeak any policy changes, they do reflect a shift in attitudes. Shim reminded that Korean soldiers fighting against the Vietnamese Liberation Army during the Vietnam War remained a real and fresh memory for the Vietnamese. &#8220;In this respect,&#8221; Shim wrote, &#8220;Korean pop stars have contributed to improving Korea&#8217;s foreign relations.… Korean actor Jang Dong-gun and actress Kim Nam-ju enjoy such popularity in Vietnam that the Vietnamese have even labelled them their ‘national&#8217; stars&#8221; (Shim 2006) Korea significantly eased years of tension between the two states through the soft power of pop culture.</p>
+
+<p>Given how well Korea is approaching its online diplomacy strategy, it follows that these efforts should translate into a similar kind of soft power. A 2010 BBC World Service poll showed Korea’s influence around the world was relatively weak. While a little under a third of those polled in 27 countries said Korea’s influence was positive, a small plurality had no opinion one way or another. Among Asian countries, only a plurality of Indonesians viewed Korea’s influence negatively, and while most of Europe viewed Korea’s influence negatively, the Americas were mostly positive about Korea (BBC World Service 2010). The same poll from 2011 showed South Korea improve slightly from 2010, although Europe continued to view Korea’s influence negatively. In the US, the poll showed a majority of people having a favorable opinion of Korea’s influence.</p>
+
+<p>The 2011 poll showed some change in attitude about Korea’s influence in the world, but not much. If anything the change lies in the number of people who had some opinion. In 2010, 62% of respondents though Korea&#8217;s influence was either positive or negative while the rest either had no opinion or gave no response. In 2011 that number increased by 6% (BBC World Service 2010; 2011). This suggests that if Korea developed any kind of soft power, it was similar to what Hayashi and Lee found in Japan, that Korea is now on the world’s agenda, recognized as having some importance or influence, whether it is positive or negative.</p>
+
+<p>Another method of looking at soft power is in tourism. If a country is winning the hearts and minds of people around the world, surely people will want to visit. A comparison of numbers of American visitors between 2005 and 2010 does show an increase of 122,256, despite a general decline in American overseas tourism in the same time period (KTO 2011; ITA 2011). American visitors to Korea in the 15 years between 1995 and 2010 increased by more than a quarter of a million people. As a percentage of all overseas travel by Americans, however, visits to Korea increased by only 1% (Korea Tourism Office 2010).</p>
+
+<p>&nbsp;</p>
+
+<table cellspacing="0" cellpadding="0">
+<tbody>
+<tr>
+<td valign="top"><strong>Year</strong></td>
+<td valign="top"><strong>1995</strong></td>
+<td valign="top"><strong>2005</strong></td>
+<td valign="top"><strong>2010</strong></td>
+<td valign="top"><strong>Δ</strong><strong> 95-05</strong></td>
+<td valign="top"><strong>Δ</strong><strong> 05-10</strong></td>
+<td valign="top"><strong>Δ</strong><strong> 95-10</strong></td>
+</tr>
+<tr>
+<td valign="top">US Arrivals in ROK</td>
+<td valign="top">358,872</td>
+<td valign="top">530,633</td>
+<td valign="top">652,889</td>
+<td valign="top">171,761</td>
+<td valign="top">122,256</td>
+<td valign="top">294,017</td>
+</tr>
+<tr>
+<td valign="top">Total US departures</td>
+<td valign="top">19,059,000</td>
+<td valign="top">38,372,404</td>
+<td valign="top">37,354,842</td>
+<td valign="top">19,313,404</td>
+<td valign="top">(1,017,562)</td>
+<td valign="top">18,295,842</td>
+</tr>
+<tr>
+<td valign="top">ROK as % of US travel</td>
+<td valign="top">1.88%</td>
+<td valign="top">1.38%</td>
+<td valign="top">1.75%</td>
+<td valign="top">-0.50%</td>
+<td valign="top">0.36%</td>
+<td valign="top">-0.14%</td>
+</tr>
+<tr>
+<td colspan="7" valign="top">(Korea Tourism Office, 2010; Korea, Monthly Statistics of Tourism (1975-1996); U.S. Department of Commerce, 2010; Office of Travel and Tourism Industries, 1995)</td>
+</tr>
+</tbody>
+</table>
+
+<p>&nbsp;</p>
+
+<p>Again, these numbers alone only tell part of the story. People are motivated to travel for more reasons than a country’s reputation. People do not exclusively travel to Bermuda because of its government’s social agenda on global warming, or what people say about the culture in blogs. Travelers to Korea also do not always visit for reasons that are easily correlated with soft power. In 2005, for example, there were 3,951 E2 Work visa holders, the majority of them being English teachers (Jambor, 2008). While there is certainly something motivating Americans to work in South Korea, the country’s reputation is not necessarily among them. Paul Jambor shows the opposite may be true,;despite a generally negative bias against foreign English teachers, the number of E-2 holders increased by an easy 5,000 in 2008 (Jambor, 2008). Thus, it is likely that a significant number of the remaining tourists are motivated by friends and family that are E-2 holders, seeing the Korea KOCIS wants them to see may happen, but it is not&nbsp; always what brings them into the country.</p>
+
+<p>This begs the question of how much online diplomacy, no matter how well crafted, can actually trigger soft power. Certainly the Korean efforts since the early 2000s seem not to have won the hearts and minds of many people abroad, slight increases in public perceptions of Korea&#8217;s influence notwithstanding. But maybe Korea doesn’t want the hearts and minds. After all soft power is not necessarily about winning over the people; it is about &#8220;getting what you want&#8221; (Nye 2004).</p>
+
+<p><strong> </strong>Perhaps Korea does not want hearts and minds, yet. Until about 20 years ago the Republic was not even a household name in some parts of the developed world. Even today the Land of the Morning Calm rarely makes global news except in the context of North Korea and high profile international events like the Olympics and the G-20 summit. With this in mind, Korea&#8217;s online diplomacy effort is more in line with a traditional goal of public diplomacy: Korea wants to talk to the world from its own perspective, and for the world to listen, and talk back.</p>
+
+<p>The KOCIS website, the blog, and the KOCIS Facebook and Twitter accounts, along with the Arirang network, and the Hansik website are all broadcasting a uniquely Korean message to anyone listening. Furthermore, some evidence that Korea has managed to etch out an ongoing narrative of its own can be seen in the change in Google search trends.</p>
+
+<p>In 2010 search trends in the US showed North Korea was about 30% more important than South Korea, with both countries hardly having any ranking outside of military threats and the World Cup. North Korea was even more popular the previous year, with South Korea hardly making any headlines, or capturing any search terms. Indeed since 2006, North Korea has generally surpassed the South in search importance. In the last twelve months, however, search trends in the United States have favored South Korea over the North, but not by much. Peak searches and news volume for that period, however, show that South Korea was making more headlines (Google 2011; data set limited to the last twelve months; data set limited to 2010; data set limited to 2009; all available search data).</p>
+
+<p>These data suggest that South Korea’s efforts are working. If 2012 remains consistent with 2011, even more so. Whenever it gives the world another story to cover, Korea is achieves soft power simply by capturing the attention of outsiders in its own context. They are anticipating, then, that as the world shifts its focus away from North <em>and</em> South Korea, people’s attitudes will eventually change in the South’s favor. This would correspond well with Hayashi and Lee&#8217;s findings about the soft power conferred upon the Japanese by Winter Sonata; some of the world’s attention, good or bad, is on Korea.</p>
+
+<p>The search trends, tourism statistics, and global public opinion suggest Korea achieved soft power simply by distinguishing itself on the world stage. Further research on this topic may explore the extent to which KOCIS is fostering some kind of content-based change in the way Korea is portrayed in foreign newspapers and magazines. This would be similar to Hayashi and Lee’s analysis of news coverage of the Korean Wave in Japan and Korea. Examining, for example, the content of foreign bloggers to see the extent to which Arirang and online resources are used in blog posts rather than mere observations, would reveal that these sources are being accepted inside the sphere of influence in that community. Additionally, public opinion polling around the world may eventually show a stronger correlation between public diplomacy and changing attitudes of Koreans around the world. For now, Korea’s role in the world is clearly changing, and the state is ready to participate.</p>
+
+<p><strong>Notes</strong></p>
+
+<ol>
+    <li id="note1">A little under a million dollars. <a href="#anchor1">Back to text.</a></li>
+    <li id="note2">This is not to suggest they are not still pursuing high profile events: the 2018 Winter Olympics will be hosted in Pyeongchang, for example. <a href="#anchor2">Back to text.</a></li>
+    <li id="note3">Though korea.kr is a similar website, a simple, unscientific content comparison shows they are very different. <a href="#anchor3">Back to text.</a></li>
+</ol>
+
+<p><strong>References</strong></p>
+
+<p>Arirang. 2011. About Arirang. URL:<a href="http://www.arirang.co.kr/prroom/About_ArirangN5.asp?sys_lang=Eng">http://www.arirang.co.kr/prroom/About_ArirangN5.asp?sys_lang=Eng</a> (Accessed, December 6, 2011)</p>
+
+<p>BBC World Service. 2011. Views of US Continue to Improve in 2011 BBC Country Rating Poll. BBC, March 7. URL: <a href="http://www.worldpublicopinion.org/pipa/pdf/mar11/BBCEvalsUS_Mar11_rpt.pdf">http://www.worldpublicopinion.org/pipa/pdf/mar11/BBCEvalsUS_Mar11_rpt.pdf</a> (Accessed December 9, 2011)</p>
+
+<p>BBC World Service 2010. Global Views of United States Improve While Other Countries Decline. BBC, April 18. URL: <a href="http://news.bbc.co.uk/2/shared/bsp/hi/pdfs/160410bbcwspoll.pdf">http://news.bbc.co.uk/2/shared/bsp/hi/pdfs/160410bbcwspoll.pdf</a> (Accessed December 9, 2011)</p>
+
+<p>Cha, Victor and Katrin Katz. 2010. “Report on U.S. Attitudes toward the Republic of Korea”. Chicago Council on Global Affairs, Sept. 16.</p>
+
+<p>Choi, Jessica Seoyoung. “Korea to become an FTA hub country.” Korea.net URL:&nbsp; <a href="http://www.korea.net/detail.do?guid=59913">http://www.korea.net/detail.do?guid=59913</a> (Accessed: December 4, 2011)</p>
+
+<p>Kim Hyun-cheol. 2008. “Campaign Starts to Globalize Korean Food”. Korea Times, October 16. Web. <a href="http://www.koreatimes.co.kr/www/news/biz/2008/10/123_32807.html">http://www.koreatimes.co.kr/www/news/biz/2008/10/123_32807.html</a> (Accessed: December 4, 2011)</p>
+
+<p>Datar, Rajan. 2011. &#8220;South Korea Pushes its pop culture abroad.&#8221; BBC URL: <a href="http://news.bbc.co.uk/2/hi/programmes/fast_track/9633298.stm">http://news.bbc.co.uk/2/hi/programmes/fast_track/9633298.stm</a> (Accessed: December 4, 2011)</p>
+
+<p>Dator, Jim and Yeongseok Seo. 2004. Korea as the Wave of a Future. Journal of Futures Studies 9(1), August.</p>
+
+<p>Leaders: The chaebol conundrum; South Korea&#8217;s industrial giants.&nbsp;2010.&nbsp;The Economist,&nbsp;April&nbsp;3,&nbsp;14.</p>
+
+<p>Faiola, Anthony. 2010 “Japanese Women Catch the ‘Korean Wave’”. Washington Post, Aug. 30. Web. URL: <a href="http://www.washingtonpost.com/wp-dyn/content/article/2006/08/30/AR2006083002985.html">http://www.washingtonpost.com/wp-dyn/content/article/2006/08/30/AR2006083002985.html</a> (Accessed: December 4, 2011)</p>
+
+<p>Feffer, John. 2005. “Korean Food, Korean Identity: The Impact of Globalization on Korean Agriculture”. Shorenstein APARC. URL: <a href="http://ksp.stanford.edu/publications/korean_food_korean_identity_the_impact_of_globalization_on_korean_agriculture/">http://ksp.stanford.edu/publications/korean_food_korean_identity_the_impact_of_globalization_on_korean_agriculture/</a> (Accessed: December 4, 2011)</p>
+
+<p>Google. 2011. Google Trends:South Korea, North Korea (data set limited to search terms from December 2010 - December 2011). Web. URL: <a href="http://trends.google.com/trends?q=south+korea&amp;ctab=0&amp;geo=all&amp;date=ytd&amp;sort=0">http://trends.google.com/trends?q=South+Korea%2C+North+Korea&amp;ctab=0&amp;geo=us&amp;geor=all&amp;date=ytd&amp;sort=0</a> (Accessed: December 6, 2011)</p>
+
+<p>––– (data set limited to 2010) URL: <a href="http://trends.google.com/trends?q=South+Korea%2C+North+Korea&amp;ctab=0&amp;geo=us&amp;geor=all&amp;date=2010&amp;sort=0">http://trends.google.com/trends?q=South+Korea%2C+North+Korea&amp;ctab=0&amp;geo=us&amp;geor=all&amp;date=2010&amp;sort=0</a></p>
+
+<p>––– (data set limited to 2009) URL: <a href="http://trends.google.com/trends?q=South+Korea%2C+North+Korea&amp;ctab=0&amp;geo=us&amp;geor=all&amp;date=2009&amp;sort=0">http://trends.google.com/trends?q=South+Korea%2C+North+Korea&amp;ctab=0&amp;geo=us&amp;geor=all&amp;date=2009&amp;sort=0</a></p>
+
+<p>––– (all available data) URL: <a href="http://trends.google.com/trends?q=South+Korea%2C+North+Korea&amp;ctab=0&amp;geo=us&amp;geor=all&amp;date=all&amp;sort=0">http://trends.google.com/trends?q=South+Korea%2C+North+Korea&amp;ctab=0&amp;geo=us&amp;geor=all&amp;date=all&amp;sort=0</a></p>
+
+<p>Garber, Megan. 2011. Twitter, The Conversation-enabler? Actually, most news orgs use the service as a glorified RSS feed. Nieman Journalism Lab, Nov. 14. URL: <a href="http://www.niemanlab.org/2011/11/twitter-the-conversation-enabler-actually-most-news-orgs-use-the-service-as-a-glorified-rss-feed/">http://www.niemanlab.org/2011/11/twitter-the-conversation-enabler-actually-most-news-orgs-use-the-service-as-a-glorified-rss-feed/</a> (Accessed: December 12, 2011)</p>
+
+<p>Hallyu, yeah! 2010. The Economist,&nbsp; January 25. Web. URL:<a href="http://www.economist.com/node/15385735">http://www.economist.com/node/15385735</a> (Accessed: December 4, 2011)</p>
+
+<p>Hayashi Kaori and Eun-Jung Lee. 2007. The Potential of Fandom and the Limits of Soft Power: Media Representations on the Popularity of a Korean Melodrama in Japan. Social Science Japan, Vol. 10:2. Oxford University Press.</p>
+
+<p>Na Jeong-ju. 2009. “N. Korea Overshadows South’s Images Abroad”. Korea Times, March 30. Web. URL: <a href="http://www.koreatimes.co.kr/www/news/special/2011/03/180_42274.html">http://www.koreatimes.co.kr/www/news/special/2011/03/180_42274.html</a> (Accessed: December 4, 2011)</p>
+
+<p>Na Jeong-ju 2009. &#8220;Korea&#8217;s Peace Corps Launched&#8221;. Korea Times, May 7.. Web. URL: <a href="http://www.koreatimes.co.kr/www/news/nation/2009/05/116_44506.html">http://www.koreatimes.co.kr/www/news/nation/2009/05/116_44506.html</a> (Accessed: December 4, 2011)</p>
+
+<p>Jambor, Paul Z. 2010. The ‘Foreign English Teacher’ A Necessary ‘Danger’ in South Korea. Korea University—IFLS: Department of Education, Art &amp; Design. URL:<a href="http://www.eric.ed.gov/PDFS/ED511524.pdf">http://www.eric.ed.gov/PDFS/ED511524.pdf</a> (Accessed 12-06-11)</p>
+
+<p>Join the 2<sup>nd</sup> batch of worldwide Korea bloggers!<em> </em>2011. The Korea Blog, December 2<em>.</em> URL: <a href="http://blog.korea.net/?p=6054">http://blog.korea.net/?p=6054</a> (Accessed 12-04-2011)</p>
+
+<p>Korea Tourism Office. 2011. Statistics of Arrivals and Departures by Itemize URL: <a href="http://kto.visitkorea.or.kr/inout.kto?func_name=search">http://kto.visitkorea.or.kr/inout.kto?func_name=search</a> (Accessed 12-06-2011)</p>
+
+<p>––– Korea, Monthly Statistics of Tourism(1975-1996) URL: <a href="http://kto.visitkorea.or.kr/inout.kto?func_name=search">http://kto.visitkorea.or.kr/inout.kto?func_name=search</a> (Accessed 12-06-2011)</p>
+
+<p>Keohane, Robert O and Joseph S. Nye Jr. 1998. Power and Interdependence in the Information Age. Foreign Affairs, Sept./Oct. Vol. 77:5 Pg. 81.</p>
+
+<p>Ku Yea-rim. 2010. “Globalization of Korean Food for Good Health of People Across the World”. IT Times: Industry and Technology Times, December 31. Web. URL: <a href="http://www.koreaittimes.com/story/12323/globalization-korean-food-good-health-people-across-world">http://www.koreaittimes.com/story/12323/globalization-korean-food-good-health-people-across-world</a> (Accessed 12-04-2011)</p>
+
+<p>Lannister, Jameson. 2010. Cultural Lessons from an Evil Ajumma. It&#8217;s Always Sunny in Korea, Dec. 6. URL: <a href="http://www.itsalwayssunnyinsouthkorea.com/cultural-lessons-from-an-evil-ajuma">http://www.itsalwayssunnyinsouthkorea.com/cultural-lessons-from-an-evil-ajuma</a> (Accessed December 6, 2011)</p>
+
+<p>Manheim, Jarol B. 1990. “Rites of Passage: The 1988 Seoul Olympics as Public Diplomacy” The Western Political Quarterly 43.2, June: 279–295. URL: <a href="http://www.jstor.org/stable/448367">http://www.jstor.org/stable/448367</a> (Accessed 11-30-2011)</p>
+
+<p>Memmott, Mark. 2011. Rep. Gabrielle Giffords (D, Ariz.), Many Others Shot; At Least Six Dead. The Two Way, NPR, Jan. 9. URL: <a href="http://www.npr.org/blogs/thetwo-way/2011/01/09/132764807/rep-gabrielle-giffords-d-ariz-others-reported-wounded-in-shooting">http://www.npr.org/blogs/thetwo-way/2011/01/09/132764807/rep-gabrielle-giffords-d-ariz-others-reported-wounded-in-shooting</a> (Accessed December 6, 2011)</p>
+
+<p>Motavalli, James. 2009. Hyundai Gets Jump on Cash for Clunkers. In Wheels. New York Times, July 20. URL: <a href="http://wheels.blogs.nytimes.com/2009/07/20/hyundai-gets-jump-on-cash-for-clunkers/">http://wheels.blogs.nytimes.com/2009/07/20/hyundai-gets-jump-on-cash-for-clunkers/</a> (Accessed 12-04-2011)</p>
+
+<p>Nye, Joseph. 2004. Soft Power: The Means to Success in the World. New York: PublicAffairs. Print.</p>
+
+<p>Nye, Joseph. 2010. Joseph Nye on Global Power Shifts. “TEDxGlobal” Technology Entertainment and Design, July 2010. URL: <a href="http://www.ted.com/talks/joseph_nye_on_global_power_shifts.html">http://www.ted.com/talks/joseph_nye_on_global_power_shifts.html</a> (Accessed December 12, 2011)</p>
+
+<p>Obama, Barack. 2011. President Obama Toasts President Lee Myung-bak of the Republic of Korea. The White House, October 13. URL: <a href="http://www.whitehouse.gov/photos-and-video/video/2011/10/13/president-obama-toasts-president-lee-myung-bak-republic-korea">http://www.whitehouse.gov/photos-and-video/video/2011/10/13/president-obama-toasts-president-lee-myung-bak-republic-korea</a> (Accessed, December 6, 2011)</p>
+
+<p>Office of Travel &amp; Tourism Industries. 1995. In-Flight Survey of International Air Travelers Annual Report. URL: <a href="http://tinet.ita.doc.gov/view/f-3/freeab24.html">http://tinet.ita.doc.gov/view/f-3/freeab24.html</a> (Accessed 12-06-2011)</p>
+
+<p>Shim, Doobo. 2006. Hybridity and the Rise of Korean Popular Culture in Asia. Media Culture and Society, Vol. 28:25 URL: <a href="http://sagepub.com/content/28/1/25">http://sagepub.com/content/28/1/25</a> (Accessed Nov 13, 2011).</p>
+
+<p>Strother, Jason. 2009. “Korea’s Image Problem.” Asia Calling. Audio. URL: <a href="http://www.asiacalling.kbr68h.com/ur/news/south-korea/805-koreas-image-problem">www.asiacalling.kbr68h.com/ur/news/south-korea/805-koreas-image-problem</a> (Accessed: December 4, 2011)</p>
+
+<p>Tharoor, Shashi. 2010. Why Nations Should Pursue “Soft” Power. Technology Entertainment and Design, Nov. 2009. Video. URL: <a href="http://www.ted.com/talks/shashi_tharoor.html">www.ted.com/talks/shashi_tharoor.html</a> (Accessed: December 4, 2011)</p>
+
+<p>Twitter. 2011. Korea.net. URL: <a href="http://twitter.com/koreanet">twitter.com/koreanet</a> (Accessed December 9, 2011)</p>
+
+<p>U.S. Department of Commerce, International Trade Administration, Office of Travel and Tourism Industries. 2010. U.S. Citizen Air Traffic to Overseas Regions, Canada &amp; Mexico. URL: <a href="http://tinet.ita.doc.gov/view/m-2010-O-001/index.html">http://tinet.ita.doc.gov/view/m-2010-O-001/index.html</a> (Accessed 12-06-2011)</p>
+
+<p><strong id="pdf"><a href="http://harmsboone.org/wp-content/uploads/2011/12/final.631.pdf">The Soft Power of Online Diplomacy</a>&nbsp;[PDF]</strong></p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Hacking as Protest?]]></title>
+    <link href="http://gboone.github.io/blog/2011/08/16/hacking-as-protest/"/>
+    <updated>2011-08-16T00:00:00-04:00</updated>
+    <id>http://gboone.github.io/blog/2011/08/16/hacking-as-protest</id>
+    <content type="html"><![CDATA[<p>I posted this question to my Google+ contacts earlier this morning, but decided it was worth blogging about too.</p>
+
+<p>The recent protests against SanFrancisco&#8217;s BART system is raising all kinds of eyebrows over a government authority&#8217;s silencing of mobile networks in the interest of  public safety. The bushiest of those eyebrows: didn&#8217;t Mubarak do exactly the same thing when he was trying to silence pro-democratic riots in Egypt, and isn&#8217;t that guy in a cage on trial right now, and doesn&#8217;t this remind anyone of a certain book titled with the year Reagan was reelected? While comparing BART&#8217;s suppression of cell networks underground to Mubarak&#8217;s silencing of all Internet and telephonic communication in the entire country of Egypt is a stretch, it does follow that if citizens are content to allow a small government agency to shut off our communication systems in the name of possible threats to public safety, it would be hard for those citizens to complain about a bigger agency doing the same thing. It sets a dangerous precedent.</p>
+
+<p>The people of SanFrancisco had the right to protest BART&#8217;s action, and <a title="Anonymous Protest Turns Tumultuous" href="http://bits.blogs.nytimes.com/2011/08/15/anonymous-protest-ends-quietely/?nl=todaysheadlines&emc=tha26">protest they did</a>. The hacker group Anonymous even got in on the action, showing up, as they did in DC recently, wearing Guy Fawkes masks and joined in the fun of shutting down the metro stations around downtown SFO.</p>
+
+<p>The eyebrow I raised after reading the <em>Times&#8217;s</em> report (linked above) about the protests, was Anonymous&#8217;s hacking of myBART.org, a &#8220;web site for BART riders,&#8221; wherein they &#8220;leaked the names, phone numbers and passwords of many of the site’s users.&#8221; What&#8217;s puzzling to me about this, is why a friend of the cause would intentionally do harm to its own people.</p>
+
+<p>Yes what BART did was wrong. Yes anonymous have the right to protest; I&#8217;m even inclined to say they have the right to hack the myBART website as a means of protest. But how effective a protest is it to release data of innocent civilians? It seems the worst kinds of protests are the ones where the leaders intentionally put the supporters at greater risk. For example, if my bank came under fire and someone hacked the bank and released my account numbers, address, user name and password, it would be hard to think, &#8220;those dudes are on my side.&#8221;</p>
+
+<p>Then again, maybe compromised data is the new risk of protesting; the 21st equivalent of getting arrested for sitting at a lunch counter. That would be like MLK arresting the people for the police, or directing the fire hoses. Most people knew it was a possibility going into the protests, but in the civil rights movement, when people were arrested it reinforced the movement&#8217;s legitimacy.</p>
+
+<p>A while ago <a title="Weak Ties Build Movements" href="http://harmsboone.org/weak-ties-build-movements">I railed against Malcolm Gladwell&#8217;s</a> argument that social movements require &#8220;huge sacrifices&#8221; in order to be successful, and that the lack of sacrifices in online social movements is proof that &#8220;the revolution will not be tweeted.&#8221; Is this the &#8220;huge sacrifice&#8221; people will be required to make, that if you protest you risk having any data connected to the institution you are protesting against compromised? Weigh in, share your thoughts in the comments.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Why I'm (still) Excited about Google+]]></title>
+    <link href="http://gboone.github.io/blog/2011/07/15/why-im-still-excited-about-google/"/>
+    <updated>2011-07-15T00:00:00-04:00</updated>
+    <id>http://gboone.github.io/blog/2011/07/15/why-im-still-excited-about-google</id>
+    <content type="html"><![CDATA[<p>It wasn&#8217;t until the Facebook/Skype marriage that I remembered Google were tackling a new social service. Eventually I got into the system to give it a spin and I have to say I&#8217;m impressed. I&#8217;m not quite ready to ditch Facebook, or say that anybody should or will ditch Zuck &amp; Co.&#8217;s popular if addled monster, but I am impressed. Apparently the fifth try is the charm.</p>
+
+<p>To be sure, Google+ is still lacking one major feature: people. The trial period means that not every Snodgrass@gmail.com can sign up for an account. But bear in mind that when Facebook launched it also lacked people, almost pretentiously so, and people still used it. In Facebook&#8217;s early days anybody without an email address ending .edu and any school where Facebook &#8220;wasn&#8217;t yet available,&#8221; were sure out of luck until Zuckerberg opened things up. What Google lacks in population (<a title="Google+ Hits 10 Million Users" href="http://www.theatlanticwire.com/technology/2011/07/google-hits-10-million-users-should-facebook-freak-out/39854/" target="_blank">though if it keeps up these growth rates, it could well have solved that problem soon</a>) it more than makes up for in user experience by providing G+ users with a natural, easy, and safe way to connect with each other.</p>
+
+<p>For the Google power user, G+ is a true winner because of it&#8217;s subtle but effective integration across all Google&#8217;s apps. Android users will also love the Google+ App available free in the Market which blows away both Twitter and Facebook&#8217;s respective apps. It&#8217;s best feature is clearly Instant Upload which posts images to G+ as you snap them. Instant uploads go into a private space where users may easily push them out to their circles.</p>
+
+<p>The biggest advantage for the everyday user is Circles. It is important to consider what Google are actually doing with G+. They are not simply redoing Facebook.</p>
+
+<a href="http://xkcd.com/918/"><img title="xkcd: Google+" src="http://imgs.xkcd.com/comics/googleplus.png" alt="It's like Facebook, but not Facebook!" width="535" height="281" /></a>
+
+<p>G+ is a rethinking of the way our social relationships can be simulated or visualized on the Internet. Ironically, it&#8217;s the same idea that launched Facebook so many years ago.</p>
+
+<p>Before Facebook there was the loud and creepy MySpace. Signing up for Facebook was refreshing. Everyone&#8217;s profile looked the same, save for the profile picture and responses to some standard details. Facebook was focused where MySpace was chaotic. Connect to friends and keep appraised of whatever parts of their personal life they want to share. As the site grew Zuck &amp; Co. added more and more features, and eventually opened things up to the whole world.<p>
+
+<p>What Facebook missed, however, was that people want to connect with their friends, but also people who aren&#8217;t really friends.</p>
+
+<p>Eventually Facebook added a way to keep your friends in groups and set up a complicated system for deciding who gets to see what by default. But these groups are still groups of friends. An organization chart of Facebook would have a giant Friends box on the top, with arrows coming out of it pointing to groups; anything you share gets sent to your friends, and then filtered into the appropriate groups. Things get dicey here with eg. teacher-student and employer-employee relationships. It may be a good thing for students to be connected to teachers on Facebook, but are they really friends? It&#8217;d be great to connect with superiors at work, but are they really friends? G+ says no.</p>
+
+<p>Everyone has social circles. Work circles, friend circles, school circles, bowling league circles, political circles, apolitical circles, <em>ad infinitum</em>. There is often overlap among these circles. In the G+ organization chart, there is no big box, but a series of Venn diagrams; when things are shared, they go directly to the appropriate circle, and nowhere else. When a user wants to connect with someone, they choose right away which circle they go into. This is how we think about the people we know in real life. In short, Facebook is a Rolodex, Google+ is a visualization of your scene.</p>
+
+<p>G+ has the best privacy controls of any social application on the web today. Twitter is straightforward: everything you post is either shared with everyone, or only the people you allow; you&#8217;re either all in or not. Facebook is too complicated to summarize in one sentence without long-winded independent and parenthetical clauses (that&#8217;s a double-dog dare). G+ users decide on every post who gets to see it and who doesn&#8217;t. While setting a default (from public, like Twitter, to private, meaning just you, and everything in between) is possible, Google have made it incredibly easy to decide on the fly. And it isn&#8217;t hard to see the benefits. Circles allows users to be more like curators, or focused conversationalists rather than forcing them to be broadcasters. And it works both ways, users control whose posts they see by cycling through circles, so if someone in a user&#8217;s circles is being too noisy, there&#8217;s always the ability to create the &#8220;isolation chamber&#8221; circle.</p>
+
+<p>The <a title="Facebook's Big Wake-Up Call" href="http://www.wallstreetdaily.com/2011/07/13/facebooks-google-plus-social-networking/">Wall Street Daily</a> was right when they called Circles &#8220;Google’s answer to Facebook’s clumsy &#8216;groups&#8217; feature.&#8221; Circles is seamless, natural and is at the foundation of Google+. It&#8217;s a great way to share. Some are starting to see some <a title="Google's new social network: Circles and the Efficiency/Serendipity Trade Off" href="http://www.economist.com/blogs/babbage/2011/07/googles-new-social-network?fsrc=scn/tw/te/bl/circlesandthetradeoff">disadvantages with this kind of forced manual sorting</a>, that the inherent segmentation may actually lead to less interesting online interactions, but in general Circles seems to be the best answer to the online privacy problem so far. If you want everyone and anyone to weigh in on a question, and if you want to see everything and anything shared with you, that is all still possible. But when you know there is something not everyone should see, G+ has your back.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Wherein a Northfield Game Inspired a Lesson Plan]]></title>
+    <link href="http://gboone.github.io/blog/2011/05/26/wherein-a-northfield-game-inspired-a-lesson/"/>
+    <updated>2011-05-26T00:00:00-04:00</updated>
+    <id>http://gboone.github.io/blog/2011/05/26/wherein-a-northfield-game-inspired-a-lesson</id>
+    <content type="html"><![CDATA[<p>People who came of age in the State of Minnesota sometime in the last decade likely have heard of <a title="Tricadecathlonomania: Official Website" href="http://trica.clockworkdistractions.com" target="_blank">Tricadecathlonomania</a>, particularly those of us who know someone Northfield. For anyone who hasn&#8217;t heard of it,  Trica, as it&#8217;s commonly known, is a scavenger hunt of epic proportion. It is not the scavenger hunt where you find a big list of things and bring them back to whomever gave you the list, nay it is far greater than that. With a whopping 288 items on the 2010 list, Trica is perhaps the most ambitious type of scavenger hunt there is; and here&#8217;s the catch: the list, whatever of it you can manage, must be completed in 24 hours. Thus was born &#8220;Tricadecathlonomania: The Lesson Plan.&#8221;</p>
+
+<p>The weather here in Hungary, simply put, has been gorgeous lately. The Magyars must have settled in this ancient ocean in April or May because I can&#8217;t imagine a better time to mosey on through the Magyarföld. Consequently, I was pestered nearly every lesson, every day, to go out to the park, have class outside, or play some kind of game. At first I was unsure if it was allowed, or if I should just stay on the Munkácsy property, or if it was allright to go to the nearby Berzsenyi Park. It turns out it is perfectly okay, so the only thing I needed to dream up was what to do once we got there. Then, it dawned on me. Students. Giant park. Nice weather. The conditions were perfect for a scavenger hunt. I contemplated different ways of doing it and ultimately settled on Trica style.</p>
+
+<p>For the purposes of keeping things easy, I decided only to pit the students against their class mates, though in retrospect, a pan-bilingual program Trica game would have been more exciting. Each lesson then broke into 3-5 teams, each team got a <a title="Trica: The lesson list" href="https://docs.google.com/document/d/1SypMFtcIqUtPEDiTptFBwAE6rMfbnK8MrR1KKpY0eFE/edit?hl=en_US" target="_blank">list</a> and once they ha a list there were off. They had until our next lesson to earn as many points as possible. The only rules:</p>
+<ol>
+	<li>Items must be documented with either a photo or video.</li>
+	<li>Points were only valid if they were earned inside a specific playing area (this was to keep the students from wandering too far during the lesson).</li>
+	<li>No breaking laws or school rules.</li>
+	<li>All language in the videos and photos must be in English. Any Hungarian—spectators commenting, little kids running into the video, signs in the background—will void the item.</li>
+	<li>Breaking rules no. 2-4 may result in a disqualification (and a mark 1).</li>
+</ol>
+<p>The students were amazingly engaged with the idea from the start. Chuckles arose while they were reading over the list, many of the items were borrowed from the 2010 Trica list, and were quite vague, strange, or seemingly impossible. Two such items perplexed almost all the groups:</p>
+<blockquote>6. Ask about the current euro to forint exchange rate at a bank, and then whip out a gyro to trade in. [40] (Bonus if said gyro is produced from a briefcase you’re handcuffed to [25])
+
+30. A partridge in a pear tree, 2 turtle doves, 3 French hens, 4 calling birds, 5 golden rings, 6 geese a laying, 7 swans a swimming, 8 maids a milking, 9 ladies dancing, 10 lords a leaping, 11 pipers piping, 12 drummers drumming. [30 per verse/item]</blockquote>
+<p>None of the teams attempted no. 6, there was only one bank within the playing area, so it may have been too hard. It also didn&#8217;t help that in Hungarian &#8220;gyro&#8221; is spelled &#8220;gyros&#8221; and pronounced &#8220;ghee-rhoss&#8221; and Euro is pronounced nothing like that in Hungarian. No. 30 confused almost all the groups, apparently the 12 Days of Christmas carol isn&#8217;t as popular here—though one group earned a whopping 360 points for doing all 12 by bringing in a video tape of a 12 Days cartoon—either that or all the groups were giving it way too much though.</p>
+
+<p>In all it was among the most fun I&#8217;ve ever had teaching, certainly the most fun I&#8217;ve had since September.</p>
+]]></content>
+  </entry>
+  
+</feed>

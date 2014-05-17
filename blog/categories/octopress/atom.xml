@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Category: Octopress | Merge Conflicts]]></title>
+  <link href="http://gboone.github.io/blog/categories/octopress/atom.xml" rel="self"/>
+  <link href="http://gboone.github.io/"/>
+  <updated>2014-01-12T11:22:01-05:00</updated>
+  <id>http://gboone.github.io/</id>
+  <author>
+    <name><![CDATA[Greg Boone]]></name>
+    <email><![CDATA[boone.greg@gmail.com]]></email>
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[A week into Octopress]]></title>
+    <link href="http://gboone.github.io/blog/2013/08/03/a-week-into-octopress/"/>
+    <updated>2013-08-03T11:39:00-04:00</updated>
+    <id>http://gboone.github.io/blog/2013/08/03/a-week-into-octopress</id>
+    <content type="html"><![CDATA[<p>About a week ago I successfully migrated some of my posts from <a href="http://harmsboone.org">harmsboone.org</a> to this blog, I also wrote a post about <a href="http://greg.harmsboone.org/blog/2013/07/28/what-i-learned-about-git-this-week/">some things I learned about git that week</a>. WordPress is great. I wouldn&rsquo;t recommend it (and I almost always do) if it weren&rsquo;t. For someone who wants to spin up a blog and maybe some day more in a pinch, WordPress is the go-to platform. In fact, the rest of harmsboone.org still runs it. Earlier this year, though, Danielle and I started talking about ditching the one-blog-for-both solution. When we were both living and teaching abroad sharing one blog made sense but now with the both of us starting different careers, we have different things to say.</p>
+
+<p>We decided to keep HarmsBoone.org as an archive of the last four years and also create new blogs for the both of us. Since I was starting from scratch anyway, might as well strike out with something new.</p>
+
+<!-- more -->
+
+
+<p>Octopress required a different way of thinking. It&rsquo;s a static file generator, not a server-database system. I knew that. I even knew I wanted to host it on GitHub but nevertheless, for whatever reason, my first step was to fire up a server for greg.harmsboone.org and installing octopress in parallel on the server and my local machine, just like I would if I were setting up WordPress. Wrong. When I stopped overcomplicating and <a href="http://octopress.org/docs">followed the directions</a>, everything fell right into palce. (For anyone trying to launch their Octopress site, it&rsquo;s a lot easier when you <code>rake new_post[]</code> or <code>rake new_page[]</code> before trying to deploy.)</p>
+
+<h2>Things to like:</h2>
+
+<h4>1. Simplicty.</h4>
+
+<p>I love how clean and simple the Octopress interface is. There&rsquo;s no menu-laden backend to interface with, no menus to customize, or sidebars to fiddle with. All of that lives in HTML files that live on my machine and backed up on github.</p>
+
+<h4>2. Backed up, version controlled</h4>
+
+<p>Since the site is hosted on GitHub, I&rsquo;m forced to use version control on my posts, pages, and template files. This has the added bonus of all my posts being backed up as soon as their published. With WordPress, they were trapped on a MySQL database at Dreamhost. Sure I could have shelled out for <a href="">RAMP</a>, <a href="">Backup Buddy</a> or <a href="">VaultPress</a>, but one of those would just be another plugin I&rsquo;d have to deal with and would still not version control my blog.</p>
+
+<h4>3. <code>rake preview</code></h4>
+
+<p>What? No MAMP/XAMPP/AMPPS? Done. Over. Next.</p>
+
+<h3>Things I miss:</h3>
+
+<p>This is not to say Octopress land is all roses and unicorns. There are some major disadvantages to the new frontier.</p>
+
+<h4>1. The web interface</h4>
+
+<p>WP-Admin has the distinct advantage of being a web-based content editing interface that lives in the same place where the content is hosted. It also generates those posts automatically. With Octopress, I have to <code>rake deploy</code> to publish. That&rsquo;s less convenient.</p>
+
+<h4>2. Mobile Apps</h4>
+
+<p>With little exception, I&rsquo;ve been laptop-free since we got back from Hungary. The iPad did just about everything I needed to do away from my desktop while I was in grad school. Tablets are great and have the added benefit of being able to stay in my backpack in security lines (at least in the US).</p>
+
+<p>The WordPress mobile app is great and updating blogs from it is really. Octopress isn&rsquo;t quite there. If I wanted to blog from a tablet, <a href="http://www.candlerblog.com/2012/04/01/remote-octopress-workflow/">I&rsquo;d have to have a remote server syncing and auto-deploying from dropbox or GitHub</a>. I&rsquo;ll probably end up brigning a laptop, at least until <code>rake watch --autodeploy</code> becomes a thing.</p>
+
+<h4>3. For Hackers Only</h4>
+
+<p>One appealing thing about working in WordPress was that everything was on the same system. Octopress bring the terminal-centric, that rules out a lot of possible users who are not also developers. People who don&rsquo;t have patience to learn Markdown or git are out. WordPress, to some extent, just works. It&rsquo;s intuitive, has a UI, and requires very little maintenance beyond an occasional software update.</p>
+]]></content>
+  </entry>
+  
+</feed>
