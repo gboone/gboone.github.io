@@ -36,4 +36,5 @@ What your website is made of and how it works speaks volumes about your organiza
 This doesn't mean fire your entire comms team or only hire developers, nor does it mean hiring one developer will be your silver bullet. Instead, focus on fostering your team as one that is equal parts traditional communications and software development. Build a team ready to say yes to what your organization needs and not dependent on some piece of technology nobody understands.
 
 [Leave a comment](https://github.com/gboone/gboone.github.io/issues/new/)
+
 [Edit my typos](https://github.com/gboone/gboone.github.io/pulls/new/)
