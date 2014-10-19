@@ -33,7 +33,7 @@ existing piece of the site.
 
 What your website is made of and how it works speaks volumes about your organization, both internally and externally. Internally, it makes your communications team a "yes first" team, or at least one where the reason for saying no to, say, putting more than one image on a page, is a communications one, not a technical limitation. And when there is a technical limitation, you can realistically evaluate whether it's possible to overcome it.
 
-This doesn't mean fire your entire comms team or only hire developers, nor does it mean hiring one developer will be your silver bullet. Instead, focus on fostering your team as one that is equal parts traditional communications and software development. Build a DevComms team ready to say yes to what your organization needs and not dependent on some piece of technology nobody understands.
+This doesn't mean fire your entire comms team or only hire developers, nor does it mean hiring one developer will be your silver bullet. Instead, focus on fostering your team as one that is equal parts traditional communications and software development. Build a team ready to say yes to what your organization needs and not dependent on some piece of technology nobody understands.
 
 [Leave a comment](https://github.com/gboone/gboone.github.io/issues/new/)
 [Edit my typos](https://github.com/gboone/gboone.github.io/pulls/new/)
