@@ -5,6 +5,7 @@ layout: post
 permalink: /blog/2014/09/05/18f-hacking-bureaucracy
 categories:
   - Features
+tags: work
 format: status
 ---
 <blockquote class="twitter-tweet" width="550">

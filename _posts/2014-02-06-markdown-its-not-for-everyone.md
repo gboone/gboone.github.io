@@ -1,5 +1,5 @@
 ---
-title: 'Markdown: It's not for everyone'
+title: Markdown&#58 It's not for everyone
 author: Greg Boone
 layout: post
 permalink: /blog/2014/02/06/markdown-its-not-for-everyone

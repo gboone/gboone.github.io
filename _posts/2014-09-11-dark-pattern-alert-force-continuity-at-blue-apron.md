@@ -3,6 +3,10 @@ title: 'Dark Pattern Alert: Forced continuity at Blue Apron'
 author: Greg Boone
 layout: post
 permalink: /blog/2014/09/11/dark-pattern-alert-force-continuity-at-blue-apron
+tags:
+  - usability
+  - user experience
+  - dark patterns
 categories:
   - Merge Conflicts
 ---

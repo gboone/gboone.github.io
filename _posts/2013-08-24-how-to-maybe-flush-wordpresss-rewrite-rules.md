@@ -1,5 +1,5 @@
 ---
-title: 'How to Maybe Flush WordPress's Rewrite Rules'
+title: How to Maybe Flush WordPress&#39;s Rewrite Rules
 author: Greg Boone
 layout: post
 permalink: /blog/2013/08/24/how-to-maybe-flush-wordpresss-rewrite-rules
