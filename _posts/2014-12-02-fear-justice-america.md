@@ -43,8 +43,7 @@ To be sure, Carey did some odd things after the Secret Service and Capitol
 Police began chasing her. Why didn't she pull over her car? Why did she back up
 when there were police with guns drawn _standing over her car?_ Maybe it's
 because she was a maniacal criminal, but maybe it's because [encounters between
-black Americans and police officers generally don't end
-well.](http://www.nytimes.com/2014/08/31/sunday-review/race-and-police-shootings-are-blacks-targeted-more.html)
+black Americans and the police genearlly favor the police.](http://www.nytimes.com/2014/08/31/sunday-review/race-and-police-shootings-are-blacks-targeted-more.html)
 
 We'll never know.
 
