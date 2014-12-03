@@ -9,7 +9,7 @@ tags:
 - personal opinions that in no way reflect those of my employer
 layout: post
 ---
-It’s easy to forget example, the first time I realized I had to go five blocks out of my way to
+It’s easy to forget the first time I realized I had to go five blocks out of my way to
 continue going east on F St. NW when I hit 17th St because of the 4 by 8 block
 area closed off around the [White House](https://www.google.com/maps/@38.8968632,-77.0366707,16z). DC is a confusing enough of a place to drive for the unintiated,
 with the diagonal avenues intersecting the grid at small, medium, and gigantic
