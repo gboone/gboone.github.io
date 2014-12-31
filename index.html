@@ -10,7 +10,10 @@ layout: default
     {% for post in site.posts %}
       <li>
         <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
-        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a>
+        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a><br />
+        {% if post.tags.size > 0 %}
+        <span class="tags">Tagged: {{ post.tags | array_to_sentence_string }}</span>
+        {% endif %}
       </li>
     {% endfor %}
   </ul>
