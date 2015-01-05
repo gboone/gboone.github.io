@@ -1,0 +1,77 @@
+==================================================================
+https://keybase.io/gboone
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://greg.harmsboone.org
+  * I am gboone (https://keybase.io/gboone) on keybase.
+  * I have a public key with fingerprint 0372 5539 C7B7 085F AD02  9FEE
+  * 7838 1DF8 B3E3 537A
+
+To claim this, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "fingerprint": "03725539c7b7085fad029fee78381df8b3e3537a",
+            "host": "keybase.io",
+            "key_id": "78381df8b3e3537a",
+            "kid":
+"0101ee760b4e60c6427ed44b91eb2721ec6792aea85649affcba4b4b5621da6d676c0a",
+            "uid": "6a95e74db98a494a919230d16c93cf00",
+            "username": "gboone"
+        },
+        "revoke": {
+            "sig_ids": [
+                "f68bea40686dc0921dda88ec6f71d751317381f37ed72cdeb145c0b942a673f40f"
+            ]
+        },
+        "service": {
+            "hostname": "greg.harmsboone.org",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1420488804,
+    "expire_in": 157680000,
+    "prev":
+"7e86957ded42dfc188f0815b3e94dad269eb9bcca404d5621f6da8f5a90b95ec",
+    "seqno": 10,
+    "tag": "signature"
+}
+
+with the aforementioned key, yielding the PGP signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.1
+Comment: https://keybase.io/crypto
+
+yMJoAnicbZJ9aFVlHMfv3MxamSOUrGbqGVOsuZ7nnOf1TggkMUjriv2jS+bzeu9x
+7Z7ruWd3zul6g0YIqeBLSYIlvZBrUwYhDCNXWGgvGgRaKWIFQ9C8IZKS1HMu+V/n
+n8N5zvf3+X1/39/z5fT6TGPdZ0vw4jXDybq6U8ff6808//E1PeDJSPd72QGv29Re
+NizmTVyKw2LiZT0QUB/jgCsqKWDYCg18bo2hLGBQWyYDE+CACq/NK0TltMJhpCib
+9jByZ+6jK9Tu9H/03bUfAALocARIZAhQBPnUaIQkh0b61IdGEcp9YQTDBHFhrZIC
+SSQx8aEWRBNKFEhxvTUcERwbirTkTCCOBIfcD4CGRPFAWQBSYdnERdFjnDovo6ho
+vK1tXmwqUbdJ5y+HeWe57GU7PUuYNAIBwohWgLuGWjDmHFkKNcUwgNRNZQPnmPpK
+GwkRVkBy5AtCA4uA9dY5tutXCVUNnmZ0p3ds8u0FEfeUaybaozjvzJXiKIlU9KIT
+FJKklE29Jf2ltKDPyK7/UF0yLGq3J1dQMXE5jIpeFjqlSsKUDZEPEGMMoDbPbCqF
+sekKUwWmhAH3pG1MJd2KYYRjql3ivrYKMmYBg9gtiSMttE+4kVwq5TJAOk3cEpeA
+xYK7KbFRXjrcxmLk2A6aiLxjuvyKIumNXawTn7/QkKlrzNw1dUp61TKN9zTduYC7
+r0673Ty/cv/Yzu3DR1Z+8utzK0pz5p3etPzHP3/4vnnpwvX3DV8+uvlwobU6b7zl
+rw9mn7uaefXB1784mFePHPv9/PaD3Wzo23cemmgdOn14Q/PLc/4Yzu84MHby2LXc
+2x0vtYzdmHxixcSMXb/szI22rJz62qpp41+tf+vJ8OT8fz4af2bt7X2DC1aH0+vn
+vrl56/V9+FRnR1PnWe9uPWPR6JQl149vfHTpti2Vx3+61PT0mkK/rp7ZseeEHYX3
+VnPZWzOHdEf9gce2Lavioz/XXXy4b9bNmbP/3gJHdesDHy7evajnt76R3KeNT319
+omH/alV9Y2Tgu9yNdxv0KyPxhWf3X3r/0OTYZPabQb73Ss70Dv4LXCVEAg==
+=S5oU
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/gboone
+
+==================================================================
+
