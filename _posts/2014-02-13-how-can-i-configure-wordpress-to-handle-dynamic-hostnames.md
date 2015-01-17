@@ -22,7 +22,7 @@ The proxy was ferrying our visitors around using a standard called [X-Forwarded-
 
 As it turns out an X-Forwarded-For is often accompanied by an X-Forwarded-Host (the hostname the user was trying to reach). We simply sniff out whether $\_SERVER has a X-Forwarded-Host key and set site\_url and wp\_home to the X-Forwarded-Host and fall back on HTTP\_HOST for non-forwarded environments. Something like this:
 
-    if ( array_key_exists( "HTTP_X_FORWARDED_FOR", $_SERVER ) {
+    if ( array_key_exists( "HTTP_X_FORWARDED_FOR", $_SERVER ) ) {
         define( "site_url", $_SERVER["HTTP_X_FORWARDED_FOR"] );
         define( "wp_home", $_SERVER["HTTP_X_FORWARDED_FOR"] );
     } else {
