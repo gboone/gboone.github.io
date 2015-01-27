@@ -333,7 +333,7 @@ Twitter. 2011. Korea.net. URL: [twitter.com/koreanet][10] (Accessed December 9, 
 
 U.S. Department of Commerce, International Trade Administration, Office of Travel and Tourism Industries. 2010. U.S. Citizen Air Traffic to Overseas Regions, Canada & Mexico. URL: <http://tinet.ita.doc.gov/view/m-2010-O-001/index.html> (Accessed 12-06-2011)
 
-<strong id="pdf"><a href="http://harmsboone.org/wp-content/uploads/2011/12/final.631.pdf">The Soft Power of Online Diplomacy</a>&nbsp;[PDF]</strong>
+<strong id="pdf"><a href="assets/images/2011/12/final.631.pdf">The Soft Power of Online Diplomacy</a>&nbsp;[PDF]</strong>
 
  [1]: #pdf
  [2]: http://korea.net

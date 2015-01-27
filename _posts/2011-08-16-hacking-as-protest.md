@@ -25,9 +25,7 @@ Yes what BART did was wrong. Yes anonymous have the right to protest; I'm even i
 
 Then again, maybe compromised data is the new risk of protesting; the 21st equivalent of getting arrested for sitting at a lunch counter. That would be like MLK arresting the people for the police, or directing the fire hoses. Most people knew it was a possibility going into the protests, but in the civil rights movement, when people were arrested it reinforced the movement's legitimacy.
 
-A while ago [I railed against Malcolm Gladwell's][2] argument that social movements require "huge sacrifices" in order to be successful, and that the lack of sacrifices in online social movements is proof that "the revolution will not be tweeted." Is this the "huge sacrifice" people will be required to make, that if you protest you risk having any data connected to the institution you are protesting against compromised? Weigh in, share your thoughts in the comments.
-
-s
+A while ago [I railed against Malcolm Gladwell's][2] argument that social movements require "huge sacrifices" in order to be successful, and that the lack of sacrifices in online social movements is proof that "the revolution will not be tweeted." Is this the "huge sacrifice" people will be required to make, that if you protest you risk having any data connected to the institution you are protesting against compromised?
 
  [1]: http://bits.blogs.nytimes.com/2011/08/15/anonymous-protest-ends-quietely/?nl=todaysheadlines&#038;emc=tha26 "Anonymous Protest Turns Tumultuous"
  [2]: http://harmsboone.org/weak-ties-build-movements "Weak Ties Build Movements"

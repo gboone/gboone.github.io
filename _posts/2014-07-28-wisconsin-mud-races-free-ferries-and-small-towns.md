@@ -24,7 +24,7 @@ Once we were past the paved and gravel portions of the trail, we found ourselves
 amidst the serene beauty that is Southern Wisconsin.
 
 <figure id="attachment_1746" style="width: 768px;" class="wp-caption alignnone">
-  <img class="wp-image-1746 size-large" src="http://greg.harmsboone.org/wp-content/uploads/2014/07/2014-07-26-15.03.25-1024x1024.jpg" alt="Along Parfrey's Glen, a mossy wall carved into the ancient creek bed." width="768" height="768" />
+  <img class="wp-image-1746 size-large" src="/assets/images/2014/07/2014-07-26-15.03.25-1024x1024.jpg" alt="Along Parfrey's Glen, a mossy wall carved into the ancient creek bed." width="768" height="768" />
   <figcaption class="wp-caption-text">Along Parfrey's Glen, a mossy wall carved
   into the ancient creek bed.</figcaption>
 </figure>  
@@ -35,7 +35,7 @@ fitted for the last time and, as it happened, we ended up being able to take it
 home that same day! While her and her parents tended to the fitting, I walked around downtown Reedsburg for a few minutes and stumbled across Corner Pub and Brewery. In the early days of Reedsburg the town was a center of commerce for hops, a key ingredient for both flavoring and preserving beer. Corner Pub and Bakery is a 100 barrel brewery tucked in the basement of a classic National League baseball bar. Suspended from the ceiling were banners from each of the teams, with brewers gear featuring most prominently. Other than Sprecher's root beer the only labels on tap were their own and they were fantastic brews. They were promoting an [1860s rules baseball tournament][3] featuring teams from around the Wisconsin-Iowa-Minnesota border regions.<figure id="attachment_1748" style="width: 768px;" class="wp-caption alignnone">
 
 <figure>
-  <img class="wp-image-1748 size-large" src="http://greg.harmsboone.org/wp-content/uploads/2014/07/2014-07-26-16.28.43-1024x1024.jpg" alt="A mural to the history of hops in Reedsburg, WI on the side of Corner Pub and Bakery." width="768" height="768" />
+  <img class="wp-image-1748 size-large" src="/assets/images/2014/07/2014-07-26-16.28.43-1024x1024.jpg" alt="A mural to the history of hops in Reedsburg, WI on the side of Corner Pub and Bakery." width="768" height="768" />
   <figcaption class="wp-caption-text">A mural to the history of hops in
   Reedsburg, WI on the side of Corner Pub and Bakery.</figcaption>
 </figure>
@@ -44,7 +44,7 @@ crossing the Wisconsin River on the Merrimac free ferry after which we enjoyed a
 sunset dinner on the shores of Lake Wisconsin.<figure id="attachment_1747" style="width: 768px;" class="wp-caption alignnone">
 
 <figure>
-  <img class="wp-image-1747 size-large" src="http://greg.harmsboone.org/wp-content/uploads/2014/07/2014-07-26-20.09.43-1024x1024.jpg" alt="Sunset after dinner at Fitz on the Lake. Lodi, WI." width="768" height="768" />]
+  <img class="wp-image-1747 size-large" src="/assets/images/2014/07/2014-07-26-20.09.43-1024x1024.jpg" alt="Sunset after dinner at Fitz on the Lake. Lodi, WI." width="768" height="768" />]
   <figcaption class="wp-caption-text">Sunset after dinner at Fitz on the Lake.
   Lodi, WI.</figcaption>
 </figure>
@@ -83,7 +83,7 @@ her face from the dirt. We each got pelted several times with this dirt but
 mostly reveled in watching the kids, who were *trying* get hit with the mud and
 then throwing it at each other like they were snowballs.
 <figure id="attachment_1749" style="width: 768px;" class="wp-caption alignnone">
-  <img class="wp-image-1749 size-large" src="http://greg.harmsboone.org/wp-content/uploads/2014/07/2014-07-27-20.23.30-1024x1024.jpg" alt="Hard to tell there are cars down there because these things went fast and kicked up a lot of dirt." width="768" height="768" />
+  <img class="wp-image-1749 size-large" src="/assets/images/2014/07/2014-07-27-20.23.30-1024x1024.jpg" alt="Hard to tell there are cars down there because these things went fast and kicked up a lot of dirt." width="768" height="768" />
   <figcaption class="wp-caption-text">Hard to tell there are cars down there
   because these things went fast and kicked up a lot of dirt.
   </figcaption>
@@ -95,18 +95,18 @@ finally got to witness them in action.
 Tomorrow we leave for the Twin Cities, our last stop before the North Shore.
 
 <figure>
-  <img class="alignnone wp-image-1750 size-large" src="http://greg.harmsboone.org/wp-content/uploads/2014/07/2014-07-27-20.38.39-1024x1024.jpg" alt="America in a Can, in a koozie" width="768" height="768" />
+  <img class="alignnone wp-image-1750 size-large" src="/assets/images/2014/07/2014-07-27-20.38.39-1024x1024.jpg" alt="America in a Can, in a koozie" width="768" height="768" />
 </figure>
 
 <span id="1"><a href="#fn1">[1.]</a> It was actually unclear what the conditions
 for being thrown out were due to a confusing comma in the sign which read: "<a href="http://instagram.com/p/q-g4BtHtQd/">If you are not interested in the races, or aimlessly wandering around, <strong>you will be asked to leave.</strong></a>" But it was clear nonetheless, if you planned on disturbing the race or the audience's enjoyment of it, you should probably stay home.</span>
 
  [1]: http://www.iceagetrail.org
- [2]: http://greg.harmsboone.org/wp-content/uploads/2014/07/2014-07-26-15.03.25.jpg
+ [2]: /assets/images/2014/07/2014-07-26-15.03.25.jpg
  [3]: http://en.wikipedia.org/wiki/Vintage_base_ball
- [4]: http://greg.harmsboone.org/wp-content/uploads/2014/07/2014-07-26-16.28.43.jpg
- [5]: http://greg.harmsboone.org/wp-content/uploads/2014/07/2014-07-26-20.09.43.jpg
+ [4]: /assets/images/2014/07/2014-07-26-16.28.43.jpg
+ [5]: /assets/images/2014/07/2014-07-26-20.09.43.jpg
  [6]: http://www.bmara.com/index.html
  [7]: http://www.bmara.com/micros/microhome.html
- [8]: http://greg.harmsboone.org/wp-content/uploads/2014/07/2014-07-27-20.23.30.jpg
- [9]: http://greg.harmsboone.org/wp-content/uploads/2014/07/2014-07-27-20.38.39.jpg
+ [8]: /assets/images/2014/07/2014-07-27-20.23.30.jpg
+ [9]: /assets/images/2014/07/2014-07-27-20.38.39.jpg

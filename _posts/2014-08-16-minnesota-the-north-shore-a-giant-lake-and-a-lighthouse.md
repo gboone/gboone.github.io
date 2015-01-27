@@ -25,7 +25,7 @@ bridal hair preview appointment. While Danielle was busy I gave myself a quick
 tour of the city that birthed one of the world's most innovative companies, 3M.
 
 <figure id="attachment_1765" style="width: 768px;" class="wp-caption alignnone">
-  <img src="http://greg.harmsboone.org/wp-content/uploads/2014/08/2014-07-30-16.12.31-1024x1024.jpg" alt="The company originally called &quot;Minnesota Mining and Manufacturing&quot; started in this humble location in Two Harbors." width="768" height="768" class="size-large wp-image-1765" />
+  <img src="/assets/images/2014/08/2014-07-30-16.12.31-1024x1024.jpg" alt="The company originally called &quot;Minnesota Mining and Manufacturing&quot; started in this humble location in Two Harbors." width="768" height="768" class="size-large wp-image-1765" />
   <figcaption class="wp-caption-text">The company originally called "Minnesota Mining and Manufacturing" started in this humble location in Two Harbors.</figcaption>
 </figure>
 <!--more-->
@@ -46,7 +46,7 @@ stopping along the way to pick agates, visit with boaters, and take in
 magnificent views of the North Shore.
 
 <figure id="attachment_1766" style="width: 768px;" class="wp-caption alignnone">
-  <img src="http://greg.harmsboone.org/wp-content/uploads/2014/08/2014-07-31-11.26.17-1024x1024.jpg" alt="A scenic overlook from the Gitchi-Gami Trail near Iona&#039;s Beach Scenic Natural Area, MN." width="768" height="768" class="size-large wp-image-1766" />
+  <img src="/assets/images/2014/08/2014-07-31-11.26.17-1024x1024.jpg" alt="A scenic overlook from the Gitchi-Gami Trail near Iona&#039;s Beach Scenic Natural Area, MN." width="768" height="768" class="size-large wp-image-1766" />
   <figcaption class="wp-caption-text">A scenic overlook from the Gitchi-Gami Trail near Iona's Beach Scenic Natural Area, MN.</figcaption>
 </figure>
 It had been at least 15 years since I was last at Split Rock Lighthouse, and had
@@ -61,7 +61,7 @@ you pay the admission you can climb the tower and get up close and personal with
 its [Fresnel lens][5].
 
 <figure id="attachment_1768" style="width: 768px;" class="wp-caption alignnone">
-  <img src="http://greg.harmsboone.org/wp-content/uploads/2014/08/2014-07-31-12.35.48-1024x1024.jpg" alt="A Fresnel is a type of lens constructed to project a beam of light visible for distances upward of 20 miles. This one is apparently &quot;third order&quot; and the light is officially visible at a distance of 22 miles, though the MNHS reports some fishermen could spot the light from 60 miles north of the station." width="768" height="768" class="size-large wp-image-1768" />
+  <img src="/assets/images/2014/08/2014-07-31-12.35.48-1024x1024.jpg" alt="A Fresnel is a type of lens constructed to project a beam of light visible for distances upward of 20 miles. This one is apparently &quot;third order&quot; and the light is officially visible at a distance of 22 miles, though the MNHS reports some fishermen could spot the light from 60 miles north of the station." width="768" height="768" class="size-large wp-image-1768" />
   <figcaption class="wp-caption-text">A Fresnel is a type of lens constructed to project a beam of light visible for distances upward of 20 miles. This one is apparently "third order" and the light is officially visible at a distance of 22 miles, though the MNHS reports some fishermen could spot the light from 60 miles north of the station.</figcaption>
 </figure>
 
@@ -71,9 +71,9 @@ trickle in and the full wedding weekend really began.
 <a href="#footnote_1_anchor" id="1">1.</a> By surface area.
 
  [1]: http://en.wikipedia.org/wiki/Castle_Danger,_Minnesota
- [2]: http://greg.harmsboone.org/wp-content/uploads/2014/08/2014-07-30-16.12.31.jpg
+ [2]: /assets/images/2014/08/2014-07-30-16.12.31.jpg
  [3]: http://www.ggta.org
- [4]: http://greg.harmsboone.org/wp-content/uploads/2014/08/2014-07-31-11.26.17.jpg
+ [4]: /assets/images/2014/08/2014-07-31-11.26.17.jpg
  [5]: http://en.wikipedia.org/wiki/Fresnel_lens
- [6]: http://greg.harmsboone.org/wp-content/uploads/2014/08/2014-07-31-12.35.48.jpg
+ [6]: /assets/images/2014/08/2014-07-31-12.35.48.jpg
  [7]: #footnote_1_anchor
