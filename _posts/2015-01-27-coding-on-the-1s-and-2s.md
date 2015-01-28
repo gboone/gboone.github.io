@@ -2,6 +2,11 @@
 title: Coding on the 1s and 2s
 date: '2015-01-27'
 layout: post
+tags:
+- how I work
+- music
+- turntables
+- productivity
 ---  
 <img src="/assets/images/turntablism.jpg" alt="Brother Ali: Mourning in America and Living in Color (at 33 1/3 RPMs)" />
 
