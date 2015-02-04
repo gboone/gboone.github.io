@@ -34,7 +34,7 @@ seriously when the punchline turned out that a woman at one of the residences
 answered the door in her underwear. People would talk about our colleagues at
 the CFPB like they were riding out their careers, set for a life of doing
 nothing and getting paid to do it. I can't count how many times I heard someone
-say our colleagues intentionally did shotty work or had lower standards because
+say our colleagues intentionally did shoddy work or had lower standards because
 they were government employees.
 
 > "That kind of work would never be tolerated if there was money at stake."
