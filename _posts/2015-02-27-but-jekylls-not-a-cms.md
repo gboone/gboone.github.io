@@ -1,6 +1,6 @@
 ---
 title: But Jekyll is not a CMS!
-date: '2015-02-26'
+date: '2015-02-27'
 layout: post
 image: "/assets/images/apple_orchard.jpg"
 tags:
