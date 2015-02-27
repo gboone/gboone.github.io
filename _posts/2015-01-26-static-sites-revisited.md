@@ -33,7 +33,8 @@ post who is not a regular contributor and maybe they'll never write a post
 again. In WordPress I've seen this problem solved two ways:
 
 1. Create a new user in your system, give them a minimal role, and assign post
-authorship _ex post facto_ 2. Create a custom field called, e.g., `guest-author`
+authorship _ex post facto_ 
+2. Create a custom field called, e.g., `guest-author`
 and use template logic to replace the name in the byline
 
 Both of these have problems. In the first, you're adding users with no
@@ -61,7 +62,7 @@ I'm not sure which is best. I loved [hacking away at WordPress][7] even when it
 drove me mad. It gives you 90% of what you need out of the box, and querying a
 database is convenient, especially if you're site is really complex. By not
 having a database, Jekyll forces you think broadly about what data you really
-need for a post and for your site because everything is build before a user
+need for a post and for your site because everything is built before a user
 loads their first webpage. As we've scaled [18f.gsa.gov](https://18f.gsa.gov)
 from basically a blog to a more functional site, these questions haven't held us
 back as much as they have forced us to think differently about the problem.
