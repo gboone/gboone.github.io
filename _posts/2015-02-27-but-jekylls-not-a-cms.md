@@ -42,7 +42,7 @@ Switching to a static site generator was an intentional decision to reassess the
 value of all the things a CMS would give me by eliminating most of them
 completely.
 
-CMSs are apples. You know what to expect and how to approach them, they're easy
+CMSs are apples. You know what to expect, they're easy
 to eat, and you get roughly the same thing every time. Static site generators
 are farmland. Maybe you'll plant an apple orchard, but if you're not into
 apples, you could grow something that works better for you. It's been a fun road
