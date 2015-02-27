@@ -12,20 +12,18 @@ authors:
 ![Honeycrisp orchard, my favorite apple, image from wikimedia commons](/assets/images/apple_orchard.jpg)
 
 Earlier this week I wrote [another post comparing static site generators to
-content management systems][1] using Jekyll and WordPress (perhaps unfairly) as
-representatives of their respective technologies. It got me thinking that in
-writing it I was compairing apples to oranges. Static site generators are not
-content management systems. They are generators, converting properly formatted
-input into webpages. To compare it to a content management system is like
-comparing [TeX][2] to [Microsoft Office][3]. Sure, both can get you a PDF
-eventually, and sure it might _look_ better coming out of TeX, but good luck
-trying to embed a long table into a LaTeX file for the first time. Perhaps a
-better metaphor than apples and oranges is I'm comparing apples to farmland.
+content management systems][1] using Jekyll and WordPress (perhaps unfairly)
+as representatives of their respective technologies. It got me thinking that
+in writing it I was compairing apples to oranges. Static site generators are
+not content management systems. They are generators, converting properly
+formatted input into webpages. To compare it to a content management system is
+like comparing [TeX][2] to [Microsoft Office][3]. Perhaps a better metaphor
+than apples and oranges is apples to farmland.
 
 The things [I outlined][1] that static site generators don't quite have down are
 really all management tasks. A built-in text editor, management of categories
 and tags, clearly defined content types, automatic rewrite rules for if you
-rename a page, I could go on an on: These are all features a good content
+rename a page, I could go on and on: These are all features a good content
 manager should have built in. With static site generators you have to do all
 that yourself, particularly if you're hosting your site with Jekyll on GitHub
 pages or want to add commenting to your blog posts.
