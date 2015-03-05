@@ -1,6 +1,6 @@
 # Site settings
 title: Greg Boone
-email: boone.greg@gmail.com	
+email: boone.greg@gmail.com
 description: "Learning out loud in Washington, DC"
 baseurl: ""
 url: "http://gboone.github.io"
@@ -9,3 +9,7 @@ timezone: "America/New_York"
 # Build settings
 markdown: kramdown
 permalink: pretty
+
+# social
+twitter: gboone42
+github: gboone
