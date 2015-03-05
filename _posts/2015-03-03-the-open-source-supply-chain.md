@@ -65,7 +65,7 @@ have one of the best wiki platforms in existence (sorry, MediaWiki, it's true).
 They're not just building a robust collaboration platform that facilitates the
 kind of exchange of ideas an knowledge creative people crave.
 
-I'm attempting to relaunch the jounralism project Danielle and I [helped create
+I'm attempting to relaunch the journalism project Danielle and I [helped create
 in Seoul][25] as a static site (using Jekyll right now, but Middleman is
 looking interesting). GitHub was just getting stated and I remember being
 really confused about [what the point of version control was][26]. Tearing
