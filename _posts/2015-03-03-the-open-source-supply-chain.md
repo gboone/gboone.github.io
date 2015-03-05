@@ -25,8 +25,8 @@ completely unsolicited to help us make the post clearer. He even wrote a
 [script called `laptop`][6] that future 18F team members will be able to use to
 make their lives easier on day one. In addition to Moncef were the [other
 individuals who helped us find mistakes and add to the post][7]. And none of
-this includes all the people reading it right now and might read it in the
-future.
+this includes all the people reading it right now and those who might read it
+in the future.
 
 We didn't just write a post _about_ open source software and how to use it, we
 wrote it in the open and you can actually see [the back and forth Mel and I had
@@ -58,12 +58,12 @@ this way, but I'm hoping we do it more.
 
 One thing about GitHub I find profoundly interesting is their drive toward
 expanding the idea of working in the open to realms that are not programming.
-Last summer they introduced [PSD Viewing and Diffing][22] and late later did
+Last summer they introduced [PSD Viewing and Diffing][22] and later did
 the same for [SVGs][23]. They improved the interface for comparing text
 documents like Markdown [so that it's easier to see what has changed][24] and
 have one of the best wiki platforms in existence (sorry, MediaWiki, it's true).
-They're not just building a robust collaboration platform that facilitates the
-kind of exchange of ideas an knowledge creative people crave.
+They're building a robust collaboration platform that facilitates the
+kind of exchange of ideas and knowledge creative people crave.
 
 I'm attempting to relaunch the journalism project Danielle and I [helped create
 in Seoul][25] as a static site (using Jekyll right now, but Middleman is
@@ -80,7 +80,7 @@ different themes from the admin interface._ It was extremely frustating, and
 laughable now that I know how to work with branches, tags, and commit history.
 I also remember emailing around PSD files when we were attempting to land on a
 logo, and using Google Wave (yes, we _actually_ used Wave and kind of loved it)
-to discuss our drafts. I'm pretty sure we would have not if not all, a lot more
+to discuss our drafts. I'm pretty sure we would have done if not all, a lot more
 of that in GitHub were it the platform it's turned into today.
 
 This is not an advertisement, though. GitHub has some big flaws and barriers to
