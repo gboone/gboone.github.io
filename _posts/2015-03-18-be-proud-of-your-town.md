@@ -1,4 +1,5 @@
---- title: Be Proud of your Town 
+--- 
+title: Be Proud of your Town 
 layout: post 
 date: 2015-03-18 
 tags: 
