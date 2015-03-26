@@ -16,6 +16,8 @@ other tech and government industry press. More surprising to me was how many
 people I knew that weren't in either industry that heard about it and wanted to
 build one of their own. (You should, [you can, here's how][2])
 
+![Government websites at 8AM Eastern Time](/assets/images/analytics.png)
+
 Why does something like this matter? Gizmodo and The Post did a pretty good job
 of explaiing that. This dashboard shows, at a really raw level, which parts of
 the government ordinary citizens interact with every day. Even in the wee hours
@@ -51,6 +53,9 @@ To paraphrase the late Paul Wellstone: Public service is not about big money or
 power games; it's about the improvement of people's lives. Analyitics.usa.gov
 is an active expression of government "for the people, of the people, and by
 the people."
+
+PS: while writing this post, about 20,000 more people started accessing
+government websites. 
 
 [1]: https://analytics.usa.gov
 [2]: https://18f.gsa.gov/2015/03/19/how-we-built-analytics-usa-gov/
