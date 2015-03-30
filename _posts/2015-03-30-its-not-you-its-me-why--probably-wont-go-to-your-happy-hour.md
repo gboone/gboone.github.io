@@ -20,7 +20,7 @@ most problemactically, think that workplace conflict can be resolved over a few
 drinks. The first two are obvious, but the final one only caught my attention
 recently.
 
-Beer is expensive, I get that. It's nice not to have to buy one every once in a
+Booze is expensive, I get that. It's nice not to have to buy one every once in a
 while, but it's merely a nice gesture when there's unresolved resentment
 between the two people. Without the extra step of apology and reconciliation,
 there's no new shared understanding, empathy, or peace between the two
