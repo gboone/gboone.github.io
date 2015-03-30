@@ -13,3 +13,10 @@ permalink: pretty
 # social
 twitter: gboone42
 github: gboone
+
+defaults:
+  -
+    scope:
+      type: posts
+    values:
+      layout: post
