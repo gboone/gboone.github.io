@@ -20,15 +20,14 @@ most problemactically, think that workplace conflict can be resolved over a few
 drinks. The first two are obvious, but the final one only caught my attention
 recently.
 
-Booze is expensive, I get that. It's nice not to have to buy one every once in a
-while, but it's merely a nice gesture when there's unresolved resentment
+Booze is expensive, I get that. It's nice not to have to buy one every once in
+a while, but it's merely a nice gesture when there's unresolved resentment
 between the two people. Without the extra step of apology and reconciliation,
-there's no new shared understanding, empathy, or peace between the two
-individuals. Moreover it puts the person wronged in an inferior position
-because to others (and maybe to the person who should apologise) it looks like
-they've worked things out. [Good apologies][1] are sincere, and come from a
-place of humility. Buying someone a beer drowns the problem in a pool of
-ethanol.
+there's no new shared understanding, empathy, or peace. Moreover it puts the
+person wronged in an inferior position because to others (and maybe to the
+person who should apologize) it looks like they've worked things out. [Good
+apologies][1] are sincere, and come from a place of humility. Buying someone a
+beer drowns the problem in a pool of ethanol.
 
 Beyond the potential damage to relationships happy hours can deal,
 events that center around alcohol are alienating for a variety of people:
