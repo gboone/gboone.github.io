@@ -16,7 +16,7 @@ of work, but the happy hour stikes me as a poor place to do it.
 For starters, a workplace with a social calendar filled in with events
 surrounding alcohol doesn't exactly foster healthy social relationships. People
 say things they don't mean when they are drinking, behave differently, and,
-most problemactically, think that workplace conflict can be resolved over a few
+most problematically, think that workplace conflict can be resolved over a few
 drinks. The first two are obvious, but the final one only caught my attention
 recently.
 
