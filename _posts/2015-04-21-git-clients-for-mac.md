@@ -84,14 +84,54 @@ By abstracting `git add` actions into checkboxes, the app conceals a lot of the 
 
 Git has a lot of bad idioms. The command `git commit` feels a lot like the "save" command in any other application but what most beginners don't learn is that `git add` is closer to save. Running `commit` is more like finishing a draft while `git add` is like every `command-s` you issue while you're writing.
 
-It is also quite difficult to explain the three "states" a file can be in when working in a git project to those who have no experience with it. What do the terms tracked and untracked mean to somebody who has only worked with Microsoft Word? What if something is Staged for Commit? How is being "tracked" different from being "staged?" GitHub for Mac answers these questions by saying it doesn't _really_ matter and then mapping the _concepts_ of Git onto the metaphors we already have for working with computers. Persistently re-adding the file for you? That's autosave. "Commit and sync," that's finishing a draft and backing it up to Dropbox.
+It is also quite difficult to explain the three "states" a file can be in when working in a git project to those who have no experience with it. What do the terms 'tracked' and 'untracked' mean to somebody who has only worked with Microsoft Word? What if something is Staged for Commit? How is being "tracked" different from being "staged?" GitHub for Mac answers these questions by saying it doesn't _really_ matter and then mapping the _concepts_ of Git onto the metaphors we already have for working with computers. Persistently re-adding the file for you? That's autosave. "Commit and sync," that's finishing a draft and backing it up to Dropbox.
 
-The only question is: what does this mean?
+There are a few times this falls down. For example, what does this mean?
 
-![WTF does the partially checked box mean? My Autosaves!](/assets/images/git-clients/wtf-is-this.png)
+![WTF does the partially checked box mean? My autosaves!](/assets/images/git-clients/wtf-is-this.png)
 
-Command line Git would have an answer. It's a little harder to tell at a glance what is happening in GitHub for Mac.
+Command line Git would have an answer with `git status`. It's a little harder to tell at a glance what is happening in GitHub for Mac.
 
-## User Control and Freedom
+In addition, you're rarely working on a Git project and not using another application. It would be great if GitHub for Mac were better integrated with a text editor or the file system. The app shows you which files were changed, but it's not clear from just looking at the app what you're supposed to do with that information other than "sync and commit."
 
-Command line Git wins this one pretty hard. There are so many different workflows available to Git users, and for each one there is a camp of people who firmly, militantly believe they are doing it the right way. Rebasing vs. merging,
+### User Control and Freedom
+
+Command line Git has this down and GitHub for Mac takes a lot of freedoms away by abstracting them into buttons (as discussed above). There are so many different workflows available to Git users, and for each one there is a camp of people who firmly, militantly believe they are doing it the right way. Rebasing vs. merging, forks vs. branches, when to branch vs. pushing to `master`, how frequently you should commit: these are all examples of different basic workflows that power users can expend a lot of hot air arguing about. (Guilty.)
+
+GitHub for Mac resolves a lot of those issues by setting some smart defaults and removing some options. You can't squash commits in the app (at least not easily). You can't `fetch` from your remote without also merging in the latest changes. You can't rebase, instead of merging, one branch into another.
+
+For those of us weaned on CLI Git this is an inexcusable restriction on our freedom and control over our projects. For others it is the enforcement of standards in an otherwise anarchical world.
+
+### Consistency and Standards
+
+GitHub for Mac nails it. Where there might be ten or 12 ways of accomplishing a task from the command line, there is only one way to do just about anything in this app. This, I imagine, is a huge win for people new to Git. Unless, of course, the standards the app tries to enforce are different from the ones your team is using. There are a lot of ways to force patterns on top of Git, (aliases, hooks, etc.) few of them are available in GitHub for Mac.
+
+### Flexibility and Efficiency of Use
+
+This, again, is a mixed bag for the app. CLI Git is full of flexibility, as mentioned in [the user control and freedom section](#user-control-and-freedom), there are many different ways of accomplishing the same task in Git. To get the latest changes on GitHub.com, for example, your workflow might be as simple as:
+```
+git pull
+```
+Unless you're working in a branch then it might be:
+```
+git checkout master
+git pull
+git checkout <your-branch>
+git merge master
+```
+And if you're on a fork it might be
+```
+git checkout master
+git pull origin
+git push upstream master
+git checkout <your-branch>
+git merge master
+git push upstream <your-branch> # (arguably optional)
+```
+And if you're into rebasing instead of merging it's a whole other can of worms.
+
+Getting that kind of flexibility is possible in GitHub for Mac, but obviated by some smart defaults.
+
+### Aesthetic and minimalist design
+### Help users recognize, diagnose, and recover from errors
+### Help and documentation
