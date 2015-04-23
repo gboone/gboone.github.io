@@ -98,7 +98,7 @@ In addition, you're rarely working on a Git project and not using another applic
 
 Command line Git has this down and GitHub for Mac takes a lot of freedoms away by abstracting them into buttons (as discussed above). There are so many different workflows available to Git users, and for each one there is a camp of people who firmly, militantly believe they are doing it the right way. Rebasing vs. merging, forks vs. branches, when to branch vs. pushing to `master`, how frequently you should commit: these are all examples of different basic workflows that power users can expend a lot of hot air arguing about. (Guilty.)
 
-GitHub for Mac resolves a lot of those issues by setting some smart defaults and removing some options. You can't squash commits in the app (at least not easily). You can't `fetch` from your remote without also merging in the latest changes. You can't rebase, instead of merging, one branch into another.
+GitHub for Mac resolves a lot of those issues by setting some smart defaults and removing some options. You can't squash commits in the app (at least not easily). You can't `fetch` from your remote without also merging in the latest changes. You can't rebase, instead of merging, one branch into another. You can't commit without also pushing your branch.
 
 For those of us weaned on CLI Git this is an inexcusable restriction on our freedom and control over our projects. For others it is the enforcement of standards in an otherwise anarchical world.
 
@@ -106,20 +106,29 @@ For those of us weaned on CLI Git this is an inexcusable restriction on our free
 
 GitHub for Mac nails it. Where there might be ten or 12 ways of accomplishing a task from the command line, there is only one way to do just about anything in this app. This, I imagine, is a huge win for people new to Git. Unless, of course, the standards the app tries to enforce are different from the ones your team is using. There are a lot of ways to force patterns on top of Git, (aliases, hooks, etc.) few of them are available in GitHub for Mac.
 
+Some of the standards it enforces are _huge improvements_ over conventional wisdom given to newcomers. Committing in the app, for example, requires and nudges users toward more informative commit messages. Let's be honest and admit that someone who is new to Git and the command line _probably_ isn't very familiar with command line editors and crazy looking commands. To solve that, or maybe to simplify the process, many Git tutorials recommend the shorthand `git commit -m 'message'`. This would be fine if that shorthand didn't often lead to unhelpful messages like "fixed stuff". (Again, guilty.)
+
+A message like that is fine if the "stuff" is one change to one line of code but GitHub is collaborative, and commit messages should help your collaborators understand what changes you made. GitHub for Mac helps newcomers get past `-m` by providing "Summary" and "description" sections in the commit view. It'd be interesting to see data around whether GitHub app users provide [more useful commit messages because of this nudge.](https://gist.github.com/matthewhudson/1475276)
+
 ### Flexibility and Efficiency of Use
 
 This, again, is a mixed bag for the app. CLI Git is full of flexibility, as mentioned in [the user control and freedom section](#user-control-and-freedom), there are many different ways of accomplishing the same task in Git. To get the latest changes on GitHub.com, for example, your workflow might be as simple as:
+
 ```
 git pull
 ```
+
 Unless you're working in a branch then it might be:
+
 ```
 git checkout master
 git pull
 git checkout <your-branch>
 git merge master
 ```
+
 And if you're on a fork it might be
+
 ```
 git checkout master
 git pull origin
@@ -128,10 +137,17 @@ git checkout <your-branch>
 git merge master
 git push upstream <your-branch> # (arguably optional)
 ```
+
 And if you're into rebasing instead of merging it's a whole other can of worms.
 
-Getting that kind of flexibility is possible in GitHub for Mac, but obviated by some smart defaults.
+Getting that kind of flexibility is maybe possible in GitHub for Mac, but obviated by default behaviors.
+
+Finally, it's worth mentioning here the ease of integration with GitHub's web service. Issuing pull requests with the click of a button is a dream.
 
 ### Aesthetic and minimalist design
+
+This criterion has been touched on by others above, but the look and simplicity of the app cannot be ignored. I mentioned in the [visibility of system status](#visibility-of-system-status) section that there are at least 11 git commands executable within one click of launching the app.
+
 ### Help users recognize, diagnose, and recover from errors
+
 ### Help and documentation

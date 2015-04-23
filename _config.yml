@@ -7,13 +7,14 @@ url: "http://greg.harmsboone.org"
 timezone: "America/New_York"
 
 # Build settings
-markdown: kramdown
+markdown: redcarpet
 permalink: pretty
 
 # social
 twitter: gboone42
 github: gboone
-
+gems:
+  - jemoji
 defaults:
   -
     scope:
