@@ -146,8 +146,40 @@ Finally, it's worth mentioning here the ease of integration with GitHub's web se
 
 ### Aesthetic and minimalist design
 
-This criterion has been touched on by others above, but the look and simplicity of the app cannot be ignored. I mentioned in the [visibility of system status](#visibility-of-system-status) section that there are at least 11 git commands executable within one click of launching the app.
+This criterion has been touched on by others above, but the look and simplicity of the app cannot be ignored. I mentioned in the [visibility of system status](#visibility-of-system-status) section that there are at least 11 git commands executable within one click of launching the app. In addition, the app abstracts away many of the more complicated commands into their most useful presentation. The "History" button takes you to a view that represents `git log --date=relative` with a `git diff` of that commit next in the opposite frame. You can even expand each commit and jump through the `diff` file by file.
+
+The branch view defaults to `git branch -v` alongside a "Published" button, which, when disabled means you have pushed all possible changes.
+
+All of this happens in relatively few clicks compared to how many commands and defaults you would need to have this kind of view in even the most sophisticated of command line set ups.
+
+A couple things are confusing in this setup.
+
+Moving the mouse to the left side of a branch turns the cursor into a hand and you can click and drag the branch. What exactly happens when you drag one on top of another is not intuitive. Are you switching branches? Merging one into the other? The answer is unclear without either giving it a shot and hoping you don't make a mistake or looking it up.
+
+There's also a star button on the right side of a branch's container. What this does is completely unclear. Clicking a star of an inactive branch appears to `checkout` or, "switch to," in the language of the app, that branch. In fact, clicking on _anything_ on an inactive branch appears to activate it, not just the "Switch to this Branch" item in the list that drops down from the "arrow down" button.
+
+Finally, you can "unpublish" a branch. As an experienced `git` user this doesn't mean much to me. Does it mean somehow reverting the remote branch back to the last previous push? Or, more likely, does it mean completely deleting the branch from the remote? It turns out it's the latter, and any collaborators working on that branch will need to find another way of getting any updates since their last "sync."
+
+![The unpublish button warns you that your branch will be deleted from the remote repository.]()
 
 ### Help users recognize, diagnose, and recover from errors
 
+While the app may be attractive and minimalist, it does not help users recognize errors very well.
+
+If multiple individuals are working off the same branch, revoking that branch is potentially confusing if not dangerous. In fairness, GitHub for Mac _does_ warn you that you'll be deleting the branch from "the remote repository" but does not contextualize what exactly that means. If you are new to `Git` you might not know that "the remote repository" means GitHub.com and that by "unpublishing" you've just prevented your collaborators from accessing your changes.
+
+On another topic of branching and merging, GitHub for Mac might have made switching branches _too_ easy. An accidental click on `master` might inadvertently switch you to the master branch and you might inadvertently commit before switching back. Depending on the project, this could result in wild instability. At 18f, for example, accidental commits to `staging` will result in republication of our staging site; and accidental commits could result in a complete obfuscation of our publishing process.
+
+This is not to say that accidental commits to a branch _can't_ happen in command line git, but the GitHub for Mac app doesn't make it easy to see errors as they occur and understand how to recover from them. The command line forces you to be more explicit by requiring you tell it exactly what branch you want, and what you want to do with it.
+
+As far as diagnosing and recovering from errors, the app doesn't help much with that either. In the above example, you would at no point get any indication you were making a mistake, how you got there in the first place, nor what to do to fix it. If you committed and synced a load of changes to `branch-a` and another collaborator asked you to submit them to `branch-b` instead, you might know what that means, but you might not know how to solve it other than checking out a new branch and copying and pasting your final changes over manually. If you're working with several files this could take a long time.
+
 ### Help and documentation
+
+In that last example, the easiest way to get out of that jam would be to mere or, better, rebase your `branch-a` onto `branch-b` like `git rebase branch-a branch-b` and then pushing up `branch-b`. If you only need some of the commits from `branch-a` you can do an interactive merge or, what I do, use `git cherry-pick` to extract the specific commits or range of commits from `branch-a` that are needed in `branch-b`.
+
+Git is an incredibly well documented piece of software through guides like [ProGit](http://git-scm.com/book/en/v2/), GitHub's and Atlassian's tutorials, and, shameless plug, [18F's tutorial](https://18f.gsa.gov/2015/03/03/how-to-use-github-and-the-terminal-a-guide/). There are separate `man` pages for Git and each subcommand (from the CLI, run `man git-commit`). And there are millions of Git users around the world answering questions on StackExchange ready for you to find by [Googling your problem](https://www.google.com/search?q=how+to+move+some+commits+to+another+branch&ie=utf-8&oe=utf-8).
+
+Little of that will be helpful on GitHub for Mac. The top search result for our merging problem above](http://stackoverflow.com/questions/2369426/how-to-move-certain-commits-to-another-branch-in-git) is to `rebase --onto` and the other top-voted answers recommend `cherry-picking`. If you're using GitHub for Mac without knowing how to `Git` from the command line, what are you supposed to do?
+
+## Conclusion
