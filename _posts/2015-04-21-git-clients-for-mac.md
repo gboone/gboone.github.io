@@ -202,3 +202,5 @@ It has a lot of room to grow, though. An app like GitHub for Mac could be a stan
 I work with a few people who had never used Git, the command line, or a static site generator before. Right now we're [trying to start people off at the command line](https://18f.gsa.gov/2015/03/03/how-to-use-github-and-the-terminal-a-guide/) and offer help as needed. We do this, in part, to standardize the way we work, but also because we think eventually all of us will encounter some kind of [error GitHub for Mac won't be able to solve](#help-users-recognize-diagnose-and-recover-from-errors) and a more experienced Git user will have to intervene anyway.
 
 Our hypothesis is that learning the command line from the start will help people feel more comfortable making mistakes and recovering from them. That means introducing people to a pretty steep learning curve. A lot of people believe the promise of a GUI is that it will reduce the learning curve. In this case, I'm not sure that's true, at least not yet.
+
+[Comment on this post at GitHub.com](https://github.com/gboone/gboone.github.io/pull/14)
