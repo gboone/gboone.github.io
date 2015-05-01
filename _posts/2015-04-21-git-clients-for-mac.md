@@ -3,7 +3,8 @@ title: "Git Clients for Mac"
 tags:
 - git
 - os x
-- user experience
+- usability
+- reviews
 ---
 Since first learning how to use Git a couple years ago I've been pretty convinced that using the command line is the _only_ way to use Git. Partly it's simplifying my workflow: On a given day I have Terminal open for running tests, working with Jekyll, and quick editing in `vim`; a browser open to work with GitHub, inspect my work, and debug things; plus a text editor for All the Things. A Git client is one more application running that I have to integrate into a three screen, multiple tab workflow.
 
@@ -193,3 +194,11 @@ Git is an incredibly well documented piece of software through guides like [ProG
 Little of that will be helpful on GitHub for Mac. The top search result for [our merging problem above](http://stackoverflow.com/questions/2369426/how-to-move-certain-commits-to-another-branch-in-git) is to `rebase --onto` and the other top-voted answers recommend `cherry-picking`. If you're using GitHub for Mac without knowing how to `Git` from the command line, what are you supposed to do?
 
 ## Conclusion
+
+GitHub for Mac is definitely a well-designed step in the right direction. For those new to Git or only working with repositories occasionally, it may be very useful and certainly an easier learning curve than learning how to use the command line and all of Git's complexities.
+
+It has a lot of room to grow, though. An app like GitHub for Mac could be a stand in for a user interface for static sites if it had  built-in text editor and visualization of the repository's tree. Or it could compete with a program like [Tower](http://www.git-tower.com/) if it offered more flexibility of use and workflow that a power Git user would want and a more exhaustive GitHub integration. At the moment, it feels like the app is struggling to figure out what it should be.
+
+I work with a few people who had never used Git, the command line, or a static site generator before. Right now we're [trying to start people off at the command line](https://18f.gsa.gov/2015/03/03/how-to-use-github-and-the-terminal-a-guide/) and offer help as needed. We do this, in part, to standardize the way we work, but also because we think eventually all of us will encounter some kind of [error GitHub for Mac won't be able to solve](#help-users-recognize-diagnose-and-recover-from-errors) and a more experienced Git user will have to intervene anyway.
+
+Our hypothesis is that learning the command line from the start will help people feel more comfortable making mistakes and recovering from them. That means introducing people to a pretty steep learning curve. A lot of people believe the promise of a GUI is that it will reduce the learning curve. In this case, I'm not sure that's true, at least not yet.
