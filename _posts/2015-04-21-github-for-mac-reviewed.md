@@ -1,16 +1,16 @@
 ---
-title: "Git Clients for Mac"
+title: "GitHub for Mac: A Usability Review"
 tags:
 - git
 - os x
 - usability
 - reviews
 ---
-Since first learning how to use Git a couple years ago I've been pretty convinced that using the command line is the _only_ way to use Git. Partly it's simplifying my workflow: On a given day I have Terminal open for running tests, working with Jekyll, and quick editing in `vim`; a browser open to work with GitHub, inspect my work, and debug things; plus a text editor for All the Things. A Git client is one more application running that I have to integrate into a three screen, multiple tab workflow.
+Since first learning how to use Git a couple years ago I've been pretty convinced that using the command line is the _only_ way to go. Partly it's simplifying my workflow: On a given day I have Terminal open for running tests, working with Jekyll, and quick editing in `vim`; a browser open to work with GitHub, inspect my work, and debug things; plus a text editor for All the Things. A Git client is one more application running that I have to integrate into a three screen, multiple tab workflow.
 
-I tried GitHub for Mac once early on because I thought I'd be able to focus on the coding part without worrying about the version control part of my job and I don't remember why I initially switched back to terminal only but I think it had something to do with my first pull request at CFPB: one that had _every file in the repo_ committed as "changed" because at some point I had changed permissions on the whole repo but forgot to tell Git to ignore that crap. OOPS!
+I tried GitHub for Mac a few years ago when I was first learning Git. I thought I'd be able to focus on the code without worrying about the version control part of my job. I don't remember why I went command line only, but I think it had something to do with my first pull request at CFPB: one that had _every file in the repo_ committed as "changed" because at some point I had changed permissions on the whole repo but forgot to tell Git to ignore that crap. OOPS!
 
-But I recently put GitHub for Mac to the test again. I work with a few people who had never worked with a command line or even heard of GitHub before starting with us and I am trying to make a conscious effort and check my assumptions about what is or isn't obvious or "easier." Being a full-time developer working with primarily with other developers for a year-and-a-half is a good way to forget what you didn't know before you started. So I dusted off the ol' GitHub for Mac app, and decided to evaluate it and Tower, the only real competitor against working with the command line.
+Being a full-time developer working with primarily with other developers for a year-and-a-half is a good way to forget what you didn't know before you started. So I dusted off the ol' GitHub for Mac app, and decided to evaluate it again. I work with a few people who are where I was two years ago and I am trying to make a conscious effort to check assumptions about what is "obvious" or "easier."
 
 ## GitHub for Mac
 
