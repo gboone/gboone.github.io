@@ -47,7 +47,7 @@ the government in the last 90 days. Put another way, that's four visits *per
 resident* of the United states every three months. They're coming to the
 government for information and help they know only the US government can
 provide. They're coming for public services and resources they can use to
-improve people lives.
+improve people's lives.
 
 To paraphrase the late Paul Wellstone: Public service is not about big money or
 power games; it's about the improvement of people's lives. Analyitics.usa.gov
