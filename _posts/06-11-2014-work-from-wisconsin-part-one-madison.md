@@ -1,5 +1,6 @@
 ---
-title: Work from Wisconsin Part one: Madison
+title: "Work from Wisconsin Part one: Madison"
+date: 2015-06-11
 tags:
 - work
 - working remote
