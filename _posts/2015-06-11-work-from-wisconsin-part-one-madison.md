@@ -15,7 +15,7 @@ Being telework-able also means when we have to leave our home base and visit fam
 
 Day one: JPH, 100state, and Rain
 
-I didn't expect the rain. I probably should have but I didn't and ended up in the middle of the rainstorm after an excellent breakfast at Johnson Public House on E. Johnson Street. The barista there described the coffee her served me as a punch in the face. He was not wrong but, paired with a breakfast sandwich, it was exactly what I needed to get going in the morning.
+I didn't expect the rain. I probably should have but I didn't and ended up in the middle of the rainstorm after an excellent breakfast at Johnson Public House on E. Johnson Street. The barista there described the coffee he served me as a punch in the face. He was not wrong but, paired with a breakfast sandwich, it was exactly what I needed to get going in the morning.
 
 ![Burnie's Rock Shop, as seen from the window of Johnson Public House](/assets/images/burnies.jpg)
 
