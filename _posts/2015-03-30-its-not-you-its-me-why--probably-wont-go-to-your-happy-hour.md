@@ -11,7 +11,7 @@ happy hour when someone from another office is visiting, the monthly Government
 Tech happy hour, and occasional impromptu happy hours. Depending on conditions, that
 can be as few as two or as many as six happy hours in a month. I like my
 colleagues well enough and would even like to get to know some of them outside
-of work, but the happy hour stikes me as a poor place to do it.
+of work, but the happy hour strikes me as a poor place to do it.
 
 For starters, a workplace with a social calendar filled in with events
 surrounding alcohol doesn't exactly foster healthy social relationships. People
@@ -39,7 +39,7 @@ poorly-lit bar is stressful, off-putting, and exclusionary.
 Our San Francisco offices do a [potluck lunch][2] every week. It happens during
 the work day and people can choose how to route around it if it gets in the way
 of their productivity. I'm sure this is not without problems. We do a monthly
-game night in the DC office, I'm hoping we can do more things like that to be
+game night in the DC office. I'm hoping we can do more things like that to be
 welcoming of people who don't drink, or can't or don't want to attend happy hours.
 
 [1]: https://ccr.byu.edu/content/power-apology
