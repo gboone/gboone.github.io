@@ -1,5 +1,5 @@
 ---
-title: "Don't make me think! (But please alow me to.)"
+title: "Don't make me think! (But please allow me to.)"
 tags:
 - apple
 - design
