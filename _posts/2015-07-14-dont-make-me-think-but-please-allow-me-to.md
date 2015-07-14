@@ -15,7 +15,7 @@ At first I thought 'but that's the whole point! You shouldn't have to think!' St
 
 Photos, the all-in-one iPhoto and Aperture replacement, is a good example to illustrate Brendan's point. The cool thing about iPhoto was that you didn't have to think. Photos has this neat feature where you can open an old Aperture or iPhoto library in Photos by simple double clicking or dragging the library onto the Dock icon, but then Photos makes a ton of assumptions for you. The big one: It assumes you opened it because you want to convert that library for use with Photos.
 
-This is fine if that's what you want to do but it's not. Maybe you have an iPhoto libary that's separate from your Aperture library. Maybe you [recently got married][2] and want to merge your family's libraries into one and you're opening them to see what's inside. In either of those two cases, the experience you get is:
+This is fine if that's what you want to do but it's not. Maybe you have an iPhoto libary that's separate from your Aperture library. Maybe you recently got married and want to merge your family's libraries into one and you're opening them to see what's inside. In either of those two cases, the experience you get is:
 
 1. Photos fires itself up
 2. Apple tries to sell you an iCloud Photo Library
@@ -54,3 +54,5 @@ The thing is, everything might not be alright. That's why I need to know where t
 The beauty of iPhoto when I first used it was that it didn't make me think. Every other photo manager out there was complicated, janky, and tied to the camera you bought. iPhoto worked with every camera and imported your photos in intuitive ways and that was great. Most of the time that's all I needed to do. But sometimes I needed to get my photos out of the Finder and iPhoto made that possible. Sometimes, despite all of Apple's best intentions, I wanted, no _needed_ to think and Apple enabled me.
 
 This "Don't let them think" design movement seems to have cascaded out of the original iPhone and in the last couple years has infected OS X and even Macs. It's a troubling trend that hopefully will spurn people against Apple enough for them to change. I want Apple Music to be great, I really do, but playlists alone won't be enough. I want to be an Apple fan boy again, but it's just not happening.
+
+[1]: http://cct.georgetown.edu
