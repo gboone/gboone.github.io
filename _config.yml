@@ -15,6 +15,7 @@ twitter: gboone42
 github: gboone
 gems:
   - jemoji
+  - jekyll-compose
 defaults:
   -
     scope:
