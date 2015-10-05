@@ -18,7 +18,7 @@ I thought maybe there'd be a trail following the creek but if there was one I co
 
 I'm not the fastest biker but I normally ride this three mile stretch about 11 miles an hour faster than I walked it and it's pretty incredible to take in this kind of nature when you're moving more slowly. You notice things. Like how the white pines seem to turn color from the bottom up and from the outside in; the pine cones seem to emerge as the needles disappear. Like the yellow to green cascade produced when the sunset hits a stand of birch trees. Or the undergrowth visible beneath a stand of pines.
 
-Forests are such complex systems. After a long day of working for the government, arguably one of the more complex systems humans have ever created, it's humbling and therapeutic to observe such a magnificent system living beyond our control. The forst will never stop – unless, of course, we stop it.
+Forests are such complex systems. After a long day of working for the government, arguably one of the more complex systems humans have ever created, it's humbling and therapeutic to observe such a magnificent system living beyond our control. The forest will never stop – unless, of course, we stop it.
 
 This week I'm grateful for forests, public land, and conservation.
 
