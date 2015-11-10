@@ -17,7 +17,7 @@ I asked more questions: Can you export the meet data? What format do you get? Ar
 
 The answers to these questions were encouraging, except for the last one. That answer was: "Because nobody cares." Swimming programs are small. A couple dozen swimmers and a couple coaches in the largest teams and the league is largely decentralized and [focused on more popular sports](https://en.wikipedia.org/wiki/High_school_football). While it's not perfect, this system works and is mostly painless for the coaches, so the impact value might be low relative to available resources.
 
-"Works" is a bit of an overstatement. If you're an athlete, the only people a record of your progress is you and your coach. If something happens to the meet manager computer or the printed-off records, it could mean an entire season's records are lost. For my mother in-law that means manually backing up the data on her old, personal, iMac. So even if it's low impact relative to the size of the budgets, there are only upshots to keeping better records: The coaches get easier management, student access could be self service, and the district's athletics program gets an accurate, accessible record of their entire history.
+"Works" is a bit of an overstatement. If you're an athlete, the only people with a record of your progress is you and your coach. If something happens to the Meet Manager computer or the printed-off records, it could mean an entire season's records are lost. For my mother in-law that means manually backing up the data on her old, personal, iMac. So even if it's low impact relative to the size of the budgets, there are only upshots to keeping better records: The coaches get easier management, student access could be self service, and the district's athletics program gets an accurate, accessible record of their entire history.
 
 Who's going to build it?
 
@@ -28,6 +28,6 @@ A few weeks ago I tweeted:
 <blockquote class="twitter-tweet" lang="en"><p lang="en" dir="ltr">I&#39;ve heard of high schools teaching computer science and code. Are there any doing user experience research and design?</p>&mdash; Greg Boone (@gboone42) <a href="https://twitter.com/gboone42/status/652116507955101696">October 8, 2015</a></blockquote>
 <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
 
-And the responses were mixed. [CFPB's Adam Scott](https://twitter.com/adamdscott/status/652117444950126592) has dome something like this, but many who responded thought it was a good idea that might never come to pass.
+And the responses were mixed. [CFPB's Adam Scott](https://twitter.com/adamdscott/status/652117444950126592) has done something like this, but many who responded thought it was a good idea that might never come to pass.
 
 A lot of people are talking about teaching kids how to code. I don't see a lot of people talking about teaching kids how to be on a design team and there's a big difference.
