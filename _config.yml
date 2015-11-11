@@ -23,13 +23,6 @@ defaults:
     values:
       layout: post
 exclude:
-- node_modules
 - deploy
-- README.md
-- LICENSE.md
-- CONTRIBUTING.md
-- vendor
-- go
-- script
 - Gemfile
 - Gemfile.lock
