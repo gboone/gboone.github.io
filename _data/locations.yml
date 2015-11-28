@@ -1,0 +1,32 @@
+kaposvar:
+  lat: 46.36383
+  lng: 17.78225
+  name: Kaposvár, Magyarország
+dc:
+  lat: 38.904722
+  lng: -77.016389
+  name: Washington, DC
+arlington:
+  lat: 38.880278
+  lng: -77.108333
+  name: "Arlington, VA"
+sp-wisconsin:
+  lat: 43.187222
+  lng: -89.210833
+  name: "Sun Prairie, WI"
+madison:
+  lat: 43.066667
+  lng: -89.4
+  name: "Madison, WI"
+castle-danger:
+  lat: 47.120833
+  lng: -91.503333
+  name: "Castle Danger, MN"
+st-germain:
+  lat: 45.929167
+  lng: -89.486944
+  name: "St. Germain, WI"
+escanaba:
+  lat: 45.745278
+  lng: -87.064444
+  loc: "Escanaba, MI"
