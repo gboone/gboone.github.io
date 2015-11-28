@@ -2,21 +2,23 @@
 title: 'rePress: Jekyll with a WordPress Frontend'
 date: '2015-01-29'
 layout: post
-image: 
-tags: 
+image:
+tags:
 - Jekyll
 - WordPress
 - Static site generators
 - Side projects
 description: rePress reads WordPress posts from a site configured with the REST API and spits out Jekyll posts.
-excerpt: 
---- 
+lat: 38.904722
+lng: -77.016389
+loc: "Washington, DC"
+---
 
 About five months ago I left the riveting world or WordPress development for the greener pastures of helping a [government startup manage its website](https://18f.gsa.gov), and while I've become [pretty taken with Jekyll lately](http://greg.harmsboone.org/2015/01/26/static-sites-revisited/), there will always be a part of me that loves WordPress. And so, like a good hacker, I started a side project I'm calling [_rePress_](https://github.com/gboone/rePress) (a name that, admittedly, needs work—see below).
 
-There have been a few different ways people approached the task of marrying WordPress with static site generators. Ben Balter's [WordPress to Jekyll exporter](https://github.com/benbalter/wordpress-to-jekyll-exporter) is one that takes on Jekyll specifically, then there's [StaticPress, a plugin for WordPress that transforms your installation into a static site](http://en.staticpress.net/), and finally CFPB is taking on the task of building [a static site generator](https://github.com/cfpb/sheer) that will pull from WordPress and other APIs. rePress takes a different tack but is inspired by these other initatives. 
+There have been a few different ways people approached the task of marrying WordPress with static site generators. Ben Balter's [WordPress to Jekyll exporter](https://github.com/benbalter/wordpress-to-jekyll-exporter) is one that takes on Jekyll specifically, then there's [StaticPress, a plugin for WordPress that transforms your installation into a static site](http://en.staticpress.net/), and finally CFPB is taking on the task of building [a static site generator](https://github.com/cfpb/sheer) that will pull from WordPress and other APIs. rePress takes a different tack but is inspired by these other initatives.
 
-The first two of these solutions are WordPress plugins, and the second generates content from an API. This combines the two ideas by creating generator plugin for Jekyll sites that relies on the [REST API currently being integrated into WordPress Core](http://wp-api.org/#rest-api_about). Right now that API is only available as a plugin, but it will one day (soon, I think) require only a clean WordPress installation. 
+The first two of these solutions are WordPress plugins, and the second generates content from an API. This combines the two ideas by creating generator plugin for Jekyll sites that relies on the [REST API currently being integrated into WordPress Core](http://wp-api.org/#rest-api_about). Right now that API is only available as a plugin, but it will one day (soon, I think) require only a clean WordPress installation.
 
 Once you the API exposed, you need only point Jekyll to the root endpoint and run `jekyll build`  on your server or your local environment. Right now it will grab the 9 most recent posts and parse out the published title, date, tags, authors, and excerpts, and, of course, the post content and generate HTML files with proper Jekyll frontmatter. This has a couple benefits: it allows you to import your WordPress posts without exporting any files and it allows you to choose whether to write Jekyll Markdown or use the WordPress editing interface.
 

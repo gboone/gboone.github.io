@@ -4,6 +4,9 @@ tags:
 - biking
 - bikedc
 - capital bikeshare
+lat: 38.904722
+lng: -77.016389
+loc: "Washington, DC"
 ---
 ![The Classic Capital Bikeshare
 bike](/assets/images/capitalbikesharebike.png )
@@ -13,7 +16,7 @@ Bikeshare's 2014 data. Bikeshare makes its [data
 available](https://www.capitalbikeshare.com/system-data) and
 [Chart-It](http://chart-it.blogspot.com) did a wonderful job of breaking down
 [ridership](http://chart-it.blogspot.com/2015/04/bikeshare1.html) and [bike
-usage](http://chart-it.blogspot.com/2015/04/bikeshare2.html) for the year 
+usage](http://chart-it.blogspot.com/2015/04/bikeshare2.html) for the year
 2014. Some highlights:
 
 1. Nearly 80% of rides are made by "registered members," that is someone
@@ -37,7 +40,7 @@ On the bikes:
 carried out about 72+% more rides," over "more than 159 hours."
 
 2014's hardest working bike was a beast, but you'll have to read about it
-yourself. 
+yourself.
 
 What's more interesting than simply the numbers is what they tell us, or
 could tell us, about the city. What can we say about the fact that the

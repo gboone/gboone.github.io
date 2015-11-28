@@ -8,6 +8,9 @@ tags:
 - justyo
 - OPM
 - Fun with APIs
+lat: 38.904722
+lng: -77.016389
+loc: "Washington, DC"
 ---
 This week marked not only Thanksgiving week but also the first winter storm of
 the year. The first time GSA emailed me about the possibility of the government

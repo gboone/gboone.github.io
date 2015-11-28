@@ -12,6 +12,9 @@ tags:
   - best practices
   - browser testing
   - WordPress
+lat: 38.904722
+lng: -77.016389
+loc: "Washington, DC"
 ---
 Browser testing is a basic component of a concept called behavior driven development (BDD), and one that has helped me become a better WordPress developer in the last few months. The concept of BDD is simple: test and develop around your software's expected behavior. [I recently wrote about BDD for Excella's company blog][1], and this post will go a bit more technical than that. The upshot of behavior testing is you can find problems with both your code and your requirements. Before we get into that, a bit of background on the tools.
 

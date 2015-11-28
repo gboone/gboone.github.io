@@ -4,6 +4,9 @@ tags:
 - apple
 - design
 - steve krug
+lat: 38.904722
+lng: -77.016389
+loc: "Washington, DC"
 ---
 My friend Brendan visited me from New York this past weekend. Brendan is a [CCT][1] friend and so naturally we talked about "CCT _stuff_." I started the Apple Music three month trial earlier that week and was telling him how amazing the curated playlists are on that service. My colleague Noah captures my feelings on the subject pretty well.
 

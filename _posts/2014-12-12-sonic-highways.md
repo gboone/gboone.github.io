@@ -6,7 +6,9 @@ tags:
 - foo fighters
 - american music
 - rock and roll
-layout: post
+lat: 38.904722
+lng: -77.016389
+loc: "Washington, DC"
 ---
 
 <img src="/assets/images/sonichighways.jpg" alt="Sonic Highways Cover" width="100%"/>
@@ -24,4 +26,4 @@ Compared with other rock albums this year, espeically Jack White's _Lazaretto_, 
 Notes:
 
 1. I loved _Lazaretto_ but seriously, the split-track, reverse-grooved, hologram-enabled LP was a bit much. We get it! Vinyl can do more than play music, MP3s can't! Read you loud and clear, bro. It's also increasingly clear Jack White is amazingly talented but when it comes down to it his ego gets in the way of the art.
-1.  The [show](http://i2.wp.com/livemusicblog.com//assets/images/2014/08/maxresdefault5.jpg?resize=1280%2C720) and the [album](/assets/images/sonichighways.jpg) have entirely different logos and branding. 
+1.  The [show](http://i2.wp.com/livemusicblog.com//assets/images/2014/08/maxresdefault5.jpg?resize=1280%2C720) and the [album](/assets/images/sonichighways.jpg) have entirely different logos and branding.

@@ -11,6 +11,9 @@ tags:
   - fixies
   - Octopress
   - WordPress
+lat: 38.904722
+lng: -77.016389
+loc: "Washington, DC"
 ---
 When I was a week into this blog, I wrote down [some of the reasons I liked Octopress][1], my initial impressions of it as a blogging platform and whether it could compete or replace WordPress. It was a leap for me, a WordPress developer and long time fan of the platform. In general I have found Octopress to be an interesting experiment in hacker blogging but am back to WordPress as of this entry.<!--more-->
 

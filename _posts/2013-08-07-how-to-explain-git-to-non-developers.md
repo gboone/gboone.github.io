@@ -9,6 +9,9 @@ tags:
   - git
   - software development
   - version control
+lat: 38.904722
+lng: -77.016389
+loc: "Washington, DC"
 ---
 Since starting with [Excella][1] in January I've found myself explaining `git` and the underlying concept of version control to a lot of non-developers. People like to ask me what I'm doing at my job, what I'm learning, and git was a big one I had to learn early on. What I usually focus on when explaining *git* is how it is fundamentally different from revision history tools like those included with Google Documents and other word processors.
 

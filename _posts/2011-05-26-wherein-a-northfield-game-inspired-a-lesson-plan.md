@@ -11,6 +11,9 @@ tags:
   - lesson plans
   - teaching
   - tricca
+lat: 46.36383
+lng: 17.78225
+loc: Kaposvár, Magyarország
 ---
 People who came of age in the State of Minnesota sometime in the last decade likely have heard of <a title="Tricadecathlonomania: Official Website" href="http://trica.clockworkdistractions.com" target="_blank">Tricadecathlonomania</a>, particularly those of us who know someone Northfield. For anyone who hasn't heard of it,  Trica, as it's commonly known, is a scavenger hunt of epic proportion. It is not the scavenger hunt where you find a big list of things and bring them back to whomever gave you the list, nay it is far greater than that. With a whopping 288 items on the 2010 list, Trica is perhaps the most ambitious type of scavenger hunt there is; and here's the catch: the list, whatever of it you can manage, must be completed in 24 hours. Thus was born "Tricadecathlonomania: The Lesson Plan."
 
@@ -27,7 +30,7 @@ For the purposes of keeping things easy, I decided only to pit the students agai
 The students were amazingly engaged with the idea from the start. Chuckles arose while they were reading over the list, many of the items were borrowed from the 2010 Trica list, and were quite vague, strange, or seemingly impossible. Two such items perplexed almost all the groups:
 
 > 6. Ask about the current euro to forint exchange rate at a bank, and then whip out a gyro to trade in. \[40\] (Bonus if said gyro is produced from a briefcase you’re handcuffed to [25])
-> 
+>
 > 30. A partridge in a pear tree, 2 turtle doves, 3 French hens, 4 calling birds, 5 golden rings, 6 geese a laying, 7 swans a swimming, 8 maids a milking, 9 ladies dancing, 10 lords a leaping, 11 pipers piping, 12 drummers drumming. [30 per verse/item]
 
 None of the teams attempted no. 6, there was only one bank within the playing area, so it may have been too hard. It also didn't help that in Hungarian "gyro" is spelled "gyros" and pronounced "ghee-rhoss" and Euro is pronounced nothing like that in Hungarian. No. 30 confused almost all the groups, apparently the 12 Days of Christmas carol isn't as popular here—though one group earned a whopping 360 points for doing all 12 by bringing in a video tape of a 12 Days cartoon—either that or all the groups were giving it way too much though.

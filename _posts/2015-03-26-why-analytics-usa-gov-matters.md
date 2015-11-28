@@ -7,6 +7,9 @@ tags:
 - transparency
 - analytics.usa.gov
 - analytics
+lat: 38.904722
+lng: -77.016389
+loc: "Washington, DC"
 ---
 Last weeek I had the pleasure of helping 18F launch [analytics.usa.gov][1], a
 public dashboard showing basic data about how many people are visiting
@@ -36,7 +39,7 @@ we are, but what government services we find most useful." And while the top
 two right now are the National Weather Service and "Where's my Refund,"
 scrolling down the top 20 list reveals some surprising insights. The [Astronomy
 Photo of the Day][5] is routinely in the top 10. [The Department of
-Agriculture's home page][6] also makes the list, but so does 
+Agriculture's home page][6] also makes the list, but so does
 [StopBullying.gov][7]. Specifically, a page on how to stand up against bullies.
 Other top contenders also include websites for checking immigration status,
 Veteran's Affaris and social security benefits, and applying for a job with the
@@ -55,7 +58,7 @@ is an active expression of government "for the people, of the people, and by
 the people."
 
 PS: while writing this post, about 20,000 more people started accessing
-government websites. 
+government websites.
 
 [1]: https://analytics.usa.gov
 [2]: https://18f.gsa.gov/2015/03/19/how-we-built-analytics-usa-gov/

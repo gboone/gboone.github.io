@@ -7,6 +7,9 @@ published: true
 tags:
   - Communications
   - DevOps
+lat: 38.904722
+lng: -77.016389
+loc: "Washington, DC"
 ---
 ![Word 1.0, no thanks I'll handwrite everything.](http://archive.wired.com/images/article/full/2008/11/ms_630px.jpg)
 <br>_Don't let your website turn into Windows 1.0_
@@ -41,7 +44,7 @@ department and are told "pages may only have one picture and it cannot be
 larger or smaller than _x_ by _y_ dimensions." (True story.) Software is not
 static, as people use it, they discover how it can do more for them. Imagine
 if Microsoft stopped developing Word after it's initial release. Nobody
-would use it because it would no longer be valuable. 
+would use it because it would no longer be valuable.
 
 What an organization can do with its website is _mission critical_, not just
 for the communications team. Having a developer available who can make it

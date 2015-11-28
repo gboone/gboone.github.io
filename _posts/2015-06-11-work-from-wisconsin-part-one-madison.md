@@ -7,6 +7,9 @@ tags:
 - wisconsin
 - madison
 - 100state
+lat: 43.066667
+lng: -89.4
+loc: "Madison, WI"
 ---
 
 One thing that's really incredible about working for 18F is our ability to telework from just about anywhere. Everything we do is online and everyone we work with is in one of about six different places so even when we're not teleworking, we're teleworking.
@@ -29,4 +32,4 @@ Though I've only once been to UberOffices in DC, I'd be surprised if other co-wo
 
 Lunch at Ian's Pizza because of course. Chicken burrito pizza, 1 slice; wish I had seen they had Sprechers in the fountain, guess there's always tomorrow.
 
-The day rounded out with a trip to Willy Street for a haircut and a burger at the inimitable Mickey's Tavern. Even in the rain Madison is a warm place. Wish I had more time to engage with the civic tech community at [Hacking Madison](http://hackingmadison.org) and learn more about what people are shipping in the Badger State. 
+The day rounded out with a trip to Willy Street for a haircut and a burger at the inimitable Mickey's Tavern. Even in the rain Madison is a warm place. Wish I had more time to engage with the civic tech community at [Hacking Madison](http://hackingmadison.org) and learn more about what people are shipping in the Badger State.

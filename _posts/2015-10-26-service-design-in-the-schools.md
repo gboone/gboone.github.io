@@ -6,6 +6,9 @@ tags:
 - coding
 - crazy ideas
 - education
+lat: 43.066667
+lng: -89.4
+loc: "Madison, WI"
 ---
 My mother in-law was a PE and special ed teacher for about 30 years and during most of that time she was also a swimming coach in Sun Prairie, both within the school system and for local club teams. Since living in her house in Northern Wisconsin, I've been able to watch her process results after swim meets. She would typically come home from a meet with a bunch of paper and she was using a special computer to do _something_ with all that paper, so I asked what that was. Boy, was the answer long and complicated.
 

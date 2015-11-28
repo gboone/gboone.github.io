@@ -5,7 +5,9 @@ tags:
 - static site generators
 - jekyll
 - post-cms
-layout: post
+lat: 38.904722
+lng: -77.016389
+loc: "Washington, DC"
 ---
 <img src="/assets/images/jekyllLogo.png" alt="jekyll logo" />
 
@@ -33,7 +35,7 @@ post who is not a regular contributor and maybe they'll never write a post
 again. In WordPress I've seen this problem solved two ways:
 
 1. Create a new user in your system, give them a minimal role, and assign post
-authorship _ex post facto_ 
+authorship _ex post facto_
 2. Create a custom field called, e.g., `guest-author`
 and use template logic to replace the name in the byline
 

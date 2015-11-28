@@ -5,6 +5,9 @@ layout: post
 permalink: /blog/2014/03/25/flannel-a-python-project
 categories:
   - Merge Conflicts
+lat: 38.904722
+lng: -77.016389
+loc: "Washington, DC"
 ---
 I'm a big fan of learning new things in programming. It's part of
 why I tried running this blog on a static site generator only to get scared back

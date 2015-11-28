@@ -13,6 +13,9 @@ tags:
   - testing
   - unit testing
   - WordPress
+lat: 38.904722
+lng: -77.016389
+loc: "Washington, DC"
 ---
 In [my last post][1] I wrote about two testing libraries for WordPress and briefly discussed the difference between integration tests and unit tests. I also mentioned a concept called test driven development (TDD) and breifly explained how it might help write better code from the start. This post will expand on that and show how to write a simple WordPress plugin from a test-first approach. Since we're writing unit tests, we're going to use WP-Mock to create a test double for us and we'll use PHPunit for our test runner.  
 <!--more-->
@@ -32,7 +35,7 @@ Now that we have a class, we can call any of PHPunit's methods for testing inclu
      }
      public function tearDown() {
          parent::tearDown();
-     } 
+     }
 </pre>
 
 If we had other objects, variables, or settings we wanted available throughout the test suite, etc., we could declare those too. If you run the test now you'll get some output, but no tests will run because we haven't written any. Every test is a method within this class. Let's write one that will always pass just to see PHPunit give us something.

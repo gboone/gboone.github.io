@@ -7,6 +7,9 @@ categories:
   - Features
 tags: work
 format: status
+lat: 38.904722
+lng: -77.016389
+loc: "Washington, DC"
 ---
 <blockquote class="twitter-tweet" width="550">
   <p>

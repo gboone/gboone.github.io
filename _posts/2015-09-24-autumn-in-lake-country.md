@@ -3,6 +3,9 @@ title: Autumn in lake country
 tags:
 - autumn
 - up north
+lat: 45.929167
+lng: -89.486944
+loc: "St. Germain, WI"
 ---
 The colors are starting to change on the trees already. Not everybody knows this but some pine trees drop their needles, too. In fact, according to my [cursory research](http://byf.unl.edu/natural-needle-drop) most do drop their needles somewhat regularly. [Danielle](http://danielle.harmsboone.org) has a great story from one of her college professors, a noted tree expert in Minnesota, who got a frantic call from someone who was worried her pine tree was dying because it dropped its needles. By the time he could get in touch to say that no, this is a normal thing white pines do almost every year, she had already cut it down.
 

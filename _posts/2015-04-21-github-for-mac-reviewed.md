@@ -5,6 +5,9 @@ tags:
 - os x
 - usability
 - reviews
+lat: 38.904722
+lng: -77.016389
+loc: "Washington, DC"
 ---
 Since first learning how to use Git a couple years ago I've been pretty convinced that using the command line is the _only_ way to go. Partly it's simplifying my workflow: On a given day I have Terminal open for running tests, working with Jekyll, and quick editing in `vim`; a browser open to work with GitHub, inspect my work, and debug things; plus a text editor for All the Things. A Git client is one more application running that I have to integrate into a three screen, multiple tab workflow.
 

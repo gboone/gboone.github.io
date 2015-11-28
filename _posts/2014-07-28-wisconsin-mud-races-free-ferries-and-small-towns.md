@@ -15,6 +15,9 @@ tags:
   - travel
   - wedding weekend
   - wisconsin
+lat: 43.187222
+lng: -89.210833
+loc: "Sun Prairie, WI"
 ---
 The first day of Wedding Weekend brought us to Parfrey's Glen State Natural Area
 in Southern Wisconsin, the first stop on our Saturday tour. Here, a section of

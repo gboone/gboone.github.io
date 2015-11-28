@@ -1,4 +1,4 @@
---- 
+---
 title: Coding on the 1s and 2s
 date: '2015-01-27'
 layout: post
@@ -7,6 +7,9 @@ tags:
 - music
 - turntables
 - productivity
+lat: 38.904722
+lng: -77.016389
+loc: "Washington, DC"
 ---  
 <img src="/assets/images/turntablism.jpg" alt="Brother Ali: Mourning in America and Living in Color (at 33 1/3 RPMs)" />
 

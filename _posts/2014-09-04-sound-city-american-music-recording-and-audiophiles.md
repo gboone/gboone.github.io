@@ -12,6 +12,9 @@ tags:
   - music
   - pro tools
   - recording
+lat: 38.904722
+lng: -77.016389
+loc: "Washington, DC"
 ---
 Sound City is a documentary about the now defunct, eponymous Van Nuys studios. If you've never heard of the studios [you've almost certainly heard music recorded there][1]. The studios also hosted some of the most famous producers of the last 70 years, many of whom got their start as runners or assistants. The studios operated as a live performance studio: all analog equipment, with the full band recorded simultaneously. Directed and produced by Dave Grohl (Foo Fighters, Nirvana), Sound City is less a tribute to this studio so much as to the unique way in which music was recorded there.
 

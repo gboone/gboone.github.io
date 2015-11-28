@@ -9,6 +9,9 @@ tags:
   - development tips
   - Rewrite rules
   - WordPress
+lat: 38.904722
+lng: -77.016389
+loc: "Washington, DC"
 ---
 Custom post types and taxonomies are one of the most powerful tools to transform WordPress from a blogging platform to a full CMS. One of the most common problems beginning developers have when starting to use them is understanding how they work. It's easy to think that calling `register_post_type` is all it takes only to discover that their new post type archives are not working. This likely leads to a long dive into first (hopefully) the code to see if something was written incorrectly and then to the WordPress support forums to figure out what the problem is. 99% percent of the time I wager it's because the developer forgot to flush WordPress's rewrite rules.
 
@@ -28,7 +31,7 @@ We have such a configuration at CFPB where wp-admin is generally inaccessible an
     if ( $rules[ $target . '/?$' ] !=  'index.php?post_type=' . $target ) {
         flush_rewrite_rules( $hard = true );
     }
-} 
+}
 // then pass the post type name to maybe flush rewrite rules
 maybe_flush_rewrite_rules( 'your_post_type' );
 </pre>

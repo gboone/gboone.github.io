@@ -1,12 +1,15 @@
---- 
-title: Be Proud of your Town 
-layout: post 
-date: 2015-03-18 
-tags: 
-- dc 
-- working 
-- impostor syndrome 
---- 
+---
+title: Be Proud of your Town
+layout: post
+date: 2015-03-18
+tags:
+- dc
+- working
+- impostor syndrome
+lat: 38.904722
+lng: -77.016389
+loc: "Washington, DC"
+---
 A friend from Gustavus was in town this week on a visit sponsored by his
 graduate program at the University of Minnesota and we had dinner a couple
 nights ago. I asked him how is week was going, hoping to hear that he had met a
@@ -36,7 +39,7 @@ hosted nearly 8 million visitors in 2012][3]. If you're a company or non-profit
 talking to out-of-state job seekers, which version convinces them to move?
 
 That is to say, while there is some truth in that bleak representation of DC, it
-is neither the whole story nor every individual's experience. 
+is neither the whole story nor every individual's experience.
 
 DC has real problems. For the people who really struggle to make rent, the cost
 of living and struggle to raise a family has nothing to do with their "networks"
@@ -51,7 +54,7 @@ where we're making a difference. In just the last week we helped introduce [a
 new standard that will keep all Americans safer on the web][4], worked with
 State and Interior to [shed new light on public data that effects every single
 American resident's life][5], and had a [public discussion about inclusivity in
-our workplace][6]. 
+our workplace][6].
 
 When people ask me what I do, I lead with that. When people ask what my friends
 do, I tell them they [advocate for children's health][7], [publish important

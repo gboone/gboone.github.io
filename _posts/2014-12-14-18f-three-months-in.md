@@ -6,13 +6,15 @@ tags:
 - US Government
 - Public service
 - Impact junkies
-layout: post
+lat: 38.904722
+lng: -77.016389
+loc: "Washington, DC"
 ---
 When I left my last job the company threw one last happy hour for me—a typical
 send-off for that firm. While we were mingling around the bar my co-workers were
 asking me how I was feeling about the move. Earlier that week someone on my
 account asked me if I felt any "trepidation" about going to the GSA and for the
-most part people were supportive and congratulatory. 
+most part people were supportive and congratulatory.
 
 At the happy hour, though, one of the company's newer employees told my wife
 something interesting: "Unlike most people," he said, "I actually became more
@@ -53,7 +55,7 @@ has to be that way and will never change: you're flat wrong. The
 government is a big ship and it's going to take more than one 18F to change it,
 but the progress we've made inside the GSA is real. We managed to hire a team of
 more than 70, take on a smattering of projects that are either live or in beta
-stage with more on their way. And it's all being done by public servants. 
+stage with more on their way. And it's all being done by public servants.
 
 To that colleague, incentives pretty much exclusively meant money: raises,
 bonuses, stock options, what have you. And that's great but we do things

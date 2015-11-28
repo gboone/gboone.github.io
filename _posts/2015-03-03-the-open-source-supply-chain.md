@@ -6,6 +6,9 @@ tags:
 - open source
 - writing in the open
 - technology and society
+lat: 38.904722
+lng: -77.016389
+loc: "Washington, DC"
 ---
 There are times when I'm spectacularly awed by Open Source Software. Today was
 one of those days.  We published [a blog post about how the team I work on uses
@@ -14,7 +17,7 @@ just as easily be titled "the guide I wish I had 10 years ago when I started
 tinkering around with web development." On my way home, I did a little
 [from-the-bus troubleshooting][2] for a reader who was having trouble with our
 instructions and found myself appreciating how many people went in to shaping
-this post to where it is now. 
+this post to where it is now.
 
 The last in the chain (so far) is a Twitter user and digital humanities
 professor I don't know and may never meet in person named Heather Froehlich
@@ -33,7 +36,7 @@ wrote it in the open and you can actually see [the back and forth Mel and I had
 to update the post][8] and even see where Moncef jumped in to help us. If you
 go back even further you can see [an earlier revision][10] where we got some
 help from [Eric Mill][11]. Earlier still we had help from [Kate Garklavs][18]
-in testing our tutorial. 
+in testing our tutorial.
 
 The post instructs people to use tools we built internally like the [`go`][12]
 script written by [Mike Bland][13] and myself, and the overall architecture of

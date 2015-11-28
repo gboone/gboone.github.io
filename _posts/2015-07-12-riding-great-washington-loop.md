@@ -4,6 +4,9 @@ tags:
 - biking
 - bikedc
 - great washington loop
+lat: 38.904722
+lng: -77.016389
+loc: "Washington, DC"
 ---
 This weekend I did a ride that's been tempting me since we first moved from Arlington into the District three years ago: The Great Washington Loop. Starting from Georgetown, the loop takes you up the Capital Crescent Trail into Montgomery County and then circles the District via the Georgetown Branch Trail in Bethesda, Sligo Creek trail in Silver Spring, the Northern Branch Trail near Brentwood, and finally the Metropolital Branch Trail back into the District. Clocking in at more than 30 miles. It is an epic ride, to be sure.
 

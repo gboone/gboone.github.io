@@ -1,0 +1,4 @@
+{% if page.lat %}{% capture lat %}{{page.lat}}{% endcapture %}{% endif %}
+{% if page.lng %}{% capture lng %}{{page.lng}}{% endcapture %}{% endif %}
+Written from: {{ page.loc }}
+<div id="map" data-lat={{lat}} data-lng={{lng}}></div>

@@ -8,6 +8,9 @@ categories:
 tags:
   - google+
   - social media
+lat: 46.36383
+lng: 17.78225
+loc: Kaposvár, Magyarország
 ---
 It wasn't until the Facebook/Skype marriage that I remembered Google were tackling a new social service. Eventually I got into the system to give it a spin and I have to say I'm impressed. I'm not quite ready to ditch Facebook, or say that anybody should or will ditch Zuck & Co.'s popular if addled monster, but I am impressed. Apparently the fifth try is the charm.
 

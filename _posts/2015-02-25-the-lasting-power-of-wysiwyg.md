@@ -3,7 +3,7 @@ title: The Lasting Power of WYSIWYG
 date: '2015-02-25'
 layout: post
 image: /assets/images/wysiwyg.png
-tags: 
+tags:
 - Jekyll
 - Content management
 - wysiwyg
@@ -11,9 +11,12 @@ tags:
 - WordPress
 - 18F
 - Communications
-authors: 
+authors:
 - gboone
---- 
+lat: 38.904722
+lng: -77.016389
+loc: "Washington, DC"
+---
 Jekyll has become one of my favorite things lately. At 18F we're using it to
 power our website but also our [Hub project](https://18f.gsa.gov/hub/) which
 includes serving up [snippets](https://github.com/18F/weekly_snippets), our
@@ -32,7 +35,7 @@ generators a lot.  People who like Markdown or other markup languages enjoy
 static site generators. And some appreciate the simplicity of configuration
 found in static sites, especially the lack of a database. For many people like
 me it is a refreshing focus on writing without the complications of The Admin
-UI that have plagued even the best CMS platforms. 
+UI that have plagued even the best CMS platforms.
 
 An example of these complications? I recently helped my wife with some
 settings on [her blog](https://danielle.harmsboone.org) and was reminded how
@@ -69,7 +72,7 @@ beyond CSS and a few WordPress methods. When I eventually needed to know more
 it was still a fairly low barrier to entry and we always had a website that
 everybody could edit. In particular, [Child
 themeing](http://codex.wordpress.org/Child_Themes) is particularly useful for
-learning WordPress on the fly. 
+learning WordPress on the fly.
 
 Static sites, for all their simplicies and technical advantages, still have a
 pretty high barrier to entry, especially if you need to overcome the
@@ -84,7 +87,7 @@ WYSIWYG either to write or to paste in copied text will always be preferable to
 editing monospaced text with strange formatting signals around it, even if
 there are buttons to help them out. (Let's not belittle the bar-lowering power
 or Prose, Dillinger, and other Markdown helpers, though, for some they may be
-exactly the right tool.) 
+exactly the right tool.)
 
 It will remain preferable even if they rely on a bookmark in their browser, or
 an icon on their desktop to get them to the admin screen.  Clicking "Preview"

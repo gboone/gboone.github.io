@@ -6,6 +6,9 @@ tags:
 - open data
 - college scorecard
 - federal government
+lat: 45.929167
+lng: -89.486944
+loc: "St. Germain, WI"
 ---
 A few weeks ago the Department of Education released a trove of data about colleges and universities around the country. The site itself does a pretty great job of showing some high level information about how much a school costs and a few statistics about retention, graduation rates, and financial success after leaving.
 

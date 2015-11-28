@@ -8,7 +8,10 @@ tags:
 - Content management
 authors:
 - gboone
---- 
+lat: 38.904722
+lng: -77.016389
+loc: "Washington, DC"
+---
 ![Honeycrisp orchard, my favorite apple, image from wikimedia commons](/assets/images/apple_orchard.jpg)
 
 Earlier this week I wrote [another post comparing static site generators to

@@ -12,6 +12,9 @@ tags:
   - gustavus
   - gustavus adolphus college
   - human geography
+lat: 38.904722
+lng: -77.016389
+loc: "Washington, DC"
 ---
 Inspired by the [Google Earth Time Machine blog][1] highlighted by Kottke.org a few days ago, I decided to see how far back the imagery over my college campus reached. I figured it being in rural area, there was probably a lot of agricultural aerial photography going on, but I was wrong, the imagery only went back as far as 1992. Perhaps if I paid for some extra features it would stretch back further, but who knows. Those familiar with Gustavus Adolphus College will recall the infamous 1998 Tornado, the ten-year anniversary of which was commemorated while I was a student. The big thing I remember hearing about the campus was tree loss. The big takeaway watching the recruitment video from the 90s they were still using when I was a freshman was &#8216;where did all those giant trees on the quad go? What I did not think about, and what never really got talked about, was how many more trees there are now, and this was immediately evident comparing the 92 aerial imagery with the photographs taken 20 years later.  
 [<img class="alignleft size-medium wp-image-1596" title="Gustavus 2012" src="/assets/images/2012/08/GAC121-512x318.jpg" alt="" width="512" height="318" />][2]
