@@ -16,6 +16,7 @@ github: gboone
 gems:
   - jemoji
   - jekyll-compose
+
 defaults:
   -
     scope:
