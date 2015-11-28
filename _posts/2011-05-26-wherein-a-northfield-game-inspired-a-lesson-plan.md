@@ -11,9 +11,7 @@ tags:
   - lesson plans
   - teaching
   - tricca
-lat: 46.36383
-lng: 17.78225
-loc: Kaposvár, Magyarország
+loc: kaposvar
 ---
 People who came of age in the State of Minnesota sometime in the last decade likely have heard of <a title="Tricadecathlonomania: Official Website" href="http://trica.clockworkdistractions.com" target="_blank">Tricadecathlonomania</a>, particularly those of us who know someone Northfield. For anyone who hasn't heard of it,  Trica, as it's commonly known, is a scavenger hunt of epic proportion. It is not the scavenger hunt where you find a big list of things and bring them back to whomever gave you the list, nay it is far greater than that. With a whopping 288 items on the 2010 list, Trica is perhaps the most ambitious type of scavenger hunt there is; and here's the catch: the list, whatever of it you can manage, must be completed in 24 hours. Thus was born "Tricadecathlonomania: The Lesson Plan."
 

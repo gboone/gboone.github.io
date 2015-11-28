@@ -14,9 +14,7 @@ tags:
   - minnesota
   - outdoors
   - wedding weekend
-lat: 47.120833
-lng: -91.503333
-loc: "Castle Danger, MN"
+loc: castle-danger
 ---
 Wedding Week part two began with a drive from Madison to Minneapolis followed by
 another drive in the morning from Minneapolis to Castle Danger, [an

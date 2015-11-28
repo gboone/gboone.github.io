@@ -10,9 +10,7 @@ tags:
   - markdown
   - static sites
 format: link
-lat: 38.904722
-lng: -77.016389
-loc: "Washington, DC"
+loc: dc
 ---
 Interesting perspective from [Tom McFarlin on Markdown as a choice, not a default][1]. He gets at an underlying issue of my struggle to fully adopt a static site blog where Markdown, with HTML as a fallback, is the default mode of entry.
 

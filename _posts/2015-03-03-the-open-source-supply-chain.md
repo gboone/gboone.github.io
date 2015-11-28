@@ -6,9 +6,7 @@ tags:
 - open source
 - writing in the open
 - technology and society
-lat: 38.904722
-lng: -77.016389
-loc: "Washington, DC"
+loc: dc
 ---
 There are times when I'm spectacularly awed by Open Source Software. Today was
 one of those days.  We published [a blog post about how the team I work on uses

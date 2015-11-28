@@ -6,9 +6,7 @@ tags:
 - foo fighters
 - american music
 - rock and roll
-lat: 38.904722
-lng: -77.016389
-loc: "Washington, DC"
+loc: dc
 ---
 
 <img src="/assets/images/sonichighways.jpg" alt="Sonic Highways Cover" width="100%"/>

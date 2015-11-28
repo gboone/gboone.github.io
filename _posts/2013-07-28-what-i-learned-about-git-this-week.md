@@ -8,9 +8,7 @@ categories:
 tags:
   - git
   - github
-lat: 38.904722
-lng: -77.016389
-loc: "Washington, DC"
+loc: dc
 ---
 I love hidden features in software. Whether it's finding a [konami code in unexpected places][1] or that I can add or remove all the dots and underscores to my gmail address I want and I'll still get the emails, something about them are great. That was what made Zach Holman's presentation &#8216;More Git & GitHub Secrets' such an enjoyable read this week.
 

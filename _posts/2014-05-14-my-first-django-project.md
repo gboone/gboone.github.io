@@ -5,9 +5,7 @@ layout: post
 permalink: /blog/2014/05/14/my-first-django-project
 categories:
   - Merge Conflicts
-lat: 38.904722
-lng: -77.016389
-loc: "Washington, DC"
+loc: dc
 ---
 It's no secret that [I'm getting married in August][1]. When the time came to build a wedding website, I saw it as an opportunity to try something new. That opportunity: build my first Django project.
 

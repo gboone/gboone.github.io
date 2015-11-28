@@ -9,9 +9,7 @@ tags:
   - dark patterns
 categories:
   - Merge Conflicts
-lat: 38.904722
-lng: -77.016389
-loc: "Washington, DC"
+loc: dc
 ---
 A friend of ours gave us an awesome wedding gift: a week of free meals from [Blue Apron][1]. We'd recently tried out [Relay Foods][2] a similar but only tangentially competitive service of home grocery delivery. The key difference between Relay and Blue Apron is in the former you shop like you're at a grocery store, the latter you're delivered exact fixings for specific meals. Our first week of meals arrives Friday and we're pretty excited to have at least three dinners next week under delicious control. Thanks Laura!
 

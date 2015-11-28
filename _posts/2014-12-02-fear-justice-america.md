@@ -7,9 +7,7 @@ tags:
 - miriam carey
 - thoughts
 - personal opinions that in no way reflect those of my employer
-lat: 38.904722
-lng: -77.016389
-loc: "Washington, DC"
+loc: dc
 ---
 It’s easy to forget the first time I realized I had to go five blocks out of my way to
 continue going east on F St. NW when I hit 17th St because of the 4 by 8 block

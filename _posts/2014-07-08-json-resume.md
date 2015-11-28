@@ -5,9 +5,7 @@ layout: post
 permalink: /blog/2014/07/08/json-resume
 categories:
   - Merge Conflicts
-lat: 38.904722
-lng: -77.016389
-loc: "Washington, DC"
+loc: dc
 ---
 A couple years ago my brother turned me on to LaTeX for writing and publishing
 documents. He's a math guy and used it for just about everything he did. I'm not

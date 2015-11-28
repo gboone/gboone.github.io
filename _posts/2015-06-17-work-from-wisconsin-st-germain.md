@@ -7,9 +7,7 @@ tags:
 - working remote
 - lakes and trees
 - up north
-lat: 45.929167
-lng: -89.486944
-loc: "St. Germain, WI"
+loc: st-germain
 ---
 For many people I knew growing up in Minnesota there was some notion of "up north." For some people it was camp, others a friend's or family's cabin, and others yet it was a relative who lived "up north." For me it was all of those at one point or another. Up north was a place to go when you needed to get out of the hot city and get in touch with wilderness. This year I went north to work remotely after visiting Wisconsin for a friend's wedding. The location: [St. Germain, Wisconsin.](https://www.google.com/maps/place/St+Germain,+WI/data=!4m2!3m1!1s0x4d55c9cfc2f19f35:0xf5e56e23fc5892d2?sa=X&ei=W3eFVbfGFpCsyASFq4-YDg&ved=0CCoQ8gEwAQ) A town of about 1200 people, St. Germain is actually closer to Michigan's Upper Peninsula than most of the rest of Wisconsin, and slightly closer to Duluth, MN and Superior, WI than any other major cities (it's still 170 miles from Superior). If this isn't the definition of remote, it's close.
 

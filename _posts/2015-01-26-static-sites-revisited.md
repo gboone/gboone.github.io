@@ -5,9 +5,7 @@ tags:
 - static site generators
 - jekyll
 - post-cms
-lat: 38.904722
-lng: -77.016389
-loc: "Washington, DC"
+loc: dc
 ---
 <img src="/assets/images/jekyllLogo.png" alt="jekyll logo" />
 

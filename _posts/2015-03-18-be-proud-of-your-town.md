@@ -6,9 +6,7 @@ tags:
 - dc
 - working
 - impostor syndrome
-lat: 38.904722
-lng: -77.016389
-loc: "Washington, DC"
+loc: dc
 ---
 A friend from Gustavus was in town this week on a visit sponsored by his
 graduate program at the University of Minnesota and we had dinner a couple

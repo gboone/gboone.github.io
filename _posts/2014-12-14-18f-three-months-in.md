@@ -6,9 +6,7 @@ tags:
 - US Government
 - Public service
 - Impact junkies
-lat: 38.904722
-lng: -77.016389
-loc: "Washington, DC"
+loc: dc
 ---
 When I left my last job the company threw one last happy hour for me—a typical
 send-off for that firm. While we were mingling around the bar my co-workers were

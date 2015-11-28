@@ -12,9 +12,7 @@ tags:
   - korean wave
   - online diplomacy
   - soft power
-lat: 38.904722
-lng: -77.016389
-loc: "Washington, DC"
+loc: dc
 ---
 **Abstract**
 

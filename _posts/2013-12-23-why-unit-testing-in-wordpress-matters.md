@@ -12,9 +12,7 @@ tags:
   - testing
   - unit testing
   - WordPress
-lat: 38.904722
-lng: -77.016389
-loc: "Washington, DC"
+loc: dc
 ---
 Testing WordPress has become a favorite topic of mine lately: moving away from hitting refresh and toward something more holistic, reliable, and automatable. I've written before about [a testing method called called browser testing][1], which verifies a webpage has some expected behavior. These kinds of tests are great but they're not perfect. They require a lot o dependencies and that someone else would need to verify your code. There is a better way, one that doesn't require any of those dependencies and verfies the code down to the exact lines you wrote—it can even be independent of WordPress. It's called unit testing and it will make you a better developer.
 

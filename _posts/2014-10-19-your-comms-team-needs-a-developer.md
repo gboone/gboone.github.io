@@ -7,9 +7,7 @@ published: true
 tags:
   - Communications
   - DevOps
-lat: 38.904722
-lng: -77.016389
-loc: "Washington, DC"
+loc: dc
 ---
 ![Word 1.0, no thanks I'll handwrite everything.](http://archive.wired.com/images/article/full/2008/11/ms_630px.jpg)
 <br>_Don't let your website turn into Windows 1.0_

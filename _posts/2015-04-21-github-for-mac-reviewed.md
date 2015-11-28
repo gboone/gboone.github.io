@@ -5,10 +5,10 @@ tags:
 - os x
 - usability
 - reviews
-lat: 38.904722
-lng: -77.016389
-loc: "Washington, DC"
+loc: dc
 ---
+**Update:** This post is out of date. The new GitHub Desktop App has major improvements to many of the usability problems addressed here. The GitHub For Mac app described below is no longer distributed.
+
 Since first learning how to use Git a couple years ago I've been pretty convinced that using the command line is the _only_ way to go. Partly it's simplifying my workflow: On a given day I have Terminal open for running tests, working with Jekyll, and quick editing in `vim`; a browser open to work with GitHub, inspect my work, and debug things; plus a text editor for All the Things. A Git client is one more application running that I have to integrate into a three screen, multiple tab workflow.
 
 I tried GitHub for Mac a few years ago when I was first learning Git. I thought I'd be able to focus on the code without worrying about the version control part of my job. I don't remember why I went command line only, but I think it had something to do with my first pull request at CFPB: one that had _every file in the repo_ committed as "changed" because at some point I had changed permissions on the whole repo but forgot to tell Git to ignore that crap. OOPS!

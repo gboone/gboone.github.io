@@ -9,9 +9,7 @@ tags:
   - proxied requests
   - system admin
   - WordPress
-lat: 38.904722
-lng: -77.016389
-loc: "Washington, DC"
+loc: dc
 ---
 An increasingly common problem enterprise-level WordPress installations will face is how they handle build, staging, and production environments where IP addresses inside a VPN use a different hostname to access the same server as those outside the VPN. In this case, the wp-config.php file is a little more complicated than in the famous 5-minute install.  
 <!--more-->

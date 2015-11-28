@@ -12,9 +12,7 @@ tags:
   - hacktivism
   - protest
   - San Francisco
-lat: 46.36383
-lng: 17.78225
-loc: Kaposvár, Magyarország
+loc: kaposvar
 ---
 I posted this question to my Google+ contacts earlier this morning, but decided it was worth blogging about too.
 

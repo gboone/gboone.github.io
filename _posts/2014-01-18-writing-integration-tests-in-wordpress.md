@@ -11,9 +11,7 @@ tags:
   - integration testing
   - testing
   - WordPress
-lat: 38.904722
-lng: -77.016389
-loc: "Washington, DC"
+loc: dc
 ---
 Integration testing, like unit testing, is a best practice with the goal of evaluating a piece of software's ability to interface with the rest of a system. Earlier I [elaborated on the distinction between integration and unit testing][1] and I won't repeat myself here. Instead I'll briefly expand our definition of integration test and demonstrate how to use the WordPress Unit Test Suite to test a plugin.
 

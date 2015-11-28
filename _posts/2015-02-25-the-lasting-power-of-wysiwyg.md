@@ -13,9 +13,7 @@ tags:
 - Communications
 authors:
 - gboone
-lat: 38.904722
-lng: -77.016389
-loc: "Washington, DC"
+loc: dc
 ---
 Jekyll has become one of my favorite things lately. At 18F we're using it to
 power our website but also our [Hub project](https://18f.gsa.gov/hub/) which

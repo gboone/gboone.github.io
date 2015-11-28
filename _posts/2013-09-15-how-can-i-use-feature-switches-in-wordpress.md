@@ -10,9 +10,7 @@ tags:
   - continuous integration
   - feature switches
   - WordPress
-lat: 38.904722
-lng: -77.016389
-loc: "Washington, DC"
+loc: dc
 ---
 While a colleague and I were discussing the rollout of a new feature to our public facing website, he asked me if it would be possible to "hide" the new content behind a toggle. Effectively, he was asking me to write a [feature switch][1], a best practice of continuous integration that [allows you to push some source code while hiding future features][2]. WordPress has some of this idea built into it's core: plugins, for example, can be activated and deactivated to turn things on and off. Within plugins and themes, options pages can be used to turn on different features. SEO plugins, for example, let users turn on and off different optimizaiton tools. Feature switches are a little different, and in our case leverage the power of Apache environment variables to show and hide different parts of our site.
 

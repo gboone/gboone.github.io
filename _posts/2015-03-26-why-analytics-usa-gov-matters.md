@@ -7,9 +7,7 @@ tags:
 - transparency
 - analytics.usa.gov
 - analytics
-lat: 38.904722
-lng: -77.016389
-loc: "Washington, DC"
+loc: dc
 ---
 Last weeek I had the pleasure of helping 18F launch [analytics.usa.gov][1], a
 public dashboard showing basic data about how many people are visiting

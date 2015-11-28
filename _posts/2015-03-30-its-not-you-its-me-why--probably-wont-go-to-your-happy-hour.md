@@ -4,9 +4,7 @@ tags:
 - tech industry
 - being social
 - workplace culture
-lat: 38.904722
-lng: -77.016389
-loc: "Washington, DC"
+loc: dc
 ---
 We have an unofficial tradition at work (at the DC office) of going for
 an office-wide happy hour on a new hire's first day. There is also usually a

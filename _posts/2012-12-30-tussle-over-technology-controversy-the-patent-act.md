@@ -15,9 +15,7 @@ tags:
   - science and technology studies
   - STS
   - US Congress
-lat: 38.880278
-lng: -77.108333
-loc: "Arlington, VA"
+loc: arlington
 ---
 ## Abstract
 

@@ -7,9 +7,7 @@ tags:
 - wisconsin
 - madison
 - 100state
-lat: 43.066667
-lng: -89.4
-loc: "Madison, WI"
+loc: madison
 ---
 
 One thing that's really incredible about working for 18F is our ability to telework from just about anywhere. Everything we do is online and everyone we work with is in one of about six different places so even when we're not teleworking, we're teleworking.

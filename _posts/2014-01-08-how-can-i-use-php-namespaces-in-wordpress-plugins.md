@@ -11,9 +11,7 @@ tags:
   - php
   - php namespacing
   - WordPress
-lat: 38.904722
-lng: -77.016389
-loc: "Washington, DC"
+loc: dc
 ---
 PHP has long had a problem of naming collisions. Because older versions of PHP had no way of declaring methods outside the global space, developers came up with several different ways of preventing and checking for namespace collisions, none of which treated the underlying condition. These many and varied solutions begged for a unifying standard as they made things like autoloading and package management increasingly difficult. PHP 5.3 introduced a feature called &#8216;namespacing' to solve this problem and WordPress developers should begin adopting. With proper namespacing, WordPress plugin and themes will become clearer, more stable, and more portable.  
 <!--more-->

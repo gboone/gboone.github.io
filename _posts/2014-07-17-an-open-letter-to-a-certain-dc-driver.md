@@ -11,9 +11,7 @@ tags:
   - cycling infrastructure
   - this is just to say
   - traffic
-lat: 38.904722
-lng: -77.016389
-loc: "Washington, DC"
+loc: dc
 ---
 This is just to say,
 

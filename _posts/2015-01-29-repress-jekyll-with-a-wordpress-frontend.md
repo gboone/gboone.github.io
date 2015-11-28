@@ -9,9 +9,7 @@ tags:
 - Static site generators
 - Side projects
 description: rePress reads WordPress posts from a site configured with the REST API and spits out Jekyll posts.
-lat: 38.904722
-lng: -77.016389
-loc: "Washington, DC"
+loc: dc
 ---
 
 About five months ago I left the riveting world or WordPress development for the greener pastures of helping a [government startup manage its website](https://18f.gsa.gov), and while I've become [pretty taken with Jekyll lately](http://greg.harmsboone.org/2015/01/26/static-sites-revisited/), there will always be a part of me that loves WordPress. And so, like a good hacker, I started a side project I'm calling [_rePress_](https://github.com/gboone/rePress) (a name that, admittedly, needs work—see below).

@@ -4,9 +4,7 @@ tags:
 - biking
 - 30DaysOfBiking
 - bikeDC
-lat: 38.904722
-lng: -77.016389
-loc: "Washington, DC"
+loc: dc
 ---
 Five years ago a small group of cyclists in Minneapolis got together a great idea: Ride a bike every day for the month of April. They called it 30 Days of Biking. I was in [Korea at the time][1], riding my bike around the city of Ilsan, sometimes going as far as Paju near the [Third Tunnel of Agression][2]. Back then we had the luxury of not having to work until after noon so going for a long ride every morning was pretty easy and didn't require waking up early.
 

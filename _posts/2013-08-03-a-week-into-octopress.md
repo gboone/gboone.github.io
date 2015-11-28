@@ -9,9 +9,7 @@ tags:
   - Octopress
   - static sites
   - WordPress
-lat: 38.904722
-lng: -77.016389
-loc: "Washington, DC"
+loc: dc
 ---
 About a week ago I successfully migrated some of my posts from [harmsboone.org][1] to this blog, I also wrote a post about [some things I learned about git that week][2]. WordPress is great. I wouldn't recommend it (and I almost always do) if it weren't. For someone who wants to spin up a blog and maybe some day more in a pinch, WordPress is the go-to platform. In fact, the rest of harmsboone.org still runs it. Earlier this year, though, Danielle and I started talking about ditching the one-blog-for-both solution. When we were both living and teaching abroad sharing one blog made sense but now with the both of us starting different careers, we have different things to say.
 
