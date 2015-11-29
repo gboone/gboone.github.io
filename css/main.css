@@ -409,3 +409,7 @@ a:visited { color: #205caa; }
 
 /* Map style */
 #map { height: 180px; }
+
+#map.full-page {
+  height: 720px;
+}
