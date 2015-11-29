@@ -8,7 +8,7 @@ var Toner = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z
 var map = new L.Map("map", { scrollWheelZoom: false });
 if ( map._container.dataset.lat && map._container.dataset.lng ) {
 	var latlng = setLatLng(map._container.dataset)
-	var zoom = 12
+	map.setView(latlng, 12)
 } else {
 	var mapData = load_data()
 	var bounds = []
