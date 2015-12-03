@@ -31,8 +31,12 @@ I used Jekyll's data directory to keep the location data. I could probably geoco
 [Leaflet](http://leafletjs.com/) powers the map itself based on [OpenStreetMap data](http://www.openstreetmap.org/copyright). It's pretty straightforward to configure and comes with some smart defaults. I used [Stamen's](http://stamen.com/) [Toner Lite tiles](http://maps.stamen.com/toner-lite/#10/44.9790/-93.2649) for the base layer. I wanted to go with the [Terrain tiles](http://maps.stamen.com/terrain/#10/44.9790/-93.2649) but lack of international coverage mean I couldn't map some of the places without some exta work. Regardless, it's really great that Stamen offer these excellent tiles for free, and that Leaflet is open source. The only trick with loading the tiles was figuring out how to do it over HTTPS, after some googling, I ended up adding the tile layer like this:
 
 ```
-var Toner = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
-	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>, <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a> &mdash; Map data &copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+var Toner = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{
+  ext}', {
+	attribution: 'Map tiles by <a href="http://stamen.com">Stamen Design</a>,
+   under <a href="http://creativecommons.org/licenses/by/3.0">CC BY 3.0</a>.
+   Data by <a href="http://openstreetmap.org">OpenStreetMap</a>, under <a
+   href="http://www.openstreetmap.org/copyright">ODbL</a>.',
 	minZoom: 0,
 	maxZoom: 20,
 	ext: 'png'
