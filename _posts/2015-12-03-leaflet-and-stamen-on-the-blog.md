@@ -16,13 +16,13 @@ I also tried to [link location data to blog posts in WordPress once upon a time]
 
 ## How it works
 
-Each blog post has a `loc` field in the frontmatter. This post, has `loc: st-germain`. Then I created and include to create a map placeholder and a plugin that cross-references that value against a file at `_data/locations.yml` to get the latitude and longitude. The location data is added to the dataset on the `div`. It looks like this:
+Each blog post has a `loc` field in the frontmatter. [This post](https://github.com/gboone/gboone.github.io/blob/master/_posts/2015-12-03-leaflet-and-stamen-on-the-blog.md) has `loc: st-germain`. Then I created an [include to create a map placeholder](https://github.com/gboone/gboone.github.io/blob/master/_includes/map.html) and [a Liquid filter](https://github.com/gboone/gboone.github.io/blob/master/_plugins/mapper.rb) that cross-references that value against a file at [`_data/locations.yml`](https://github.com/gboone/gboone.github.io/blob/master/_data/locations.yml) to get the latitude and longitude. The location data is added to the dataset on the `div`. It looks like this:
 
 ```
 <div id="map" data-lat={{ location['lat'] }} data-lng={{ location['lng'] }}></div>
 ```
 
-Then I have some really simple javascript that picks up the location values and produces a map. There's also [a page showing all the locations as markers](/map/). For that piece I added a JSON dump of the `_data/locations.yml` into a script tag and load it with `JSON.parse(document.getElementById('map-data').innerHTML);` and then iterate over the values.
+Then I have some [really simple javascript](https://github.com/gboone/gboone.github.io/blob/master/assets/js/map.js) that picks up the `dataset` and produces a map. There's also [a page showing all the locations as markers](/map/). For that piece I added [a JSON dump of the `_data/locations.yml` into a script tag](https://github.com/gboone/gboone.github.io/blob/master/pages/map.html#L7) and load it with `JSON.parse(document.getElementById('map-data').innerHTML);`, then iterate over the values.
 
 ## What I used
 
