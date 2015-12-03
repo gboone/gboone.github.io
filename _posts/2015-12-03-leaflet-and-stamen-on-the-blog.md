@@ -10,9 +10,9 @@ loc: st-germain
 ---
 I changed the tagline of my blog to "Nomad public servant, learning out loud" when we moved out of DC. In addition to writing about the different places we've visited, I also end up writing a lot of these posts from places other than where we live. So over Thanksgiving weekend I decided it was time I learned how to do some mapping work. The last time I tried to map something, it was about six years ago, in Google Maps, and I had no idea what I was doing.
 
-I ended up with a giant, hand-crafted JSON file that got loaded to create markers for the map. It was also completely separate from any real data. It was just a big list of places and descriptions. While it looked cool, it also only loaded on Firefox (puzzlingly), all other browsers got a blank beige placeholder.
+I ended up with a giant, hand-crafted JSON file that got loaded to create markers for the map. It was also completely separate from any real data. It was just a big list of places and descriptions. While it looked cool, it also only loaded on Firefox (puzzlingly) and all other browsers got a blank beige placeholder.
 
-I later tried to [link location data to blog posts in WordPress once upon a time](https://github.com/gboone/WordPress-Travel-Plugin). I think if I did either of those again I'd probably do them differently, and it would probably look more like how I did it with this blog.
+I also tried to [link location data to blog posts in WordPress once upon a time](https://github.com/gboone/WordPress-Travel-Plugin). I think if I did either of those again I'd probably do them differently, and it would probably look more like how I did it with this blog.
 
 ## How it works
 
@@ -28,7 +28,7 @@ Then I have some really simple javascript that picks up the location values and 
 
 I used Jekyll's data directory to keep the location data. I could probably geocode these values, too, and that would take the manual work out of figuring out where these places are, but I decided since there's only a handful right now it was easier to look them up.
 
-Leaflet powers the map itself. It's pretty straightforward to configure and comes with some smart defaults. I used Stamen's Toner Lite tiles for the base layer. I wanted to go with the Terrain layers but lack of international coverage mean I couldn't map some of the places without some exta work. The only trick there was figuring out how to load the tiles over HTTPS, after some googling, I ended up adding the tile layer like this:
+[Leaflet](http://leafletjs.com/) powers the map itself based on [OpenStreetMap data](http://www.openstreetmap.org/copyright). It's pretty straightforward to configure and comes with some smart defaults. I used [Stamen's](http://stamen.com/) [Toner Lite tiles](http://maps.stamen.com/toner-lite/#10/44.9790/-93.2649) for the base layer. I wanted to go with the [Terrain tiles](http://maps.stamen.com/terrain/#10/44.9790/-93.2649) but lack of international coverage mean I couldn't map some of the places without some exta work. Regardless, it's really great that Stamen offer these excellent tiles for free, and that Leaflet is open source. The only trick with loading the tiles was figuring out how to do it over HTTPS, after some googling, I ended up adding the tile layer like this:
 
 ```
 var Toner = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z}/{x}/{y}.{ext}', {
