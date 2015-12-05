@@ -30,3 +30,19 @@ escanaba:
   lat: 45.745278
   lng: -87.064444
   name: "Escanaba, MI"
+gogebic:
+  lat: 46.4575
+  lng: -89.57611
+  name: "Gogebic State Park, MI"
+lake-of-the-clouds:
+  lat: 46.803889
+  lng: -89.752222
+  name: "Lake of the Clouds, Porcupine Mountains, MI"
+ontonagon:
+  lat: 46.871111
+  lng: -89.314167
+  name: "Ontonagon, MI"
+bond-falls:
+  lat: 46.4088
+  lng: -89.1329
+  name: "Bond Falls, Paulding, MI"
