@@ -46,3 +46,7 @@ bond-falls:
   lat: 46.4088
   lng: -89.1329
   name: "Bond Falls, Paulding, MI"
+mackinac:
+  lat: 45.816
+  lng: -84.727
+  name: Mackinac Bridge
