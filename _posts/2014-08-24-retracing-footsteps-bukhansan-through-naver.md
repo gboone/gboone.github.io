@@ -10,6 +10,8 @@ tags:
   - outdoors
 format: link
 loc: dc
+markers:
+- seoul
 ---
 Most people who know both of us know that my friend [Andre][1] and I met on a mountain in Korea. Two Minnesotans (and our significant others) who connected on twitter and decided a hike up one of the South Korea's most famous peaks, Bukansan, would be a good place to meet for the first time. (Plug: Andre is about to tell a great story about the [earliest days he spent in Korea][2], if you live in DC, you should be there.)
 

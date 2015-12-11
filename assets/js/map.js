@@ -6,24 +6,38 @@ var Toner = L.tileLayer('https://stamen-tiles-{s}.a.ssl.fastly.net/toner-lite/{z
 });
 
 var map = new L.Map("map", { scrollWheelZoom: false });
-if ( map._container.dataset.lat && map._container.dataset.lng ) {
+if ( _.contains(map._container.classList, 'no-markers') ) {
 	var item = map._container.dataset
 	setMarker(item)
-	var latlng = [setLatLng(item)]
+	var latlng = setLatLng(item)
 	if ( ! document.getElementById('locations') ) {
-		map.fitBounds(latlng)
+		map.setView(latlng)
 		map.setZoom(12)
 	}
 }
-if (document.getElementById('locations')) {
+
+if ( _.contains(map._container.classList, 'all-locations') ) {
 	var locations = loadData('locations')
-	var mapData = loadData('map-data')
-	var reduced = []
-	_.each(mapData, function(item) {
-		reduced.push(locations[item])
-	})
-	setMarkers(reduced)
-	map.fitBounds(setBounds(reduced))
+	setMarkers(locations)
+	map.fitBounds(setBounds(locations))
+}
+
+if (_.contains(map._container.classList, 'post-with-markers')) {
+	var locations = loadData('locations')
+	var markers = loadData('map-data')
+	if (markers.length === 1) {
+		name = markers[0]
+		setMarker(locations[name])
+		map.setView(setLatLng(locations[name]))
+		map.setZoom(12)
+	} else {
+		var reduced = []
+		_.each(markers, function(item) {
+			reduced.push(locations[item])
+		})
+		setMarkers(reduced)
+		map.fitBounds(setBounds(reduced))
+	}
 }
 map.addLayer(Toner);
 
@@ -46,8 +60,8 @@ function setMarker(item) {
 	}).addTo(map)
 		.bindPopup(item['name']);
 }
-function setMarkers(mapData) {
-	var markers = _.each(mapData, function(item) {
+function setMarkers(markers) {
+	_.each(markers, function(item) {
 		setMarker(item)
 	})
 }

@@ -50,3 +50,31 @@ mackinac:
   lat: 45.816
   lng: -84.727
   name: Mackinac Bridge
+seoul:
+  lat: 37.566667
+  lng: 126.966667
+  name: "Seoul, South Korea"
+minneapolis:
+  lat: 44.983333
+  lng: -93.266667
+  name: "Minneapolis, MN"
+green-bay:
+  lat: 44.513333
+  lng: -88.015833
+  name: "Green Bay, WI"
+sturgeon-bay:
+  lat: 44.832346
+  lng: -87.372076
+  name: "Sturgeon Bay, WI"
+egg-harbor:
+  lat: 45.049167
+  lng: -87.2975
+  name: "Egg Harbor, WI"
+potawatomi:
+  lat: 44.864444
+  lng: -87.415
+  name: "Potawatomi State Park, WI"
+cave-point-park:
+  lat: 44.9302746
+  lng: -87.1742686
+  name: "Cave Point County Park, WI"
