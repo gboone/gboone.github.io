@@ -2,7 +2,7 @@
 title: Why I'm (still) Excited about Google+
 author: Greg Boone
 layout: post
-permalink: /blog/2011/07/05/why-im-still-excited-about-google
+permalink: /blog/2011/07/05/why-im-still-excited-about-google/
 categories:
   - Uncategorized
 tags:

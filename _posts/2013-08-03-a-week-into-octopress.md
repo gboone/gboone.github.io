@@ -2,7 +2,7 @@
 title: A week into Octopress
 author: Greg Boone
 layout: post
-permalink: /blog/2013/08/03/a-week-into-octopress
+permalink: /blog/2013/08/03/a-week-into-octopress/
 categories:
   - Merge Conflicts
 tags:

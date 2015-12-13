@@ -2,7 +2,7 @@
 title: 'Tussle over Technology: Controversy &#038; the Patent Act'
 author: Greg Boone
 layout: post
-permalink: /blog/2012/12/30/tussle-over-technology-controversy-the-patent-act
+permalink: /blog/2012/12/30/tussle-over-technology-controversy-the-patent-act/
 categories:
   - Uncategorized
 tags:

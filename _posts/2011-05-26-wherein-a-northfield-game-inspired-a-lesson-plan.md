@@ -2,7 +2,7 @@
 title: Wherein a Northfield Game Inspired A Lesson Plan
 author: Greg Boone
 layout: post
-permalink: /blog/2011/05/26/wherein-a-northfield-game-inspired-a-lesson-plan
+permalink: /blog/2011/05/26/wherein-a-northfield-game-inspired-a-lesson-plan/
 categories:
   - Keeping up with the Magyars
 tags:

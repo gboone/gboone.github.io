@@ -2,7 +2,7 @@
 title: How can I use PHP Namespaces in WordPress Plugins
 author: Greg Boone
 layout: post
-permalink: /blog/2014/01/08/how-can-i-use-php-namespaces-in-wordpress-plugins
+permalink: /blog/2014/01/08/how-can-i-use-php-namespaces-in-wordpress-plugins/
 categories:
   - Merge Conflicts
 tags:

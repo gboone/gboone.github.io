@@ -2,7 +2,7 @@
 title: How to Explain Git to Non-Developers
 author: Greg Boone
 layout: post
-permalink: /blog/2013/08/07/how-to-explain-git-to-non-developers
+permalink: /blog/2013/08/07/how-to-explain-git-to-non-developers/
 categories:
   - Merge Conflicts
 tags:

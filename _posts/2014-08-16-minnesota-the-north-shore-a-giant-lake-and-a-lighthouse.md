@@ -2,7 +2,7 @@
 title: 'Minnesota: The north shore, a giant lake, and a lighthouse'
 author: Greg Boone
 layout: post
-permalink: /blog/2014/08/16/minnesota-the-north-shore-a-giant-lake-and-a-lighthouse
+permalink: /blog/2014/08/16/minnesota-the-north-shore-a-giant-lake-and-a-lighthouse/
 categories:
   - Merge Conflicts
   - Photo Blog

@@ -2,7 +2,7 @@
 title: Why Unit Testing in WordPress Matters
 author: Greg Boone
 layout: post
-permalink: /blog/2013/12/23/why-unit-testing-in-wordpress-matters
+permalink: /blog/2013/12/23/why-unit-testing-in-wordpress-matters/
 categories:
   - Merge Conflicts
 tags:

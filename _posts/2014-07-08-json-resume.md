@@ -2,7 +2,7 @@
 title: JSON Resume
 author: Greg Boone
 layout: post
-permalink: /blog/2014/07/08/json-resume
+permalink: /blog/2014/07/08/json-resume/
 categories:
   - Merge Conflicts
 loc: dc

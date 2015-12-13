@@ -2,7 +2,7 @@
 title: 'Octopress: Six Months Later'
 author: Greg Boone
 layout: post
-permalink: /blog/2014/01/13/octopress-six-months-later
+permalink: /blog/2014/01/13/octopress-six-months-later/
 categories:
   - Merge Conflicts
 tags:

@@ -2,7 +2,7 @@
 title: 'Flannel: A Python Project'
 author: Greg Boone
 layout: post
-permalink: /blog/2014/03/25/flannel-a-python-project
+permalink: /blog/2014/03/25/flannel-a-python-project/
 categories:
   - Merge Conflicts
 loc: dc

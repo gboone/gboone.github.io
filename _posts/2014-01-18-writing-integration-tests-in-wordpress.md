@@ -2,7 +2,7 @@
 title: Writing Integration tests in WordPress
 author: Greg Boone
 layout: post
-permalink: /blog/2014/01/18/writing-integration-tests-in-wordpress
+permalink: /blog/2014/01/18/writing-integration-tests-in-wordpress/
 categories:
   - Merge Conflicts
 tags:

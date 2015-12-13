@@ -2,7 +2,7 @@
 title: How can I Configure WordPress to Handle Dynamic Hostnames?
 author: Greg Boone
 layout: post
-permalink: /blog/2014/02/13/how-can-i-configure-wordpress-to-handle-dynamic-hostnames
+permalink: /blog/2014/02/13/how-can-i-configure-wordpress-to-handle-dynamic-hostnames/
 categories:
   - Merge Conflicts
 tags:

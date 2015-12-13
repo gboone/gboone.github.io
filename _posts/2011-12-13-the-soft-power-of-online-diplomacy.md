@@ -2,7 +2,7 @@
 title: The Soft Power of Online Diplomacy
 author: Greg Boone
 layout: post
-permalink: /blog/2011/12/13/the-soft-power-of-online-diplomacy
+permalink: /blog/2011/12/13/the-soft-power-of-online-diplomacy/
 categories:
   - Korea Stories
 tags:

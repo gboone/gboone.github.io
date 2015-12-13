@@ -2,7 +2,7 @@
 title: 'Sound City: American music, recording, and audiophiles'
 author: Greg Boone
 layout: post
-permalink: /blog/2014/09/04/sound-city-american-music-recording-and-audiophiles
+permalink: /blog/2014/09/04/sound-city-american-music-recording-and-audiophiles/
 categories:
   - Features
 tags:

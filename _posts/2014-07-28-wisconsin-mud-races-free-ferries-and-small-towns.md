@@ -2,7 +2,7 @@
 title: 'Wisconsin: Mud races, free ferries, and small towns'
 author: Greg Boone
 layout: post
-permalink: /blog/2014/07/28/wisconsin-mud-races-free-ferries-and-small-towns
+permalink: /blog/2014/07/28/wisconsin-mud-races-free-ferries-and-small-towns/
 categories:
   - Merge Conflicts
   - Photo Blog

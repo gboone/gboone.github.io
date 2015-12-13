@@ -2,7 +2,7 @@
 title: Using Composer to Manage a WordPress Installation
 author: Greg Boone
 layout: post
-permalink: /blog/2014/01/16/using-composer-to-manage-a-wordpress-installation
+permalink: /blog/2014/01/16/using-composer-to-manage-a-wordpress-installation/
 categories:
   - Merge Conflicts
 tags:

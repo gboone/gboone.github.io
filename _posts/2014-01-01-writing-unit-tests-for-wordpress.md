@@ -2,7 +2,7 @@
 title: Writing Unit Tests for WordPress
 author: Greg Boone
 layout: post
-permalink: /blog/2014/01/01/writing-unit-tests-for-wordpress
+permalink: /blog/2014/01/01/writing-unit-tests-for-wordpress/
 categories:
   - Merge Conflicts
 tags:

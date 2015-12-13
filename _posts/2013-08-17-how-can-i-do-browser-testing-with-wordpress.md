@@ -2,7 +2,7 @@
 title: How can I do Browser Testing With WordPress
 author: Greg Boone
 layout: post
-permalink: /blog/2013/08/17/how-can-i-do-browser-testing-with-wordpress
+permalink: /blog/2013/08/17/how-can-i-do-browser-testing-with-wordpress/
 categories:
   - Merge Conflicts
 tags:

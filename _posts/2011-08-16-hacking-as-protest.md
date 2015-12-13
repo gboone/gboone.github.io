@@ -2,7 +2,7 @@
 title: Hacking as Protest?
 author: Greg Boone
 layout: post
-permalink: /blog/2011/08/16/hacking-as-protest
+permalink: /blog/2011/08/16/hacking-as-protest/
 categories:
   - Uncategorized
 tags:

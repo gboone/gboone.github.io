@@ -2,7 +2,7 @@
 title: 20 Years of Gustavus&#58 A bird's eye view
 author: Greg Boone
 layout: post
-permalink: /blog/2012/08/15/20-years-of-gustavus-a-birds-eye-view
+permalink: /blog/2012/08/15/20-years-of-gustavus-a-birds-eye-view/
 categories:
   - Uncategorized
 tags:

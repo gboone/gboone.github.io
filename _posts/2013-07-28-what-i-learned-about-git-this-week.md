@@ -2,7 +2,7 @@
 title: What I learned about git this week
 author: Greg Boone
 layout: post
-permalink: /blog/2013/07/28/what-i-learned-about-git-this-week
+permalink: /blog/2013/07/28/what-i-learned-about-git-this-week/
 categories:
   - Merge Conflicts
 tags:

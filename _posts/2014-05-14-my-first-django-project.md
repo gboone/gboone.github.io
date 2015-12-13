@@ -2,7 +2,7 @@
 title: My First Django Project!
 author: Greg Boone
 layout: post
-permalink: /blog/2014/05/14/my-first-django-project
+permalink: /blog/2014/05/14/my-first-django-project/
 categories:
   - Merge Conflicts
 loc: dc

@@ -2,7 +2,7 @@
 title: '18F: Hacking Bureaucracy'
 author: Greg Boone
 layout: post
-permalink: /blog/2014/09/05/18f-hacking-bureaucracy
+permalink: /blog/2014/09/05/18f-hacking-bureaucracy/
 categories:
   - Features
 tags: work

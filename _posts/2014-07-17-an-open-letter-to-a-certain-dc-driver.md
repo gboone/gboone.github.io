@@ -2,7 +2,7 @@
 title: An open letter to a certain DC driver
 author: Greg Boone
 layout: post
-permalink: /blog/2014/07/17/an-open-letter-to-a-certain-dc-driver
+permalink: /blog/2014/07/17/an-open-letter-to-a-certain-dc-driver/
 categories:
   - Shorts
 tags:

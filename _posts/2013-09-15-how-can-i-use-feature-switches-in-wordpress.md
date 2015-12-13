@@ -2,7 +2,7 @@
 title: How can I use Feature Switches in WordPress
 author: Greg Boone
 layout: post
-permalink: /blog/2013/09/15/how-can-i-use-feature-switches-in-wordpress
+permalink: /blog/2013/09/15/how-can-i-use-feature-switches-in-wordpress/
 categories:
   - Merge Conflicts
 tags:

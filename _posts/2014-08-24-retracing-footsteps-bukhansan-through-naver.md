@@ -2,7 +2,7 @@
 title: 'Retracing footsteps: Bukhansan through Naver'
 author: Greg Boone
 layout: post
-permalink: /blog/2014/08/24/retracing-footsteps-bukhansan-through-naver
+permalink: /blog/2014/08/24/retracing-footsteps-bukhansan-through-naver/
 categories:
   - Korea Stories
 tags:

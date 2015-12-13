@@ -2,7 +2,7 @@
 Title: Your Comms Team Needs a Developer
 author: Greg Boone
 layout: post
-permalink: /blog/2014/10/18/your-comms-team-should-be-a-devops-team
+permalink: /blog/2014/10/18/your-comms-team-should-be-a-devops-team/
 published: true
 tags:
   - Communications
