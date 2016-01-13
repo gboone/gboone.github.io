@@ -9,7 +9,8 @@ timezone: "America/New_York"
 # Build settings
 markdown: redcarpet
 permalink: pretty
-
+sass:
+  sass_dir: assets/_sass
 # social
 twitter: gboone42
 github: gboone
