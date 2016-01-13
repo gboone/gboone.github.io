@@ -1,21 +1,15 @@
 ---
 layout: default
 ---
-<div class="post">
+<article class="post usa-grid">
 
-  <header class="post-header">
+  <header class="post-header usa-width-one-whole">
     <h1>{{ page.title }}</h1>
     <p class="meta">{{ page.date | date: "%b %-d, %Y" }}{% if page.author %} • {{ page.author }}{% endif %}{% if page.meta %} • {{ page.meta }}{% endif %}</p>
   </header>
-  <article class="post-content">
-  {{ content }}
-  <hr />
-  <a href="https://github.com/gboone/gboone.github.io/issues/new">Leave a comment</a><br />
-  <a href="https://github.com/gboone/gboone.github.io/edit/master/{{ page.path }}">Fix my
-typos</a>
-
-  </article>
-  <section class="post-map">
-    {% include map.html %}
+  <section class="post-content">
+    {{ content }}
   </section>
-</div>
+  <hr />
+  {% include post-footer.html %}
+</article>

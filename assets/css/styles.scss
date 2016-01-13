@@ -53,4 +53,11 @@ h1 {
   zoom: 1;
 }
 
+/* Map style */
+#map { height: 240px; }
+
+#map.full-page {
+  height: 720px;
+}
+
 /* vim:noet ts=4 sw=4 */

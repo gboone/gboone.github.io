@@ -1,5 +1,6 @@
 {% assign location = page.loc | find_location %}
-Written from {{ location['name'] }}{% if page.markers %}, and about these places:{% assign markers = true %}{% endif %}
-<div id="map" class="post {% if markers %}post-with-markers{% else %}no-markers{% endif %}" data-lat="{{ location['lat'] }}" data-lng="{{ location['lng'] }}" data-name="{{ location['name'] }}"></div>
+<p class="usa-width-one-third">Written from {{ location['name'] }}{% if page.markers %}, and about these places:{% assign markers = true %}{% endif %}</p>
+</section>
+<section class="post-map usa-grid"><div id="map" class="usa-width-one-whole {% if markers %}post-with-markers{% else %}no-markers{% endif %}" data-lat="{{ location['lat'] }}" data-lng="{{ location['lng'] }}" data-name="{{ location['name'] }}"></div>
 {% if page.markers %}<script type="application/json" id="map-data">{{ page.markers | jsonify }}</script>
 <script type="application/json" id="locations">{{ site.data.locations | jsonify }}</script>{% endif %}
