@@ -1,23 +1,26 @@
 ---
 layout: default
 ---
-
-<div class="home">
-
-  <h1>Posts</h1>
-
-  <ul class="posts">
-    {% for post in site.posts %}
-      <li>
-        <span class="post-date">{{ post.date | date: "%b %-d, %Y" }}</span>
-        <a class="post-link" href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a><br />
-        {% if post.tags.size > 0 %}
-        <span class="tags">Tagged: {{ post.tags | array_to_sentence_string }}</span>
-        {% endif %}
-      </li>
+<section class="about usa-grid">
+  <div class="usa-width-one-whole">{{ site.pages[0]['content'] }}</div>
+</section>
+<section class="blog-posts">
+  <header class="usa-grid">
+    <h2 class="usa-heading usa-width-one-whole">Blog posts</h1>
+  </header>
+  <section class="usa-grid blog-posting">
+    {% for post in paginator.posts limit:3 %}
+      <div class="usa-width-one-third">
+        <h3 class="post-link usa-heading" ><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h2>
+        <time class="post-date" datetime="{{ post.date }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+      </div>
     {% endfor %}
-  </ul>
-
-  <p class="rss-subscribe">subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a></p>
-
-</div>
+  </section>
+  <section class="usa-grid blog-posting">
+    {% for post in paginator.posts offset:3 %}
+    <div class="usa-width-one-third">
+      <h3 class="post-link usa-heading" ><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h2>
+      <time class="post-date" datetime="{{ post.date }}">{{ post.date | date: "%b %-d, %Y" }}</time>
+    </div>
+    {% endfor %}
+  </section>
