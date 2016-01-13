@@ -1,0 +1,17 @@
+---
+layout: default
+---
+<section class="blog-river usa-grid">
+  {% for post in paginator.posts limit:3 %}
+    {% include post-snippet.html class="third" %}
+  {% endfor %}
+</section>
+<section class="blog-river usa-grid">
+  {% for post in paginator.posts offset:3 %}
+    {% include post-snippet.html class="third" %}
+  {% endfor %}
+  <aside class="usa-width-one-third">
+    <h3><a href="{{paginator.next_page_path }}">Older posts</a><h3>
+    <h3><a href="{{ paginator.previous_page_path }}">Newer posts</a></h3>
+  </aside>
+</section>

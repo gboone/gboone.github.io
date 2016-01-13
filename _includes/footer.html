@@ -1,22 +1,15 @@
-<footer class="site-footer">
+<footer class="site-footer usa-grid">
+  <hr class="usa-width-one-whole">
+  {% if page.collection == "posts" %}
+  {% include post-footer.html %}
+  {% endif %}
   <section class="usa-grid">
-    <hr>
-    <p class="usa-width-one-fourth"><a href="{{ paginator.next_page_path | prepend: site.baseurl }}">Read more blog posts</a></p>
-    <p class="rss-subscribe usa-width-one-fourth"><a href="{{ "/feed.xml" | prepend: site.baseurl }}">Subscribe via RSS</a></p>
-    <p class="github usa-width-one-fourth"><a href="https://github.com/{{ site.github }}">
-      <span class="icon github">
-        {% includes github-svg.html %}
-      </span>
-      <span class="username">{{ site.github }}</span>
-      </a>
+    <p class="rss-subscribe usa-width-one-third"><a href="{{ "/feed.xml" | prepend: site.baseurl }}">Subscribe via RSS</a></p>
+    <p class="github usa-width-one-third">
+      {% include github-svg.html %}
     </p>
-    <p class="twitter usa-width-one-fourth">
-      <a href="https://twitter.com/{{ site.twitter }}">
-        <span class="icon twitter">
-          {% include twitter-svg.html %}
-        </span>
-        <span class="username">{{ site.twitter }}</span>
-      </a>
+    <p class="twitter usa-width-one-third">
+        {% include twitter-svg.html %}
     </p>
   </section>
     <script type="text/javascript" src="/assets/js/underscore-min.js"></script>

@@ -1,11 +1,11 @@
 # Site settings
 title: Greg Boone
 email: boone.greg@gmail.com
-description: "Nomad public servant, learning out loud."
+description: "Learning out lout in Denver, CO."
 baseurl: ""
 url: "http://greg.harmsboone.org"
-timezone: "America/New_York"
-paginate: 3
+timezone: "America/Denver"
+paginate: 5
 paginate_path: "/blog/page/:num/"
 
 # Build settings

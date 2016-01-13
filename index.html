@@ -9,18 +9,14 @@ layout: default
     <h2 class="usa-heading usa-width-one-whole">Recent blog posts</h1>
   </header>
   <section class="usa-grid blog-posting">
-    {% for post in paginator.posts limit:3 %}
-      <div class="usa-width-one-third">
-        <h3 class="post-link usa-heading" ><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h2>
-        <time class="post-date" datetime="{{ post.date }}">{{ post.date | date: "%b %-d, %Y" }}</time>
-      </div>
+    {% for post in site.posts limit:3 %}
+      {% include post-snippet.html class="third" %}
     {% endfor %}
   </section>
   <section class="usa-grid blog-posting">
-    {% for post in paginator.posts offset:3 %}
-    <div class="usa-width-one-third">
-      <h3 class="post-link usa-heading" ><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h2>
-      <time class="post-date" datetime="{{ post.date }}">{{ post.date | date: "%b %-d, %Y" }}</time>
-    </div>
+    {% for post in site.posts offset:4 limit:2 %}
+      {% include post-snippet.html class="third" %}
     {% endfor %}
+      <div class="usa-width-one-third">
+        <h3><a href="{{site.baseurl}}/blog/page/2/">Read more posts</a></h3>
   </section>
