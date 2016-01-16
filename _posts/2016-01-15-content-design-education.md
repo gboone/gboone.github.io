@@ -9,7 +9,7 @@ tags:
 ---
 A couple friends of mine work as teachers here in Denver (by the way, we made it to Denver!) and we recently started talking about design in education. One friend told me he proposed some design standards for his fellow teachers. The problem he was trying to solve was relatively simple: Each teacher makes a Moodle site for each class, the designs of those pages vary wildly and result in a mostly confusing education experience for students.
 
-I'm not a teacher, but my friend's school-wide standards idea got me thinking: We do a lot of [this kind of thing] at 18F. What are some ways our approach to solving design problems might apply in education?
+I'm not a teacher (anymore), but my friend's school-wide standards idea got me thinking: We do a lot of [this kind of thing](https://18f.gsa.gov/2015/09/28/web-design-standards/) at 18F. What are some ways our approach to solving design problems might apply in education?
 
 ## The problem of design
 
@@ -31,7 +31,7 @@ This is [a classic format for usability studies](http://www.usability.gov/how-to
 
 Consistency across common elements like link color, typography, buttons, and information architecture can save a student time and energy by instantly recognizing them across each of their classes. That's time and energy they now have for being successful. Consistency across the district means less re-learning when they move schools. Plus it makes it easier for teachers new and old to develop new classes without repeating these routine decisions.
 
-The National Parks have [a common standard that lets people instantly recognize and trust park resources, rangers, and informational materials](https://www.fastcodesign.com/3027714/how-the-creator-of-nycs-hated-subway-map-redesigned-our-nations-parks) no matter which park they're at. The same could be done for school districts. Resources like [WebAIM](http://webaim.org/) can help ensure your standards are fully accessible to all students. Make sure to test these standards with real students, too.
+The National Parks have [a common standard that lets people instantly recognize and trust park resources, rangers, and informational materials](https://www.fastcodesign.com/3027714/how-the-creator-of-nycs-hated-subway-map-redesigned-our-nations-parks) no matter which park they're at. The same could be done for school districts. Resources like [WebAIM](http://webaim.org/) and [content guides (shameless plug)](https://18f.gsa.gov/2015/07/06/18f-content-guide/) can help ensure your standards are accessible to all students. Make sure to test these standards with real students, while you're making them, too.
 
 ### 3. Design for the student
 
@@ -43,4 +43,4 @@ After redesigning, he recommends periodically re-checking the designs every once
 
 ## Your class speaks for itself
 
-I'm not a teacher, but like any artifact, your course website is an expression of your course goals and an expression of you. These are a few tools you can use to figure out how to balance those interests. Kois loves his kid's school, he says so on his podcast. His frustration rose out of uncertainty over whether his kid was as successful as they could be. It was probably a great assignment, well designed and supported by the teacher's expertise. Why risk students not being able to complete it properly?
+Again, I'm not a teacher, but like any artifact, your course website is an expression of your course goals and an expression of you. These are a few tools you can use to figure out how to balance those interests. Kois loves his kid's school, he says so on his podcast. His frustration rose out of uncertainty over whether his kid was as successful as they could be. It was probably a great assignment, well designed and supported by the teacher's expertise. Why risk students not being able to complete it properly?
