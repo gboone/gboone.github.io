@@ -78,3 +78,7 @@ cave-point-park:
   lat: 44.9302746
   lng: -87.1742686
   name: "Cave Point County Park, WI"
+denver:
+  lat: 39.745
+  lng: -104.99
+  name: "Denver, CO"
