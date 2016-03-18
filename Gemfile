@@ -1,4 +1,5 @@
 source 'https://rubygems.org'
+gem 'fitgem'
 gem 'jekyll', '~> 3.0.0'
 gem 'jemoji'
 gem 'redcarpet'
