@@ -1,0 +1,12 @@
+{% assign work = site.data.resume.work %}
+<div class="resume-work usa-grid">
+  <div class="usa-width-one-whole">
+    <h2 class="usa-header">Work</h2>
+    {% for job in work %}
+    <h3 class="usa-header">{{ job.company }}</h3>
+      <em>{{ job.position }}</em>, {{ job.startDate | date: "%b %Y"}} – {{ job.endDate | date: "%b %Y" }}
+      <ul>{% for highlight in job.highlights %}
+        <li>{{ highlight }}</li>{% endfor %}
+      </ul>{% endfor %}
+  </div>
+</div>

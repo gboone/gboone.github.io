@@ -1,0 +1,15 @@
+{% assign skills = site.data.resume.skills %}
+<div class="usa-grid">
+  <h2 class="usa-header">Skills</h2>
+    {% for skill in skills %}
+    {% if skills.size == 4 %}<div class="usa-width-one-fourth">{% elsif skills.size == 3 %}
+      <div class="usa-width-one-third">{% elsif skills.size == 2 %}
+      <div class="usa-width-one-half">{% else%}
+      <div class="usa-width-one-whole">{% endif %}
+      <h3>{{ skill.name }}{% if skill.level %}, {{ skill.level }}{% endif %}</h3>
+      <ul>{% for keyword in skill.keywords | sample:5 %}
+        <li>{{ keyword }}</li>
+      {% endfor %}</ul>
+  </div>
+  {% endfor %}
+</div>

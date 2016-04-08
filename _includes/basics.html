@@ -1,0 +1,11 @@
+{% assign basics = site.data.resume.basics %}
+<div class="usa-grid">
+  <div class="usa-width-one-whole">
+    <ul>
+      <li>email: {{ basics.email }}</li>
+      <li>location: {{ basics.location.city }}, {{ basics.location.state }}</li>
+      <li><a href="{{basics.website}}">Personal website</a></li>
+    </ul>
+    <strong>{{ basics.summary }}</strong>
+  </div>
+</div>

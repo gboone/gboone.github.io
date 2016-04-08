@@ -1,0 +1,156 @@
+{
+  "basics": {
+    "name": "Greg Boone",
+    "email": "greg@harmsboone.org",
+    "phone": "(612) 849-7505",
+    "summary": "Engaging the public on the sociotechnical issues behind innovative technologies.",
+    "location": {
+      "city": "Denver",
+      "countryCode": "US",
+      "state": "Colorado"
+    },
+    "website": "https://greg.harmsboone.org",
+    "profiles": [{
+      "network":"github",
+      "username": "gboone",
+      "url": "https://github.com/gboone/"
+      },
+      {
+        "network":"twitter",
+        "username": "gboone42",
+        "url":"https://twitter.com/gboone42/"
+      }
+    ]
+  },
+  "work": [
+    {
+      "company": "18F, U.S. General Services Administration",
+      "position": "Innovation Specialist, Communications Coordinator",
+      "website": "https://18f.gsa.gov/",
+      "startDate": "2014-09-07",
+      "endDate": "2016-09-07",
+      "summary": "Helped a highly productive team tell the stories behind their work.",
+      "highlights": [
+        "Built a blogging platform and workflow to tell complex, technical stories",
+        "Interviewed public servants about their roles in public service."
+      ]
+    },
+    {
+      "company": "Excella Consulting",
+      "position": "Arlington, VA; Web Developer and Account Lead",
+      "website": "http://excella.com",
+      "startDate": "2013-01-20",
+      "endDate": "2014-09-07",
+      "summary": "Lead WordPress developer at the Consumer Financial Protection Bureau",
+      "highlights": [
+        "Maintained consumerfinance.gov, and supporting web applications"
+      ]
+    },
+    {
+      "company": "gnovis Journal of Communication, Culture, and Technology",
+      "position": "Washington, DC; Webmaster and Multimedia Director",
+      "website": "http://gnovisjournal.org",
+      "startDate": "2011-09-01",
+      "endDate": "2013-05-01",
+      "summary": "Managed online publishing, podcasts, and managed content",
+      "highlights": [
+        "Launched the journal's podcast and hardened the site against attacks."
+      ]
+    },
+    {
+      "company": "Georgetown Medical School",
+      "position": "Research Assistant",
+      "startDate":"2012-08-01",
+      "endDate": "2013-05-01",
+      "summary": "Facilitated web and video-enabled discussions about patient interviews."
+    },
+    {
+      "company": "Munkácsy Mihály Gimnázium",
+      "position" : "Kaposvár, Hungary; Visiting Conversational English Instructor",
+      "startDate":"2010-08-20",
+      "endDate" : "2011-06-30",
+      "summary" : "Used new classroom technologies with English language learners.",
+      "highlights": [
+        "Launched and led the school's first English language newspaper",
+        "Also taught first through third grade at a local elementary school"
+      ]
+    },
+    {
+      "company": "KoreaPOLYSchool, Ilsan, South Korea",
+      "position": "Ilsan, South Korea; English Teacher",
+      "startDate": "2009-07-05",
+      "endDate": "2010-07-03",
+      "summary": "Taught various subjects to elementary English language learners."
+    }
+  ],
+  "education": [
+    {
+      "institution": "Georgetown University",
+      "startDate": "2011-09-01",
+      "endDate": "2013-06-01",
+      "area": "Communication, Culture, and Technology",
+      "studyType": "Master of Arts",
+      "courses": [
+        "Fundamentals of Technology (Teaching Assistant)",
+        "Grounded Theory: History and Sociology of Technology",
+        "Education Technology"
+      ]
+    },
+    {
+      "institution" : "Gustavus Adolphus College",
+      "startDate": "2005-09-01",
+      "endDate": "2009-06-01",
+      "area": "Communication Studies",
+      "area": "Political Science",
+      "studyType": "Bachelor of Arts",
+      "courses": [
+        "Rhetorical Criticism",
+        "Media and Society",
+        "Constitutional Law"
+      ]
+    }
+  ],
+  "publications": [
+    {
+      "name": "Globalization of Korean Food",
+      "publisher": "Oxford University Press",
+      "releaseDate": "2014-10-01",
+      "website": "http://oxford.edu"
+    }
+  ],
+  "skills": [
+    {
+      "name": "Web Development",
+      "level": "Mid-level",
+      "keywords": [
+        "Ruby",
+        "Jekyll",
+        "CSS",
+        "Python",
+        "Django",
+        "PHP",
+        "WordPress",
+        "Git",
+        "OS X",
+        "Linux"
+      ]
+    },
+    {
+      "name": "Multimedia Production",
+      "level": "Mid-level",
+      "keywords": [
+        "Pro Tools",
+        "Final Cut Pro",
+        "Hindenburg Journalist"
+      ]
+    },
+    {
+      "name": "Foreign Languages",
+      "keywords": [
+        "German (Conversational)",
+        "Korean (Beginner)",
+        "Hungarian (Beginner)"
+      ]
+    }
+  ]
+}

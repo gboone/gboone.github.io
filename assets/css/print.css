@@ -1,0 +1,7 @@
+@import main.css;
+
+@media print {
+  .site-footer {
+    display: none;
+  }
+}
