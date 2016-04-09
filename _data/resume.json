@@ -112,10 +112,146 @@
   ],
   "publications": [
     {
-      "name": "Globalization of Korean Food",
+      "name": "A visit to the National Earthquake Information Center’s open source team",
+      "publisher": "18F, U.S. General Services Administration",
+      "releaseDate": "2016-04-04",
+      "website": "https://18f.gsa.gov/2016/04/04/national-earthquake-information-centers-open-source-team/",
+      "type": "blog"
+    },
+    {
+      "name": "What's in the first U.S. Extractives Industries Transparency Initiative report",
+      "publisher": "18F, U.S. General Services Administration",
+      "releaseDate": "2015-12-16",
+      "website": "https://18f.gsa.gov/2015/12/16/useiti-whats-in-first-report/",
+      "type": "blog"
+    },
+    {
+      "name": "How we test 18f.gsa.gov",
+      "publisher": "18F, U.S. General Services Administration",
+      "releaseDate": "2015-12-11",
+      "website": "https://18f.gsa.gov/2015/12/11/how-we-test-18f-gsa-gov/",
+      "type": "blog"
+    },
+    {
+      "name": "A look at complex data in USEITI",
+      "publisher": "18F, U.S. General Services Administration",
+      "releaseDate": "2015-11-30",
+      "website": "https://18f.gsa.gov/2015/11/30/complex-data-in-useiti/",
+      "type": "blog"
+    },
+    {
+      "name": "USEITI: What we learned and where we're headed",
+      "publisher": "18F, U.S. General Services Administration",
+      "releaseDate": "2015-11-02",
+      "website": "https://18f.gsa.gov/2015/11/02/useiti-what-we-learned-where-were-headed/",
+      "type": "blog"
+    },
+    {
+      "name": "Service design in the schools",
+      "publisher": "Greg Boone",
+      "releaseDate": "2015-10-27",
+      "website": "https://greg.harmsboone.org/2015/10/27/service-design-in-the-schools/",
+      "type": "blog"
+    },
+    {
+      "name": "Communicart tool will streamline purchase card process",
+      "publisher": "18F, U.S. General Services Administration",
+      "releaseDate": "2015-08-06",
+      "website":"https://18f.gsa.gov/2015/08/06/communicart-tool-will-streamline-purchase-card-process/",
+      "type": "blog"
+    },
+    {
+      "name": "Sunshine week: extractive industries transparency initiative event",
+      "publisher": "18F, U.S. General Services Administration",
+      "releaseDate": "2015-03-18",
+      "website": "https://18f.gsa.gov/2015/03/18/sunshine-week-extractive-industries-transparency-initiative-event/",
+      "type": "blog"
+    },
+    {
+      "name": "U.X. lessons learned from a procurement project",
+      "publisher": "18F, U.S. General Services Administration",
+      "releaseDate": "2015-03-06",
+      "website": "https://18f.gsa.gov/2015/03/06/ux-lessons-learned-from-a-procurement-project/",
+      "type": "blog"
+    },
+    {
+      "name": "Making procurement easier: questions for developer Kailin Devine",
+      "publisher": "18F, U.S. General Services Administration",
+      "releaseDate": "2015-03-05",
+      "website": "https://18f.gsa.gov/2015/03/05/making-procurement-easier-some-questions-for-developer-kaitlin-devine/",
+      "type": "blog"
+    },
+    {
+      "name": "How to use GitHub and the terminal: a guide",
+      "publisher": "18F, U.S. General Services Administration",
+      "releaseDate": "2015-03-03",
+      "website": "https://18f.gsa.gov/2015/03/03/how-to-use-github-and-the-terminal-a-guide/",
+      "type": "blog"
+    },
+    {
+      "name": "Taking control of our website with Jekyll and webhooks",
+      "publisher": "18F, U.S. General Services Administration",
+      "releaseDate": "2014-11-17",
+      "website": "https://18f.gsa.gov/2014/11/17/taking-control-of-our-website-with-jekyll-and-webhooks/",
+      "type": "blog"
+    },
+    {
+      "name": "Globalization Korea: A rhetoric of food",
+      "title": "How Writing Works with Readings",
       "publisher": "Oxford University Press",
       "releaseDate": "2014-10-01",
-      "website": "http://oxford.edu"
+      "website": "http://oxford.edu",
+      "type": "Reading"
+    },
+    {
+      "name": "Tussel over Technology: Controversy & the Patent Act",
+      "publisher": "Greg Boone",
+      "releaseDate": "2012-12-30",
+      "website": "https://greg.harmsboone.org/blog/2012/12/30/tussle-over-technology-controversy-the-patent-act/",
+      "type": "blog"
+    },
+    {
+      "name": "The soft power of online diplomacy",
+      "publisher": "Greg Boone",
+      "releaseDate": "2011-12-13",
+      "website": "https://greg.harmsboone.org/blog/2011/12/13/the-soft-power-of-online-diplomacy/",
+      "type": "blog"
+    },
+    {
+      "name": "Wherein a Northfield game inspires a lesson plan",
+      "publisher": "Greg Boone",
+      "releaseDate": "2011-05-26",
+      "website": "https://greg.harmsboone.org/blog/2011/05/26/wherein-a-northfield-game-inspired-a-lesson-plan/",
+      "type": "blog"
+    },
+    {
+      "name": "Classroom 2.0: The Wiki Experiment",
+      "publisher": "Greg Boone",
+      "releaseDate": "2011-04-13",
+      "website": "https://harmsboone.org/2011/04/13/classroom-2-0-the-wiki-experiment/",
+      "type": "blog"
+    }
+  ],
+  "presentations": [
+    {
+      "name": "How to do browser testing on WordPress",
+      "event": "Do More With What You Have: Experience WordPress in Government",
+      "date": "2015-05-28",
+      "location": {
+        "city": "Washington",
+        "state": "DC",
+        "venue": "District Architecture Center"
+      }
+    },
+    {
+      "name": "Soft Power of Online Diplomacy: A close look at South Korea's online communication strategy",
+      "event": "ST Global 2012",
+      "date": "2012-03-30",
+      "location": {
+        "city": "Washington",
+        "state": "DC",
+        "venue": "National Academy of Sciences"
+      }
     }
   ],
   "skills": [

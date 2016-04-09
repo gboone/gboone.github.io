@@ -1,4 +1,8 @@
 <div class="usa-grid">
-  <div class="usa-width-one-whole"{% assign writing = site.data.resume.publications %}
+  <h2 class="usa-header">Writing and publications</h2>
+  <div class="usa-width-one-whole">{% assign writing = site.data.resume.publications %}
+  {% for pub in writing %}
+  <p>"{{ pub.name }}." <em>{{ pub.publisher }}</em>. {{ pub.releaseDate | date: "%B %d, %Y"}} <a href="{{pub.website}}">{{pub.website}}</a></p>
+  {% endfor %}
   </div>
 </div>
