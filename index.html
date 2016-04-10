@@ -3,7 +3,10 @@ layout: default
 ---
 <section class="about usa-grid">
   <div class="usa-width-one-third"><img src="{{ site.baseurl }}/assets/images/avatar.jpg"></div>
-  <div class="usa-width-two-thirds">{{ site.pages[0]['content'] }}</div>
+  <div class="usa-width-two-thirds">
+    <p>{{ site.pages[0]['excerpt'] | markdownify }}</p>
+    <p><a href="{{site.baseurl}}/about/">Read more</a></p>
+  </div>
 </section>
 <section class="blog-posts">
   <header class="usa-grid">
