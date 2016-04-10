@@ -1,12 +1,14 @@
 {% assign work = site.data.resume.work %}
-<div class="resume-work usa-grid">
-  <div class="usa-width-one-whole">
+<div class="resume-work-header usa-grid">
+  <header class="usa-width-one-whole">
     <h2 class="usa-header">Work</h2>
-    {% for job in work %}
-    <h3 class="usa-header">{{ job.company }}</h3>
-      <em>{{ job.position }}</em>, {{ job.startDate | date: "%b %Y"}} – {{ job.endDate | date: "%b %Y" }}
-      <ul>{% for highlight in job.highlights %}
-        <li>{{ highlight }}</li>{% endfor %}
-      </ul>{% endfor %}
-  </div>
-</div>
+  </header>
+</div>{% for job in work %}{% assign modulo = forloop.index | modulo: 2 %}
+{% if modulo == 1 %}<div class="usa-grid resume-work">{% endif %}
+<div class="resume-job usa-width-one-half">
+  <h3 class="usa-header">{{ job.company }}</h3>
+  <em>{{ job.position }}</em>, {{ job.startDate | date: "%b %Y"}} – {{ job.endDate | date: "%b %Y" }}
+  <ul>{% for highlight in job.highlights %}
+    <li>{{ highlight }}</li>{% endfor %}
+  </ul>
+</div>{% if modulo == 0 %}</div>{% endif %}{% endfor %}

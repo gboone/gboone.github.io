@@ -3,7 +3,7 @@
     "name": "Greg Boone",
     "email": "greg@harmsboone.org",
     "phone": "(612) 849-7505",
-    "summary": "Engaging the public on the sociotechnical issues behind innovative technologies.",
+    "summary": "Mission driven, user centered, open source",
     "location": {
       "city": "Denver",
       "countryCode": "US",
@@ -90,11 +90,21 @@
       "endDate": "2013-06-01",
       "area": "Communication, Culture, and Technology",
       "studyType": "Master of Arts",
+      "degree": true,
       "courses": [
         "Fundamentals of Technology (Teaching Assistant)",
         "Grounded Theory: History and Sociology of Technology",
         "Education Technology"
-      ]
+      ],
+      "website": "https://cct.georgetown.edu"
+    },
+    {
+      "institution": "Graduate Institute of International and Development Studies",
+      "startDate": "2012-07-01",
+      "endDate": "2012-07-31",
+      "area": "Trade, Technology and Development",
+      "studyType": "Certificate",
+      "website": "http://graduateinstitute.ch/home.html"
     },
     {
       "institution" : "Gustavus Adolphus College",
@@ -103,11 +113,21 @@
       "area": "Communication Studies",
       "area": "Political Science",
       "studyType": "Bachelor of Arts",
+      "degree": true,
       "courses": [
         "Rhetorical Criticism",
         "Media and Society",
         "Constitutional Law"
-      ]
+      ],
+      "website": "https://gustavus.edu"
+    },
+    {
+      "institution": "United International College",
+      "startDate": "2008-09-01",
+      "endDate": "2009-01-15",
+      "area": "International journalism and poltiics",
+      "studyType": "Exchange",
+      "website": "http://uic.edu.hk/en"
     }
   ],
   "publications": [

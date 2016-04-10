@@ -8,8 +8,12 @@
 
         <header class="post-header usa-width-one-whole">
           <h1 class="usa-header">{{ site.data.resume.basics.name }}</h1>
-          <span class="usa-width-one-half">{{ site.data.resume.basics.location.city }}, {{ site.data.resume.basics.location.state }}</aside>
-          <aside class="usa-width-one-half"><a href="{{ site.data.resume.basics.website }}">Blog</a></aside>
+          <div class="resume-preamble usa-grid">
+            <span class="usa-width-one-fourth">{{ site.data.resume.basics.location.city }}, {{ site.data.resume.basics.location.state }}</span>
+            <span class="usa-width-one-fourth"><a href="{{ site.data.resume.basics.website }}">Blog</a></span>
+            <span class="usa-width-one-fourth">{{ site.data.resume.basics.email}}</span>
+            <span class="usa-width-one-fourth">{{ site.data.resume.basics.summary }}</span>
+          </div>
         </header>
 
         <article class="post-content usa-width-one-whole">
