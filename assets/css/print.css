@@ -1,6 +1,48 @@
 @import main.css;
 
 @media print {
+  h1 {
+    font-size: 16pt;
+  }
+  h2 {
+    font-size: 14pt;
+  }
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: 12pt;
+    margin-top: 0;
+    margin-bottom: 0;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    margin-top: 0
+  }
+  .usa-grid {
+    padding: 0;
+  }
+  p,
+  ul > li,
+  span {
+    font-size: 11pt;
+  }
+  ul {
+    margin-bottom: 0;
+  }
+  .resume-work-header,
+  .resume-education-header,
+  .resume-writing {
+    margin: 1.5em 0 1em;
+  }
+  .resume-school,
+  .resume-job {
+    margin: 1em 0 0;
+  }
   .site-footer {
     display: none;
   }

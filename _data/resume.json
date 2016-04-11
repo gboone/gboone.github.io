@@ -28,8 +28,8 @@
       "position": "Innovation Specialist, Communications Coordinator",
       "website": "https://18f.gsa.gov/",
       "startDate": "2014-09-07",
-      "endDate": "2016-09-07",
-      "summary": "Helped a highly productive team tell the stories behind their work.",
+      "endDate": "present",
+      "summary": "Helped a highly productive team of public servants tell the stories behind their work.",
       "highlights": [
         "Built a blogging platform and workflow to tell complex, technical stories",
         "Interviewed public servants about their roles in public service."
@@ -62,7 +62,10 @@
       "position": "Research Assistant",
       "startDate":"2012-08-01",
       "endDate": "2013-05-01",
-      "summary": "Facilitated web and video-enabled discussions about patient interviews."
+      "summary": "A project co-led by medical and graduate school faculty to better teach doctor-patient communication.",
+      "highlights": [
+        "Filmed and produced video to help understand doctor's goals and patient's needs during routine exams."
+      ]
     },
     {
       "company": "Munkácsy Mihály Gimnázium",

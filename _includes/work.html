@@ -6,8 +6,9 @@
 </div>{% for job in work %}{% assign modulo = forloop.index | modulo: 2 %}
 {% if modulo == 1 %}<div class="usa-grid resume-work">{% endif %}
 <div class="resume-job usa-width-one-half">
-  <h3 class="usa-header">{{ job.company }}</h3>
-  <em>{{ job.position }}</em>, {{ job.startDate | date: "%b %Y"}} – {{ job.endDate | date: "%b %Y" }}
+  <h3 class="usa-header"><a href="{{job.website}}">{{ job.company }}</a></h3>
+  <strong>{{ job.position }}</strong>,<br><em>{{ job.startDate | date: "%b %Y"}} – {{ job.endDate | date: "%b %Y" }}</em>
+  <p>{{ job.summary }}</p>
   <ul>{% for highlight in job.highlights %}
     <li>{{ highlight }}</li>{% endfor %}
   </ul>
