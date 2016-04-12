@@ -1,4 +1,5 @@
-{% assign work = site.data.resume.work %}
+{% if page.permalink contains "cv" %}{% assign work = site.data.resume.work %}{% else %}
+{% assign work = site.data.resume.work | where:"cv-only", "false" %}{% endif %}
 <div class="resume-work-header usa-grid">
   <header class="usa-width-one-whole">
     <h2 class="usa-header">Work</h2>
@@ -6,10 +7,10 @@
 </div>{% for job in work %}{% assign modulo = forloop.index | modulo: 2 %}
 {% if modulo == 1 %}<div class="usa-grid resume-work">{% endif %}
 <div class="resume-job usa-width-one-half">
-  <h3 class="usa-header"><a href="{{job.website}}">{{ job.company }}</a></h3>
-  <strong>{{ job.position }}</strong>,<br><em>{{ job.startDate | date: "%b %Y"}} – {{ job.endDate | date: "%b %Y" }}</em>
+  <h3 class="usa-header"><a href="{{job.website}}">{{ job.company | markdownify }}</a></h3>
+  <em>{{ job.position }}</em>, {{ job.location }}<br><em>{{ job.startDate | date: "%b %Y"}} – {{ job.endDate | date: "%b %Y" }}</em>
   <p>{{ job.summary }}</p>
   <ul>{% for highlight in job.highlights %}
     <li>{{ highlight }}</li>{% endfor %}
   </ul>
-</div>{% if modulo == 0 %}</div>{% endif %}{% endfor %}
+</div>{% if modulo == 0 or forloop.last %}</div>{% endif %}{% endfor %}

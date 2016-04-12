@@ -4,5 +4,6 @@
 {% if modulo == 1 %}<div class="usa-grid resume-education">{% endif %}
   <div class="usa-width-one-half resume-school">
     <h3 class="usa-header"><a href="{{school.website}}">{{ school.institution }}</a>, {{ school.studyType }}</h3>
-    <em>{{ school.area }}, {{ school.startDate }} – {{ school.endDate }}</em>
+    <p><em>{{ school.area }}</em><br>
+    <em>{{ school.startDate | date: "%b %Y" }} – {{ school.endDate | date:"%b %Y"}}</em></p>
   </div>{% if modulo == 0 %}</div>{% endif %}{% endfor %}

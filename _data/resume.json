@@ -26,6 +26,7 @@
     {
       "company": "18F, U.S. General Services Administration",
       "position": "Innovation Specialist, Communications Coordinator",
+      "location": "Washington, DC; Denver, CO",
       "website": "https://18f.gsa.gov/",
       "startDate": "2014-09-07",
       "endDate": "present",
@@ -33,58 +34,97 @@
       "highlights": [
         "Built a blogging platform and workflow to tell complex, technical stories",
         "Interviewed public servants about their roles in public service."
-      ]
+      ],
+      "cv-only": false
     },
     {
       "company": "Excella Consulting",
-      "position": "Arlington, VA; Web Developer and Account Lead",
+      "location": "Arlington, VA",
+      "position": "Web Developer and Account Lead",
       "website": "http://excella.com",
       "startDate": "2013-01-20",
       "endDate": "2014-09-07",
       "summary": "Lead WordPress developer at the Consumer Financial Protection Bureau",
       "highlights": [
         "Maintained consumerfinance.gov, and supporting web applications"
-      ]
+      ],
+      "cv-only": false
     },
     {
-      "company": "gnovis Journal of Communication, Culture, and Technology",
-      "position": "Washington, DC; Webmaster and Multimedia Director",
+      "company": "_gnovis_ Journal of Communication, Culture, and Technology",
+      "location": "Georgetown University; Washington, DC",
+      "position": "Digital publisher and multimedia director",
       "website": "http://gnovisjournal.org",
       "startDate": "2011-09-01",
       "endDate": "2013-05-01",
       "summary": "Managed online publishing, podcasts, and managed content",
       "highlights": [
         "Launched the journal's podcast and hardened the site against attacks."
-      ]
+      ],
+      "cv-only": false
     },
     {
       "company": "Georgetown Medical School",
       "position": "Research Assistant",
+      "location": "Washington, DC; Brentwood, MD",
       "startDate":"2012-08-01",
       "endDate": "2013-05-01",
       "summary": "A project co-led by medical and graduate school faculty to better teach doctor-patient communication.",
       "highlights": [
         "Filmed and produced video to help understand doctor's goals and patient's needs during routine exams."
-      ]
+      ],
+      "cv-only": false
     },
     {
       "company": "Munkácsy Mihály Gimnázium",
-      "position" : "Kaposvár, Hungary; Visiting Conversational English Instructor",
+      "position" : "Visiting English Instructor",
+      "location": "Kaposvár, Hungary;",
       "startDate":"2010-08-20",
       "endDate" : "2011-06-30",
       "summary" : "Used new classroom technologies with English language learners.",
       "highlights": [
         "Launched and led the school's first English language newspaper",
         "Also taught first through third grade at a local elementary school"
-      ]
+      ],
+      "cv-only": false
     },
     {
       "company": "KoreaPOLYSchool, Ilsan, South Korea",
-      "position": "Ilsan, South Korea; English Teacher",
+      "position": "English Teacher",
+      "location": "Ilsan, South Korea",
       "startDate": "2009-07-05",
       "endDate": "2010-07-03",
-      "summary": "Taught various subjects to elementary English language learners."
-    }
+      "summary": "Worked in a fully immersive language education environment",
+      "highlights": [
+        "Taught grades 1-5 subjects incl. Grammar, Math, Science"
+      ],
+      "cv-only": false
+    },
+    {
+      "company": "Gustavus Communications and Marketing",
+      "position": "Podcaster",
+      "location": "Zhuhai, China",
+      "startDate": "2008-09-01",
+      "endDate": "2009-01-10",
+      "cv-only": true
+    },
+    {
+      "company": "Gustavian Weekly",
+      "position": "Columnist",
+      "location": "St. Peter, MN; Zhuhai, China",
+      "startDate": "2007-10-01",
+      "endDate": "2009-06-01",
+      "summary": "Offered commentary on current events on campus",
+      "cv-only": true
+    },
+    {
+      "company": "KGSM Radio",
+      "position": "General Manager and Program Director",
+      "startDate": "2006-09-01",
+      "endDate": "2008-09-01",
+      "summary": "Built a web publishing platform and launched several podcasts with college radio hosts.",
+      "cv-only": true
+    },
   ],
   "education": [
     {
@@ -253,13 +293,47 @@
       "releaseDate": "2011-04-13",
       "website": "https://harmsboone.org/2011/04/13/classroom-2-0-the-wiki-experiment/",
       "type": "blog"
+    },
+    {
+      "name": "Chaebol vs. the Microbrewer",
+      "publisher": "International Underground",
+      "releaseDate": "2010-06-02",
+      "website": "https://internationalunderground.org/2010/chaebol-vs-microbrewer",
+      "type": "article"
+    },
+    {
+      "name": "A Culture of Support",
+      "publisher": "international Underground",
+      "releaseDate": "2010-03-16",
+      "website": "https://internationalunderground.org/2010/culture-support",
+      "type": "article"
     }
   ],
   "presentations": [
     {
+      "name": "Data Jam",
+      "event": "gnovicon: Unlocking Open Data",
+      "date": "2015-02-20",
+      "role": "Panelist and facilitator",
+      "location": {
+
+      }
+    },
+    {
+      "name": "Vocation and post-graduate careers",
+      "event": "Georgetown Communication Culture and Technology Open House",
+      "date": "2014-12-05",
+      "role": "Panelist",
+      "location": {
+        "city": "Washington",
+        "state": "DC",
+        "venue": "Georgetown University"
+      }
+    },
+    {
       "name": "How to do browser testing on WordPress",
       "event": "Do More With What You Have: Experience WordPress in Government",
-      "date": "2015-05-28",
+      "date": "2014-05-28",
       "location": {
         "city": "Washington",
         "state": "DC",
