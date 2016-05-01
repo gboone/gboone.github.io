@@ -316,7 +316,9 @@
       "date": "2015-02-20",
       "role": "Panelist and facilitator",
       "location": {
-
+        "city": "Washington",
+        "state": "DC",
+        "venue": "Georgetown University"
       }
     },
     {
