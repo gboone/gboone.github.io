@@ -46,4 +46,9 @@
   .site-footer {
     display: none;
   }
+  .usa-width-one-third {
+    float: left;
+    clear: none;
+    width: 33%
+  }
 }
