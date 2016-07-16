@@ -1,6 +1,11 @@
 ---
 title: On whiteness in tech
 layout: post
+loc: denver
+tags:
+- tech
+- working
+- racism
 ---
 I'm a white, cis, hetero male and I work in tech — sorta. That puts me in a pretty established majority. Last year men accounted for 70% of all employees at Twitter. White folks were 59%. 67% of Facebookers are men. 52% are white. **93%** are straight. I don't know what those numbers are where I work and for complicated bureaucratic reasons I don't fully understand, it might be a while before I do. That said, 18F is the most diverse team I've ever worked on but we are far from perfect. 
 
