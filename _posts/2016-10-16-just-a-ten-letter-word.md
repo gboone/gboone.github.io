@@ -3,9 +3,9 @@ title: "Just a ten letter word"
 layout: post
 loc: denver
 tags:
--
--
--
+- music
+- hip hop
+- punk rock
 ---
 I recently attended my first show at Red Rocks and it was as good as everyone has hyped the venue to be. The scene is beautiful, with a huge stage and brilliant sound ([suggesting they had some good engineers, and good luck with the weather](http://www.cpr.org/news/story/red-rocks-acoustical-challenges-offset-iconic-setting)). We were also seeing some of my favorite acts: Atmosphere headlined, supported by Brother Ali, Lizzo, and the 16-years-defunct punk band [LFTR PLLR](https://en.wikipedia.org/wiki/Lifter_Puller).
 
@@ -26,3 +26,7 @@ It was a blood-sucking summer
 I dug in to those lyrics in a pre-Genius era of googled lyric snippets and liner notes and found that this guy was behind The Hold Steady and that band from that Atmosphere song, "Lifter Puller." It turned out that POS was in a punk band called Building Better Bombs. Later, I learned about a band called The Plastic Constellations, and that Aaron Mader from that band was a DJ in Doomtree.
 
 It was endless. I love finding connections in music, whether its learning about jazz through De La Soul or discovering the diversity in my local music scene, they give me a better appreciation for the artistry behind the music. Like all things, diversity makes your scene better. It was for that reason I was excited that night at Red Rocks (and to see a band I never thought I'd get to see). It's also why I'm excited to live in a city now that can support such diverse artists as Wheelchair Sports Camp, Brent Cowles, Dressy Bessy, Nathaniel Rateliff, and, of course, the Flobots.
+
+It's also why I don't really understand the people who were upset about the punk band being on stage. I know they probably came there to hear some hip hop, but as Prince once said:
+
+> If you free your mind up baby, maybe you'd understand.
