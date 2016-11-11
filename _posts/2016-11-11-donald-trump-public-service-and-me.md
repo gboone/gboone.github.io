@@ -1,5 +1,10 @@
 ---
 title: Donald Trump, public service, and Me
+loc: denver
+tags:
+- public service
+- donald trump
+- country before self
 ---
 If you've read this blog or follow me on social media you might already know that I wasn't a Trump supporter. I was raised to be suspicious of people who lied, cheated, and stole their way to the top. I was disgusted and terrified by the words he chose to use when talking about my fellow Americans from marginalized communities: People of color, LGBT people, the disabled, women, and especially Muslims. To me, most of his policy statements, in the rare event he gave one, rang as flippant and rooted in racist ideas about people's motives. What makes me most nervous is that we have no idea what to expect from him other than making America great again. We learned on the campaign trail that we can't trust the sincerity of anything he says. If he says something racist, he's just joking. If he says something sexist like how he "grabs [women] by the pussy," it's "just locker room talk." So is he serious about the wall? About banning Muslims from entering the country? About making immigrants walk around with special ID cards? We have no idea. I wasn't a Romney or McCain supporter in the last two elections, but at least we know what we were in for if they won.
 
