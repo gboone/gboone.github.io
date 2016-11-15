@@ -1,26 +1,53 @@
 ---
 layout: default
 ---
+{% assign hikes = site.data.hikes.features | reverse %}
 <section class="about usa-grid">
   <div class="usa-width-one-third"><img src="{{ site.baseurl }}/assets/images/avatar.jpg"></div>
   <div class="usa-width-two-thirds">
     <p>{{ site.pages[0]['excerpt'] | markdownify }}</p>
     <p><a href="{{site.baseurl}}/about/">Read more</a></p>
+    <h2>Other HarmsBoones</h2>
+    <ul>
+      <li><a href="https://danielle.harmsboone.org">Danielle</a></li>
+      <li><a href="https://harmsboone.org">Family</a></li>
+      <li><a href="https://outside.harmsboone.org">Outdoor adventures</a></li>
+      <li><a href="https://1000wednesdays.org">1,000 Wednesdays</a></li>
+    </ul>
   </div>
 </section>
-<section class="blog-posts">
-  <header class="usa-grid">
-    <h2 class="usa-heading usa-width-one-whole">Recent blog posts</h1>
+<section class="usa-headings usa-grid">
+  <header class="usa-heading usa-width-two-thirds">
+    <h2 >Blog posts</h2>
   </header>
-  <section class="usa-grid blog-posting">
-    {% for post in site.posts limit:3 %}
-      {% include post-snippet.html class="third" %}
+  <header class="usa-heading usa-width-one-third">
+    <h2>Recent journeys</h2>
+  </header>
+</section>
+<section class="usa-grid blog-posting">
+    {% for post in site.posts limit:1 %}
+      {% include post-snippet.html class="two-thirds" %}
     {% endfor %}
-  </section>
-  <section class="usa-grid blog-posting">
-    {% for post in site.posts offset:4 limit:2 %}
-      {% include post-snippet.html class="third" %}
+    <div class="usa-width-one-third">
+      <h3>A {{ hikes[0].properties.activity.distance }} mile {{ hikes[0].properties.activity.type}} on {{hikes[0].properties.activity.date | date: "%b %-d, %Y" }} in <a href="{{ hikes[0].self.url | prepend:'https://outside.harmsboone.org'}}">{{ hikes[0].properties.activity.park }}</a></h3>
+    </div>
+</section>
+<section class="usa-grid blog-posting">
+    {% for post in site.posts offset:2 limit:1 %}
+      {% include post-snippet.html class="two-thirds" %}
     {% endfor %}
-      <div class="usa-width-one-third">
-        <h3><a href="{{site.baseurl}}/blog/page/2/">Read more posts</a></h3>
-  </section>
+    <div class="usa-width-one-third">
+      <h3>A {{ hikes[1].properties.activity.distance }} mile {{ hikes[1].properties.activity.type}} on {{hikes[1].properties.activity.date | date: "%b %-d, %Y" }} in <a href="{{ hikes[1].self.url | prepend:'https://outside.harmsboone.org'}}">{{ hikes[1].properties.activity.park }}</a></h3>
+    </div>
+</section>
+<section class="usa-grid blog-posting">
+    {% for post in site.posts offset:3 limit:1 %}
+      {% include post-snippet.html class="two-thirds" %}
+    {% endfor %}
+    <div class="usa-width-one-third">
+      <h3>A {{ hikes[2].properties.activity.distance }} mile {{ hikes[2].properties.activity.type}} on {{hikes[2].properties.activity.date | date: "%b %-d, %Y" }} in <a href="{{ hikes[2].self.url | prepend:'https://outside.harmsboone.org'}}">{{ hikes[2].properties.activity.park }}</a></h3>
+    </div>
+</section>
+<section class="usa-grid read-more">
+  <h3><a href="{{site.baseurl}}/blog/page/2/">Read more posts</a></h3>
+</section>

@@ -1,0 +1,1518 @@
+{
+	"type": "FeatureCollection",
+	"features": [
+	
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-78.20423,
+		  			38.87074
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Shenandoah National Park",
+					"state": "VA",
+					"trail": "Stony Man",
+					"distance": "1.4",
+					"baseElevation": "3711",
+					"gainElevation": "300",
+					"type": "hiking",
+					"info": "https://www.nps.gov/shen/planyourvisit/upload/rapidan_camp_area.pdf",
+					"date": "2014-08-06 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2014-08-06.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-78.20423,
+		  			38.87074
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Shenandoah National Park",
+					"state": "VA",
+					"trail": "Mill Prong - Rapidan - Laurel Prong",
+					"distance": "7.4",
+					"baseElevation": "2502",
+					"gainElevation": "1310",
+					"type": "hiking",
+					"info": "https://www.nps.gov/shen/planyourvisit/upload/rapidan_camp_area.pdf",
+					"date": "2014-08-07 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2014-08-07.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-78.20423,
+		  			38.87074
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Shenandoah National Park",
+					"state": "VA",
+					"trail": "Dark Hollow Falls",
+					"distance": "1.4",
+					"baseElevation": "3312",
+					"gainElevation": "440",
+					"type": "hiking",
+					"info": "http://www.summitpost.org/dickey-hill/688604",
+					"date": "2014-08-08 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2014-08-08.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-77.7057469,
+		  			38.8246137
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Bull Run Mountain Conservancy",
+					"state": "VA",
+					"trail": "Green Loop",
+					"distance": "4",
+					"baseElevation": "394",
+					"gainElevation": "917",
+					"type": "hiking",
+					"info": "http://brmconservancy.org/",
+					"date": "2014-10-25 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2014-10-25.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-78.20423,
+		  			38.87074
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Shenandoah National Park",
+					"state": "VA",
+					"trail": "Dickey Ridge",
+					"distance": "5",
+					"baseElevation": "3502",
+					"gainElevation": "950",
+					"type": "hiking",
+					"info": "http://www.summitpost.org/dickey-hill/688604",
+					"date": "2014-11-02 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2014-11-02.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-76.5692138,
+		  			42.3986468
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Robert Treman State Park",
+					"state": "NY",
+					"trail": "Rim Trail",
+					"distance": "4",
+					"baseElevation": "904",
+					"gainElevation": "0",
+					"type": "hiking",
+					"info": "http://parks.ny.gov/parks/135/details.aspx",
+					"date": "2014-12-26 00:00:00 -0500"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2014-12-26.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-77.7295315,
+		  			39.3230553
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Harper's Ferry National Historic Park",
+					"state": "WV",
+					"trail": "Naval Battery Overlook",
+					"distance": "1.7",
+					"baseElevation": "265",
+					"gainElevation": "404",
+					"type": "hiking",
+					"info": "https://www.nps.gov/hafe/planyourvisit/maps.htm",
+					"date": "2015-02-15 00:00:00 -0500"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2015-02-15.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-78.3200017,
+		  			39.4930581
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Cacapon State Park",
+					"state": "WV",
+					"trail": "Ziler Loop & Central Trail",
+					"distance": "6",
+					"baseElevation": "1200",
+					"gainElevation": "600",
+					"type": "hiking",
+					"info": "http://www.cacaponresort.com/cacapon.pdf",
+					"date": "2015-03-07 00:00:00 -0500"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2015-03-07.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-78.3855514,
+		  			38.5906199
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Shenandoah National Park",
+					"state": "VA",
+					"trail": "Millers Head Lookout",
+					"distance": "2",
+					"baseElevation": "3502",
+					"gainElevation": "0",
+					"type": "hiking",
+					"info": "https://www.nps.gov/shen/planyourvisit/hiking.htm",
+					"date": "2015-04-24 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2015-04-24.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-78.38349,
+		  			38.585656
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Shenandoah National Park",
+					"state": "VA",
+					"trail": "WhiteOak Canyon",
+					"distance": "7",
+					"baseElevation": "3502",
+					"gainElevation": "-1200",
+					"type": "hiking",
+					"info": "https://www.nps.gov/shen/planyourvisit/hiking.htm",
+					"date": "2015-04-25 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2015-04-25.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-78.3200017,
+		  			39.4930581
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Cacapon State Park",
+					"state": "WV",
+					"trail": "Ziler Loop",
+					"distance": "6",
+					"baseElevation": "1200",
+					"gainElevation": "600",
+					"type": "hiking",
+					"info": "http://www.cacaponresort.com/cacapon.pdf",
+					"date": "2015-07-25 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2015-07-25.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-89.5520472,
+		  			45.9204616
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Northern Highlands American Legion State Forest",
+					"state": "WI",
+					"trail": "Bike trail",
+					"distance": "41.7",
+					"baseElevation": "1607",
+					"gainElevation": "443",
+					"type": "biking",
+					"info": "https://www.strava.com/activities/370722066",
+					"date": "2015-08-16 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2015-08-16.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-89.752222,
+		  			46.803889
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Porcupine Mountains State Park",
+					"state": "MI",
+					"trail": "Escarpment Trail",
+					"distance": "4.3",
+					"baseElevation": "1076",
+					"gainElevation": "100",
+					"type": "hiking",
+					"info": "http://www.michigandnr.com/parksandtrails/details.aspx?type=SPRK&id=426",
+					"date": "2015-09-13 10:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2015-09-13.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-89.7124983,
+		  			45.8727023
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Bearskin trail",
+					"state": "WI",
+					"trail": "Bearskin trail",
+					"distance": "21.8",
+					"baseElevation": "1604",
+					"gainElevation": "295",
+					"type": "biking",
+					"info": "http://dnr.wi.gov/topic/parks/name/bearskin/",
+					"date": "2015-10-12 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2015-10-12.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-89.4798871,
+		  			46.0325838
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Northern Highlands American Legion State Forest",
+					"state": "WI",
+					"trail": "Star Lake trail",
+					"distance": "2.5",
+					"baseElevation": "1605",
+					"gainElevation": "0",
+					"type": "hiking",
+					"info": "http://dnr.wi.gov/topic/StateForests/nhal/trails.html",
+					"date": "2015-10-17 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2015-10-17.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-87.1737,
+		  			44.9367
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Cave Point and Whitefish Dunes Parks",
+					"state": "WI",
+					"trail": "Red",
+					"distance": "2",
+					"baseElevation": "170",
+					"gainElevation": "0",
+					"type": "hiking",
+					"info": "http://dnr.wi.gov/topic/parks/name/whitefish/",
+					"date": "2015-10-30 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2015-11-14.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-91.463333,
+		  			47.146944
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Superior Hiking Trail & Gooseberry Falls State Park",
+					"state": "MN",
+					"trail": "Wolf Rock & River View",
+					"distance": "5.6",
+					"baseElevation": "50",
+					"gainElevation": "900",
+					"type": "hiking",
+					"info": "http://www.dnr.state.mn.us/state_parks/gooseberry_falls/index.html",
+					"date": "2015-11-01 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2015-11-01.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-87.4150987,
+		  			44.8644402
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Potawatomi State Park",
+					"state": "WI",
+					"trail": "Tower",
+					"distance": "2.8",
+					"baseElevation": "636",
+					"gainElevation": "150",
+					"type": "hiking",
+					"info": "http://dnr.wi.gov/topic/parks/name/potawatomi/",
+					"date": "2015-11-13 00:00:00 -0500"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2015-11-13.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-88.6268,
+		  			45.3714
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Chequamegon National Forest",
+					"state": "WI",
+					"trail": "Quartz Hill",
+					"distance": "1.25",
+					"baseElevation": "430",
+					"gainElevation": "100",
+					"type": "hiking",
+					"info": "http://www.fs.usda.gov/recarea/cnnf/recreation/ohv/recarea/?recid=27963&actid=50",
+					"date": "2015-11-15 00:00:00 -0500"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2015-11-15.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-89.4798871,
+		  			46.0325838
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Northern Highlands American Legion State Forest",
+					"state": "WI",
+					"trail": "Star Lake trail",
+					"distance": "2.5",
+					"baseElevation": "1605",
+					"gainElevation": "0",
+					"type": "hiking",
+					"info": "http://dnr.wi.gov/topic/StateForests/nhal/trails.html",
+					"date": "2015-12-13 00:00:00 -0500"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2015-12-13.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-93.2905989,
+		  			44.8026626
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Minnesota Valley National Wildlife Refuge",
+					"state": "MN",
+					"trail": "Overlook Trail",
+					"distance": "0.5",
+					"baseElevation": "700",
+					"gainElevation": "0",
+					"type": "hiking",
+					"info": "https://www.fws.gov/refuge/Minnesota_Valley/",
+					"date": "2015-12-26 00:00:00 -0500"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2015-12-26.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-105.33111,
+		  			39.92944
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Eldorado Canyon State Park",
+					"state": "CO",
+					"trail": "Fowler trail",
+					"distance": "1",
+					"baseElevation": "6000",
+					"gainElevation": "0",
+					"type": "hiking",
+					"info": "http://cpw.state.co.us/placestogo/parks/EldoradoCanyon/Pages/Trails.aspx",
+					"date": "2016-01-23 00:00:00 -0500"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-01-23.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-105.5711114,
+		  			40.0099867
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Rainbow Lakes Campground",
+					"state": "CO",
+					"trail": "Rainbow Lakes Campground Road",
+					"distance": "2.25",
+					"baseElevation": "9261",
+					"gainElevation": "316",
+					"type": "Snowshoeing",
+					"info": "http://www.fs.usda.gov/recarea/arp/recreation/camping-cabins/recarea?recid=28324&actid=29",
+					"date": "2016-01-31 00:00:00 -0500"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-01-31.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-105.2078729,
+		  			39.6654403
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Red Rocks Park",
+					"state": "CO",
+					"trail": "Trading post trail",
+					"distance": "1.4",
+					"baseElevation": "6280",
+					"gainElevation": "500 ft",
+					"type": "hiking",
+					"info": "http://redrocksonline.com/the-park/recreation/trails",
+					"date": "2016-02-14 00:00:00 -0500"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-02-14.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-105.6421456,
+		  			40.3079751
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Rocky Mountain National Park",
+					"state": "CO",
+					"trail": "The Loch Vale",
+					"distance": "6",
+					"baseElevation": "9240",
+					"gainElevation": "990",
+					"type": "hiking",
+					"info": "https://www.nps.gov/romo/index.htm",
+					"date": "2016-02-21 00:00:00 -0500"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-02-21.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-105.6446734,
+		  			39.8303679
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Idaho Springs",
+					"state": "CO",
+					"trail": "St. Mary’s Glacier",
+					"distance": "1.5",
+					"baseElevation": "10300",
+					"gainElevation": "700",
+					"type": "hiking",
+					"info": "",
+					"date": "2016-03-05 00:00:00 -0500"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-03-05.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-105.429795,
+		  			39.835514
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Golden Gate Canyon State Park",
+					"state": "CO",
+					"trail": "Blue grouse and Mule Deer Trails",
+					"distance": "1.5",
+					"baseElevation": "8200",
+					"gainElevation": "1050",
+					"type": "hiking",
+					"info": "",
+					"date": "2016-03-13 00:00:00 -0500"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-03-13.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-105.5311859,
+		  			40.0824611
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Brainard Lakes Recreation Area",
+					"state": "CO",
+					"trail": "Snowshoe trail",
+					"distance": "6",
+					"baseElevation": "10160",
+					"gainElevation": "200",
+					"type": "snowshoeing",
+					"info": "http://www.fs.usda.gov/recarea/arp/recreation/wintersports/recarea/?recid=28182&actid=91",
+					"date": "2016-03-20 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-03-20.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-104.835454,
+		  			39.632116
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Cherry Creek State Park",
+					"state": "CO",
+					"trail": "Cherry Creek, Pipeline, and Wetland Loop",
+					"distance": "4.5",
+					"baseElevation": "5668",
+					"gainElevation": "0",
+					"type": "Hike",
+					"info": "http://cpw.state.co.us/placestogo/parks/CherryCreek",
+					"date": "2016-03-27 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-03-27.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-105.3830213,
+		  			39.499137
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Staunton State Park",
+					"state": "CO",
+					"trail": "Staunton Ranch to Scout Line to Marmot's Passage",
+					"distance": "6.6",
+					"baseElevation": "8320",
+					"gainElevation": "900",
+					"type": "Hike",
+					"info": "http://cpw.state.co.us/placestogo/parks/Staunton",
+					"date": "2016-03-27 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-04-02.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-105.3445371,
+		  			39.7854174
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Alderfer/Three Sisters Park",
+					"state": "CO",
+					"trail": "Evergreen Mountain Trail to Summit Trail",
+					"distance": "6.2",
+					"baseElevation": "7470",
+					"gainElevation": "1057",
+					"type": "hiking",
+					"info": "http://jeffco.us/open-space/parks/alderfer-three-sisters-park/",
+					"date": "2016-04-10 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-04-10.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-107.18983,
+		  			39.58967
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "White River National Forest",
+					"state": "CO",
+					"trail": "Hanging Lake Trail",
+					"distance": "3",
+					"baseElevation": "6135",
+					"gainElevation": "1365",
+					"type": "hiking",
+					"info": "http://cpw.state.co.us/placestogo/parks/EldoradoCanyon/Pages/Trails.aspx",
+					"date": "2016-04-23 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-04-23.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-105,
+		  			39.745
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "City of Denver Parks",
+					"state": "CO",
+					"trail": "Lakewood Dry Gulch, Sloan's Lake, Cherry Creek",
+					"distance": "1",
+					"baseElevation": "6400",
+					"gainElevation": "200",
+					"type": "cycling",
+					"info": "https://www.strava.com/activities/583438600",
+					"date": "2016-05-21 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-05-21.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-104.743824,
+		  			39.3304303
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Castlewood Canyon",
+					"state": "CO",
+					"trail": "Lake Gulch",
+					"distance": "1",
+					"baseElevation": "6400",
+					"gainElevation": "200",
+					"type": "hiking",
+					"info": "http://cpw.state.co.us/placestogo/parks/CastlewoodCanyon/Pages/Trails.aspx",
+					"date": "2016-05-27 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-05-27.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-105.6399655,
+		  			40.3557352
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Rocky Mountain National Park",
+					"state": "CO",
+					"trail": "Bear Lake and Fern Lake to the Pool",
+					"distance": "4",
+					"baseElevation": "8165",
+					"gainElevation": "0",
+					"type": "hiking",
+					"info": "https://www.nps.gov/romo/planyourvisit/hiking.htm",
+					"date": "2016-05-28 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-05-28.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-105.5125031,
+		  			37.7329954
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Great Sand Dunes National Park and Reservation",
+					"state": "CO",
+					"trail": "Mosca Pass and Monteville Trails",
+					"distance": "5",
+					"baseElevation": "8170",
+					"gainElevation": "1230",
+					"type": "hiking",
+					"info": "https://www.nps.gov/grsa/planyourvisit/hiking.htm",
+					"date": "2016-06-04 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-06-04.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-104.8795854,
+		  			38.8769868
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Garden of the Gods",
+					"state": "CO",
+					"trail": "Bretag/Palmer and Central Garden trail",
+					"distance": "2",
+					"baseElevation": "6400",
+					"gainElevation": "200",
+					"type": "hiking",
+					"info": "http://gardenofgods.com",
+					"date": "2016-06-05 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-06-05.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-105.612018,
+		  			40.3869889
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Rocky Mountain National Park",
+					"state": "CO",
+					"trail": "Deer Mountain",
+					"distance": "6",
+					"baseElevation": "8930",
+					"gainElevation": "1083",
+					"type": "hiking",
+					"info": "https://www.nps.gov/romo/planyourvisit/hikes.htm",
+					"date": "2016-06-11 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-06-11.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-105.893265,
+		  			40.500483
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "State Forest State Park",
+					"state": "CO",
+					"trail": "Lake Agnes",
+					"distance": "5",
+					"baseElevation": "9912",
+					"gainElevation": "761",
+					"type": "hiking",
+					"info": "",
+					"date": "2016-07-02 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-07-02.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-105.893265,
+		  			40.500483
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "State Forest State Park",
+					"state": "CO",
+					"trail": "American Lakes",
+					"distance": "10",
+					"baseElevation": "9912",
+					"gainElevation": "1368",
+					"type": "hiking",
+					"info": "http://cpw.state.co.us/placestogo/parks/StateForest",
+					"date": "2016-07-03 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-07-03.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-105.64581,
+		  			40.31196
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Rocky Mountain National Park",
+					"state": "CO",
+					"trail": "Mills Lake (from Bear Lake trailhead) and Tundra Communities",
+					"distance": "5.8",
+					"baseElevation": "9240",
+					"gainElevation": "780",
+					"type": "hiking",
+					"info": "https://www.nps.gov/romo/planyourvisit/hikes.htm",
+					"date": "2016-07-23 10:30:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-07-23.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-105.7329252,
+		  			40.4121949
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Rocky Mountain National Park",
+					"state": "CO",
+					"trail": "Tundra Communities",
+					"distance": "1",
+					"baseElevation": "12050",
+					"gainElevation": "250",
+					"type": "hiking",
+					"info": "http://rockymountainnationalpark.com/things-do/hiking/Tundra-Communities-Trail",
+					"date": "2016-07-23 14:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-07-23-tundra-communities.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-105.84109,
+		  			40.30738
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Rocky Mountain National Park",
+					"state": "CO",
+					"trail": "Green Mountain trailhead to Big Meadows and Adams Falls",
+					"distance": "4",
+					"baseElevation": "8805",
+					"gainElevation": "740",
+					"type": "hiking",
+					"info": "https://www.nps.gov/romo/planyourvisit/hikes.htm",
+					"date": "2016-07-24 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-07-24.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-106.93416667,
+		  			39.10277778
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Maroon Bells - Snowmass Wilderness Area",
+					"state": "CO",
+					"trail": "Maroon-Snowmass Trail",
+					"distance": "4",
+					"baseElevation": "9580",
+					"gainElevation": "2400",
+					"type": "backpacking",
+					"info": "http://www.fs.usda.gov/Internet/FSE_DOCUMENTS/stelprd3815050.pdf",
+					"date": "2016-08-01 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-08-01.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-106.97638889,
+		  			39.05583333
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Maroon Bells - Snowmass Wilderness Area",
+					"state": "CO",
+					"trail": "West Maroon Pass",
+					"distance": "4.5",
+					"baseElevation": "10800",
+					"gainElevation": "1700",
+					"type": "backpacking",
+					"info": "http://www.fs.usda.gov/Internet/FSE_DOCUMENTS/stelprd3815050.pdf",
+					"date": "2016-08-02 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-08-02.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-107.008767,
+		  			39.038301
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Maroon Bells - Snowmass Wilderness Area",
+					"state": "CO",
+					"trail": "Frigid Air Pass",
+					"distance": "5",
+					"baseElevation": "11600",
+					"gainElevation": "820",
+					"type": "backpacking",
+					"info": "http://www.fs.usda.gov/Internet/FSE_DOCUMENTS/stelprd3815050.pdf",
+					"date": "2016-08-03 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-08-03.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-107.008767,
+		  			39.038301
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Maroon Bells - Snowmass Wilderness Area",
+					"state": "CO",
+					"trail": "Trail Rider Pass",
+					"distance": "6",
+					"baseElevation": "10400",
+					"gainElevation": "2020",
+					"type": "backpacking",
+					"info": "http://www.fs.usda.gov/Internet/FSE_DOCUMENTS/stelprd3815050.pdf",
+					"date": "2016-08-04 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-08-04.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-107.03000000,
+		  			39.11666667
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Maroon Bells - Snowmass Wilderness Area",
+					"state": "CO",
+					"trail": "Buckskin Pass",
+					"distance": "7.5",
+					"baseElevation": "10400",
+					"gainElevation": "2062",
+					"type": "backpacking",
+					"info": "http://www.fs.usda.gov/Internet/FSE_DOCUMENTS/stelprd3815050.pdf",
+					"date": "2016-08-05 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-08-05.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-104.9991117,
+		  			39.6907981
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Bear Creek Lake Park",
+					"state": "CO",
+					"trail": "South Platte River Trail to Bear Creek Trail",
+					"distance": "37.4",
+					"baseElevation": "5223",
+					"gainElevation": "714",
+					"type": "biking",
+					"info": "https://www.strava.com/activities/683130785",
+					"date": "2016-08-20 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-08-20.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-105.2564099,
+		  			39.9393569
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "South Mesa Trailhead",
+					"state": "CO",
+					"trail": "Homestead - Shadow Canyon - Mesa",
+					"distance": "6.2",
+					"baseElevation": "5631",
+					"gainElevation": "2459",
+					"type": "hiking",
+					"info": "https://bouldercolorado.gov/osmp/south-mesa-trailhead",
+					"date": "2016-08-27 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-08-27.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-105.5532404,
+		  			40.211785
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Rocky Mountain National Park",
+					"state": "CO",
+					"trail": "Ouzel Falls",
+					"distance": "7.4",
+					"baseElevation": "8500",
+					"gainElevation": "960",
+					"type": "hiking",
+					"info": "https://www.nps.gov/romo/planyourvisit/hikes.htm#CP_JUMP_2329146",
+					"date": "2016-09-04 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-09-04.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-105.9923798,
+		  			38.5377575
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "City of Salida Parks",
+					"state": "CO",
+					"trail": "Monarch Spur Trail to Poncha Blvd.",
+					"distance": "9.3",
+					"baseElevation": "7051",
+					"gainElevation": "392",
+					"type": "biking",
+					"info": "https://www.strava.com/activities/723833936",
+					"date": "2016-09-24 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-09-24.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-106.1998625,
+		  			38.717521
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Colorado Trail",
+					"state": "CO",
+					"trail": "Chalk Creek Trailhead",
+					"distance": "5",
+					"baseElevation": "8396",
+					"gainElevation": "792",
+					"type": "hiking",
+					"info": "https://www.google.com/maps/dir/38.7030758,-106.1807861/38.717521,-106.199072/@38.705797,-106.2025302,15z/am=t/data=!4m2!4m1!3e2",
+					"date": "2016-09-25 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-09-25.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-105.6399655,
+		  			40.3557352
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Rocky Mountain National Park",
+					"state": "CO",
+					"trail": "Fern Lake trailhead to Cub Lake",
+					"distance": "5.5",
+					"baseElevation": "8151",
+					"gainElevation": "598",
+					"type": "hiking",
+					"info": "https://www.strava.com/activities/732504726",
+					"date": "2016-10-01 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-10-01.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-105.33111,
+		  			39.92944
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Eldorado Canyon State Park",
+					"state": "CO",
+					"trail": "Eldoardo Canyon Trail",
+					"distance": "7",
+					"baseElevation": "6000",
+					"gainElevation": "1000",
+					"type": "hiking",
+					"info": "http://cpw.state.co.us/placestogo/parks/EldoradoCanyon/Pages/Trails.aspx",
+					"date": "2016-10-09 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-10-09.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-105.40518,
+		  			39.835942
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Golden Gate Canyon",
+					"state": "CO",
+					"trail": "Horseshoe - Black Bear trail loop",
+					"distance": "4.5",
+					"baseElevation": "8250",
+					"gainElevation": "850",
+					"type": "hiking",
+					"info": "http://cpw.state.co.us/placestogo/parks/EldoradoCanyon/Pages/Trails.aspx",
+					"date": "2016-11-06 00:00:00 -0400"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-11-06.html"
+		  	}
+		}
+		
+	]
+}

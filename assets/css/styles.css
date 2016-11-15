@@ -1,0 +1,24 @@
+---
+---
+/* Site header */
+.site-title,
+.site-title:visited,
+.site-title:hover {
+  color: $color-primary;
+  text-decoration: none;
+}
+
+/* GitHub and Twitter icons */
+.github,
+.twitter,
+.rss-subscribe {
+  padding: 0 5em;
+}
+/* Map style */
+#map { height: 240px; }
+
+#map.full-page {
+  height: 720px;
+}
+
+/* vim:noet ts=4 sw=4 */
