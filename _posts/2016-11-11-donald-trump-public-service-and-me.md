@@ -1,5 +1,5 @@
 ---
-title: Donald Trump, public service, and Me
+title: Donald Trump, public service, and me
 loc: denver
 tags:
 - public service
