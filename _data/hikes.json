@@ -1505,12 +1505,66 @@
 					"baseElevation": "8250",
 					"gainElevation": "850",
 					"type": "hiking",
-					"info": "http://cpw.state.co.us/placestogo/parks/EldoradoCanyon/Pages/Trails.aspx",
+					"info": "http://cpw.state.co.us/placestogo/parks/GoldenGateCanyon/Pages/MapsDirections.aspx",
 					"date": "2016-11-06 00:00:00 -0400"
 		  		}
 		  	},
 		  	"self": {
 		  		"url": "/hikes/2016-11-06.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-105.5532404,
+		  			40.211785
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Rocky Mountain National Park",
+					"state": "CO",
+					"trail": "Ouzel Falls",
+					"distance": "5.4",
+					"baseElevation": "8500",
+					"gainElevation": "960",
+					"type": "hiking",
+					"info": "https://www.nps.gov/romo/planyourvisit/hikes.htm#CP_JUMP_2329146",
+					"date": "2016-11-12 00:00:00 -0500"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-11-12.html"
+		  	}
+		},
+		
+		{
+		  	"type": "Feature",
+		  	"geometry": {
+		  		"type": "Point",
+		  		"coordinates": [
+		  			-105.614814,
+		  			40.320362
+		  		]
+		  	},
+		  	"properties": {
+		  		"activity": {
+					"park": "Rocky Mountain National Park",
+					"state": "CO",
+					"trail": "Bierstadt Lake",
+					"distance": "4",
+					"baseElevation": "8850",
+					"gainElevation": "566",
+					"type": "hiking",
+					"info": "https://www.nps.gov/romo/planyourvisit/list_hiking_trails.htm",
+					"date": "2016-11-13 00:00:00 -0500"
+		  		}
+		  	},
+		  	"self": {
+		  		"url": "/hikes/2016-11-13.html"
 		  	}
 		}
 		
