@@ -20,7 +20,7 @@ I've worked remotely and from offices. I like both! More than liking the office 
 
 I'm mission driven. My [resume]({{site.baseurl}}/resume/) is peppered with universities, governments, and other organizations that put purpose and people before profit. The best jobs I've had are the ones where money is a necessity that means nothing if the organization can't deliver it's public commitments. No matter the organization, proactive communication, working transparently, and starting with the people you're serving builds trust and ultimately results in better products.
 
-I believe in open source. I find working in the open [joyful]({{site.baseurl}}/2015/03/04/the-open-source-supply-chain/) but also see it as key to building trust in software and institutions. In graduate school I released some of my [papers as open source documents](https://github.com/gboone/Controversy-at-the-Patent-Office), this website is open source, and when I launched my college radio station's website it was on open source software. We deserve to be able to know how systems work, and we have a right to inspect and audit those systems even if we don't want to.
+I believe in open source. I find working in the open [joyful]({{site.baseurl}}/2015/03/04/the-open-source-supply-chain/) but also see it as key to building trust in software and institutions. In graduate school I released some of my [papers as open source documents](https://github.com/gboone/Controversy-at-the-Patent-Office), this website is open source, and when I launched my college radio station's website it was on open source software. We deserve to be able to know how systems work, and we have a right to inspect and audit those systems.
 
 I believe the people you're trying to help know what they need and are ready to tell you. Whether they're users of a piece of software or students trying to better understand the world, they know their situation better than anybody and that's where research should start. Meet your users where they are, speak plainly, and put their needs before your own: This is a recipe for good products and good customer service.
 
@@ -30,17 +30,17 @@ Working in technology means you're either making or supporting makers. After sev
 
 I listen to a lot of podcasts, but I make sure to listen to these. (Not in any particular order.)
 
-### [StartUp](https://gimletmedia.com/show/startup/) (Gimlet)
+### [Good Muslim/Bad Muslim](https://www.goodmuslimbadmuslim.com) (Independent)
 
-What: A show about companies getting started, or not, in the 21st century.
+What: Comedians Taz Ahmed and Zahra Noorbakhsh discuss "the good and the bad of the female Muslim experience."
 
-Why: It's the most transparent and honest look at how startups actually work, even if nobody is buying anything.
+Why: I have very little exposure to the lives of Muslims in America. Taz and Zahra are not only hilarious comedians but also offer sharp criticism of the world around us, and insight into the lived experience of a religious minority in the United States.
 
-### [Reply All](https://gimletmedia.com/show/reply-all/) (Gimlet)
+### [Call Your Girlfriend](https://www.callyourgirlfriend.com/about) (Acast)
 
-What: A show about the internet and society.
+What: A podcast for long distance besties.
 
-Why: It is an unpretentious look at the internet, from how technologies work to the strange problems they create for ordinary humans.
+Why: Aminatou Sow and Ann Friedman discuss pop culture, politics, and feminisim. I like it because it gives me a glimpse into the workaday lives of people who different from me, and fresh perspective on current events.
 
 ### [Another Round](https://www.buzzfeed.com/anotherround) (Buzzfeed)
 
@@ -52,10 +52,10 @@ Why: Heben and Tracy do genuine interviews that bring out the humanity and lived
 
 What: Comedian Marc Maron interviews other artists, and sometimes even politicians.
 
-Why: We need more honest conversations of mental health in the media. Maron's casual interview format always seems to find it's way to a how his guests experience and control depression, additction, and other mental health conditions.
+Why: We need more honest conversations of mental health in the media. Maron's casual interview format always seems to find it's way to a how his guests experience and control depression, addiction, and other mental health conditions.
 
 ### [U Talkin U2 2 Me](http://www.earwolf.com/show/u-talkin-u2-to-me/) (Earwolf)
 
 What: Adam Scott and Scott Aukerman talk about U2 — their favorite band on the planet — whenever they drop an album (or really whenever they feel like it).
 
-Why: I like U2 and sometimes need to remind myself how awesome they are. Scott and Scott ace it on making U2 funny while honoring their music.
+Why: I like U2 and sometimes need to remind myself how awesome they are. This podcast is a hilarious look at U2's catalog, one album, show, or interview at a time.

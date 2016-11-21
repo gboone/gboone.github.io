@@ -1,6 +1,6 @@
-<div class="usa-width-{{include.class}}">
+<div class="col-md-8">
   <h3 class="post-link usa-heading" ><a href="{{ post.url | prepend: site.baseurl }}">{{ post.title }}</a></h2>
   <time class="post-date" datetime="{{ post.date }}">{{ post.date | date: "%b %-d, %Y" }}</time>
   <aside class="post-tags">Tagged:{% for tag in post.tags %} {{tag}} / {% endfor %}</aside>
-  <p></p>
+  <p>{{ post.content | strip_html | truncatewords: 50 }}</p>
 </div>

@@ -1,10 +1,11 @@
 ---
 ---
+@import 'style.scss';
+
 /* Site header */
 .site-title,
 .site-title:visited,
 .site-title:hover {
-  color: $color-primary;
   text-decoration: none;
 }
 
@@ -20,5 +21,4 @@
 #map.full-page {
   height: 720px;
 }
-
 /* vim:noet ts=4 sw=4 */

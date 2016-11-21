@@ -3,15 +3,16 @@
   {% if page.collection == "posts" %}
   {% include post-footer.html %}
   {% endif %}
-  <section class="usa-grid">
-    <p class="rss-subscribe usa-width-one-fourth"><a href="{{ "/feed.xml" | prepend: site.baseurl }}">{% include rss-svg.html %}</a></p>
-    <p class="github usa-width-one-fourth"><a href="https://github.com/{{site.github}}">
+  <section class="row">
+    <p class="rss-subscribe col-md-2"><a href="{{ "/feed.xml" | prepend: site.baseurl }}">{% include rss-svg.html %}</a></p>
+    <p class="github col-md-2"><a href="https://github.com/{{site.github}}">
       {% include github-svg.html %}
     </a></p>
-    <p class="twitter usa-width-one-fourth"><a href="https://twitter.com/{{ site.twitter }}">
+    <p class="twitter col-md-2"><a href="https://twitter.com/{{ site.twitter }}">
         {% include twitter-svg.html %}
     </a></p>
-    <div class="usa-width-one-fourth"><a rel="license" href="https://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">{{ site.title }} — {{ site.description }}</span> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://greg.harmsboone.org/about/" property="cc:attributionName" rel="cc:attributionURL">Greg Boone</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://harmsboone.org" rel="dct:source">https://harmsboone.org</a>.</div>
+    <div class="col-md-4"><a rel="license" href="https://creativecommons.org/licenses/by/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by/4.0/88x31.png" /></a><br /><span xmlns:dct="http://purl.org/dc/terms/" href="http://purl.org/dc/dcmitype/Text" property="dct:title" rel="dct:type">{{ site.title }} — {{ site.description }}</span> by <a xmlns:cc="https://creativecommons.org/ns#" href="https://greg.harmsboone.org/about/" property="cc:attributionName" rel="cc:attributionURL">Greg Boone</a> is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by/4.0/">Creative Commons Attribution 4.0 International License</a>.<br />Based on a work at <a xmlns:dct="http://purl.org/dc/terms/" href="https://harmsboone.org" rel="dct:source">https://harmsboone.org</a>.</div>
+    <span="col-md-2"></span>
   </section>
     <script type="text/javascript" src="/assets/js/underscore-min.js"></script>
     <script type="text/javascript" src="/assets/js/leaflet.js"></script>
