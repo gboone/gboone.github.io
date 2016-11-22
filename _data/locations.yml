@@ -82,3 +82,7 @@ denver:
   lat: 39.745
   lng: -104.99
   name: "Denver, CO"
+leadville:
+  lat: 39.2508229
+  lng: -106.2925238
+  name: "Leadville, CO"
