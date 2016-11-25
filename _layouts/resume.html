@@ -4,14 +4,14 @@
 <html lang="en">
   {% include head.html %}
     <body>
-      <div class="post usa-grid">
+      <div class="post row">
 
-        <header class="post-header usa-width-one-whole">
+        <header class="post-header col-md-12">
           <h1 class="usa-header">{{ site.data.resume.basics.name }}</h1>
           <p>{{  site.data.resume.basics.summary }} • {{ site.data.resume.basics.location.city }}, {{ site.data.resume.basics.location.state }}</p>
         </header>
 
-        <article class="post-content usa-width-one-whole">
+        <article class="post-content col-md-12">
         {{ content }}
         </article>
 
