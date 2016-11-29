@@ -1,9 +1,11 @@
-<div class="usa-grid resume-education-header">
-  <header class="usa-width-one-whole"><h2 class="usa-header">Education</h2></header>
-</div>{% if page.permalink contains "resume" %}{% assign schools = site.data.resume.education | where:"degree","true" %}{% else %}{% assign schools = site.data.resume.education %}{% endif %}{% for school in schools %}{% assign modulo = forloop.index | modulo:2 %}
-{% if modulo == 1 %}<div class="usa-grid resume-education">{% endif %}
-  <div class="usa-width-one-half resume-school">
+<div class="row resume-edu-header">
+  <header class="col-md-12">
+    <h2 class="usa-header">Education</h2>
+  </header>
+</div>{% assign schools = site.data.resume.education %}{% for school in schools %}{% assign modulo = forloop.index | modulo:2 %}
+{% if modulo == 1 %}<div class="row resume-education">{% endif %}
+  <div class="col-md-12 resume-school">
     <h3 class="usa-header"><a href="{{school.website}}">{{ school.institution }}</a>, {{ school.studyType }}</h3>
-    <p><em>{{ school.area }}</em><br>
+    <p><em>{% for area in school.area %}{{ area }}{% unless forloop.last%}, {% endunless %}{% endfor %}</em><br>
     <em>{{ school.startDate | date: "%b %Y" }} – {{ school.endDate | date:"%b %Y"}}</em></p>
   </div>{% if modulo == 0 %}</div>{% endif %}{% endfor %}

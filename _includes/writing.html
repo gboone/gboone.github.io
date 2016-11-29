@@ -1,6 +1,8 @@
-<div class="usa-grid resume-writing">
-  <h2 class="usa-header">Writing and publications</h2>
-  <div class="usa-width-one-whole">{% assign writing = site.data.resume.publications %}
+<div class="row resume-writing">
+  <h2 class="usa-header col-md-12">Writing and publications</h2>
+</div>
+<div class="row">
+  <div class="col-md-12">{% assign writing = site.data.resume.publications %}
   {% for pub in writing %}
   <p>"{{ pub.name }}." {% if pub.title %}<em>{{ pub.title }}</em>.{% endif %} {{ pub.publisher }}. {{ pub.releaseDate | date: "%B %d, %Y"}} <a href="{{pub.website}}">{{pub.website}}</a></p>
   {% endfor %}

@@ -4,18 +4,18 @@
 <html lang="en">
   {% include head.html %}
     <body>
-      <div class="post row">
+      <div class="post container">
 
-        <header class="post-header col-md-12">
-          <h1 class="usa-header">{{ site.data.resume.basics.name }}</h1>
-          <p>{{  site.data.resume.basics.summary }} • {{ site.data.resume.basics.location.city }}, {{ site.data.resume.basics.location.state }}</p>
+        <header class="post-header row">
+          <h1 class="usa-header col-md-12">{{ site.data.resume.basics.name }}</h1>
+          <p>{{  site.data.resume.basics.summary }}</p>
+          <p>{{ site.data.resume.basics.location.city }}, {{ site.data.resume.basics.location.state }}</p>
         </header>
 
-        <article class="post-content col-md-12">
+        <article class="post-content">
         {{ content }}
         </article>
-
+        {% include footer.html %}
       </div>
-      {% include footer.html %}
     </body>
 </html>

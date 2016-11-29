@@ -2,16 +2,18 @@
 
 @media print {
   h1 {
-    font-size: 16pt;
+    font-size: 18pt;
   }
   h2 {
     font-size: 14pt;
+    border-bottom: solid 1px black;
   }
   h3,
   h4,
   h5,
   h6 {
     font-size: 12pt;
+    font-weight: bold;
     margin-top: 0;
     margin-bottom: 0;
   }
@@ -21,34 +23,52 @@
   h4,
   h5,
   h6 {
-    margin-top: 0
+    margin-top: 0;
+    font-family: sans-serif;
   }
-  .usa-grid {
+  .container {
+    margin: 0.5in;
+  }
+  .container > header {
+    margin-bottom: 0.125in;
+  }
+  .container > header > h1 {
+    width: 50%;
+    float: left
+  }
+  .row {
+    padding: 0;
+  }
+  .col-md-1,
+  .col-md-2,
+  .col-md-3,
+  .col-md-4,
+  .col-md-5,
+  .col-md-6,
+  .col-md-7,
+  .col-md-8,
+  .col-md-9,
+  .col-md-10,
+  .col-md-11,
+  .col-md-12 {
     padding: 0;
   }
   p,
+  ul,
   ul > li,
   span {
     font-size: 11pt;
-  }
-  ul {
-    margin-bottom: 0;
+    margin: 0
   }
   .resume-work-header,
   .resume-education-header,
   .resume-writing {
-    margin: 1.5em 0 1em;
   }
   .resume-school,
   .resume-job {
-    margin: 1em 0 0;
+    margin-bottom: 0.25in;
   }
   .site-footer {
     display: none;
-  }
-  .usa-width-one-third {
-    float: left;
-    clear: none;
-    width: 33%
   }
 }

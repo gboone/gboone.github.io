@@ -413,3 +413,8 @@ a:visited { color: #205caa; }
 #map.full-page {
   height: 720px;
 }
+
+/* Print styles */
+@media print {
+  body { background:black; color:white; margin:0; }
+}
