@@ -65,9 +65,23 @@
       "cv-only": true
     },
     {
+      "company": "Georgetown University Communication Culture and Technology program",
+      "position": "Teaching Assistant",
+      "website": "https://cct.georgetown.edu",
+      "location": "Washington, DC",
+      "startDate": "2013-01-01",
+      "endDate": "2013-05-31",
+      "summary": "Led a weekly discussion group and prepared course materials for a Science and Technology Studies survey",
+      "highlights": [
+        "Managed classroom and led discussion of a 12 student section. Helped students plan final projects unpacking the sociotechnical aspects of emerging technology",
+      ],
+      "cv-only": false
+    },
+    {
       "company": "Georgetown Medical School",
       "position": "Research Assistant",
       "location": "Washington, DC and Brentwood, MD",
+      "website": "https://som.georgetown.edu",
       "startDate":"2012-08-01",
       "endDate": "2013-05-01",
       "summary": "A project co-led by medical and graduate school faculty to better teach doctor-patient communication.",
