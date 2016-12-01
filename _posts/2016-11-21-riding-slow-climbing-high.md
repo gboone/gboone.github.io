@@ -2,9 +2,9 @@
 title: Riding slow, climbing high
 loc: leadville
 tags:
-- public service
 - biking
-- Trump's America
+- colorado
+- innovation
 ---
 I've been riding my bike more slowly lately.
 
