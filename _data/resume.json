@@ -32,7 +32,8 @@
       "endDate": "present",
       "summary": "One of five on a public service startup's strategic outreach team.",
       "highlights": [
-        "Led an ethnographic research project to understand how a medium size government agency works, and the breadth of its mission",
+        "Led an ethnographic research project to understand how 18F's parent agency works, and the breadth of its mission",
+        "Shaped a customer-centric communication and marketing strategy",
         "Organized events to introduce our organization to key stakeholders across the federal government.",
         "Led the redesign team for the agency's website."
       ],
@@ -41,14 +42,15 @@
     {
       "company": "Excella Consulting",
       "location": "Arlington, VA",
-      "position": "Web Developer and Account Lead",
+      "position": "Web Developer and Account Lead at Consumer Financial Protection Bureau",
       "website": "http://excella.com",
       "startDate": "2013-01-20",
       "endDate": "2014-09-07",
-      "summary": "Lead WordPress developer at the Consumer Financial Protection Bureau",
+      "summary": "Lead WordPress developer",
       "highlights": [
-        "Maintained consumerfinance.gov, and supporting web applications",
-        "Managed a small team of software engineers amd made sure they had adequate support"
+        "Supported the agency's mission through maintenance of consumerfinance.gov, and related web applications.",
+        "Contributed to and created open source software projects.",
+        "Managed and supervised a small team of software engineers and served as a technical lead for account management."
       ],
       "cv-only": false
     },
@@ -75,8 +77,8 @@
       "summary": "Led a weekly discussion group and prepared course materials for a Science and Technology Studies survey",
       "highlights": [
         "Managed classroom and led discussion of a 12 student section.",
-        "Helped students plan final projects unpacking the sociotechnical aspects of emerging technology",
-        "Assisted professors and other TAs with curriculum development"
+        "Helped students plan final projects unpacking the sociotechnical context of emerging technologies.",
+        "Assisted professors and other TAs with curriculum development."
       ],
       "cv-only": false
     },
@@ -101,7 +103,9 @@
       "endDate" : "2011-06-30",
       "summary" : "Used new classroom technologies with English language learners.",
       "highlights": [
-        "Launched and led the school's first English language newspaper while teaching high school and first through third grade at a local elementary school"
+        "With limited classroom technology, taught information literacy and engaged students in digital creative projects.",
+        "Taught ninth through 12th graders in a public high school bilingual program.",
+        "Taught first through third grade in a public elementary school bilingual program."
       ],
       "cv-only": false
     },
@@ -113,7 +117,7 @@
       "endDate": "2010-07-03",
       "summary": "Worked in a fully immersive language education environment",
       "highlights": [
-        "Taught grades 1-5 subjects incl. Grammar, Math, Science"
+        "Taught grades 1-5 subjects grammar, math, science."
       ],
       "cv-only": false
     },
@@ -123,6 +127,7 @@
       "location": "Zhuhai, China",
       "startDate": "2008-09-01",
       "endDate": "2009-01-10",
+      "summary": "Kept a weekly podcast chronicling my experience abroad.",
       "cv-only": true
     },
     {
@@ -131,7 +136,7 @@
       "location": "St. Peter, MN; Zhuhai, China",
       "startDate": "2007-10-01",
       "endDate": "2009-06-01",
-      "summary": "Offered commentary on current events on campus",
+      "summary": "Offered commentary on current events on campus.",
       "cv-only": true
     },
     {
