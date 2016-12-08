@@ -1,11 +1,8 @@
 {% assign skills = site.data.resume.skills %}
-<div class="row">
-  <h2 class="usa-header">Skills</h2>
+<div class="row resume-skills">
+  <h2 class="header">Skills</h2>
     {% for skill in skills %}
-    {% if skills.size == 4 %}<div class="col-md-12">{% elsif skills.size == 3 %}
-      <div class="col-md-12">{% elsif skills.size == 2 %}
-      <div class="col-md-12">{% else%}
-      <div class="col-md-12">{% endif %}
+    <div class="col-md-12 resume-skill">
       <h3>{{ skill.name }}{% if skill.level %}, {{ skill.level }}{% endif %}</h3>
       <p>{% for keyword in skill.keywords %}{{ keyword }}{% unless forloop.last %},{% endunless %}
       {% endfor %}</p>

@@ -7,9 +7,13 @@
       <div class="post container">
 
         <header class="post-header row">
-          <h1 class="usa-header col-md-12">{{ site.data.resume.basics.name }}</h1>
-          <p>{{  site.data.resume.basics.summary }}</p>
-          <p>{{ site.data.resume.basics.location.city }}, {{ site.data.resume.basics.location.state }}</p>
+          <div class="col-md-12">
+            <h1 class="usa-header">{{ site.data.resume.basics.name }}</h1>
+          </div>
+          <div class="col-md-12">
+            <p>{{  site.data.resume.basics.summary }}</p>
+            <p>{{ site.data.resume.basics.location.city }}, {{ site.data.resume.basics.location.state }}</p>
+          </div>
         </header>
 
         <article class="post-content">

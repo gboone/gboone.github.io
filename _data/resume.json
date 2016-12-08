@@ -3,7 +3,7 @@
     "name": "Greg Boone",
     "email": "greg@harmsboone.org",
     "phone": "(612) 849-7505",
-    "summary": "Mission driven, user centered, open source",
+    "summary": "Public servant driven to building governments that serve all",
     "location": {
       "city": "Denver",
       "countryCode": "US",
@@ -32,7 +32,7 @@
       "endDate": "present",
       "summary": "One of five on a public service startup's strategic outreach team.",
       "highlights": [
-        "Researched to understand the breadth and depth of work done by a 19,000 employee agency.",
+        "Led an ethnographic research project to understand how a medium size government agency works, and the breadth of its mission",
         "Organized events to introduce our organization to key stakeholders across the federal government.",
         "Led the redesign team for the agency's website."
       ],
@@ -47,7 +47,8 @@
       "endDate": "2014-09-07",
       "summary": "Lead WordPress developer at the Consumer Financial Protection Bureau",
       "highlights": [
-        "Maintained consumerfinance.gov, and supporting web applications"
+        "Maintained consumerfinance.gov, and supporting web applications",
+        "Managed a small team of software engineers amd made sure they had adequate support"
       ],
       "cv-only": false
     },
@@ -60,7 +61,7 @@
       "endDate": "2013-05-01",
       "summary": "Managed online publishing, podcasts, and managed content",
       "highlights": [
-        "Launched the journal's podcast and managed its web presence."
+        "Launched the journal's podcast and managed its web presence including backend security and maintenance."
       ],
       "cv-only": true
     },
@@ -73,7 +74,9 @@
       "endDate": "2013-05-31",
       "summary": "Led a weekly discussion group and prepared course materials for a Science and Technology Studies survey",
       "highlights": [
-        "Managed classroom and led discussion of a 12 student section. Helped students plan final projects unpacking the sociotechnical aspects of emerging technology",
+        "Managed classroom and led discussion of a 12 student section.",
+        "Helped students plan final projects unpacking the sociotechnical aspects of emerging technology",
+        "Assisted professors and other TAs with curriculum development"
       ],
       "cv-only": false
     },
@@ -134,6 +137,7 @@
     {
       "company": "KGSM Radio",
       "position": "General Manager and Program Director",
+      "location": "St. Peter, MN",
       "startDate": "2006-09-01",
       "endDate": "2008-09-01",
       "summary": "Built a web publishing platform and launched several podcasts with college radio hosts.",

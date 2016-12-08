@@ -1,11 +1,15 @@
 @import main.css;
 
 @media print {
+  @page {
+    size: letter;
+    margin: 0.5in;
+  }
   h1 {
-    font-size: 18pt;
+    font-size: 28pt;
   }
   h2 {
-    font-size: 14pt;
+    font-size: 24pt;
     border-bottom: solid 1px black;
   }
   h3,
@@ -27,7 +31,8 @@
     font-family: sans-serif;
   }
   .container {
-    margin: 0.5in;
+    margin: 0;
+    line-height: 1.5;
   }
   .container > header {
     margin-bottom: 0.125in;
@@ -65,8 +70,10 @@
   .resume-writing {
   }
   .resume-school,
-  .resume-job {
+  .resume-job,
+  .resume-skill {
     margin-bottom: 0.25in;
+    page-break-inside: avoid;
   }
   .site-footer {
     display: none;
