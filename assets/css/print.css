@@ -65,9 +65,12 @@
     font-size: 11pt;
     margin: 0
   }
-  .resume-work-header,
-  .resume-education-header,
-  .resume-writing {
+  .resume-writing-entry p,
+  .resume-presentations-entry p {
+    margin: 0 0 1rem;
+  }
+  .resume-writing-entry p a::after {
+    content: "";
   }
   .resume-school,
   .resume-job,

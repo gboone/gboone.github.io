@@ -8,10 +8,10 @@
 
         <header class="post-header row">
           <div class="col-md-12">
-            <h1 class="usa-header">{{ site.data.resume.basics.name }}</h1>
+            <h1 class="header">{% if page.permalink == "/cv/" %} Curriculum Vitæ{% endif%}<br>{{ site.data.resume.basics.name }}</h1>
           </div>
           <div class="col-md-12">
-            <p>{{  site.data.resume.basics.summary }}</p>
+            {% if page.permalink == "/resume/" %}<p>{{  site.data.resume.basics.summary }}</p>{% endif %}
             <p>{{ site.data.resume.basics.location.city }}, {{ site.data.resume.basics.location.state }}</p>
           </div>
         </header>

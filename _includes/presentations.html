@@ -1,7 +1,7 @@
 {% assign presentations = site.data.resume.presentations %}
-<div class="usa-grid">
-  <h2 class="usa-header">Presentations</h2>{% for p in presentations %}
-  <div class="usa-width-one-whole">
+<div class="row resume-presentations">
+  <h2 class="header">Presentations</h2>{% for p in presentations %}
+  <div class="col-md-12 resume-presentations-entry">
     <p><em>"{{ p.name }}" {{ p.event}}</em>, {{ p.date | date: "%B %d, %Y"}}, {{p.location.venue}}, {{ p.location.city }}, {{ p.state }}</p>
   </div>
   {% endfor %}

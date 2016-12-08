@@ -195,27 +195,6 @@
   ],
   "publications": [
     {
-      "name": "Riding slow, climbing high",
-      "publisher": "Greg Boone",
-      "releaseDate": "2016-11-21",
-      "website": "https://greg.harmsboone.org/2016/11/21/riding-slow-climbing-high/",
-      "type": "blog"
-    },
-    {
-      "name": "Donald Trump, public service, and me",
-      "publisher": "Greg Boone",
-      "releaseDate": "2016-11-11",
-      "website": "https://greg.harmsboone.org/2016/11/11/donald-trump-public-service-and-me/",
-      "type": "blog"
-    },
-    {
-      "name": "Just a ten letter word",
-      "publisher": "Greg Boone",
-      "releaseDate": "2016-10-16",
-      "website": "https://greg.harmsboone.org/2016/10/16/just-a-ten-letter-word/",
-      "type": "blog"
-    },
-    {
       "name": "Iterative workplace design at the Denver Federal Center",
       "publisher": "18F, U.S. General Services Administration",
       "releaseDate": "2016-10-14",
@@ -227,20 +206,6 @@
       "publisher": "18F, U.S. General Services Administration",
       "releaseDate": "2016-09-20",
       "website": "https://18f.gsa.gov/2016/09/20/mississippi-agile-modular-techniques-child-welfare-system/",
-      "type": "blog"
-    },
-    {
-      "name": "The personal is always political",
-      "publisher": "Greg Boone",
-      "releaseDate": "2016-09-09",
-      "website": "https://greg.harmsboone.org/2016/09/09/personal-always-political/",
-      "type": "blog"
-    },
-    {
-      "name": "On whiteness in tech",
-      "pubisher": "Greg Boone",
-      "releaseDate": "2016-07-16",
-      "website": "https://greg.harmsboone.org/2016/07/16/on-whiteness-tech/",
       "type": "blog"
     },
     {
@@ -300,13 +265,6 @@
       "type": "blog"
     },
     {
-      "name": "Service design in the schools",
-      "publisher": "Greg Boone",
-      "releaseDate": "2015-10-27",
-      "website": "https://greg.harmsboone.org/2015/10/27/service-design-in-the-schools/",
-      "type": "blog"
-    },
-    {
       "name": "Communicart tool will streamline purchase card process",
       "publisher": "18F, U.S. General Services Administration",
       "releaseDate": "2015-08-06",
@@ -357,34 +315,6 @@
       "type": "Reading"
     },
     {
-      "name": "Tussel over Technology: Controversy & the Patent Act",
-      "publisher": "Greg Boone",
-      "releaseDate": "2012-12-30",
-      "website": "https://greg.harmsboone.org/blog/2012/12/30/tussle-over-technology-controversy-the-patent-act/",
-      "type": "blog"
-    },
-    {
-      "name": "The soft power of online diplomacy",
-      "publisher": "Greg Boone",
-      "releaseDate": "2011-12-13",
-      "website": "https://greg.harmsboone.org/blog/2011/12/13/the-soft-power-of-online-diplomacy/",
-      "type": "blog"
-    },
-    {
-      "name": "Wherein a Northfield game inspires a lesson plan",
-      "publisher": "Greg Boone",
-      "releaseDate": "2011-05-26",
-      "website": "https://greg.harmsboone.org/blog/2011/05/26/wherein-a-northfield-game-inspired-a-lesson-plan/",
-      "type": "blog"
-    },
-    {
-      "name": "Classroom 2.0: The Wiki Experiment",
-      "publisher": "Greg Boone",
-      "releaseDate": "2011-04-13",
-      "website": "https://harmsboone.org/2011/04/13/classroom-2-0-the-wiki-experiment/",
-      "type": "blog"
-    },
-    {
       "name": "Chaebol vs. the Microbrewer",
       "publisher": "International Underground",
       "releaseDate": "2010-06-02",
@@ -400,6 +330,16 @@
     }
   ],
   "presentations": [
+    {
+      "name": "Building Trust Through Radical Transparency",
+      "event": "Refresh Denver",
+      "date": "2016-06-08",
+      "location": {
+        "city": "Denver",
+        "state": "CO",
+        "venue": "Galvanize Golden Triangle"
+        }
+    },
     {
       "name": "Data Jam",
       "event": "gnovicon: Unlocking Open Data",
@@ -448,10 +388,10 @@
       "name": "Research and design",
       "level": "Mid-level",
       "keywords": [
-        "Content design",
-        "User-centered design",
-        "Participant observation",
-        "Enthography"
+        "content design",
+        "user-centered design",
+        "participant observation",
+        "enthography"
       ]
     },
     {
