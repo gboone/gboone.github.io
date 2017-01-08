@@ -4,7 +4,7 @@ tags:
 - reading
 - new perspectives
 - media consumption
-loc: Denver
+loc: denver
 ---
 In 2016, I didn't read any books by white men. I already knew so many, that I decided to press pause on them for the year. I looked at the books I'd read in the last few years since grad school and ones I'd put on the ever-growing reading list, and realized that many were white, mostly Christian or Athiest, men. I'm a white man who grew up Christian and drifted toward Atheism as I grew older, why only read books that reinforce that point of view. Perhaps, I thought, there was a lot to learn from people who didn't look like, sound, or grow up the way I did.
 
