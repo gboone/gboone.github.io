@@ -1,8 +1,9 @@
 ---
-title: A letter to Senator Cory Gardner regarding Betsy DeVos: Nominee for Secretary of Education
+title: "A letter to Senator Cory Gardner regarding Betsy DeVos: Nominee for Secretary of Education"
 tags:
 - student loans
 - donald trump
+loc: denver
 ---
 Sen. Gardner,
 I'm writing today to share a few thoughts on the nomination of Betsy DeVos for the post of Secretary of Education. After watching segments of her nomination hearing and reading her responses on a variety of issues I am convinced she is uniquely unqualified to fill this position. While she demonstrated a general lack of knowledge about the federal laws, including the Individuals with Disabilities Education Act (IDEA), and a flippancy toward existing whistleblower protection laws that ensure federal dollars are not being misused, her answers about student loans and higher education financial assistance were particularly troubling to me.
