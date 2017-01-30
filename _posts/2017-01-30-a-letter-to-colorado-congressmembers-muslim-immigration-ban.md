@@ -1,5 +1,6 @@
 ---
 title: A letter to the Colorado Congressional delegation regarding the Muslim immigration ban
+loc: denver
 ---
 Below is a letter sent by email to Colorado's Senators Bennet and Gardner and Congresswoman DeGette on January 30, 2017.
 
