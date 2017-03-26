@@ -3,10 +3,10 @@
   {% include head.html %}
     <body>
         <div class="container">
-          {% include nav.html %}
+          {% unless page.header == "disabled" %}{% include nav.html %}{% endunless %}
           <div class="container">
             {{ content }}
-          {% include footer.html %}
+          {% unless page.footer == "disabled" %}{% include footer.html %}{% endunless %}
         </div>
       </div>
     </body>

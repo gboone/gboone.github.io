@@ -28,12 +28,33 @@ gems:
   - jekyll-compose
   - jekyll-paginate
 
+collections:
+  assignments:
+    output: true
+    permalink: /assignments/:name/
+  teaching:
+    output: true
+    permalink: /teaching/:path/
 defaults:
   -
     scope:
       type: posts
     values:
       layout: post
+  -
+    scope:
+      type: teaching
+    values:
+      layout: page
+      header: disabled
+      footer: disabled
+  -
+    scope:
+      type: assignments
+    values:
+      layout: page
+      header: disabled
+      footer: disabled
 exclude:
 - deploy
 - Gemfile

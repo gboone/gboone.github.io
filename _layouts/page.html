@@ -3,12 +3,16 @@ layout: default
 ---
 <div class="post row">
 
-  <header class="post-header col-md-12">
-    <h1>{{ page.title }}</h1>
+  <header class="post-header row">
+    <div class="col-md-2"></div>
+    <h1 class="col-md-8">{{ page.title }}</h1>
+    <div class="col-md-2"></div>
   </header>
 
   <article class="post-content row">
-    <div class="col-md-12">{{ content }}</div>
+    <div class="col-md-2"></div>
+    <div class="col-md-8">{{ content }}</div>
+    <div class="col-md-2"></div>
   </article>
 
 </div>
