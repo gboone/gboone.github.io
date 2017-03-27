@@ -43,7 +43,7 @@ Final project: 40%
 
 ## Schedule
 
-### March 27
+### [March 27]({{site.baseurl}}/teaching/engr-3970/class-0/)
 
 #### Topic: Introduction to the course and me.
 
@@ -58,6 +58,8 @@ Goals of the day:
 Optional reading
 * How	to	Read	(and	Understand)	a	Social	Science	Journal	Article (especially if you've never taken a course like this before.) http://www.icpsr.umich.edu/files/instructors/How_to_Read_a_Journal_Article.pdf
 
+[Notes for this lesson.]({{site.baseurl}}/teaching/engr-3970/class-0/)
+
 ### March 29
 
 #### Topic: Introduction to science and technology studies
@@ -65,6 +67,7 @@ Optional reading
 #### Assignments
 * **Read:** Sismondo, Sergio. _An Introduction to Science and Technology Studies._ Chapter 1.
 
+[Notes for this lesson.]({{site.baseurl}}/teaching/engr-3970/class-1/)
 ### April 3
 
 #### Topic: Innovation is shaped by the people with the technical expertise to design new inventions, and the people who use them.

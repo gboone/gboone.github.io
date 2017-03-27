@@ -93,7 +93,9 @@ A final group project will be 40% of your final grade. I'll ask you and your gro
 
 ---
 
-## Next week
+## Next class
 
 **Read:** Sismondo, Sergio. _An Introduction to Science and Technology Studies._ Chapter 1.
 **Do:** Introduction essay assignment
+
+---
