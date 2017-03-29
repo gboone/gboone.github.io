@@ -128,7 +128,7 @@ Greek root of the word "technology," means art, craft, craftsmanship
 
 ---
 
-### o
+### Lewis Mumford
 
 * Humans act in the context of the technology available to them
 * Polytechnics: small machines for achieving routine goals

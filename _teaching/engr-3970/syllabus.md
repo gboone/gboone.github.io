@@ -23,7 +23,9 @@ Email: boone.greg+3970@gmail.com (DU email once I have one.)
 This course presents an overview of fundamentals of understanding entrepreneurship and entrepreneurial characteristics; the focus is on aspects of engineering entrepreneurship, technology-based innovation and new product development. Topics to be covered: learning an industry; recognizing and creating opportunities; new product development process, phases and cycle, risks and benefits; 'testing' of an engineering-focused business concept; marketing, organization plan strategies and financing new start-ups. Special attention is given to technological innovation, considering both incremental or routine innovation and more radical or revolutionary changes in products and processes. Prerequisite: ENGR 3610 or permission of the instructor.
 
 ## Goals
+
 By the end of this course students will:
+
 * Understand the basic fundamentals of the field of Science and Technology Studies
 * Articulate the value of studying technology from many different disciplines
 * Apply the concepts of socio-technical study to real products
@@ -48,6 +50,7 @@ Final project: 40%
 #### Topic: Introduction to the course and me.
 
 Goals of the day:
+
 * Understand my approach to this class.
 * Set expectations
 * Brief group exercise
@@ -56,6 +59,7 @@ Goals of the day:
 * **Do:** [Introduction letter]({{site.baseurl}}/assignments/introduction-letter/), **due March 31 at midnight.**
 
 Optional reading
+
 * How	to	Read	(and	Understand)	a	Social	Science	Journal	Article (especially if you've never taken a course like this before.) http://www.icpsr.umich.edu/files/instructors/How_to_Read_a_Journal_Article.pdf
 
 [Notes for this lesson.]({{site.baseurl}}/teaching/engr-3970/class-0/)
@@ -64,10 +68,18 @@ Optional reading
 
 #### Topic: Introduction to science and technology studies
 
+#### Goals:
+
+* Understand different theories of how knowledge is created (also called epistemology)
+* Understand the history and  purpose of studying scientists and engineers
+* Have a framework for thinking about the relationship between the natural world, science, and technology
+
 #### Assignments
+
 * **Read:** Sismondo, Sergio. _An Introduction to Science and Technology Studies._ Chapter 1.
 
 [Notes for this lesson.]({{site.baseurl}}/teaching/engr-3970/class-1/)
+
 ### April 3
 
 #### Topic: Innovation is shaped by the people with the technical expertise to design new inventions, and the people who use them.
@@ -78,20 +90,21 @@ Optional reading
 
 ### April 5
 
-#### Topic Science is constructed and remade over long periods of time.
-
-#### Assignments
-* **Read** Sismondo, Sergio. _An Introduction to Science and Technology Studies._ Chapter 2: Khunian Revolution.
-
-### April 10 Dissent and Revolution
-
 #### Topic: Technology, once deployed, can have momentum that is hard to reverse.
 
 #### Assignments
 
 * **Read** David, P. (1985) "Clio and the Economics of QWERTY" Economic History 75: 332-337.
-* **Do** Reflection essay
-  > Choose a technology from your every-day life and try to answer these three questions: 1) What was the necessity that caused this technology to exist? 2) How have social forces shaped it over time?
+* **Do** Reflection essay (details on Canvas)
+
+
+### April 10 Dissent and Revolution
+
+#### Topic: Science is constructed and remade over long periods of time.
+
+##### Assignments
+
+* **Read** Sismondo, Sergio. _An Introduction to Science and Technology Studies._ Chapter 2: Khunian Revolution.
 
 ### April 12
 
@@ -110,6 +123,7 @@ Optional reading
 #### Topic: The creation of the laboratory gave science immense power. The formalized methods and standardized environment found in laboratories make scientific discovery possible.
 
 #### Assignments:
+
 * **Read:** Latour, Bruno "Give me a laboratory and I will raise the world"
 * **Read:** Knorr-Cetina, Karin. (1999) "What is a Laboratory" from _Epistemic Cultures_ pp. 26-45.
 
@@ -118,9 +132,9 @@ Optional reading
 #### Topic: Scientists and engineers have a way of seeing the world. It allows them to do empirical work but it also prevents them from seeing other things.
 
 #### Assignments
+
 * **Read** Epstein, Stephen. (1995) "The Construction of Lay Expertise: AIDS Activism and the Forging of Credibility in the Reform of Clinical Trials"
 * **Read:** Goodwin, Charles. (1994) "Professional Vision"
-
 * **Do** Reflection essay
   > Think about your role as an engineer. How does your training allow you to see the world in a unique way? What unconscious biases do you have as an engineer that might have unintended consequences? How might we structure organizations to correct for these biases? (Less than 500 words.)
 
@@ -137,6 +151,7 @@ Optional reading
 #### Topic: Presentations on Entrepreneurship
 
 #### Assignments
+
 * **Read** Wu, Timothy. Excerpts from _The Master Switch_.
 * **Do:** Mid-term essay
 
@@ -145,6 +160,7 @@ Optional reading
 #### Topic: Accessibility is an often overlooked part of the user experience. If it's considered at all, it's as a compliance checklist at the end.
 
 #### Assignments
+
 * **Read:** United Nations Department of Economic and Social Affairs. "Accessibility for the Disabled - A Design Manual for a Barrier Free Environment" <https://www.un.org/esa/socdev/enable/designm/intro.htm>
 * **Read:** Denver Post. (2017) "For the disability community, lack of sidewalks is a major issue." <http://www.denverpost.com/2017/02/16/for-the-disability-community-denvers-lack-of-sidewalks-is-a-major-issue/>
 * **Read:** Murray, John. _Denver Post._ (2017) "Denver officials hashing out ways to help pay for sidewalks." <http://www.denverpost.com/2017/01/03/denver-sidewalk-payment-plan/>
@@ -157,6 +173,7 @@ Optional reading
 #### Topic: Testing for accessibility
 
 #### Assignments
+
 * **Read:** Web Content Accessibility Group. "Accessibility testing" <https://www.w3.org/wiki/Accessibility_testing>
 
 * **Do:** Reflection essay
@@ -167,6 +184,7 @@ Optional reading
 #### Topic: Plain language reduces the risk of product (or program) failure.
 
 #### Assignments:
+
 * **Read:** Sibley, Ryan. “Using plain language to bridge the gap between government and industry” (https://18f.gsa.gov/2016/06/21/using-plain-language-to-bridge-the-gap-between-government-and-industry/)
 * **Read:** Fenton, Nicole. Writing is Design. http://nicolefenton.com/writing-is-design/
 * **Read:** Vox Media Storytelling Studio. "Content is part of your experience, and other lessons from user testing" <https://storytelling.voxmedia.com/2016/10/25/13380810/user-testing-storytelling>
