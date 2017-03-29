@@ -47,7 +47,12 @@
       "startDate": "2017-03-27",
       "endDate": "present",
       "summary": "Taught Entrepreneurship for Engineers and Computer Scientists",
-      "highlights": []
+      "highlights": [
+        "Introduced electrical and computer engineering students to basic concepts of Science and Technology Studies",
+        "Challenged students to think about how social impact of engineering is part of being an entrepreneur",
+        "Introduced the ideas of user-centred design and usability as essential components to running an engineering start up"
+      ],
+      "cv-only": false
     },
     {
       "company": "Excella Consulting",
