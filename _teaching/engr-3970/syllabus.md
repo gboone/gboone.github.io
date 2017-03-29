@@ -74,23 +74,24 @@ Optional reading
 
 #### Assignments:
 
-* **Read** Bijker and Pinch, The Social Construction of Facts and Artifacts (Canvas or in class handout)
+* **Read** [Bijker and Pinch, The Social Construction of Facts and Artifacts](http://sciencepolicy.colorado.edu/students/envs_5110/bijker2.pdf)
 
 ### April 5
+
+#### Topic Science is constructed and remade over long periods of time.
+
+#### Assignments
+* **Read** Sismondo, Sergio. _An Introduction to Science and Technology Studies._ Chapter 2: Khunian Revolution.
+
+### April 10 Dissent and Revolution
 
 #### Topic: Technology, once deployed, can have momentum that is hard to reverse.
 
 #### Assignments
+
 * **Read** David, P. (1985) "Clio and the Economics of QWERTY" Economic History 75: 332-337.
 * **Do** Reflection essay
   > Choose a technology from your every-day life and try to answer these three questions: 1) What was the necessity that caused this technology to exist? 2) How have social forces shaped it over time?
-
-### April 10 Dissent and Revolution
-
-#### Topic Science is constructed and remade over long periods of time. The concept of pseudoscience and what is considered real science remains relatively stable until a major discovery, usually made by an outsider or free thinker, upends our current understanding.
-
-#### Assignments
-* **Read** Excerpt from: Kuhn, Thomas _Structure of Scientific Revolution_
 
 ### April 12
 
@@ -133,7 +134,7 @@ Optional reading
 
 ### April 26
 
-#### Topic: How does society encourage or discourage innovation through policy?
+#### Topic: Presentations on Entrepreneurship
 
 #### Assignments
 * **Read** Wu, Timothy. Excerpts from _The Master Switch_.
