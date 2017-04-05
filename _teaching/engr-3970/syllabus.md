@@ -116,7 +116,6 @@ Optional reading
 * **Read:** Fujimura, John and Danny Chou. Dissent in Science: Styles of scientific practice and the controversy over the cause of AIDS.
 
 * **Do:** Reflection essay
-  > Pick something we know to be true today — a current paradigm — and explain how it got that way. What paradigm did it replace? How did that paradigm fail? (Less than 500 words.)
 
 ### April 17 Science has power
 
@@ -136,7 +135,6 @@ Optional reading
 * **Read** Epstein, Stephen. (1995) "The Construction of Lay Expertise: AIDS Activism and the Forging of Credibility in the Reform of Clinical Trials"
 * **Read:** Goodwin, Charles. (1994) "Professional Vision"
 * **Do** Reflection essay
-  > Think about your role as an engineer. How does your training allow you to see the world in a unique way? What unconscious biases do you have as an engineer that might have unintended consequences? How might we structure organizations to correct for these biases? (Less than 500 words.)
 
 ### April 24 Social consequences of technology
 
@@ -177,7 +175,6 @@ Optional reading
 * **Read:** Web Content Accessibility Group. "Accessibility testing" <https://www.w3.org/wiki/Accessibility_testing>
 
 * **Do:** Reflection essay
-  > Find two artifacts in your community: One that has neglected accessibility, another designed to accommodate access. Critique both. Even the best designed artifacts can still post challenges to disabled users. There’s always an accommodation designers don’t know about, or choose to forgo because the opportunity cost is too high. (No more than 500 words.)
 
 ### May 8 Usability and user experience: Plain Language
 
@@ -188,6 +185,7 @@ Optional reading
 * **Read:** Sibley, Ryan. “Using plain language to bridge the gap between government and industry” (https://18f.gsa.gov/2016/06/21/using-plain-language-to-bridge-the-gap-between-government-and-industry/)
 * **Read:** Fenton, Nicole. Writing is Design. http://nicolefenton.com/writing-is-design/
 * **Read:** Vox Media Storytelling Studio. "Content is part of your experience, and other lessons from user testing" <https://storytelling.voxmedia.com/2016/10/25/13380810/user-testing-storytelling>
+
 ### May 10
 
 #### Topic: How to ensure plain writing in your organization
@@ -197,7 +195,6 @@ Optional reading
 * **Read:** Colter, Angela. (2010) "Testing Content" _A List Apart_. <http://www.alistapart.com/articles/testing-content>
 * **Read:** MailChimp Styleguide <http://styleguide.mailchimp.com/>
 * **Do:** Reflection essay:
-  > What are the benefits of plain language for high tech or engineering companies? Find an artifact of a high tech company using plain language well and reflect on the investment in plain language they made.
 
 ### May 15 Usability and user experience: Interviewing Users
 
