@@ -88,6 +88,8 @@ Optional reading
 
 * **Read** [Bijker and Pinch, The Social Construction of Facts and Artifacts](http://sciencepolicy.colorado.edu/students/envs_5110/bijker2.pdf)
 
+[Notes for this lesson.]({{site.baseurl}}/teaching/engr-3970/class-2/)
+
 ### April 5
 
 #### Topic: Technology, once deployed, can have momentum that is hard to reverse.
@@ -97,6 +99,7 @@ Optional reading
 * **Read** David, P. (1985) "Clio and the Economics of QWERTY" Economic History 75: 332-337.
 * **Do** Reflection essay (details on Canvas)
 
+[Notes for this lesson.]({{site.baseurl}}/teaching/engr-3970/class-3/)
 
 ### April 10 Dissent and Revolution
 

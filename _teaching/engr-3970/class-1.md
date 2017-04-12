@@ -1,5 +1,5 @@
 ---
-title: "March 29, 2017"
+title: "How is knowledge created?"
 ---
 ## Announcements (5 minutes)
 ---
