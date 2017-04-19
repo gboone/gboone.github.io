@@ -8,7 +8,7 @@ Announcement: Next Wednesday, Stephen Koziol from the USPTO will be here. Bring 
 
 ## In your groups!
 
-Scenario: You are introducing Stephen Epstein at a conference celebrating the AIDS movement. You've been given five minutes to speak:
+**Scenario:** You are introducing Stephen Epstein at a conference celebrating the AIDS movement. You've been given **five minutes** to speak:
 
 Summarize:
 
@@ -26,6 +26,8 @@ Summarize:
 10 minutes to work through that and develop the **5 minute speech**.
 - Go to each group, listen to the speech, coach the speaker
 
+{% comment %}
+
 **Next scenario:** Summarize the same info, this time you are on a panel of experts at a conference about the AIDS movement. You have **3 minutes** to introduce yourself and your area of expertise.
 
 5 minutes to refine the original speech for this new situation.
@@ -37,5 +39,7 @@ Summarize:
 - Go to each group, listen to the speech, coach the speaker
 
 **Final scenario:** You are sharing an elevator with the Dean of the Graduate School at the RPI. You are there to interview for a graduate program and she has asked you what you know about fields outside your own. You have **45 seconds** to show how much you know about how AIDS activists shaped the world of clinical trials.
+
+{% endcomment %}
 
 ---
