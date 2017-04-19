@@ -11,6 +11,7 @@ Announcement: Next Wednesday, Stephen Koziol from the USPTO will be here. Bring 
 Scenario: You are introducing Stephen Epstein at a conference celebrating the AIDS movement. You've been given five minutes to speak:
 
 Summarize:
+
 - Describe the conditions that prompted AIDS activists into action. Be sure to answer at least these questions:
   - How were AIDS patients seen by society?
   - How did they get treatment for their disease?
@@ -36,4 +37,5 @@ Summarize:
 - Go to each group, listen to the speech, coach the speaker
 
 **Final scenario:** You are sharing an elevator with the Dean of the Graduate School at the RPI. You are there to interview for a graduate program and she has asked you what you know about fields outside your own. You have **45 seconds** to show how much you know about how AIDS activists shaped the world of clinical trials.
+
 ---
